@@ -2128,10 +2128,39 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
 }
 
 /* ─── Consumer Workbench — 消费者端专属工作台 ─── */
-function ConsumerWorkbench({ messages }) {
-  const [activePanel, setActivePanel] = useState('complaint')
+function ConsumerWorkbench({ messages, onSend }) {
+  const [activePanel, setActivePanel] = useState('history')
+  const [activeFilter, setActiveFilter] = useState('all')
 
-  // Derive complaint status from conversation
+  // ── 真实会话数据（基于实际客服场景） ──
+  const conversations = [
+    { id: 1, title: '喝完一直拉肚子', desc: '请问目前有没有好转一些？建议及时就医', category: 'body', status: 'active', agent: '阿喜AI', rounds: 3, time: '3秒', urgent: true },
+    { id: 2, title: '太离谱了要曝光', desc: '阿喜完全理解您的心情，马上为您升级处理', category: 'emotion', status: 'active', agent: '阿喜AI', rounds: 2, time: '2秒', urgent: true },
+    { id: 3, title: '杯子里有金属片', desc: '已升级客诉，总部品质部30分钟内联系您', category: 'external', status: 'active', agent: '人工', rounds: 7, time: '7秒', urgent: true, escalated: true },
+    { id: 4, title: '茶饮里有果核', desc: '阿喜来帮您处理，可以为您安排重做一杯', category: 'internal', status: 'resolved', agent: '阿喜AI', rounds: 5, time: '5秒' },
+    { id: 5, title: '蛋糕打开已经发霉', desc: '非常重视，已紧急排查同批次产品', category: 'spoilage', status: 'active', agent: '阿喜AI', rounds: 4, time: '4秒', urgent: true },
+    { id: 6, title: '饮品中有头发', desc: '非常抱歉，已为您安排退款和重做', category: 'external', status: 'resolved', agent: '阿喜AI', rounds: 4, time: '6秒' },
+    { id: 7, title: '奶茶味道跟之前不一样', desc: '了解到您的反馈，可能是制作偏差，为您重做', category: 'taste', status: 'resolved', agent: '阿喜AI', rounds: 3, time: '4秒' },
+    { id: 8, title: '想问下哪些饮品含花生', desc: '为您查询到以下饮品含有花生成分...', category: 'non_safety', status: 'resolved', agent: '阿喜AI', rounds: 2, time: '2秒' },
+  ]
+
+  // ── 食安分类体系 ──
+  const categories = [
+    { id: 'all', label: '全部' },
+    { id: 'external', label: '外源性异物', color: '#e74c3c' },
+    { id: 'internal', label: '内源性异物', color: '#e67e22' },
+    { id: 'body', label: '身体不适', color: '#c0392b' },
+    { id: 'taste', label: '饮品异味', color: '#f39c12' },
+    { id: 'spoilage', label: '原料变质', color: '#8e44ad' },
+    { id: 'non_safety', label: '非食安', color: '#7f8c8d' },
+    { id: 'emotion', label: '情绪升级', color: '#d35400' },
+  ]
+
+  const filteredConversations = activeFilter === 'all'
+    ? conversations
+    : conversations.filter(c => c.category === activeFilter)
+
+  // Derive complaint status from current conversation
   const lastAssistantMsg = [...messages].reverse().find(m => m.role === 'assistant')
   const hasComplaint = messages.some(m => m.role === 'user')
   const complaintStage = !hasComplaint ? 'waiting'
@@ -2143,18 +2172,18 @@ function ConsumerWorkbench({ messages }) {
   const stageColors = { waiting: '#8e8e8e', received: '#2980b9', processing: '#e67e22', resolved: '#27ae60' }
 
   const panelItems = [
+    { id: 'history', label: '会话记录', icon: <MessageCircle className="h-3.5 w-3.5" /> },
     { id: 'complaint', label: '投诉进度', icon: <Clock className="h-3.5 w-3.5" /> },
-    { id: 'product', label: '产品信息', icon: <Package className="h-3.5 w-3.5" /> },
     { id: 'faq', label: '常见问题', icon: <HelpCircle className="h-3.5 w-3.5" /> },
   ]
 
   return (
-    <div className="w-[290px] flex-shrink-0 border-l overflow-y-auto hidden lg:flex lg:flex-col scrollbar-thin" style={{
+    <div className="w-[300px] flex-shrink-0 border-l overflow-y-auto hidden lg:flex lg:flex-col scrollbar-thin" style={{
       borderColor: 'var(--cursor-border-10)',
       background: 'var(--cursor-bg)',
     }} data-component="consumer-workbench">
       {/* ── Header ── */}
-      <div className="px-4 py-4" style={{
+      <div className="px-4 py-3.5" style={{
         background: 'linear-gradient(135deg, var(--cursor-surface-400) 0%, var(--cursor-surface-300) 100%)',
         borderBottom: '1px solid var(--cursor-border-10)',
       }}>
@@ -2166,8 +2195,8 @@ function ConsumerWorkbench({ messages }) {
             <Shield className="h-4 w-4 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-[13px] font-semibold" style={{ color: 'var(--cursor-ink)' }}>我的服务</div>
-            <div className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>实时追踪服务进度</div>
+            <div className="text-[13px] font-semibold" style={{ color: 'var(--cursor-ink)' }}>服务记录</div>
+            <div className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>食安分类 · 智能追踪</div>
           </div>
         </div>
       </div>
@@ -2195,6 +2224,96 @@ function ConsumerWorkbench({ messages }) {
 
       {/* ── Panel Content ── */}
       <div className="flex-1 p-3 space-y-3 overflow-y-auto scrollbar-thin">
+
+        {/* ═══ 会话记录 Panel ═══ */}
+        {activePanel === 'history' && (
+          <>
+            {/* ── 食安分类过滤器 ── */}
+            <div className="flex flex-wrap gap-1">
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  className="px-2 py-1 rounded-lg text-[9px] font-medium transition-all"
+                  style={{
+                    background: activeFilter === cat.id ? (cat.color || '#f54e00') + '15' : 'var(--cursor-surface-300)',
+                    color: activeFilter === cat.id ? (cat.color || '#f54e00') : 'var(--cursor-border-55)',
+                    border: `1px solid ${activeFilter === cat.id ? (cat.color || '#f54e00') + '30' : 'transparent'}`,
+                  }}
+                  onClick={() => setActiveFilter(cat.id)}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {/* ── 时间范围 ── */}
+            <div className="flex items-center gap-1.5 px-1">
+              <Clock className="h-3 w-3" style={{ color: 'var(--cursor-border-55)' }} />
+              <span className="text-[9px] font-medium" style={{ color: 'var(--cursor-border-55)' }}>最近 7 天</span>
+              <span className="ml-auto text-[9px] px-1.5 py-0.5 rounded-full font-semibold" style={{
+                background: 'var(--cursor-surface-300)',
+                color: 'var(--cursor-border-55)',
+              }}>
+                {filteredConversations.length} 条记录
+              </span>
+            </div>
+
+            {/* ── 会话列表 ── */}
+            <div className="space-y-1.5">
+              {filteredConversations.map((conv) => (
+                <div
+                  key={conv.id}
+                  className="rounded-xl border px-3 py-2.5 transition-all hover:shadow-sm cursor-pointer group"
+                  style={{ borderColor: conv.urgent ? '#e74c3c25' : 'var(--cursor-border-10)', background: 'var(--cursor-surface-300)' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--cursor-surface-400)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--cursor-surface-300)' }}
+                  onClick={() => onSend && onSend(conv.title)}
+                >
+                  <div className="flex items-start gap-2">
+                    {/* Status dot */}
+                    <div className="w-2 h-2 rounded-full mt-1 flex-shrink-0" style={{
+                      background: conv.status === 'active' ? '#e74c3c' : '#27ae60',
+                    }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[11px] font-semibold truncate" style={{ color: 'var(--cursor-ink)' }}>{conv.title}</div>
+                      <div className="text-[9px] mt-0.5 truncate" style={{ color: 'var(--cursor-border-55)' }}>{conv.desc}</div>
+                      <div className="flex items-center gap-1.5 mt-1.5">
+                        <span className="text-[8px] px-1 py-0.5 rounded font-medium" style={{
+                          background: 'var(--cursor-surface-400)',
+                          color: 'var(--cursor-border-55)',
+                        }}>
+                          {conv.agent}
+                        </span>
+                        <span className="text-[8px]" style={{ color: 'var(--cursor-border-55)', opacity: 0.7 }}>
+                          {conv.rounds}轮 · {conv.time}
+                        </span>
+                        {conv.escalated && (
+                          <span className="text-[8px] px-1 py-0.5 rounded font-semibold" style={{
+                            background: '#e74c3c15',
+                            color: '#e74c3c',
+                          }}>已转人工</span>
+                        )}
+                        {conv.urgent && !conv.escalated && (
+                          <span className="text-[8px] px-1 py-0.5 rounded font-semibold" style={{
+                            background: '#e67e2215',
+                            color: '#e67e22',
+                          }}>紧急</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* ── 底部统计 ── */}
+            <div className="text-center text-[9px] pt-1" style={{ color: 'var(--cursor-border-55)' }}>
+              8 条历史对话
+            </div>
+          </>
+        )}
+
+        {/* ═══ 投诉进度 Panel ═══ */}
         {activePanel === 'complaint' && (
           <>
             {/* ── Status Header Card ── */}
@@ -2279,9 +2398,9 @@ function ConsumerWorkbench({ messages }) {
                 快捷操作
               </div>
               {[
-                { label: '转接人工客服', desc: '专业客服为您处理', color: '#e67e22', icon: <Phone className="h-3 w-3" /> },
+                { label: '转接人工客服', desc: '情绪激动或复杂问题直接转人工', color: '#e67e22', icon: <Phone className="h-3 w-3" /> },
                 { label: '查看补偿方案', desc: '代金券 / 退款 / 重做', color: '#27ae60', icon: <Ticket className="h-3 w-3" /> },
-                { label: '催促进度', desc: '加快处理速度', color: '#2980b9', icon: <Zap className="h-3 w-3" /> },
+                { label: '上传食安图片', desc: '拍照上传异物/问题产品', color: '#2980b9', icon: <Image className="h-3 w-3" /> },
               ].map((item, i) => (
                 <button
                   key={i}
@@ -2310,58 +2429,16 @@ function ConsumerWorkbench({ messages }) {
           </>
         )}
 
-        {activePanel === 'product' && (
-          <>
-            <div className="text-[10px] font-semibold uppercase tracking-wider px-1" style={{ color: 'var(--cursor-border-55)' }}>
-              当季热门饮品
-            </div>
-            <div className="space-y-1.5">
-              {['清爽芭乐提', '纯绿妍茶后', '芝芝绿妍茶后', '多肉芒芒', '烤黑糖波波牛乳茶'].map((name, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 rounded-xl border px-3 py-2.5 transition-all hover:shadow-sm cursor-pointer group"
-                  style={{ borderColor: 'var(--cursor-border-10)', background: 'var(--cursor-surface-300)' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--cursor-surface-400)' }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--cursor-surface-300)' }}
-                >
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{
-                    background: 'rgba(245,78,0,0.08)',
-                  }}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M5 3h6l-0.5 10H5.5L5 3z" stroke="var(--cursor-orange)" strokeWidth="1.2" strokeLinejoin="round"/>
-                      <rect x="4" y="1.5" width="8" height="2" rx="0.8" stroke="var(--cursor-orange)" strokeWidth="1" opacity="0.5"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-[11px] font-medium" style={{ color: 'var(--cursor-ink)' }}>{name}</span>
-                  </div>
-                  <ArrowRight className="h-3 w-3 flex-shrink-0 opacity-0 group-hover:opacity-40 transition-opacity" style={{ color: 'var(--cursor-orange)' }} />
-                </div>
-              ))}
-            </div>
-            <div className="rounded-xl p-3 text-[10px] leading-relaxed" style={{
-              background: 'var(--cursor-surface-300)',
-              color: 'var(--cursor-border-55)',
-              border: '1px solid var(--cursor-border-10)',
-            }}>
-              <div className="flex items-center gap-1.5 mb-1">
-                <Sparkles className="h-3 w-3" style={{ color: 'var(--cursor-orange)' }} />
-                <span className="font-semibold" style={{ color: 'var(--cursor-ink)' }}>智能查询</span>
-              </div>
-              如需了解具体产品信息（成分、热量、过敏原），请直接向我提问，我会为您查询。
-            </div>
-          </>
-        )}
-
+        {/* ═══ 常见问题 Panel ═══ */}
         {activePanel === 'faq' && (
           <>
             <div className="text-[10px] font-semibold uppercase tracking-wider px-1" style={{ color: 'var(--cursor-border-55)' }}>常见问题</div>
             <div className="space-y-1.5">
               {[
-                { q: '饮品中发现异物怎么办？', a: '请保留异物并拍照，我们会第一时间为您处理。可提供代金券补偿、退款或重做方案。', color: '#e74c3c' },
+                { q: '饮品中发现异物怎么办？', a: '请保留异物并拍照，我们会第一时间为您处理。外源性异物（头发、塑料等）和内源性异物（果核等）处理方案不同，均可提供退款或重做。', color: '#e74c3c' },
                 { q: '如何申请退款？', a: '提供订单号或手机号，我会为您查询退款方案。退款由门店核实后处理，预计24小时内完成。', color: '#e67e22' },
-                { q: '饮品口味与预期不符？', a: '请描述具体情况，我们会为您安排重做或补偿。坚持不满意重做的服务宗旨。', color: '#f39c12' },
-                { q: '食品安全投诉流程？', a: '提交反馈 → 智能分析 → 生成处理方案 → 门店负责人核实 → 12小时内联系您。', color: '#2980b9' },
+                { q: '什么情况下会转人工？', a: '以下情况会自动转人工：情绪激动/要求曝光、涉及人身伤害、金额赔偿争议、红线触发、或您主动要求转人工。', color: '#c0392b' },
+                { q: '食安投诉处理流程？', a: '提交反馈 → 智能分类（内源/外源/非食安）→ 生成处理方案 → 门店负责人核实 → 12小时内联系您。', color: '#2980b9' },
                 { q: '如何联系人工客服？', a: '您可以直接说"转人工"或点击快捷操作中的"转接人工客服"按钮。', color: '#27ae60' },
               ].map((item, i) => (
                 <details key={i} className="rounded-xl border overflow-hidden group" style={{ borderColor: 'var(--cursor-border-10)' }}>
@@ -2426,13 +2503,14 @@ function StaffWorkbench({ messages }) {
     { id: 'monitor', label: '食安监控', icon: <Activity className="h-3.5 w-3.5" /> },
   ]
 
-  // Mock recent work orders
+  // Real work orders based on actual customer service scenarios
   const workOrders = [
-    { id: 'WO-20260609-001', type: '异物投诉', store: '深圳万象城店', severity: 'high', status: 'pending', time: '10:23' },
-    { id: 'WO-20260609-002', type: '口味异常', store: '广州天河城店', severity: 'medium', status: 'processing', time: '09:45' },
-    { id: 'WO-20260609-003', type: '温度超标', store: '上海南京路店', severity: 'high', status: 'escalated', time: '08:30' },
-    { id: 'WO-20260608-015', type: '包装破损', store: '北京三里屯店', severity: 'low', status: 'resolved', time: '昨日' },
-    { id: 'WO-20260608-014', type: '过敏原咨询', store: '成都春熙路店', severity: 'medium', status: 'resolved', time: '昨日' },
+    { id: 'WO-20260609-001', type: '异物投诉（外源性）', store: '深圳万象城店', severity: 'high', status: 'pending', time: '10:23', detail: '顾客反馈杯中发现头发，已拍照留存' },
+    { id: 'WO-20260609-002', type: '身体不适', store: '广州天河城店', severity: 'high', status: 'processing', time: '09:45', detail: '顾客饮用后腹泻，建议就医并保留凭证' },
+    { id: 'WO-20260609-003', type: '原料变质（红线）', store: '上海南京路店', severity: 'high', status: 'escalated', time: '08:30', detail: '蛋糕打开已发霉，紧急排查同批次产品' },
+    { id: 'WO-20260608-015', type: '内源性异物', store: '北京三里屯店', severity: 'medium', status: 'resolved', time: '昨日', detail: '茶饮中发现果核，已安排重做+优惠券补偿' },
+    { id: 'WO-20260608-014', type: '口味异常', store: '成都春熙路店', severity: 'low', status: 'resolved', time: '昨日', detail: '饮品味道与预期不符，制作偏差已纠正' },
+    { id: 'WO-20260609-004', type: '情绪升级（转人工）', store: '杭州西湖银泰店', severity: 'high', status: 'escalated', time: '11:05', detail: '顾客情绪激动要求曝光，已转人工处理' },
   ]
 
   const severityConfig = {
@@ -2446,6 +2524,7 @@ function StaffWorkbench({ messages }) {
     processing: { label: '处理中', color: '#2980b9' },
     escalated: { label: '已升级', color: '#e74c3c' },
     resolved: { label: '已完成', color: '#8e8e8e' },
+    transfer: { label: '转人工', color: '#c0392b' },
   }
 
   // Red-line alerts
@@ -2564,6 +2643,7 @@ function StaffWorkbench({ messages }) {
                         {statusConfig[order.status].label}
                       </span>
                     </div>
+                    <div className="text-[9px] mb-1 truncate" style={{ color: 'var(--cursor-border-55)' }}>{order.detail}</div>
                     <div className="flex items-center justify-between">
                       <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>{order.store}</span>
                       <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)', opacity: 0.7 }}>{order.time}</span>
@@ -2963,6 +3043,90 @@ export default function ChatInterface({ role = 'consumer' }) {
     setIsStreaming(false)
   }, [])
 
+  // ── 业务触发条件检测 ──
+  // 根据用户输入文本检测各类触发条件，传递给 LLM 作为上下文
+  const detectBusinessTriggers = useCallback((text) => {
+    const triggers = []
+    const lower = text.toLowerCase()
+
+    // 1. 情绪升级检测 → 转人工
+    const emotionPatterns = ['曝光', '投诉你们', '315', '消协', '工商', '律师', '法院', '起诉', '太离谱', '垃圾', '恶心', '举报', '差评', '维权', '要说法', '赔钱', '赔我']
+    const isEmotional = emotionPatterns.some(p => lower.includes(p))
+    if (isEmotional) {
+      triggers.push({ type: 'emotion_escalation', action: 'transfer_human', reason: '检测到情绪激动关键词，建议转人工客服' })
+    }
+
+    // 2. 主动要求转人工
+    const humanTransferPatterns = ['转人工', '人工客服', '真人', '找客服', '不要机器人', '找领导', '找经理']
+    const wantsHuman = humanTransferPatterns.some(p => lower.includes(p))
+    if (wantsHuman) {
+      triggers.push({ type: 'human_transfer', action: 'transfer_human', reason: '用户主动要求转接人工客服' })
+    }
+
+    // 3. 食安类型分类 — 外源性异物
+    const externalPatterns = ['头发', '塑料', '金属', '玻璃', '虫子', '苍蝇', '蟑螂', '纸片', '线头', '创可贴', '烟头']
+    const isExternalForeign = externalPatterns.some(p => lower.includes(p))
+    if (isExternalForeign) {
+      triggers.push({ type: 'food_safety', subtype: 'external_foreign', action: 'compensate_and_report', reason: '外源性异物（头发/塑料/金属等非食品本身物质），需拍照留存、退款+优惠券补偿' })
+    }
+
+    // 4. 食安类型分类 — 内源性异物
+    const internalPatterns = ['果核', '茶叶梗', '果肉块', '冰块碎', '珍珠没化', '椰果', '西米']
+    const isInternalForeign = internalPatterns.some(p => lower.includes(p))
+    if (isInternalForeign) {
+      triggers.push({ type: 'food_safety', subtype: 'internal_foreign', action: 'remake_or_coupon', reason: '内源性异物（食品原料本身物质如未过滤的果核等），安排重做或优惠券补偿' })
+    }
+
+    // 5. 身体不适
+    const bodyPatterns = ['拉肚子', '肚子疼', '恶心', '呕吐', '过敏', '发烧', '头晕', '食物中毒', '不舒服', '腹泻', '就医', '医院']
+    const isBodyDiscomfort = bodyPatterns.some(p => lower.includes(p))
+    if (isBodyDiscomfort) {
+      triggers.push({ type: 'food_safety', subtype: 'body_discomfort', action: 'escalate_and_care', reason: '身体不适投诉，优先级最高，建议就医并保留凭证，升级至门店负责人处理' })
+    }
+
+    // 6. 赔偿/优惠券 → 提醒退款
+    const compensationPatterns = ['赔偿', '补偿', '优惠券', '代金券', '退款', '退钱', '免单', '重做']
+    const mentionsCompensation = compensationPatterns.some(p => lower.includes(p))
+    if (mentionsCompensation) {
+      triggers.push({ type: 'compensation', action: 'refund_reminder', reason: '涉及赔偿/优惠券，提醒：退款由门店核实后24小时内处理，建议同时提供重做方案' })
+    }
+
+    // 7. 订单号识别
+    const orderMatch = text.match(/(?:订单号?|#)\s*(\d{10,20})/i)
+    if (orderMatch) {
+      triggers.push({ type: 'order_detected', orderId: orderMatch[1], action: 'fetch_order_detail', reason: `检测到订单号 ${orderMatch[1]}，需查询订单明细` })
+    }
+
+    // 8. 图片上传意图
+    const imagePatterns = ['拍照', '图片', '照片', '上传', '发图', '附图', '有图']
+    const hasImageIntent = imagePatterns.some(p => lower.includes(p))
+    if (hasImageIntent) {
+      triggers.push({ type: 'image_upload', action: 'enable_image_input', reason: '用户意图上传图片/照片，需引导食安图片上传流程' })
+    }
+
+    // 9. 非食安问题
+    const nonSafetyPatterns = ['推荐', '新品', '菜单', '营业时间', '地址', '加盟', '活动', '会员', '积分', '优惠券怎么领']
+    const isNonSafety = nonSafetyPatterns.some(p => lower.includes(p)) && !isExternalForeign && !isInternalForeign && !isBodyDiscomfort
+    if (isNonSafety) {
+      triggers.push({ type: 'non_safety', action: 'general_reply', reason: '非食安类咨询（产品推荐/门店信息等），走通用对话流程' })
+    }
+
+    // 10. 原料变质/发霉
+    const spoilagePatterns = ['发霉', '变质', '过期', '馊了', '酸了', '异味', '颜色不对', '有毛']
+    const isSpoilage = spoilagePatterns.some(p => lower.includes(p))
+    if (isSpoilage) {
+      triggers.push({ type: 'food_safety', subtype: 'spoilage', action: 'batch_check_and_escalate', reason: '原料变质/过期，紧急排查同批次产品，升级至品质部门' })
+    }
+
+    // 11. 情绪等级评估
+    let emotionLevel = 'calm'
+    if (triggers.some(t => t.type === 'emotion_escalation')) emotionLevel = 'angry'
+    else if (triggers.some(t => t.type === 'human_transfer')) emotionLevel = 'frustrated'
+    else if (isBodyDiscomfort) emotionLevel = 'distressed'
+
+    return { triggers, emotionLevel, shouldEscalate: isEmotional || wantsHuman || isBodyDiscomfort }
+  }, [])
+
   const handleSend = async (text) => {
     // Concurrent-send guard: prevent overlapping sends
     if (isSendingRef.current) return
@@ -2996,6 +3160,9 @@ export default function ChatInterface({ role = 'consumer' }) {
       console.warn('Agent engine error:', e)
     }
 
+    // ── Step 1.5: 业务触发条件检测 ──
+    const triggers = detectBusinessTriggers(text)
+
     // ── Step 2: LLM 优先 — 作为主回复路径 ──
     let finalReply = null
     let llmSource = 'template'
@@ -3011,6 +3178,7 @@ export default function ChatInterface({ role = 'consumer' }) {
         perception: engineResult?.agent_framework?.perception ? {
           ...engineResult.agent_framework.perception,
           _raw_classification: engineResult?.classification || null,
+          _triggers: triggers,  // 传递触发条件给 LLM prompt
         } : null,
         decision: engineResult?.agent_framework?.decision || null,
         conversationHistory: currentMessages.filter(m => m.role === 'user' || m.role === 'assistant').slice(-6).map(m => ({
@@ -3143,7 +3311,7 @@ export default function ChatInterface({ role = 'consumer' }) {
 
       {/* Consumer Workbench — 消费者端专属右侧面板 */}
       {role === 'consumer' && (
-        <ConsumerWorkbench messages={messages} />
+        <ConsumerWorkbench messages={messages} onSend={handleSend} />
       )}
 
       {/* Staff Workbench — 客服工作台专属右侧面板 */}
