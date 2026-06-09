@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
-  Plus, Search, MessageSquare, Clock, AlertTriangle, Users
+  Plus, Search, MessageSquare, Clock, AlertTriangle, Users,
+  Bug, Leaf, HeartPulse, AlertCircle, Package, CupSoda, Flame
 } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
@@ -33,6 +34,46 @@ const GROUP_LABELS = {
   older: '更早',
 }
 
+// 风险等级筛选
+const RISK_FILTERS = [
+  { key: '', label: '全部风险', dotColor: 'var(--cursor-border-55)' },
+  { key: 'high', label: '高风险', dotColor: '#cf2d56' },
+  { key: 'medium', label: '中风险', dotColor: '#c08532' },
+  { key: 'low', label: '低风险', dotColor: '#1f8a65' },
+]
+
+// 会话分类筛选（含图标 + 层级匹配）
+const CATEGORY_ICON_MAP = {
+  '外源性异物': Bug, '内源性异物': Leaf, '身体不适': HeartPulse,
+  '品质问题': AlertCircle, 'OEM产品': Package, '非食安问题': CupSoda,
+  '情绪激动': Flame,
+}
+const CATEGORY_FILTERS = [
+  { key: '', label: '全部' },
+  { key: '外源性异物', label: '外源性异物' },
+  { key: '内源性异物', label: '内源性异物' },
+  { key: '身体不适', label: '身体不适' },
+  { key: '品质问题', label: '品质问题', matchLabels: ['饮品异味', '原料变质', '原料未熟', '产品有效期'] },
+  { key: 'OEM产品', label: 'OEM产品', matchLabels: ['OEM'] },
+  { key: '非食安问题', label: '非食安' },
+  { key: '情绪激动', label: '情绪激动' },
+]
+
+// 智能标签匹配：支持层级路径 + 分类字段 + 自定义匹配集
+function matchConversation(conv, categoryKey, riskKey) {
+  if (riskKey && conv.riskLevel !== riskKey) return false
+  if (!categoryKey) return true
+  const cat = CATEGORY_FILTERS.find(c => c.key === categoryKey)
+  if (!cat) return true
+  const label = conv.label || ''
+  const classification = conv.classification?.consult_type || ''
+  const matchSet = [categoryKey, ...(cat.matchLabels || [])]
+  return matchSet.some(m =>
+    label.startsWith(m) || label.includes('/' + m) ||
+    label.includes(m) || classification.includes(m)
+  )
+}
+
 const RISK_DOT_STYLE = {
   high: { background: '#cf2d56' },
   medium: { background: '#c08532' },
@@ -52,6 +93,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
   const location = useLocation()
   const [searchQuery, setSearchQuery] = useState('')
   const [filterLabel, setFilterLabel] = useState('')
+  const [riskFilter, setRiskFilter] = useState('')
   const [viewMode, setViewMode] = useState('conversations') // conversations | sessions
 
   // Reset to conversations view when role switches to consumer
@@ -63,7 +105,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
 
   const groups = groupByTime(MOCK_CONVERSATIONS)
 
-  // Filter conversations
+  // Filter conversations with smart category + risk matching
   const filtered = Object.entries(groups).reduce((acc, [key, convs]) => {
     let items = convs
     if (searchQuery) {
@@ -74,12 +116,22 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
           c.lastMessage.toLowerCase().includes(q)
       )
     }
-    if (filterLabel) {
-      items = items.filter((c) => c.label.includes(filterLabel))
+    if (filterLabel || riskFilter) {
+      items = items.filter((c) => matchConversation(c, filterLabel, riskFilter))
     }
     acc[key] = items
     return acc
   }, {})
+
+  // Dynamic counts per filter dimension
+  const categoryCounts = CATEGORY_FILTERS.map(cat => ({
+    ...cat,
+    count: MOCK_CONVERSATIONS.filter(c => matchConversation(c, cat.key, riskFilter)).length,
+  }))
+  const riskCounts = RISK_FILTERS.map(r => ({
+    ...r,
+    count: MOCK_CONVERSATIONS.filter(c => matchConversation(c, filterLabel, r.key)).length,
+  }))
 
   // Filter sessions for 七鱼 view
   const filteredSessions = MOCK_SESSIONS.filter(s => {
@@ -102,8 +154,6 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
     navigate('/')
     if (window.innerWidth < 1024) onClose?.()
   }
-
-  const filterOptions = ['', '外源性异物', '内源性异物', '身体不适', '饮品异味', '原料变质']
 
   // Stats for 七鱼 sessions
   const activeSessions = MOCK_SESSIONS.filter(s => s.session_state === 'active').length
@@ -211,40 +261,64 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
 
         {/* Filters */}
         {viewMode === 'conversations' ? (
-          <div className="flex flex-wrap gap-1.5 px-3 pb-3" data-component="sidebar-filters" data-qoder-id="qel-sidebar-filters-57ec5471" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-sidebar-filters-57ec5471&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;sidebar-filters&quot;,&quot;loc&quot;:{&quot;line&quot;:214,&quot;column&quot;:11}}">
-            {filterOptions.map((label) => (
-              <Button
-                key={label || 'all'}
-                variant="ghost"
-                size="sm"
-                onClick={() => setFilterLabel(label)}
-                className="rounded-full"
-                style={{
-                  background: filterLabel === label
-                    ? 'var(--cursor-surface-500)'
-                    : 'var(--cursor-surface-300)',
-                  color: filterLabel === label
-                    ? 'var(--cursor-orange)'
-                    : 'var(--cursor-border-55)',
-                }}
-               data-qoder-id="qel-rounded-full-5453d858" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-full-5453d858&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;rounded-full&quot;,&quot;loc&quot;:{&quot;line&quot;:216,&quot;column&quot;:15}}">
-                {label || '全部'}
-              </Button>
-            ))}
+          <div className="px-3 pb-3 space-y-2" data-component="sidebar-filters">
+            {/* 风险等级筛选 */}
+            <div className="flex flex-wrap gap-1" data-component="risk-filters">
+              {riskCounts.map((r) => (
+                <button
+                  key={r.key || 'all-risk'}
+                  onClick={() => setRiskFilter(r.key)}
+                  className="flex items-center gap-1 rounded-full text-[10px] transition-all"
+                  style={{
+                    padding: '2px 7px',
+                    background: riskFilter === r.key ? 'var(--cursor-surface-500)' : 'var(--cursor-surface-300)',
+                    color: riskFilter === r.key ? 'var(--cursor-ink)' : 'var(--cursor-border-55)',
+                    border: `1px solid ${riskFilter === r.key ? r.dotColor : 'transparent'}`,
+                  }}
+                >
+                  <div className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: r.dotColor }} />
+                  {r.label}
+                  <span style={{ opacity: 0.6, fontSize: '9px' }}>{r.count}</span>
+                </button>
+              ))}
+            </div>
+            {/* 会话分类筛选 */}
+            <div className="flex flex-wrap gap-1" data-component="category-filters">
+              {categoryCounts.map((cat) => {
+                const IconComp = CATEGORY_ICON_MAP[cat.key]
+                const isActive = filterLabel === cat.key
+                return (
+                  <button
+                    key={cat.key || 'all-cat'}
+                    onClick={() => setFilterLabel(cat.key)}
+                    className="flex items-center gap-1 rounded-full text-[10px] transition-all"
+                    style={{
+                      padding: '2px 7px',
+                      background: isActive ? 'var(--cursor-surface-500)' : 'var(--cursor-surface-300)',
+                      color: isActive ? 'var(--cursor-orange)' : 'var(--cursor-border-55)',
+                    }}
+                  >
+                    {IconComp && <IconComp className="h-2.5 w-2.5" />}
+                    {cat.label}
+                    <span style={{ opacity: 0.6, fontSize: '9px' }}>{cat.count}</span>
+                  </button>
+                )
+              })}
+            </div>
           </div>
         ) : (
           /* 七鱼 session quick stats */
-          <div className="flex items-center gap-2 px-3 pb-3" data-qoder-id="qel-flex-6da27fa6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-6da27fa6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:237,&quot;column&quot;:11}}">
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-success)' }} data-qoder-id="qel-flex-cab9add8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-cab9add8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:238,&quot;column&quot;:13}}">
-              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#1f8a65' }}  data-qoder-id="qel-h-1-5-3f1d1187" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-3f1d1187&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:239,&quot;column&quot;:15}}"/>
+          <div className="flex items-center gap-2 px-3 pb-3">
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-success)' }}>
+              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#1f8a65' }} />
               {activeSessions} 对话中
             </span>
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-gold)' }} data-qoder-id="qel-flex-54c142db" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-54c142db&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:242,&quot;column&quot;:13}}">
-              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#c08532' }}  data-qoder-id="qel-h-1-5-4723d9e4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-4723d9e4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:243,&quot;column&quot;:15}}"/>
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-gold)' }}>
+              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#c08532' }} />
               {queueSessions} 排队
             </span>
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-error)' }} data-qoder-id="qel-flex-56c14601" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-56c14601&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:246,&quot;column&quot;:13}}">
-              <AlertTriangle className="h-2.5 w-2.5"  data-qoder-id="qel-h-2-5-b81cbcf2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-b81cbcf2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:247,&quot;column&quot;:15}}"/>
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-error)' }}>
+              <AlertTriangle className="h-2.5 w-2.5" />
               {highRiskSessions} 高风险
             </span>
           </div>
@@ -311,6 +385,14 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                 <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-dbdbd8cf" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-dbdbd8cf&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:311,&quot;column&quot;:33}}">
                                   {conv.handler === 'AI' ? '阿喜AI' : conv.handler}
                                 </span>
+                                {conv.label && (
+                                  <span className="rounded text-[8px] px-1 py-px" style={{
+                                    background: 'var(--cursor-surface-300)',
+                                    color: 'var(--cursor-border-55)',
+                                  }}>
+                                    {conv.label.split('/').pop()}
+                                  </span>
+                                )}
                                 {conv.turn_count && (
                                   <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-dadbd73c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-dadbd73c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:315,&quot;column&quot;:35}}">
                                     {conv.turn_count}轮
