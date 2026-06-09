@@ -20,6 +20,7 @@ import { generateBrandGreeting, BRAND } from '../../lib/brand-config.js'
 import { processMessage, processMessageWithAgent, executeOrderWorkflow, generateLLMEnhancedReply } from '../../lib/agent-engine.js'
 import { runFullSafetyCheck } from '../../lib/content-safety.js'
 import { getLLMConfig, getModelDisplayName } from '../../lib/llm-client.js'
+import TestRunnerPanel from '../test/TestRunnerPanel.jsx'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -3039,6 +3040,7 @@ export default function ChatInterface({ role = 'consumer' }) {
   const streamAbortRef = useRef(null)
   const isSendingRef = useRef(false) // concurrent-send guard
   const _episodicMemoryRef = useRef(null) // Agent 情景记忆持久引用
+  const [showTestRunner, setShowTestRunner] = useState(false)
 
   // Load conversation if navigating to a specific one
   useEffect(() => {
@@ -3464,6 +3466,61 @@ export default function ChatInterface({ role = 'consumer' }) {
 
       {/* Floating Service Widget — 可拖拽智能客服悬浮窗 */}
       <FloatingServiceWidget onSend={handleSend} role={role} />
+
+      {/* Test Runner Toggle — 循环测试入口 */}
+      <button
+        onClick={() => setShowTestRunner(prev => !prev)}
+        title="循环测试打分"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          zIndex: 900,
+          width: '44px',
+          height: '44px',
+          borderRadius: '50%',
+          border: 'none',
+          background: showTestRunner ? '#1a1a2e' : 'white',
+          color: showTestRunner ? 'white' : '#4a5568',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '18px',
+        }}
+      >
+        🧪
+      </button>
+
+      {/* Test Runner Panel — 循环测试打分面板 */}
+      {showTestRunner && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          width: '380px',
+          height: '100vh',
+          zIndex: 1000,
+          boxShadow: '-4px 0 20px rgba(0,0,0,0.1)',
+          background: '#fafafa',
+          animation: 'slideIn 0.3s ease-out',
+        }}>
+          <button
+            onClick={() => setShowTestRunner(false)}
+            style={{
+              position: 'absolute', top: '12px', right: '12px', zIndex: 10,
+              width: '28px', height: '28px', borderRadius: '50%',
+              border: 'none', background: 'rgba(255,255,255,0.8)',
+              color: '#4a5568', cursor: 'pointer', fontSize: '14px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            ✕
+          </button>
+          <TestRunnerPanel />
+        </div>
+      )}
     </div>
   )
 }

@@ -1,0 +1,3006 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "extraction_date": "2026-06-09",
+    "source": "conversation_analysis.json (70 Excel files, 38644 conversations)",
+    "total_cases": 83,
+    "categories_covered": 19,
+    "category_breakdown": {
+      "异物-塑料": 2,
+      "异物-金属": 6,
+      "异物-果核": 2,
+      "异物-苍蝇/蟑螂": 3,
+      "异物-茶渣": 4,
+      "呕吐": 2,
+      "变质-产品变质": 5,
+      "变质-一般": 6,
+      "变质-变酸": 5,
+      "变质-发霉": 1,
+      "过期": 5,
+      "有效期": 8,
+      "有效期-OEM": 4,
+      "过敏": 3,
+      "杯盖": 3,
+      "OEM": 12,
+      "OEM-补充": 2,
+      "OEM-变质": 8,
+      "综合-历史会话": 2
+    }
+  },
+  "cases": [
+    {
+      "id": "CASE-异物-塑-001-1d788341",
+      "category": "异物-塑料",
+      "source_file": "塑料.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "塑料",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "快喝到底了发现底上有塑料的东西",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "upset"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，有什么可以帮助吗？",
+        "请问您是什么原因要退款的，辛苦您告知一下阿喜的，麻烦您提供一下订单号的",
+        "非常抱歉给您带来不好的体验，为了更好的为您处理，还请您提供下单手机号码或订单编号，阿喜为您核实一下"
+      ],
+      "full_text_length": 1730
+    },
+    {
+      "id": "CASE-异物-塑-002-dd7329cc",
+      "category": "异物-塑料",
+      "source_file": "塑料.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "塑料",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "我刚刚点了开心小奶茉",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉没有给您带来满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 1520
+    },
+    {
+      "id": "CASE-异物-金-001-d1d8b54e",
+      "category": "异物-金属",
+      "source_file": "金属.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "金属",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "人工客服吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "angry"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，真的非常非常抱歉给您带来不愉快的消费体验了，请您消消气并告知阿喜具体的情况以及相关凭证，我会如实记录您的投诉"
+      ],
+      "full_text_length": 2768
+    },
+    {
+      "id": "CASE-异物-金-002-f96272e8",
+      "category": "异物-金属",
+      "source_file": "金属.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "金属",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "请问你们奶茶到喝到生锈金属零件，可以让门店提供照片证明吗？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "还请您稍等，阿喜为您反馈跟进",
+        "给您造成不好的体验非常抱歉的，辛苦您详细描述一下事情经过，阿喜会如实记录"
+      ],
+      "full_text_length": 3058
+    },
+    {
+      "id": "CASE-异物-金-003-23fb0421",
+      "category": "异物-金属",
+      "source_file": "金属 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "金属",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "喜茶外卖里喝出了异物 钢丝球",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "escalate",
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉给您带来不好的体验，为了更好的为您处理，还请您提供下单手机号码或订单编号、饮品及标签图片，阿喜为您核实一下~"
+      ],
+      "full_text_length": 1296
+    },
+    {
+      "id": "CASE-异物-金-004-48eef9aa",
+      "category": "异物-金属",
+      "source_file": "金属 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "金属",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "喝出个铁丝",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "escalate",
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意",
+        "请您稍等一下，阿喜这就为您查询一下具体信息~~~~"
+      ],
+      "full_text_length": 767
+    },
+    {
+      "id": "CASE-异物-金-005-712990f7",
+      "category": "异物-金属",
+      "source_file": "金属3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "金属",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "喝出小石头",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "选真果，喝喜茶，超大桶鸭喜香柠打茶在此恭候，有什么可以为您效劳？"
+      ],
+      "full_text_length": 819
+    },
+    {
+      "id": "CASE-异物-金-006-c34cb9ff",
+      "category": "异物-金属",
+      "source_file": "金属3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "金属",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "备注都不看的",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "选真果，喝喜茶，轻芝莓莓在此恭候，有什么可以为您效劳？"
+      ],
+      "full_text_length": 2828
+    },
+    {
+      "id": "CASE-异物-果-001-c1dc9340",
+      "category": "异物-果核",
+      "source_file": "果核.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "果核",
+        "type": "内源性异物",
+        "risk": "medium",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "为什么呀",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "请问您这边是遇到什么问题了呢？"
+      ],
+      "full_text_length": 3273
+    },
+    {
+      "id": "CASE-异物-果-002-a7be833e",
+      "category": "异物-果核",
+      "source_file": "果核.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "果核",
+        "type": "内源性异物",
+        "risk": "medium",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "饮品品控能行不，那么大的葡萄籽",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉给您带来不好的体验，为了更好的为您处理，还请您提供下单手机号码或订单编号、饮品及标签图片，阿喜为您核实一下"
+      ],
+      "full_text_length": 1551
+    },
+    {
+      "id": "CASE-异物-苍-001-e03923c1",
+      "category": "异物-苍蝇/蟑螂",
+      "source_file": "苍蝇或蟑螂.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "苍蝇或蟑螂",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "你们的奶茶有苍蝇…",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "非常抱歉给您带来不好的体验，请您提供下单手机号码或订单编号、以及收到的饮品及标签图片，阿喜查看记录一下",
+        "也辛苦您提供一下收到的餐品图片"
+      ],
+      "full_text_length": 1774
+    },
+    {
+      "id": "CASE-异物-苍-002-eb4c0df7",
+      "category": "异物-苍蝇/蟑螂",
+      "source_file": "苍蝇或蟑螂.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "苍蝇或蟑螂",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "有苍蝇",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "真的非常抱歉没有给您满意体验",
+        "请您稍等一下，阿喜这就为您查询一下具体信息~~~~"
+      ],
+      "full_text_length": 1098
+    },
+    {
+      "id": "CASE-异物-苍-004-f45ec6a2",
+      "category": "异物-苍蝇/蟑螂",
+      "source_file": "苍蝇或蟑螂 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "苍蝇或蟑螂",
+        "type": "外源性异物",
+        "risk": "high",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "你好我刚在你们奶茶里面喝出了苍蝇",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 1493
+    },
+    {
+      "id": "CASE-异物-茶-001-e5a06f61",
+      "category": "异物-茶渣",
+      "source_file": "茶渣.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "茶渣",
+        "type": "内源性异物",
+        "risk": "low",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "。我点了我点了两次外卖，鸭喜香柠檬茶去柠檬片都没给我去",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2477
+    },
+    {
+      "id": "CASE-异物-茶-002-a52dc4c3",
+      "category": "异物-茶渣",
+      "source_file": "茶渣.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "茶渣",
+        "type": "内源性异物",
+        "risk": "low",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "我点的苹果杏",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "真的非常抱歉没有给您满意体验"
+      ],
+      "full_text_length": 2687
+    },
+    {
+      "id": "CASE-异物-茶-003-7487e05b",
+      "category": "异物-茶渣",
+      "source_file": "茶渣 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "茶渣",
+        "type": "内源性异物",
+        "risk": "low",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "这底是啥东西啊！",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "请问是遇到了什么问题的，辛苦您告知一下阿喜的"
+      ],
+      "full_text_length": 2144
+    },
+    {
+      "id": "CASE-异物-茶-004-c42056c8",
+      "category": "异物-茶渣",
+      "source_file": "茶渣 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "茶渣",
+        "type": "内源性异物",
+        "risk": "low",
+        "scenario": "foreign_object"
+      },
+      "user_input": {
+        "first_message": "你好，我刚买的奶茶有加料，但是我喝不到哦",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "request_photo",
+          "request_order",
+          "compensation"
+        ]
+      },
+      "reference_replies": [],
+      "full_text_length": 790
+    },
+    {
+      "id": "CASE-呕吐-002-50b9c1f2",
+      "category": "呕吐",
+      "source_file": "呕吐1.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "呕吐",
+        "type": "身体不适",
+        "risk": "high",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "这个新品感觉不太好喝……",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence",
+          "health_status"
+        ],
+        "actions": [
+          "escalate",
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "真的非常抱歉没有给您满意体验"
+      ],
+      "full_text_length": 2177
+    },
+    {
+      "id": "CASE-呕吐-004-69f6782f",
+      "category": "呕吐",
+      "source_file": "呕吐2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "呕吐",
+        "type": "身体不适",
+        "risk": "high",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "我朋友喝完那杯抹茶不舒服",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "concerned"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence",
+          "health_status"
+        ],
+        "actions": [
+          "escalate",
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "真的非常抱歉没有给您满意体验"
+      ],
+      "full_text_length": 1828
+    },
+    {
+      "id": "CASE-变质-产-001-d9398236",
+      "category": "变质-产品变质",
+      "source_file": "产品变质.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "瓶装饮料变质找哪边？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "请您提供一下订单截图，瓶装饮料生产批次图片，茶饮图片"
+      ],
+      "full_text_length": 2628
+    },
+    {
+      "id": "CASE-变质-产-002-04da82e8",
+      "category": "变质-产品变质",
+      "source_file": "产品变质.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "有没有人",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "angry"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，真的非常非常抱歉给您带来不愉快的消费体验了，请您消消气并告知阿喜您的投诉内容，方便我们针对处理。麻烦您提供投诉门店，具体的情况以及消费的时间，感谢您的反馈。"
+      ],
+      "full_text_length": 3202
+    },
+    {
+      "id": "CASE-变质-产-004-810b5b4a",
+      "category": "变质-产品变质",
+      "source_file": "产品变质2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我订的奶茶酸了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "angry"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2681
+    },
+    {
+      "id": "CASE-变质-产-005-ae749c9c",
+      "category": "变质-产品变质",
+      "source_file": "产品变质3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "产品变质了",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "upset"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 1873
+    },
+    {
+      "id": "CASE-变质-产-008-4e2fcc14",
+      "category": "变质-产品变质",
+      "source_file": "产品变质4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "产品变质了",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 3951
+    },
+    {
+      "id": "CASE-变质-一-001-997f9e60",
+      "category": "变质-一般",
+      "source_file": "变质.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "你好，我今天买的这个杨桃，喝起来味道怪怪的，半个小时后开始拉肚子，特别拉，不知是否无菌，或鲜榨液变质了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "upset"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "health_status"
+        ],
+        "actions": [
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2751
+    },
+    {
+      "id": "CASE-变质-一-002-2f5d8211",
+      "category": "变质-一般",
+      "source_file": "变质.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "葡萄都变质了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 1851
+    },
+    {
+      "id": "CASE-变质-一-003-997f9e60",
+      "category": "变质-一般",
+      "source_file": "变质2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "你好，我今天买的这个杨桃，喝起来味道怪怪的，半个小时后开始拉肚子，特别拉，不知是否无菌，或鲜榨液变质了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "upset"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "health_status"
+        ],
+        "actions": [
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2751
+    },
+    {
+      "id": "CASE-变质-一-004-2f5d8211",
+      "category": "变质-一般",
+      "source_file": "变质2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "葡萄都变质了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 1851
+    },
+    {
+      "id": "CASE-变质-一-005-dc0635a9",
+      "category": "变质-一般",
+      "source_file": "变质 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "今天买的两杯都是有变质味儿",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "angry"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "喜一下，喝喜茶，波波咖啡在此恭候，有什么可以为您效劳？",
+        "非常理解您的心情的，再次向您致以我们真挚的歉意。对于您反馈的情况我们是非常重视的，我也会如实记录反馈到相关负责人，后续也会有相关负责人致电您与您进行沟通，还请您后续留意联系，给我们一次为您满意处理的机会。"
+      ],
+      "full_text_length": 586
+    },
+    {
+      "id": "CASE-变质-一-006-760aa68a",
+      "category": "变质-一般",
+      "source_file": "变质 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "Hi，茶茶人工客服多肉橙橙为您服务，请问有什么可以帮您？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "咱家这个芝士起了很多黄色泡泡"
+      ],
+      "full_text_length": 3658
+    },
+    {
+      "id": "CASE-变质-变-001-44887b58",
+      "category": "变质-变酸",
+      "source_file": "变酸.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "不好意思，让您久等了。茶茶正火速赶来，请您再稍作等候。",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "020077202205251733224236"
+      ],
+      "full_text_length": 2377
+    },
+    {
+      "id": "CASE-变质-变-002-7931e5ee",
+      "category": "变质-变酸",
+      "source_file": "变酸.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "Hi，茶茶人工客服纯绿妍茶后为您服务，请问有什么可以帮您？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "你好，请问这个观音爆柠打包回家喝会变苦变酸吗？",
+        "你好，请问这个观音爆柠打包回家喝会边苦变酸吗？",
+        "好的，那我下次要是打包的话我就不点这个了"
+      ],
+      "full_text_length": 1620
+    },
+    {
+      "id": "CASE-变质-变-003-17a6d7b9",
+      "category": "变质-变酸",
+      "source_file": "变酸2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我觉得我现在喝的这个芒果的很奇怪，冰化了后，感觉有酸味",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [],
+      "full_text_length": 2039
+    },
+    {
+      "id": "CASE-变质-变-004-7f047325",
+      "category": "变质-变酸",
+      "source_file": "变酸2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "芭乐喝起来变酸了，跟平时喝起来不一样，颜色是鲜粉色的，这次的是深沉的颜色。变酸变坏的味道",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "真的非常抱歉没有给您满意体验"
+      ],
+      "full_text_length": 1906
+    },
+    {
+      "id": "CASE-变质-变-006-73d489dd",
+      "category": "变质-变酸",
+      "source_file": "变酸4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "你好，你们热饮能不要要求搞什么纸吸管吗，不管是热饮还是冷饮纸吸管真的会影响口感，我今天点了一杯热烤黑糖波波牛乳一股子酸味",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "您好，热饮的“可降解吸管”是提供的纸吸管，PLA吸管因材质限制热饮体验不佳，如果您有特殊需要也可以主动沟通门店工作人员，我们会尽可能给您满意茶饮体验~",
+        "非常抱歉给您带来不好的体验，请您提供下单手机号码或订单编号，马上为您核实"
+      ],
+      "full_text_length": 958
+    },
+    {
+      "id": "CASE-变质-发-004-d3bfdb85",
+      "category": "变质-发霉",
+      "source_file": "发霉2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我下单的是冰的，你们给我做的热的",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "还请您稍等，马上为您反馈核查"
+      ],
+      "full_text_length": 3782
+    },
+    {
+      "id": "CASE-过期-002-973766e2",
+      "category": "过期",
+      "source_file": "过期.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "昨天在淘宝上买了一单，点了一个金凤茶酥，今天发现已经过期了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "我非常重视您的体验和感受，希望您可以消消气"
+      ],
+      "full_text_length": 1860
+    },
+    {
+      "id": "CASE-过期-004-973766e2",
+      "category": "过期",
+      "source_file": "过期2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "昨天在淘宝上买了一单，点了一个金凤茶酥，今天发现已经过期了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "我非常重视您的体验和感受，希望您可以消消气"
+      ],
+      "full_text_length": 1860
+    },
+    {
+      "id": "CASE-过期-005-c5f89dca",
+      "category": "过期",
+      "source_file": "过期样本.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我昨晚吃完才发现过期了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "很抱歉给您造成不好体验的，还"
+      ],
+      "full_text_length": 3042
+    },
+    {
+      "id": "CASE-过期-006-dc8868e9",
+      "category": "过期",
+      "source_file": "过期样本2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "昨天我在万菱汇茶坊店凑单下单的蝴蝶酥",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "阿喜非常理解您的心情，很抱歉没有给您满意的体验的"
+      ],
+      "full_text_length": 2026
+    },
+    {
+      "id": "CASE-过期-008-e35a1e55",
+      "category": "过期",
+      "source_file": "过期样本3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "你们那个茶酥都过期了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "我非常重视您的体验和感受，希望您可以消消气"
+      ],
+      "full_text_length": 2801
+    },
+    {
+      "id": "CASE-有效期-003-e7e55c9b",
+      "category": "有效期",
+      "source_file": "产品有效期2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "柚子发霉了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "辛苦您详细描述一下遇到的问题，阿喜会尽快核实，希望能给到您满意体验"
+      ],
+      "full_text_length": 1474
+    },
+    {
+      "id": "CASE-有效期-004-f90f167c",
+      "category": "有效期",
+      "source_file": "产品有效期2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我点的多肉葡萄里面的葡萄是烂的",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "为了更好的帮您解决问题，麻烦您提供下单手机号码或者订单编号，[爱心]谢谢"
+      ],
+      "full_text_length": 768
+    },
+    {
+      "id": "CASE-有效期-007-d0bbf496",
+      "category": "有效期",
+      "source_file": "产品有效期4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "人工客服",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "还请您提供下单手机号码或订单编号、饮品及标签图片，阿喜为您核实一下~",
+        "请问是什么时候的订单呢"
+      ],
+      "full_text_length": 2263
+    },
+    {
+      "id": "CASE-有效期-008-8c641089",
+      "category": "有效期",
+      "source_file": "产品有效期4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "你好，我购买了光与夜之恋联名小蛋糕，然后我发现它上面显示推荐美味期，这个可以理解成它的保质期吗？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，这个是保质期来的"
+      ],
+      "full_text_length": 2296
+    },
+    {
+      "id": "CASE-有效期-009-90b447db",
+      "category": "有效期",
+      "source_file": "产品有效期5.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我想要投诉",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "angry"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，真的非常非常抱歉给您带来不愉快的消费体验了，请您消消气并告知阿喜您的投诉内容，方便我们针对处理。麻烦您提供投诉门店，具体的情况以及消费的时间，感谢您的反馈。"
+      ],
+      "full_text_length": 2013
+    },
+    {
+      "id": "CASE-有效期-010-ac30c13f",
+      "category": "有效期",
+      "source_file": "产品有效期5.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "葡萄都感觉坏掉了",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。"
+      ],
+      "full_text_length": 495
+    },
+    {
+      "id": "CASE-有效期-011-d6821b3f",
+      "category": "有效期",
+      "source_file": "产品有效期6.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "这个过期了还在用",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "angry"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "escalate",
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~"
+      ],
+      "full_text_length": 1145
+    },
+    {
+      "id": "CASE-有效期-012-1fd3ffe6",
+      "category": "有效期",
+      "source_file": "产品有效期6.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "产品有效期",
+        "type": "原料变质",
+        "risk": "medium",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "我刚刚下单买了两杯我只喝了其中一杯。里面的芒果发苦发酸",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~"
+      ],
+      "full_text_length": 2098
+    },
+    {
+      "id": "CASE-有效期--001-37007e25",
+      "category": "有效期-OEM",
+      "source_file": "产品有效期oem1.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM过期",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "这次的茶饮不新鲜",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "upset"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "选真果，喝喜茶，轻芝芝莓莓在此恭候，有什么可以为您效劳？",
+        "我们坚持使用新鲜的原料制作，每一颗水果在生长中受到阳光和水分的影响，所以甜度和大小都会有一定差异，希望能得到您的谅解。如果您对于出品有任何不满意，请随时告知门店小伙伴，我们将免费为您重新制作"
+      ],
+      "full_text_length": 1515
+    },
+    {
+      "id": "CASE-有效期--002-d1963b05",
+      "category": "有效期-OEM",
+      "source_file": "产品有效期oem1.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM过期",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "这次做的牛乳茶有问题",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉给您带来不好的体验，还请您提供一下订单号，茶茶核实一下"
+      ],
+      "full_text_length": 1644
+    },
+    {
+      "id": "CASE-有效期--003-e72818ea",
+      "category": "有效期-OEM",
+      "source_file": "产品有效期、oem.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM过期",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "嬛嬛四郎真情意，共饮甄喜茶尽兴，生椰芋在此恭候，有什么可以为小主效劳？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "020024202211211018550005"
+      ],
+      "full_text_length": 3397
+    },
+    {
+      "id": "CASE-有效期--004-ca74efa9",
+      "category": "有效期-OEM",
+      "source_file": "产品有效期、oem.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM过期",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "产品有问题",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "喜一下，喝喜茶，满杯红柚在此恭候，有什么可以为您效劳？",
+        "非常抱歉给您带来不好的体验，为了更好的为您处理，还请您提供订单编号和饮品图片，茶茶为您核实一下~ (如离开对话后超过三分钟未提供对话会自动断开，如断开请再次输入rg后进入对话重新提供）"
+      ],
+      "full_text_length": 1282
+    },
+    {
+      "id": "CASE-过敏-002-7cb4b3fc",
+      "category": "过敏",
+      "source_file": "过敏.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "过敏",
+        "type": "身体不适",
+        "risk": "high",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "你好，我点的淘宝闪购不满杯",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence",
+          "health_status"
+        ],
+        "actions": [
+          "escalate",
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [],
+      "full_text_length": 2599
+    },
+    {
+      "id": "CASE-过敏-003-db7f1680",
+      "category": "过敏",
+      "source_file": "过敏 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "过敏",
+        "type": "身体不适",
+        "risk": "high",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "是人工客服吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "concerned"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence",
+          "health_status"
+        ],
+        "actions": [
+          "escalate",
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "有什么是阿喜可以帮到您？",
+        "很抱歉给您造成不好体验的，还希望您可以消消气"
+      ],
+      "full_text_length": 1886
+    },
+    {
+      "id": "CASE-过敏-004-a82e414e",
+      "category": "过敏",
+      "source_file": "过敏 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "过敏",
+        "type": "身体不适",
+        "risk": "high",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "喜茶的退换条件是什么啊",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "concerned"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L4",
+        "required_info": [
+          "order_number",
+          "photo_evidence",
+          "health_status"
+        ],
+        "actions": [
+          "escalate",
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "辛苦您详细描述一下遇到的问题，阿喜会尽快核实，希望能给到您满意体验",
+        "对于您描述的情况阿喜非常重视，请问您目前有没有好转一些的",
+        "非常抱歉给您带来不好的体验，为了更好的为您处理，还请您提供下单手机号码或订单编号"
+      ],
+      "full_text_length": 2707
+    },
+    {
+      "id": "CASE-杯盖-002-ad438baf",
+      "category": "杯盖",
+      "source_file": "杯盖1.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "杯盖或小白塞",
+        "type": "外源性异物",
+        "risk": "medium",
+        "scenario": "packaging"
+      },
+      "user_input": {
+        "first_message": "杯盖上是啥，其他杯的抹茶弄我杯子上了？？？",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。"
+      ],
+      "full_text_length": 1148
+    },
+    {
+      "id": "CASE-杯盖-003-77b737c0",
+      "category": "杯盖",
+      "source_file": "杯盖2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "杯盖或小白塞",
+        "type": "外源性异物",
+        "risk": "medium",
+        "scenario": "packaging"
+      },
+      "user_input": {
+        "first_message": "纤体瓶喝出了这个",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "很抱歉给您造成不好体验的，还希望您可以消消气",
+        "请您稍等一下，阿喜这就为您查询一下具体信息"
+      ],
+      "full_text_length": 1661
+    },
+    {
+      "id": "CASE-杯盖-005-998c9d6c",
+      "category": "杯盖",
+      "source_file": "杯盖3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "杯盖或小白塞",
+        "type": "外源性异物",
+        "risk": "medium",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "这个杯子盖有问题啊",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "concerned"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number",
+          "health_status"
+        ],
+        "actions": [
+          "health_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "十分抱歉没能给到您满意的体验的，请问需要阿喜安排伙伴陪同您就医吗？还请您提供一下您的联系方式，阿喜马上"
+      ],
+      "full_text_length": 2832
+    },
+    {
+      "id": "CASE-OEM-001-7fe0285c",
+      "category": "OEM",
+      "source_file": "oem.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "我想买你们的小零食",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，阿喜这边与您核实一下是OEM饼干小吃类的吗"
+      ],
+      "full_text_length": 196
+    },
+    {
+      "id": "CASE-OEM-002-b1475567",
+      "category": "OEM",
+      "source_file": "oem.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "买了一杯芋泥波波奶茶，备注了要纸吸管，但就是不看",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉没有给您带来满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 3402
+    },
+    {
+      "id": "CASE-OEM-004-ba745481",
+      "category": "OEM",
+      "source_file": "oem3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "雪糕有贴纸送吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，请问您这边咨询的是「小红花贴纸」吗",
+        "8月21日，您可在全渠道（含门店现场点单、喜茶GO小程序、美团外卖等渠道），购买喜茶任意现制饮品，即可随单获得「小红花贴纸」1份，每个订单限送1份，单点OEM/小料/雪糕不参与，周边数量有限，赠完即止"
+      ],
+      "full_text_length": 1100
+    },
+    {
+      "id": "CASE-OEM-005-accb7a2b",
+      "category": "OEM",
+      "source_file": "oem4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "没过保质期，但是都变味发霉了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [],
+      "full_text_length": 2397
+    },
+    {
+      "id": "CASE-OEM-006-ad3229ac",
+      "category": "OEM",
+      "source_file": "oem4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "金凤茶酥可以批发购买吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "暂时只能单独购买的，如您有需要可以直接在购物车加购即可",
+        "感谢您对喜茶的支持，这边阿喜会如实把您的建议反馈给相关部门"
+      ],
+      "full_text_length": 1070
+    },
+    {
+      "id": "CASE-OEM-007-accb7a2b",
+      "category": "OEM",
+      "source_file": "oem5.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "没过保质期，但是都变味发霉了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [],
+      "full_text_length": 2397
+    },
+    {
+      "id": "CASE-OEM-008-ad3229ac",
+      "category": "OEM",
+      "source_file": "oem5.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "金凤茶酥可以批发购买吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "暂时只能单独购买的，如您有需要可以直接在购物车加购即可",
+        "感谢您对喜茶的支持，这边阿喜会如实把您的建议反馈给相关部门"
+      ],
+      "full_text_length": 1070
+    },
+    {
+      "id": "CASE-OEM-009-eec92e71",
+      "category": "OEM",
+      "source_file": "OEM (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "755140202311281255450005",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "喜悦相伴，月观在此恭候，有什么可以为您效劳？",
+        "阿喜先为您查看下留言记录，请稍等"
+      ],
+      "full_text_length": 929
+    },
+    {
+      "id": "CASE-OEM-010-595188c6",
+      "category": "OEM",
+      "source_file": "OEM (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "为什么我这边吃出了铁丝？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "喜悦相伴，芝芝多肉青提在此恭候，有什么可以为您效劳？",
+        "您的心情我非常理解，很抱歉给您带来不好的体验",
+        "为了更好的帮您解决问题，麻烦您提供一下订单号（点击订单-订单下拉-订单信息-订单编号复制）或下单手机号，阿喜这边为您查询，谢谢。"
+      ],
+      "full_text_length": 4280
+    },
+    {
+      "id": "CASE-OEM-011-595188c6",
+      "category": "OEM",
+      "source_file": "OEM2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "为什么我这边吃出了铁丝？",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "喜悦相伴，芝芝多肉青提在此恭候，有什么可以为您效劳？",
+        "您的心情我非常理解，很抱歉给您带来不好的体验",
+        "为了更好的帮您解决问题，麻烦您提供一下订单号（点击订单-订单下拉-订单信息-订单编号复制）或下单手机号，阿喜这边为您查询，谢谢。"
+      ],
+      "full_text_length": 4280
+    },
+    {
+      "id": "CASE-OEM-012-d0679e62",
+      "category": "OEM",
+      "source_file": "OEM2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "你们牛乳卷保质期是多久",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "喜悦相伴，青提柠打茶在等您，有什么可以为您效劳？",
+        "感谢您的支持与喜爱，建议您在24小时之内食用完毕的"
+      ],
+      "full_text_length": 3138
+    },
+    {
+      "id": "CASE-OEM-013-3bc55961",
+      "category": "OEM",
+      "source_file": "OEM3 (2).xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "您好是不是有点变质了 颜色不一样 味道也不一样",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2706
+    },
+    {
+      "id": "CASE-OEM--001-da69da27",
+      "category": "OEM-补充",
+      "source_file": "oem补充2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "8225是门店的第一单吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。"
+      ],
+      "full_text_length": 1279
+    },
+    {
+      "id": "CASE-OEM--002-450fc038",
+      "category": "OEM-补充",
+      "source_file": "oem补充2.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM",
+        "type": "OEM",
+        "risk": "medium",
+        "scenario": "oem_issue"
+      },
+      "user_input": {
+        "first_message": "免配？是只支持饮品吗",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~",
+        "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。"
+      ],
+      "full_text_length": 852
+    },
+    {
+      "id": "CASE-OEM--002-e1fccaf1",
+      "category": "OEM-变质",
+      "source_file": "oem变质.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "这个是发霉了吗",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "concerned"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉给您带来不好的体验，请您提供下单手机号码或订单编号，阿喜查看一下"
+      ],
+      "full_text_length": 1512
+    },
+    {
+      "id": "CASE-OEM--003-244448ef",
+      "category": "OEM-变质",
+      "source_file": "oem变质1.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "你好 我前段时间买的一盒金凤茶酥",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉没有给您带来满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2288
+    },
+    {
+      "id": "CASE-OEM--005-3bc55961",
+      "category": "OEM-变质",
+      "source_file": "oem变质3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "您好是不是有点变质了 颜色不一样 味道也不一样",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2706
+    },
+    {
+      "id": "CASE-OEM--006-27ab9a90",
+      "category": "OEM-变质",
+      "source_file": "oem变质3.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "这是不是发霉啊",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "实在抱歉的，辛苦您提供下订单号给阿喜的",
+        "请您稍等一下，阿喜这就为您查询一下具体信息~~~~"
+      ],
+      "full_text_length": 1807
+    },
+    {
+      "id": "CASE-OEM--008-4b2d9283",
+      "category": "OEM-变质",
+      "source_file": "oem变质4.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "人工客服",
+        "has_image": false,
+        "has_order": true,
+        "emotion": "calm"
+      },
+      "order_info": {
+        "orderId": "C0011302020260124153830460",
+        "productName": "85%浓巧生布蕾挞等2商品",
+        "status": "已完成"
+      },
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "您好，当前正在排队，您可以先描述遇到的问题，如有订单问题（催促、产品售后等）着急可直接致电门店~ 订单详情页面可以直接点击联系门店的~"
+      ],
+      "full_text_length": 3180
+    },
+    {
+      "id": "CASE-OEM--011-3bc55961",
+      "category": "OEM-变质",
+      "source_file": "oem变质6.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "您好是不是有点变质了 颜色不一样 味道也不一样",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2706
+    },
+    {
+      "id": "CASE-OEM--012-27ab9a90",
+      "category": "OEM-变质",
+      "source_file": "oem变质6.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "这是不是发霉啊",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "实在抱歉的，辛苦您提供下订单号给阿喜的",
+        "请您稍等一下，阿喜这就为您查询一下具体信息~~~~"
+      ],
+      "full_text_length": 1807
+    },
+    {
+      "id": "CASE-OEM--015-244448ef",
+      "category": "OEM-变质",
+      "source_file": "oem变质8.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "OEM变质",
+        "type": "OEM",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "你好 我前段时间买的一盒金凤茶酥",
+        "has_image": false,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": false,
+        "compensation_level": "L2",
+        "required_info": [
+          "order_number",
+          "photo_evidence"
+        ],
+        "actions": [
+          "batch_check",
+          "escalate",
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常抱歉没有给您带来满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2288
+    },
+    {
+      "id": "CASE-综合0-001-997f9e60",
+      "category": "综合-历史会话",
+      "source_file": "历史会话导出2026-05-091778322436048.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "身体不适",
+        "type": "身体不适",
+        "risk": "high",
+        "scenario": "body_discomfort"
+      },
+      "user_input": {
+        "first_message": "你好，我今天买的这个杨桃，喝起来味道怪怪的，半个小时后开始拉肚子，特别拉，不知是否无菌，或鲜榨液变质了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "upset"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 2751
+    },
+    {
+      "id": "CASE-综合1-002-2f5d8211",
+      "category": "综合-历史会话",
+      "source_file": "历史会话导出2026-05-091778322436048.xlsx",
+      "classification": {
+        "is_food_safety": true,
+        "label": "原料变质",
+        "type": "原料变质",
+        "risk": "high",
+        "scenario": "spoilage"
+      },
+      "user_input": {
+        "first_message": "葡萄都变质了",
+        "has_image": true,
+        "has_order": false,
+        "emotion": "calm"
+      },
+      "order_info": null,
+      "expected_handling": {
+        "should_escalate": true,
+        "compensation_level": "L3",
+        "required_info": [
+          "order_number"
+        ],
+        "actions": [
+          "compensation"
+        ]
+      },
+      "reference_replies": [
+        "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意"
+      ],
+      "full_text_length": 1851
+    }
+  ]
+}

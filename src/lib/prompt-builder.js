@@ -74,6 +74,9 @@ export function buildSystemPrompt(perception = null, session = {}, options = {})
   // ═══ 6. 沟通规范 ═══
   sections.push(_buildCommunicationRules())
 
+  // ═══ 7. 真实客服话术参考（来自 70 个 Excel 提取的策略库）═══
+  sections.push(_buildRealScriptGuide(perception))
+
   // ═══ 6. ICL 示例 (LIMA 原则: 少而精) ═══
   if (includeICL && perception) {
     const iclResult = retrieveICLExamples(perception, { maxExamples: maxICLExamples })
@@ -318,6 +321,78 @@ function _buildTriggerResponseGuide(triggersData) {
 - 回复语气要诚恳，避免机械化的客服套话
 - ${emotionLevel === 'angry' ? '避免使用过于轻松的语气，保持严肃专业' : '可以适当温暖，让顾客感到被重视'}`)
   }
+
+  return parts.join('\n')
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SECTION 2.7 — 真实客服话术参考（从 38,644 条会话中提取）
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * 注入真实客服话术模式作为 LLM 风格参考
+ * 来源: strategy_knowledge_base.json（70 个 Excel 文件提取）
+ * 这些不是固定模板——是让 LLM 学习真实客服的表达方式
+ */
+function _buildRealScriptGuide(perception) {
+  const scenario = perception?._raw_classification?.consult_type ||
+                   perception?._triggers?.triggers?.find(t => t.type === 'food_safety')?.subtype ||
+                   ''
+
+  // 通用信息收集话术（适用于所有食安场景）
+  const infoCollection = `**信息收集话术参考**（来自真实客服对话）：
+- 请求订单号："还请您提供下单手机号码或订单编号，阿喜为您核实一下"
+- 请求照片："麻烦您提供一下异物图片，方便阿喜为您反馈处理"
+- 请求门店："请问您下单的是具体哪家门店呢"
+- 组合请求："为了更好的为您处理，还请您提供订单编号、饮品及标签图片"`
+
+  // 通用共情话术
+  const empathy = `**共情安抚话术参考**：
+- 标准道歉："非常抱歉给您带来不好的体验，向您致以我们真挚的歉意"
+- 理解共情："非常理解您的心情，阿喜非常重视您的体验"
+- 重视表达："阿喜非常重视您的反馈，会如实记录并反馈给相关负责人"
+- 升级安抚："如您不满意门店处理方案，阿喜也会为您升级反馈给更高负责人跟进"`
+
+  // 场景特定话术
+  let scenarioScripts = ''
+  if (scenario === '外源性异物' || scenario === 'external_foreign' || scenario.includes('异物')) {
+    scenarioScripts = `**当前场景（异物类）话术参考**：
+- 确认异物："请问异物是什么样的呢？方便的话请您拍照给阿喜"
+- 处理方案："阿喜为您申请退款并补偿一张代金券，希望您可以继续支持我们"
+- 升级处理："阿喜这边如实记录反馈到门店相关负责人，由负责人联系您处理"
+- 不要说："这个很正常""偶尔会发生""不是我们的问题"`
+  } else if (scenario === '身体不适' || scenario === 'body_discomfort') {
+    scenarioScripts = `**当前场景（身体不适）话术参考**：
+- 首先关心健康："请先确认目前的身体状况，如有不适请尽快就医"
+- 保留凭证："请您保留好就医凭证（病历、发票等），后续可作为处理依据"
+- 记录反馈："阿喜非常重视您的情况，会如实记录并反馈给相关负责人"
+- 不要质疑："不要说'确定是我们的产品导致的吗'这类质疑性话语"`
+  } else if (scenario === '原料变质' || scenario === 'spoilage') {
+    scenarioScripts = `**当前场景（变质/过期）话术参考**：
+- 立即道歉："非常抱歉，这是我们的严重失误，向您致以最真挚的歉意"
+- 紧急处理："阿喜立即为您记录并紧急反馈给品质部门和门店负责人"
+- 排查承诺："我们会立即排查同批次产品，避免类似问题再次发生"
+- 补偿方案："为您申请全额退款并补偿代金券，后续由负责人与您联系确认"`
+  }
+
+  const parts = ['# 真实客服话术参考（风格指南）',
+    '以下话术来自真实客服对话数据，用于参考表达风格和用词习惯。',
+    '**不要照搬**，用自己的话表达同样的意思，保持自然对话感。',
+    '',
+    infoCollection,
+    '',
+    empathy,
+  ]
+
+  if (scenarioScripts) {
+    parts.push('', scenarioScripts)
+  }
+
+  // 解决时效话术
+  parts.push('', `**时效承诺话术参考**：
+- 标准处理："阿喜这边为您如实记录反馈，预计24小时内由负责人联系您处理"
+- 退款时效："退款将在门店核实后24小时内原路退回"
+- 工单跟进："阿喜已为您创建工单，后续会有负责人与您联系，请留意来电"`)
 
   return parts.join('\n')
 }
