@@ -21,6 +21,7 @@ import { processMessage, processMessageWithAgent, executeOrderWorkflow, generate
 import { runFullSafetyCheck } from '../../lib/content-safety.js'
 import { getLLMConfig, getModelDisplayName } from '../../lib/llm-client.js'
 import TestRunnerPanel from '../test/TestRunnerPanel.jsx'
+import { getWorkbenchConversations, getCategoryStats, getMetadata } from '../../lib/case-library.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -2229,17 +2230,28 @@ function ConsumerWorkbench({ messages, onSend }) {
   const [activePanel, setActivePanel] = useState('history')
   const [activeFilter, setActiveFilter] = useState('all')
 
-  // ── 真实会话数据（基于实际客服场景） ──
-  const conversations = [
-    { id: 1, title: '喝完一直拉肚子', desc: '请问目前有没有好转一些？建议及时就医', category: 'body', status: 'active', agent: '阿喜AI', rounds: 3, time: '3秒', urgent: true },
-    { id: 2, title: '太离谱了要曝光', desc: '阿喜完全理解您的心情，马上为您升级处理', category: 'emotion', status: 'active', agent: '阿喜AI', rounds: 2, time: '2秒', urgent: true },
-    { id: 3, title: '杯子里有金属片', desc: '已升级客诉，总部品质部30分钟内联系您', category: 'external', status: 'active', agent: '人工', rounds: 7, time: '7秒', urgent: true, escalated: true },
-    { id: 4, title: '茶饮里有果核', desc: '阿喜来帮您处理，可以为您安排重做一杯', category: 'internal', status: 'resolved', agent: '阿喜AI', rounds: 5, time: '5秒' },
-    { id: 5, title: '蛋糕打开已经发霉', desc: '非常重视，已紧急排查同批次产品', category: 'spoilage', status: 'active', agent: '阿喜AI', rounds: 4, time: '4秒', urgent: true },
-    { id: 6, title: '饮品中有头发', desc: '非常抱歉，已为您安排退款和重做', category: 'external', status: 'resolved', agent: '阿喜AI', rounds: 4, time: '6秒' },
-    { id: 7, title: '奶茶味道跟之前不一样', desc: '了解到您的反馈，可能是制作偏差，为您重做', category: 'taste', status: 'resolved', agent: '阿喜AI', rounds: 3, time: '4秒' },
-    { id: 8, title: '想问下哪些饮品含花生', desc: '为您查询到以下饮品含有花生成分...', category: 'non_safety', status: 'resolved', agent: '阿喜AI', rounds: 2, time: '2秒' },
-  ]
+  // ── 真实会话数据（从 70 个 Excel/38,644 条会话中提取）──
+  const realCases = getWorkbenchConversations(10)
+  const conversations = realCases.map((c, i) => ({
+    id: i + 1,
+    title: c.firstMessage.substring(0, 15),
+    desc: c.referenceReplies?.[0]?.substring(0, 30) || `${c.category}投诉处理中`,
+    category: c.category === '外源性异物' ? 'external'
+      : c.category === '内源性异物' ? 'internal'
+      : c.category === '身体不适' ? 'body'
+      : c.category === '原料变质' ? 'spoilage'
+      : c.category === '饮品异味' ? 'taste'
+      : c.emotion === 'angry' ? 'emotion'
+      : 'non_safety',
+    status: c.risk === 'high' ? 'active' : 'resolved',
+    agent: c.risk === 'high' ? '阿喜AI' : '阿喜AI',
+    rounds: c.referenceReplies?.length || 3,
+    time: c.time,
+    urgent: c.risk === 'high',
+    escalated: c.shouldEscalate || c.risk === 'high',
+    store: c.store,
+    sourceId: c.id,
+  }))
 
   // ── 食安分类体系 ──
   const categories = [
@@ -2600,15 +2612,23 @@ function StaffWorkbench({ messages }) {
     { id: 'monitor', label: '食安监控', icon: <Activity className="h-3.5 w-3.5" /> },
   ]
 
-  // Real work orders based on actual customer service scenarios
-  const workOrders = [
-    { id: 'WO-20260609-001', type: '异物投诉（外源性）', store: '深圳万象城店', severity: 'high', status: 'pending', time: '10:23', detail: '顾客反馈杯中发现头发，已拍照留存' },
-    { id: 'WO-20260609-002', type: '身体不适', store: '广州天河城店', severity: 'high', status: 'processing', time: '09:45', detail: '顾客饮用后腹泻，建议就医并保留凭证' },
-    { id: 'WO-20260609-003', type: '原料变质（红线）', store: '上海南京路店', severity: 'high', status: 'escalated', time: '08:30', detail: '蛋糕打开已发霉，紧急排查同批次产品' },
-    { id: 'WO-20260608-015', type: '内源性异物', store: '北京三里屯店', severity: 'medium', status: 'resolved', time: '昨日', detail: '茶饮中发现果核，已安排重做+优惠券补偿' },
-    { id: 'WO-20260608-014', type: '口味异常', store: '成都春熙路店', severity: 'low', status: 'resolved', time: '昨日', detail: '饮品味道与预期不符，制作偏差已纠正' },
-    { id: 'WO-20260609-004', type: '情绪升级（转人工）', store: '杭州西湖银泰店', severity: 'high', status: 'escalated', time: '11:05', detail: '顾客情绪激动要求曝光，已转人工处理' },
-  ]
+  // Real work orders derived from actual customer service data (70 Excel files)
+  const realCases = getWorkbenchConversations(8)
+  const workOrders = realCases.map((c, i) => ({
+    id: `WO-${new Date().toISOString().slice(0,10).replace(/-/g,'')}-${String(i+1).padStart(3,'0')}`,
+    type: c.category === '外源性异物' ? `异物投诉（${c.subCategory}）`
+      : c.category === '内源性异物' ? `内源性异物（${c.subCategory}）`
+      : c.category === '身体不适' ? '身体不适'
+      : c.category === '原料变质' ? '原料变质'
+      : c.emotion === 'angry' ? '情绪升级（转人工）'
+      : `${c.category}投诉`,
+    store: c.store,
+    severity: c.risk,
+    status: c.status === 'pending' ? 'pending' : c.status === 'processing' ? 'processing' : 'resolved',
+    time: c.time,
+    detail: c.firstMessage.substring(0, 40),
+    sourceCaseId: c.id,
+  }))
 
   const severityConfig = {
     high: { label: '高', color: '#e74c3c', bg: '#e74c3c' },
