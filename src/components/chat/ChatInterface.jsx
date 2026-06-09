@@ -2981,7 +2981,7 @@ export default function ChatInterface({ role = 'consumer' }) {
     // Snapshot current messages for this send cycle
     const currentMessages = messages
 
-    // Run Agent Engine (感知-决策-执行 闭环)
+    // ── Step 1: Agent Engine 轻量运行 — 仅提取感知上下文 (不做回复生成) ──
     let engineResult = null
     try {
       engineResult = processMessageWithAgent(text, {
@@ -2989,7 +2989,6 @@ export default function ChatInterface({ role = 'consumer' }) {
         turnIndex: currentMessages.filter(m => m.role === 'user').length,
         _episodicMemory: _episodicMemoryRef.current,
       })
-      // 保存情景记忆引用供下一轮使用
       if (engineResult._episodicMemory) {
         _episodicMemoryRef.current = engineResult._episodicMemory
       }
@@ -2997,26 +2996,11 @@ export default function ChatInterface({ role = 'consumer' }) {
       console.warn('Agent engine error:', e)
     }
 
-    // Run Order Processing Workflow in parallel
-    try {
-      const orderResult = executeOrderWorkflow({
-        userInput: text,
-        conversation: currentConversation?.id || '',
-        orderId: '',
-      })
-      // Only attach when a meaningful scene is detected (not generic "其他" fallback)
-      if (orderResult && orderResult.scene !== '其他') {
-        engineResult = { ...(engineResult || {}), orderResult }
-      }
-    } catch (e) {
-      console.warn('Order workflow error:', e)
-    }
-
-    const templateReply = engineResult?.reply || generateStreamingResponse(text)
-
-    // 尝试 LLM 增强回复 (API 已配置时)
-    let finalReply = templateReply
+    // ── Step 2: LLM 优先 — 作为主回复路径 ──
+    let finalReply = null
     let llmSource = 'template'
+    let templateReply = null  // 延迟生成，仅作为兜底
+
     try {
       const llmResult = await generateLLMEnhancedReply({
         userText: text,
@@ -3048,10 +3032,17 @@ export default function ChatInterface({ role = 'consumer' }) {
         }
       }
     } catch (e) {
-      console.warn('LLM reply generation failed, using template:', e)
+      console.warn('LLM reply generation failed:', e)
     }
 
-    // 内容安全护栏 (post-generation safety check)
+    // ── Step 3: LLM 未产出 → 降级到规则引擎 / 模板回复 ──
+    if (!finalReply) {
+      templateReply = engineResult?.reply || generateStreamingResponse(text)
+      finalReply = templateReply
+      llmSource = 'template'
+    }
+
+    // ── Step 4: 内容安全护栏 (仅对 LLM 生成内容检查) ──
     let safetyResult = null
     try {
       const llmConfig = getLLMConfig()
@@ -3062,12 +3053,30 @@ export default function ChatInterface({ role = 'consumer' }) {
         })
         if (safetyResult.blocked) {
           console.warn('Content safety blocked reply, falling back to template:', safetyResult.recommendation)
+          // 安全拦截时才降级到模板
+          if (!templateReply) {
+            templateReply = engineResult?.reply || generateStreamingResponse(text)
+          }
           finalReply = templateReply
           llmSource = 'template_safety_fallback'
         }
       }
     } catch (e) {
       console.warn('Content safety check failed (non-blocking):', e)
+    }
+
+    // ── Step 5: 订单工作流 — 仅在检测到明确订单意图时执行 ──
+    try {
+      const orderResult = executeOrderWorkflow({
+        userInput: text,
+        conversation: currentConversation?.id || '',
+        orderId: '',
+      })
+      if (orderResult && orderResult.scene !== '其他') {
+        engineResult = { ...(engineResult || {}), orderResult }
+      }
+    } catch (e) {
+      console.warn('Order workflow error:', e)
     }
 
     // 将安全检查结果附加到 agent_framework

@@ -20,14 +20,14 @@
 
 /** 默认 API 配置 (可在运行时覆盖) — 预配置 NVIDIA 生态 */
 const DEFAULT_CONFIG = Object.freeze({
-  // API 端点 (NVIDIA 生态集成)
+  // API 端点 (NVIDIA 生态集成 — kimi-k2.6 主力模型)
   baseUrl: 'https://integrate.api.nvidia.com/v1',
-  apiKey: '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',
-  model: 'nvidia/nemotron-3-ultra-550b-a55b',
+  apiKey: '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',
+  model: 'moonshotai/kimi-k2.6',
 
   // 请求参数
   temperature: 0.3,       // 低温度 = 更确定性 (客服场景偏好稳定)
-  maxTokens: 16384,       // 回复最大 token (NVIDIA 支持 16K)
+  maxTokens: 4096,        // 回复最大 token
   topP: 0.95,
   frequencyPenalty: 0.1,  // 轻微惩罚重复 (对应 Reward Hacking 防御 §6.5)
   presencePenalty: 0.05,
@@ -40,16 +40,16 @@ const DEFAULT_CONFIG = Object.freeze({
   // 流式
   stream: false,
 
-  // 备用配置 (主 API 失败时降级 → kimi-k2.6 快速响应)
+  // 备用配置 (主 API 失败时降级 → nemotron reasoning model)
   fallback: {
     baseUrl: 'https://integrate.api.nvidia.com/v1',
-    apiKey: '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',
-    model: 'moonshotai/kimi-k2.6',
+    apiKey: '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',
+    model: 'nvidia/nemotron-3-ultra-550b-a55b',
   },
 
-  // NVIDIA Reasoning Model 专属
-  enableThinking: true,        // 启用 reasoning chain (nemotron-3-ultra)
-  reasoningBudget: 16384,      // reasoning token 预算 (max 16384)
+  // Reasoning Model 专属 (kimi-k2.6 不支持，置 false)
+  enableThinking: false,       // kimi-k2.6 不支持 reasoning chain
+  reasoningBudget: 0,          // 不适用
   extraBody: null,             // 额外请求体参数 (如 chat_template_kwargs)
 
   // 内容安全护栏 (独立 API key)
@@ -95,7 +95,7 @@ export function getLLMConfig() {
 
 /**
  * 从 localStorage 恢复配置
- * 如果保存的配置缺少 apiKey 但默认配置有，则使用默认配置的值
+ * 智能合并: 已保存值优先，但空值/不可用模型回退到 DEFAULT_CONFIG
  */
 export function restoreLLMConfig() {
   try {
@@ -105,6 +105,18 @@ export function restoreLLMConfig() {
         const parsed = JSON.parse(saved)
         // 合并策略: 已保存值优先，但空值回退到 DEFAULT_CONFIG
         _activeConfig = { ...DEFAULT_CONFIG, ...parsed }
+
+        // 检测不可用模型 (nemotron-3-ultra 已知超时)，强制回退到默认模型
+        const unavailableModels = ['nvidia/nemotron-3-ultra-550b-a55b']
+        if (unavailableModels.includes(_activeConfig.model)) {
+          _activeConfig.apiKey = DEFAULT_CONFIG.apiKey
+          _activeConfig.baseUrl = DEFAULT_CONFIG.baseUrl
+          _activeConfig.model = DEFAULT_CONFIG.model
+          _activeConfig.enableThinking = DEFAULT_CONFIG.enableThinking
+          _activeConfig.reasoningBudget = DEFAULT_CONFIG.reasoningBudget
+          _activeConfig.maxTokens = DEFAULT_CONFIG.maxTokens
+        }
+
         // 如果保存的 apiKey 为空但默认有值，使用默认
         if (!_activeConfig.apiKey && DEFAULT_CONFIG.apiKey) {
           _activeConfig.apiKey = DEFAULT_CONFIG.apiKey
