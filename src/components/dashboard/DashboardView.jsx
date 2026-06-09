@@ -139,7 +139,7 @@ export default function DashboardView() {
               食安运营指挥中心
             </h2>
             <p className="mt-0.5 text-sm" style={{ color: 'var(--cursor-border-55)' }}>
-              Agent 实时运营数据 · 食安 AIQC_V2 质检 · 七鱼协同监控
+              Agent 实时运营数据 · 食安智能质检 · 七鱼协同监控
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -399,7 +399,7 @@ export default function DashboardView() {
         <div className="mb-6 metric-card" data-component="workflow-architecture">
           <div className="flex items-center justify-between mb-1">
             <h3 className="text-sm font-medium" style={{ color: 'var(--cursor-ink)' }}>
-              食安专家 AIQC_V2 质检工作流
+              食安专家智能质检工作流
             </h3>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded" style={{
               background: 'var(--cursor-surface-500)',

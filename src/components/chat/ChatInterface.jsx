@@ -170,7 +170,7 @@ function AIQCResultCard({ aiqc_v2 }) {
     <div className="decision-card mt-2" data-component="aiqc-result-card">
       <div className="decision-card__header cursor-pointer" onClick={() => setExpanded(!expanded)}>
         <Shield className="h-3 w-3 flex-shrink-0" style={{ color: allPass ? 'var(--cursor-success)' : 'var(--cursor-error)' }} />
-        <span className="decision-card__label">AIQC_V2 质检结果</span>
+        <span className="decision-card__label">质检分析结果</span>
         <span className={cn(
           'redline-badge ml-1',
           allPass ? 'redline-badge--pass' : 'redline-badge--fail'
@@ -1345,7 +1345,7 @@ function WelcomeScreen({ onSend }) {
           </h2>
         </div>
         <p className="max-w-md text-sm leading-relaxed" style={{ color: 'var(--cursor-border-55)' }}>
-          食品安全智能服务系统 — AIQC_V2 多模型质检 · 感知-决策-执行全链路闭环 · 实时风险识别与守护
+          食品安全智能服务系统 — 多模型智能质检 · 感知-决策-执行全链路闭环 · 实时风险识别与守护
         </p>
       </div>
 
@@ -1673,7 +1673,7 @@ function ChatInputBar({ onSend, isStreaming, onStop }) {
           </span>
           <span className="flex items-center gap-1">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1L2 3v3c0 2.2 1.3 4.2 3 4.8 1.7-0.6 3-2.6 3-4.8V3L5 1z" stroke="#8e44ad" strokeWidth="1.1" strokeLinejoin="round"/></svg>
-            AIQC_V2 质检
+            智能质检
           </span>
           <span className="flex items-center gap-1">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#e67e22" strokeWidth="1.1"/><path d="M5 3v2l1.5 1" stroke="#e67e22" strokeWidth="0.9" strokeLinecap="round"/></svg>
@@ -1760,7 +1760,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
       color: '#e67e22',
       items: [
         { label: '当前工单', action: '请显示当前待处理的工单列表' },
-        { label: '质检结果', action: '请显示最新的AIQC_V2质检结果' },
+        { label: '质检结果', action: '请显示最新的质检分析结果' },
         { label: '待升级工单', action: '请显示需要升级处理的工单' },
       ],
     },
@@ -1865,7 +1865,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
             className="relative cursor-grab active:cursor-grabbing"
             style={{
               background: isStaff
-                ? 'linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%)'
+                ? 'linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%)'
                 : 'linear-gradient(135deg, #f54e00 0%, #d43800 100%)',
               padding: '14px 16px 16px',
             }}
@@ -1889,7 +1889,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
                 {/* Online dot */}
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2" style={{
                   background: '#27ae60',
-                  borderColor: isStaff ? '#0d47a1' : '#d43800',
+                  borderColor: isStaff ? '#1a1a1a' : '#d43800',
                 }} />
               </div>
 
@@ -1898,7 +1898,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
                   {isStaff ? '客服工作台' : '阿喜智能助手'}
                 </div>
                 <div className="text-[10px] mt-0.5 leading-tight" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  {isStaff ? 'AIQC_V2 食安服务工作流' : 'AI 食安服务 · 全程可追踪'}
+                  {isStaff ? '食安智能服务中心' : 'AI 食安服务 · 全程可追踪'}
                 </div>
               </div>
 
@@ -1950,8 +1950,8 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
               <span>快捷服务</span>
               {isStaff && (
                 <span className="text-[9px] font-normal px-1.5 py-0.5 rounded-full" style={{
-                  background: '#1a73e815',
-                  color: '#1a73e8',
+                  background: '#3a3a3a15',
+                  color: '#3a3a3a',
                 }}>工作模式</span>
               )}
             </div>
@@ -2052,8 +2052,8 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
             {isStaff && (
               <div className="flex items-center justify-between mb-2 px-1">
                 <div className="flex items-center gap-1.5">
-                  <Activity className="h-3 w-3" style={{ color: '#1a73e8' }} />
-                  <span className="text-[9px] font-medium" style={{ color: 'var(--cursor-ink)' }}>AIQC_V2 引擎运行中</span>
+                  <Activity className="h-3 w-3" style={{ color: '#3a3a3a' }} />
+                  <span className="text-[9px] font-medium" style={{ color: 'var(--cursor-ink)' }}>智能引擎运行中</span>
                 </div>
                 <span className="text-[8px] px-1.5 py-0.5 rounded-full font-semibold" style={{
                   background: '#27ae6018',
@@ -2066,7 +2066,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
               className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-[11px] font-semibold transition-all hover:shadow-md hover:-translate-y-px"
               style={{
                 background: isStaff
-                  ? 'linear-gradient(135deg, #1a73e8, #0d47a1)'
+                  ? 'linear-gradient(135deg, #3a3a3a, #1a1a1a)'
                   : 'linear-gradient(135deg, #f54e00, #d43800)',
                 color: 'white',
                 boxShadow: isStaff
@@ -2082,7 +2082,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
               {isStaff ? '生成质检报告' : '联系人工客服'}
             </button>
             <div className="text-center text-[9px] mt-1.5" style={{ color: 'var(--cursor-border-55)', opacity: 0.6 }}>
-              {isStaff ? 'AIQC_V2 · 质检数据仅供参考' : '阿喜回复仅供参考 · 重要事项请联系人工客服'}
+              {isStaff ? '质检数据仅供参考' : '阿喜回复仅供参考 · 重要事项请联系人工客服'}
             </div>
           </div>
         </div>
@@ -2116,7 +2116,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
             }} />
             {/* Outer pulse */}
             <span className="absolute inset-0 rounded-full animate-ping" style={{
-              background: isStaff ? '#1a73e8' : '#f54e00',
+              background: isStaff ? '#3a3a3a' : '#f54e00',
               opacity: 0.15,
               animationDuration: '2.5s',
             }} />
@@ -2237,7 +2237,7 @@ function ConsumerWorkbench({ messages }) {
               <div className="px-3.5 py-3 space-y-0">
                 {[
                   { step: '提交反馈', desc: '您的问题已提交', done: hasComplaint },
-                  { step: '智能分析', desc: 'AIQC_V2 多模型质检', done: complaintStage === 'processing' || complaintStage === 'resolved' },
+                  { step: '智能分析', desc: '多模型智能质检', done: complaintStage === 'processing' || complaintStage === 'resolved' },
                   { step: '方案生成', desc: '补偿方案与处理建议', done: complaintStage === 'resolved' },
                   { step: '处理完成', desc: '问题已解决', done: complaintStage === 'resolved' },
                 ].map((item, i) => (
@@ -2361,7 +2361,7 @@ function ConsumerWorkbench({ messages }) {
                 { q: '饮品中发现异物怎么办？', a: '请保留异物并拍照，我们会第一时间为您处理。可提供代金券补偿、退款或重做方案。', color: '#e74c3c' },
                 { q: '如何申请退款？', a: '提供订单号或手机号，我会为您查询退款方案。退款由门店核实后处理，预计24小时内完成。', color: '#e67e22' },
                 { q: '饮品口味与预期不符？', a: '请描述具体情况，我们会为您安排重做或补偿。坚持不满意重做的服务宗旨。', color: '#f39c12' },
-                { q: '食品安全投诉流程？', a: '提交反馈 → AIQC_V2 智能分析 → 生成处理方案 → 门店负责人核实 → 12小时内联系您。', color: '#2980b9' },
+                { q: '食品安全投诉流程？', a: '提交反馈 → 智能分析 → 生成处理方案 → 门店负责人核实 → 12小时内联系您。', color: '#2980b9' },
                 { q: '如何联系人工客服？', a: '您可以直接说"转人工"或点击快捷操作中的"转接人工客服"按钮。', color: '#27ae60' },
               ].map((item, i) => (
                 <details key={i} className="rounded-xl border overflow-hidden group" style={{ borderColor: 'var(--cursor-border-10)' }}>
@@ -2397,7 +2397,7 @@ function ConsumerWorkbench({ messages }) {
           </div>
           <div>
             <div className="text-[10px] font-medium" style={{ color: 'var(--cursor-ink)' }}>喜茶食安保障体系</div>
-            <div className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>AIQC_V2 全程质检守护</div>
+            <div className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>全程质检守护</div>
           </div>
         </div>
       </div>
@@ -2460,7 +2460,7 @@ function StaffWorkbench({ messages }) {
     }} data-component="staff-workbench">
       {/* ── Header ── */}
       <div className="px-4 py-4" style={{
-        background: 'linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%)',
+        background: 'linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%)',
       }}>
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{
@@ -2471,7 +2471,7 @@ function StaffWorkbench({ messages }) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="text-[13px] font-semibold text-white">客服工作台</div>
-            <div className="text-[10px] text-white" style={{ opacity: 0.75 }}>AIQC_V2 食安质检服务流</div>
+            <div className="text-[10px] text-white" style={{ opacity: 0.75 }}>食安智能质检服务</div>
           </div>
           <button className="w-6 h-6 rounded-lg flex items-center justify-center transition-all hover:bg-white/10">
             <Settings className="h-3.5 w-3.5 text-white" style={{ opacity: 0.7 }} />
@@ -2484,7 +2484,7 @@ function StaffWorkbench({ messages }) {
             { label: '待处理', value: metrics.pendingOrders, color: '#ffa726' },
             { label: '今日质检', value: metrics.todayInspections, color: '#66bb6a' },
             { label: '红线预警', value: metrics.redLineAlerts, color: '#ef5350' },
-            { label: '解决率', value: metrics.resolvedRate + '%', color: '#42a5f5' },
+            { label: '解决率', value: metrics.resolvedRate + '%', color: '#78909c' },
           ].map((stat, i) => (
             <div key={i} className="flex-1 rounded-lg px-2 py-1.5 text-center" style={{
               background: 'rgba(255,255,255,0.12)',
@@ -2504,7 +2504,7 @@ function StaffWorkbench({ messages }) {
             key={item.id}
             className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-[10px] font-medium transition-all relative rounded-t-lg"
             style={{
-              color: activePanel === item.id ? '#1a73e8' : 'var(--cursor-border-55)',
+              color: activePanel === item.id ? '#3a3a3a' : 'var(--cursor-border-55)',
               background: activePanel === item.id ? 'var(--cursor-surface-300)' : 'transparent',
             }}
             onClick={() => setActivePanel(item.id)}
@@ -2512,7 +2512,7 @@ function StaffWorkbench({ messages }) {
             <span style={{ display: 'flex', opacity: activePanel === item.id ? 1 : 0.5 }}>{item.icon}</span>
             {item.label}
             {activePanel === item.id && (
-              <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ background: '#1a73e8' }} />
+              <div className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full" style={{ background: '#3a3a3a' }} />
             )}
           </button>
         ))}
@@ -2579,7 +2579,7 @@ function StaffWorkbench({ messages }) {
                 快捷指令
               </div>
               {[
-                { label: '生成质检报告', desc: '汇总今日全部质检结果', color: '#1a73e8', icon: <FileText className="h-3 w-3" /> },
+                { label: '生成质检报告', desc: '汇总今日全部质检结果', color: '#3a3a3a', icon: <FileText className="h-3 w-3" /> },
                 { label: '查看升级工单', desc: `${metrics.escalationQueue} 个待处理升级`, color: '#e74c3c', icon: <TrendingUp className="h-3 w-3" /> },
                 { label: '导出统计数据', desc: 'CSV / Excel 格式导出', color: '#27ae60', icon: <BarChart3 className="h-3 w-3" /> },
               ].map((item, i) => (
@@ -2616,7 +2616,7 @@ function StaffWorkbench({ messages }) {
             {/* KPI Cards */}
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: '今日接待', value: '47', trend: '+12%', color: '#1a73e8', icon: <Users className="h-3.5 w-3.5" /> },
+                { label: '今日接待', value: '47', trend: '+12%', color: '#3a3a3a', icon: <Users className="h-3.5 w-3.5" /> },
                 { label: '平均响应', value: metrics.avgResponseTime, trend: '-8%', color: '#27ae60', icon: <Clock className="h-3.5 w-3.5" /> },
                 { label: '质检完成', value: metrics.todayInspections, trend: '+5', color: '#e67e22', icon: <CheckCircle2 className="h-3.5 w-3.5" /> },
                 { label: '解决率', value: metrics.resolvedRate + '%', trend: '+2.1%', color: '#8e44ad', icon: <TrendingUp className="h-3.5 w-3.5" /> },
@@ -2693,7 +2693,7 @@ function StaffWorkbench({ messages }) {
                   {[2, 5, 8, 12, 9, 15, 18, 14, 10, 7, 4, 3].map((v, i) => (
                     <div key={i} className="flex-1 rounded-t transition-all" style={{
                       height: `${(v / 18) * 100}%`,
-                      background: i === 6 ? '#1a73e8' : '#1a73e830',
+                      background: i === 6 ? '#3a3a3a' : '#3a3a3a30',
                       minWidth: 4,
                     }} />
                   ))}
@@ -2825,8 +2825,8 @@ function StaffWorkbench({ messages }) {
               border: '1px solid var(--cursor-border-10)',
             }}>
               <div className="flex items-center gap-1.5 mb-1">
-                <Sparkles className="h-3 w-3" style={{ color: '#1a73e8' }} />
-                <span className="font-semibold" style={{ color: 'var(--cursor-ink)' }}>AIQC_V2 智能巡检</span>
+                <Sparkles className="h-3 w-3" style={{ color: '#3a3a3a' }} />
+                <span className="font-semibold" style={{ color: 'var(--cursor-ink)' }}>智能巡检</span>
               </div>
               今日已自动完成 {metrics.todayInspections} 项质检，{metrics.redLineAlerts} 项红线预警待处理。系统建议优先处理上海南京路店温度超标工单。
             </div>
@@ -2838,12 +2838,12 @@ function StaffWorkbench({ messages }) {
       <div className="px-4 py-3" style={{ borderTop: '1px solid var(--cursor-border-10)', background: 'var(--cursor-surface-300)' }}>
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0" style={{
-            background: 'rgba(26,115,232,0.1)',
+            background: 'rgba(58,58,58,0.1)',
           }}>
-            <Shield className="h-3 w-3" style={{ color: '#1a73e8' }} />
+            <Shield className="h-3 w-3" style={{ color: '#3a3a3a' }} />
           </div>
           <div>
-            <div className="text-[10px] font-medium" style={{ color: 'var(--cursor-ink)' }}>AIQC_V2 质检工作台</div>
+            <div className="text-[10px] font-medium" style={{ color: 'var(--cursor-ink)' }}>智能质检工作台</div>
             <div className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>感知-决策-执行 全链路闭环</div>
           </div>
         </div>
@@ -3120,22 +3120,11 @@ export default function ChatInterface({ role = 'consumer' }) {
                 ))}
               </div>
 
-              {/* Workflow trace after last AI message */}
-              {!isStreaming && workflowTrace && (
-                <WorkflowTracePanel trace={workflowTrace} />
-              )}
+              {/* Workflow trace — hidden (internal detail, not shown to users) */}
 
-              {/* Red-line audit for last message */}
-              {!isStreaming && messages.length > 0 && (() => {
-                const lastMsg = messages[messages.length - 1]
-                return lastMsg.redlineAudit ? <RedlineAuditBadge audit={lastMsg.redlineAudit} /> : null
-              })()}
+              {/* Red-line audit — hidden (internal detail) */}
 
-              {/* Agent 感知-决策-执行 闭环追踪 */}
-              {!isStreaming && messages.length > 0 && (() => {
-                const lastMsg = messages[messages.length - 1]
-                return lastMsg.agentFramework ? <AgentClosedLoopTrace framework={lastMsg.agentFramework} /> : null
-              })()}
+              {/* Agent trace — hidden (internal detail) */}
 
               <div ref={messagesEndRef} />
             </div>
