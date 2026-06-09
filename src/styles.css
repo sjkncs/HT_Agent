@@ -86,11 +86,11 @@
     --risk-low: 159 63% 33%;         /* #1f8a65 muted teal */
     --risk-low-bg: 159 40% 94%;
 
-    /* ─── HEYTEA Brand (remapped to Cursor palette) ─── */
-    --heytea-green: 20 100% 48%;          /* → Cursor orange */
-    --heytea-green-hover: 20 100% 43%;     /* → darker orange */
-    --heytea-green-soft: 20 80% 96%;       /* → light peach tint */
-    --heytea-green-glow: 20 100% 48% / 0.12;
+    /* ─── HEYTEA Brand (gray neutral palette) ─── */
+    --heytea-green: 0 0% 20%;              /* → #333 dark charcoal */
+    --heytea-green-hover: 0 0% 33%;        /* → #555 medium gray */
+    --heytea-green-soft: 0 0% 96%;         /* → #f5f5f5 light gray tint */
+    --heytea-green-glow: 0 0% 20% / 0.12;
 
     /* ─── Chat Bubbles ─── */
     --bubble-user: 38 20% 91%;       /* warm cream #ebeae5 */
@@ -175,10 +175,10 @@
     --cursor-error-border: rgba(207, 45, 86, 0.15);
     --cursor-info-border: rgba(75, 123, 236, 0.15);
 
-    --heytea-green: 20 100% 48%;
-    --heytea-green-hover: 20 100% 55%;
-    --heytea-green-soft: 20 40% 16%;
-    --heytea-green-glow: 20 100% 48% / 0.15;
+    --heytea-green: 0 0% 80%;              /* → #ccc light gray for dark mode */
+    --heytea-green-hover: 0 0% 90%;        /* → #e6 lighter on hover */
+    --heytea-green-soft: 0 0% 16%;         /* → dark gray tint */
+    --heytea-green-glow: 0 0% 80% / 0.15;
 
     --bubble-user: 42 8% 16%;
     --bubble-user-fg: 38 10% 91%;

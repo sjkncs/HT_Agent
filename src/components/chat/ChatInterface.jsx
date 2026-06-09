@@ -3535,15 +3535,15 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
           height: '44px',
           borderRadius: '50%',
           border: 'none',
-          background: showOrderPanel ? '#3d6b14' : 'white',
-          color: showOrderPanel ? 'white' : '#5a8f29',
+          background: showOrderPanel ? '#555' : 'white',
+          color: showOrderPanel ? 'white' : '#333',
           boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '18px',
-        }}>
+        }} data-qoder-id="qel-button-3f72c959" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-3f72c959&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInterface&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:3526,&quot;column&quot;:7}}">
         🧋
       </button>
 
@@ -3559,7 +3559,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
           boxShadow: '-4px 0 20px rgba(0,0,0,0.12)',
           background: '#fff',
           animation: 'slideIn 0.3s ease-out',
-        }}>
+        }} data-qoder-id="qel-div-43fa751a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-43fa751a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInterface&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:3552,&quot;column&quot;:9}}">
           <OrderingPanel
             onClose={() => setShowOrderPanel(false)}
             onOrderCreated={(order) => {
@@ -3573,7 +3573,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
               setMessages(prev => [...prev, orderMsg])
             }}
             embedded={false}
-          />
+           data-qoder-id="qel-orderingpanel-f2f7c714" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-orderingpanel-f2f7c714&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInterface&quot;,&quot;elementRole&quot;:&quot;orderingpanel&quot;,&quot;loc&quot;:{&quot;line&quot;:3563,&quot;column&quot;:11}}"/>
         </div>
       )}
 
