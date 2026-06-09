@@ -1889,7 +1889,7 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
                 {/* Online dot */}
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2" style={{
                   background: '#27ae60',
-                  borderColor: '#d43800',
+                  borderColor: isStaff ? '#0d47a1' : '#d43800',
                 }} />
               </div>
 
@@ -1923,12 +1923,37 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
                 ? '您好，欢迎使用客服工作台。以下是您的工作快捷操作，也可以直接输入指令。'
                 : '您好，欢迎来到喜茶！请问有什么可以帮到您？您可以选择以下服务或直接描述您的问题。'}
             </div>
+
+            {/* Staff: compact KPI bar */}
+            {isStaff && (
+              <div className="flex gap-1.5 mt-2.5">
+                {[
+                  { label: '待处理', value: '3', dot: '#ffa726' },
+                  { label: '红线', value: '1', dot: '#ef5350' },
+                  { label: '今日质检', value: '12', dot: '#66bb6a' },
+                ].map((kpi, i) => (
+                  <div key={i} className="flex-1 flex items-center justify-center gap-1.5 rounded-lg py-1.5" style={{
+                    background: 'rgba(255,255,255,0.1)',
+                  }}>
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: kpi.dot }} />
+                    <span className="text-[10px] font-bold text-white">{kpi.value}</span>
+                    <span className="text-[8px] text-white" style={{ opacity: 0.7 }}>{kpi.label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* ── Body: 分类快捷操作 ── */}
           <div className="px-3 pt-3 pb-1">
-            <div className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--cursor-border-55)' }}>
-              快捷服务
+            <div className="text-[10px] font-semibold uppercase tracking-wider mb-2 flex items-center justify-between" style={{ color: 'var(--cursor-border-55)' }}>
+              <span>快捷服务</span>
+              {isStaff && (
+                <span className="text-[9px] font-normal px-1.5 py-0.5 rounded-full" style={{
+                  background: '#1a73e815',
+                  color: '#1a73e8',
+                }}>工作模式</span>
+              )}
             </div>
 
             {/* Category tabs */}
@@ -1955,12 +1980,14 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
             </div>
 
             {/* Action items — show selected category or all */}
-            <div className="space-y-1 max-h-[180px] overflow-y-auto scrollbar-thin">
+            <div className="space-y-1 max-h-[200px] overflow-y-auto scrollbar-thin">
               {(activeCategory ? actionGroups.filter(g => g.id === activeCategory) : actionGroups).map((group) => (
                 <div key={group.id}>
                   {!activeCategory && (
-                    <div className="text-[9px] font-semibold uppercase tracking-wider py-1" style={{ color: group.color + '99' }}>
-                      {group.label}
+                    <div className="flex items-center gap-1.5 py-1.5" style={{ color: group.color + 'cc' }}>
+                      <div className="h-px flex-1" style={{ background: group.color + '15' }} />
+                      <span className="text-[9px] font-semibold uppercase tracking-wider">{group.label}</span>
+                      <div className="h-px flex-1" style={{ background: group.color + '15' }} />
                     </div>
                   )}
                   {group.items.map((item, j) => (
@@ -1970,14 +1997,17 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
                       className="flex items-center gap-2.5 w-full px-2.5 py-[7px] rounded-lg text-left text-[11px] font-medium transition-all group/item"
                       style={{ color: 'var(--cursor-ink)' }}
                       onClick={() => { onSend(item.action); setExpanded(false) }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = group.color + '08' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = group.color + '0d' }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
                     >
-                      <div className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 text-[9px] font-bold text-white" style={{ background: group.color }}>
+                      <div className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 text-[9px] font-bold text-white transition-all" style={{
+                        background: group.color,
+                        boxShadow: `0 2px 6px ${group.color}30`,
+                      }}>
                         {j + 1}
                       </div>
                       <span className="flex-1 truncate">{item.label}</span>
-                      <ArrowRight className="h-3 w-3 flex-shrink-0 opacity-0 group-hover/item:opacity-50 transition-opacity" style={{ color: group.color }} />
+                      <ArrowRight className="h-3 w-3 flex-shrink-0 opacity-0 group-hover/item:opacity-50 transition-all group-hover/item:translate-x-0.5" style={{ color: group.color }} />
                     </button>
                   ))}
                 </div>
@@ -1986,16 +2016,24 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
           </div>
 
           {/* ── Tag chips ── */}
-          <div className="px-3 py-2" style={{ borderTop: '1px solid var(--cursor-border-10)' }}>
-            <div className="text-[9px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--cursor-border-55)' }}>
-              {isStaff ? '常用指令' : '热门问题'}
+          <div className="px-3 py-2.5" style={{ borderTop: '1px solid var(--cursor-border-10)' }}>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[9px] font-semibold uppercase tracking-wider" style={{ color: 'var(--cursor-border-55)' }}>
+                {isStaff ? '常用指令' : '热门问题'}
+              </span>
+              {isStaff && (
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#27ae60' }} />
+                  <span className="text-[8px]" style={{ color: '#27ae60' }}>系统在线</span>
+                </div>
+              )}
             </div>
             <div className="flex flex-wrap gap-1.5">
               {tagActions.map((tag, i) => (
                 <button
                   key={i}
                   data-action="true"
-                  className="px-2 py-1 rounded-md text-[10px] font-medium transition-all hover:shadow-sm"
+                  className="px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all hover:shadow-sm hover:-translate-y-px"
                   style={{
                     background: tag.color + '0a',
                     color: tag.color,
@@ -2011,9 +2049,21 @@ function FloatingServiceWidget({ onSend, role = 'consumer' }) {
 
           {/* ── Footer ── */}
           <div className="px-3 py-2.5" style={{ background: 'var(--cursor-surface-300)', borderTop: '1px solid var(--cursor-border-10)' }}>
+            {isStaff && (
+              <div className="flex items-center justify-between mb-2 px-1">
+                <div className="flex items-center gap-1.5">
+                  <Activity className="h-3 w-3" style={{ color: '#1a73e8' }} />
+                  <span className="text-[9px] font-medium" style={{ color: 'var(--cursor-ink)' }}>AIQC_V2 引擎运行中</span>
+                </div>
+                <span className="text-[8px] px-1.5 py-0.5 rounded-full font-semibold" style={{
+                  background: '#27ae6018',
+                  color: '#27ae60',
+                }}>v2.1.0</span>
+              </div>
+            )}
             <button
               data-action="true"
-              className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-[11px] font-semibold transition-all"
+              className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-[11px] font-semibold transition-all hover:shadow-md hover:-translate-y-px"
               style={{
                 background: isStaff
                   ? 'linear-gradient(135deg, #1a73e8, #0d47a1)'
