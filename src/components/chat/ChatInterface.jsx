@@ -24,6 +24,7 @@ import TestRunnerPanel from '../test/TestRunnerPanel.jsx'
 import OrderingPanel from '../order/OrderingPanel.jsx'
 import { getWorkbenchConversations, getCategoryStats, getMetadata } from '../../lib/case-library.js'
 import { detectOrderIntent } from '../../lib/mcp-prompt-integration.js'
+import { getOrCreateMemory, processAndUpdateMemory } from '../../lib/conversation-memory.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -3332,11 +3333,18 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     let llmSource = 'template'
     let templateReply = null  // 延迟生成，仅作为兜底
 
+    // ── Step 1.8: 对话记忆处理 — 提取事实、生成摘要 ──
+    const sessionId = currentConversation?.id || `sess-${Date.now()}`
+    const allChatMessages = [...currentMessages, userMessage].filter(m => m.role === 'user' || m.role === 'assistant')
+    const memoryContext = processAndUpdateMemory(sessionId, allChatMessages.map(m => ({ role: m.role, content: m.content })))
+    const memoryManager = getOrCreateMemory(sessionId)
+    const enhancedHistory = memoryManager.getEnhancedHistory(allChatMessages.map(m => ({ role: m.role, content: m.content })))
+
     try {
       const llmResult = await generateLLMEnhancedReply({
         userText: text,
         session: {
-          sessionId: currentConversation?.id || `sess-${Date.now()}`,
+          sessionId,
           turnIndex: currentMessages.filter(m => m.role === 'user').length,
         },
         perception: engineResult?.agent_framework?.perception ? {
@@ -3345,10 +3353,8 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
           _triggers: triggers,  // 传递触发条件给 LLM prompt
         } : null,
         decision: engineResult?.agent_framework?.decision || null,
-        conversationHistory: currentMessages.filter(m => m.role === 'user' || m.role === 'assistant').slice(-6).map(m => ({
-          role: m.role,
-          content: m.content,
-        })),
+        conversationHistory: enhancedHistory,
+        memoryContext,  // 对话记忆上下文注入
       })
 
       if (llmResult.reply) {

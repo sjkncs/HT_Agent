@@ -5528,6 +5528,7 @@ export async function generateLLMEnhancedReply(params) {
     decision = null,
     actionResult = null,
     conversationHistory = [],
+    memoryContext = '',  // 对话记忆上下文
   } = params
 
   // 动态导入 (避免循环依赖 + 按需加载)
@@ -5553,15 +5554,16 @@ export async function generateLLMEnhancedReply(params) {
   }
 
   try {
-    // 1. 构建系统提示 (CAMEL + ICL + 工作流)
+    // 1. 构建系统提示 (CAMEL + ICL + 工作流 + 记忆上下文)
     const systemPrompt = promptBuilder.buildSystemPrompt(perception, session, {
       includeICL: true,
       maxICLExamples: 3,
       includeCompensation: true,
       includeWorkflow: true,
+      memoryContext,
     })
 
-    // 2. 构建消息列表
+    // 2. 构建消息列表（支持增强历史，含摘要 system 消息）
     const messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
 
     // 3. 调用 LLM API

@@ -42,6 +42,7 @@ export function buildSystemPrompt(perception = null, session = {}, options = {})
     maxICLExamples = 3,
     includeCompensation = true,
     includeWorkflow = true,
+    memoryContext = '',    // 对话记忆上下文
     verbose = false,
   } = options
 
@@ -49,6 +50,11 @@ export function buildSystemPrompt(perception = null, session = {}, options = {})
 
   // ═══ 1. 角色身份 (CAMEL Inception Prompt) ═══
   sections.push(_buildIdentitySection())
+
+  // ═══ 1.5 对话记忆上下文 (Conversation Memory) ═══
+  if (memoryContext) {
+    sections.push(memoryContext)
+  }
 
   // ═══ 2. 核心行为准则 ═══
   sections.push(_buildBehavioralPrinciples())
@@ -460,14 +466,23 @@ export function buildMessages(systemPrompt, conversationHistory = [], userMessag
     { role: 'system', content: systemPrompt },
   ]
 
-  // 添加对话历史 (最多保留最近 6 轮，避免 token 过载)
-  const MAX_HISTORY = 6
-  const recentHistory = conversationHistory.slice(-MAX_HISTORY * 2) // user+assistant pairs
+  // 添加对话历史 — 支持增强的历史（含摘要 system 消息）
+  const MAX_HISTORY = 8  // 从 6 提升到 8
+  let directHistory = conversationHistory
 
+  // 如果历史中包含 summary system 消息（来自 conversation-memory），单独处理
+  const summaryMsgs = conversationHistory.filter(m => m.role === 'system')
+  const chatMsgs = conversationHistory.filter(m => m.role === 'user' || m.role === 'assistant')
+
+  // 加入摘要消息
+  for (const msg of summaryMsgs) {
+    messages.push({ role: 'system', content: msg.content })
+  }
+
+  // 加入最近的聊天消息
+  const recentHistory = chatMsgs.slice(-MAX_HISTORY * 2)
   for (const msg of recentHistory) {
-    if (msg.role === 'user' || msg.role === 'assistant') {
-      messages.push({ role: msg.role, content: msg.content })
-    }
+    messages.push({ role: msg.role, content: msg.content })
   }
 
   // 添加当前用户输入
