@@ -1486,11 +1486,11 @@ function WelcomeScreen({ onSend }) {
 
 /* ─── Quick Action Chips — SVG illustration chips above input ─── */
 const QUICK_ACTIONS = [
-  { Svg: SvgChipInspection, label: '食安检测', color: '#f54e00', desc: 'AIQC 多模型质检' },
-  { Svg: SvgChipOrder, label: '订单处理', color: '#2980b9', desc: '9路意图分支' },
-  { Svg: SvgChipKnowledge, label: '知识检索', color: '#27ae60', desc: '策略知识库' },
-  { Svg: SvgChipStrategy, label: '策略推荐', color: '#8e44ad', desc: 'SOP 匹配' },
-  { Svg: SvgChipTest, label: '意图测试', color: '#e67e22', desc: '实时路由测试' },
+  { Svg: SvgChipInspection, label: '食安检测', color: '#f54e00', desc: '食品安全问题分类与处理', prompt: '我的饮品里发现了异物，请帮我处理' },
+  { Svg: SvgChipOrder, label: '订单处理', color: '#2980b9', desc: '查单、催单、退款', prompt: '帮我查一下最近的订单状态' },
+  { Svg: SvgChipKnowledge, label: '知识检索', color: '#27ae60', desc: '产品信息与政策查询', prompt: '请问喜茶有哪些新品推荐？' },
+  { Svg: SvgChipStrategy, label: '策略推荐', color: '#8e44ad', desc: '智能方案匹配', prompt: '我想了解一下你们的补偿政策' },
+  { Svg: SvgChipTest, label: '意图测试', color: '#e67e22', desc: 'AI意图识别测试', prompt: '帮我转接人工客服' },
 ]
 
 /* ─── Chat Input Bar ─── */
@@ -1605,20 +1605,20 @@ function ChatInputBar({ onSend, isStreaming, onStop }) {
       data-component="chat-input-bar"
     >
       <div className="mx-auto max-w-[820px]">
-        {/* Quick Action Chips — SVG Illustration Chips */}
-        <div className="relative flex items-center gap-1.5 mb-2 flex-wrap">
+        {/* Quick Action Chips — compact, centered */}
+        <div className="flex items-center justify-center gap-1.5 mb-2 flex-wrap">
           {QUICK_ACTIONS.map((action, i) => {
             const { Svg } = action
             return (
               <button
                 key={i}
-                className="flex items-center gap-1.5 px-2 py-1 rounded-lg border text-[11px] transition-all hover:shadow-sm"
+                className="flex items-center gap-1 px-2 py-1 rounded-md border text-[11px] transition-all hover:shadow-sm whitespace-nowrap"
                 style={{
                   borderColor: action.color + '25',
                   background: action.color + '06',
                   color: action.color,
                 }}
-                onClick={() => onSend(`请使用${action.label}模式帮我处理`)}
+                onClick={() => onSend(action.prompt)}
                 title={action.desc}
                 data-component="quick-action-chip"
               >
@@ -1713,7 +1713,7 @@ function ChatInputBar({ onSend, isStreaming, onStop }) {
             onChange={handleInput}
             onKeyDown={handleKeyDown}
             onPaste={handlePaste}
-            placeholder="描述您遇到的食品安全问题..."
+            placeholder="请输入您的问题，阿喜随时为您服务..."
             rows={1}
             className="flex-1 resize-none bg-transparent text-sm"
             style={{
