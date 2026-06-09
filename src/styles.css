@@ -1,0 +1,861 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================================================================
+   HEYTEA Food Safety Agent — Cursor-inspired Design Token System
+   Warm cream canvas, warm-brown ink, oklab borders, orange accent
+   =================================================================== */
+
+@layer base {
+  :root {
+    /* ─── Cursor Seed Tokens ─── */
+    --seed-bg: #f2f1ed;
+    --seed-fg: #26251e;
+    --seed-primary: #f54e00;
+    --seed-accent: #f54e00;
+    --seed-surface: #e6e5e0;
+    --seed-radius: 8px;
+    --font-size-base: 1rem;
+
+    /* ─── Cursor Surface Scale ─── */
+    --cursor-surface-100: #f7f7f4;
+    --cursor-surface-200: #f2f1ed;
+    --cursor-surface-300: #ebeae5;
+    --cursor-surface-400: #e6e5e0;
+    --cursor-surface-500: #e1e0db;
+
+    /* ─── Derived Theme Tokens ─── */
+    --background: 38 23% 94%;        /* #f2f1ed */
+    --foreground: 42 17% 13%;        /* #26251e */
+    --primary: 20 100% 48%;          /* #f54e00 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 15% 90%;         /* #e6e5e0 */
+    --secondary-foreground: 42 17% 13%;
+    --accent: 20 100% 48%;           /* #f54e00 */
+    --accent-foreground: 0 0% 100%;
+    --muted: 38 12% 88%;             /* ~#ebeae5 */
+    --muted-foreground: 42 17% 13% / 0.55;
+    --card: 38 15% 90%;              /* #e6e5e0 */
+    --card-foreground: 42 17% 13%;
+    --border: 42 17% 13% / 0.1;     /* warm brown 10% */
+    --input: 42 17% 13% / 0.1;
+    --ring: 20 100% 48%;             /* orange focus ring */
+    --destructive: 345 75% 49%;      /* #cf2d56 warm crimson */
+    --destructive-foreground: 0 0% 100%;
+    --radius: var(--seed-radius);
+
+    /* ─── Cursor Brand Colors (hex for direct use) ─── */
+    --cursor-ink: #26251e;
+    --cursor-cream: #f2f1ed;
+    --cursor-canvas: #f2f1ed;
+    --cursor-light: #e6e5e0;
+    --cursor-orange: #f54e00;
+    --cursor-orange-hover: #d94400;
+    --cursor-gold: #c08532;
+    --cursor-error: #cf2d56;
+    --cursor-success: #1f8a65;
+    --cursor-thinking: #dfa88f;
+    --cursor-grep: #9fc9a2;
+    --cursor-read: #9fbbe0;
+    --cursor-edit: #c0a8dd;
+    --cursor-info: #4b7bec;
+    --cursor-info-tint: hsl(217 80% 94%);
+    --cursor-gold-border: rgba(192, 133, 50, 0.2);
+    --cursor-error-border: rgba(207, 45, 86, 0.2);
+    --cursor-info-border: rgba(75, 123, 236, 0.2);
+
+    /* ─── Cursor oklab Border (CSS fallback) ─── */
+    --cursor-border-10: rgba(38, 37, 30, 0.1);
+    --cursor-border-20: rgba(38, 37, 30, 0.2);
+    --cursor-border-55: rgba(38, 37, 30, 0.55);
+
+    /* ─── Semantic Tokens ─── */
+    --success: 159 63% 33%;          /* #1f8a65 muted teal */
+    --success-fg: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-fg: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-fg: 0 0% 100%;
+
+    /* ─── Risk Level Colors (warm-shifted) ─── */
+    --risk-high: 345 75% 49%;        /* #cf2d56 warm crimson */
+    --risk-high-bg: 345 60% 96%;
+    --risk-medium: 33 90% 53%;       /* #f5a623 warm amber */
+    --risk-medium-bg: 33 80% 94%;
+    --risk-low: 159 63% 33%;         /* #1f8a65 muted teal */
+    --risk-low-bg: 159 40% 94%;
+
+    /* ─── HEYTEA Brand (remapped to Cursor palette) ─── */
+    --heytea-green: 20 100% 48%;          /* → Cursor orange */
+    --heytea-green-hover: 20 100% 43%;     /* → darker orange */
+    --heytea-green-soft: 20 80% 96%;       /* → light peach tint */
+    --heytea-green-glow: 20 100% 48% / 0.12;
+
+    /* ─── Chat Bubbles ─── */
+    --bubble-user: 38 20% 91%;       /* warm cream #ebeae5 */
+    --bubble-user-fg: 42 17% 13%;
+    --bubble-ai: transparent;
+    --bubble-ai-fg: 42 17% 13%;
+
+    /* ─── Layout ─── */
+    --sidebar-width: 280px;
+    --header-height: 56px;
+    --input-bar-height: 72px;
+    --container-max: 820px;
+
+    /* ─── Typography (Cursor three-voice system) ─── */
+    --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, ui-serif, Georgia, 'Cambria', 'Times New Roman', serif;
+    --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+    /* ─── Cursor Letter-Spacing Scale ─── */
+    --tracking-display: -0.03em;     /* ~-2.16px at 72px */
+    --tracking-heading: -0.02em;     /* ~-0.72px at 36px */
+    --tracking-subheading: -0.0125em; /* ~-0.325px at 26px */
+    --tracking-title: -0.005em;      /* ~-0.11px at 22px */
+    --tracking-body: 0;
+
+    /* ─── Shadows (Cursor atmospheric depth) ─── */
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 14px 32px rgba(0,0,0,0.1), 0 28px 70px rgba(0,0,0,0.14);
+    --shadow-card: rgba(0,0,0,0.14) 0px 28px 70px, rgba(0,0,0,0.1) 0px 14px 32px, rgba(38,37,30,0.1) 0px 0px 0px 1px;
+    --shadow-ambient: rgba(0,0,0,0.02) 0px 0px 16px, rgba(0,0,0,0.008) 0px 0px 8px;
+    --shadow-focus: rgba(0,0,0,0.1) 0px 4px 12px;
+    --shadow-focus-ring: 0 0 0 3px rgba(245, 78, 0, 0.12);
+
+    /* ─── Transitions ─── */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-fast: 150ms;
+    --duration-normal: 220ms;
+    --duration-slow: 360ms;
+  }
+
+  .dark {
+    --seed-bg: #1a1916;
+    --seed-fg: #e8e7e3;
+    --seed-primary: #f54e00;
+    --seed-accent: #f54e00;
+    --seed-surface: #26251e;
+    --seed-radius: 8px;
+
+    --cursor-surface-100: #2a2923;
+    --cursor-surface-200: #1a1916;
+    --cursor-surface-300: #33322b;
+    --cursor-surface-400: #26251e;
+    --cursor-surface-500: #3d3c34;
+
+    --background: 42 10% 10%;
+    --foreground: 38 10% 91%;
+    --primary: 20 100% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 42 8% 15%;
+    --secondary-foreground: 38 10% 91%;
+    --accent: 20 100% 48%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 42 8% 16%;
+    --muted-foreground: 38 10% 91% / 0.55;
+    --card: 42 10% 13%;
+    --card-foreground: 38 10% 91%;
+    --border: 38 10% 91% / 0.1;
+    --input: 38 10% 91% / 0.1;
+    --ring: 20 100% 48%;
+
+    --cursor-ink: #e8e7e3;
+    --cursor-cream: #1a1916;
+    --cursor-canvas: #1a1916;
+    --cursor-light: #26251e;
+    --cursor-border-10: rgba(232, 231, 227, 0.1);
+    --cursor-border-20: rgba(232, 231, 227, 0.2);
+    --cursor-border-55: rgba(232, 231, 227, 0.55);
+    --cursor-info-tint: hsl(217 40% 14%);
+    --cursor-gold-border: rgba(192, 133, 50, 0.15);
+    --cursor-error-border: rgba(207, 45, 86, 0.15);
+    --cursor-info-border: rgba(75, 123, 236, 0.15);
+
+    --heytea-green: 20 100% 48%;
+    --heytea-green-hover: 20 100% 55%;
+    --heytea-green-soft: 20 40% 16%;
+    --heytea-green-glow: 20 100% 48% / 0.15;
+
+    --bubble-user: 42 8% 16%;
+    --bubble-user-fg: 38 10% 91%;
+    --bubble-ai: transparent;
+    --bubble-ai-fg: 38 10% 91%;
+
+    --risk-high: 345 75% 55%;
+    --risk-high-bg: 345 40% 14%;
+    --risk-medium: 33 80% 55%;
+    --risk-medium-bg: 33 40% 14%;
+    --risk-low: 159 60% 45%;
+    --risk-low-bg: 159 30% 14%;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+    --shadow-lg: 0 14px 32px rgba(0,0,0,0.4), 0 28px 70px rgba(0,0,0,0.3);
+    --shadow-card: rgba(0,0,0,0.3) 0px 28px 70px, rgba(0,0,0,0.2) 0px 14px 32px, rgba(232,231,227,0.08) 0px 0px 0px 1px;
+  }
+
+  * {
+    border-color: var(--cursor-border-10);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--seed-bg);
+    color: var(--seed-fg);
+    font-size: var(--font-size-base, 16px);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ─── Component Layer ─── */
+@layer components {
+  /* Chat bubbles — Cursor warm style */
+  .bubble-user {
+    @apply rounded-xl px-4 py-2.5;
+    background: var(--cursor-surface-300);
+    color: var(--cursor-ink);
+    border: 1px solid var(--cursor-border-10);
+    max-width: min(75%, 480px);
+  }
+
+  .bubble-ai {
+    @apply px-4 py-2.5;
+    background: transparent;
+    color: var(--cursor-ink);
+    max-width: min(85%, 560px);
+  }
+
+  /* Smart classification card */
+  .smart-card {
+    @apply rounded-lg border p-4;
+    background: var(--cursor-surface-400);
+    border-color: var(--cursor-border-10);
+    transition: box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .smart-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Risk level badges — Cursor warm palette */
+  .badge-risk-high {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium;
+    background: hsl(345 60% 96%);
+    color: var(--cursor-error);
+  }
+  .dark .badge-risk-high {
+    background: hsl(345 40% 14%);
+  }
+
+  .badge-risk-medium {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium;
+    background: hsl(33 80% 94%);
+    color: var(--cursor-gold);
+  }
+  .dark .badge-risk-medium {
+    background: hsl(33 40% 14%);
+  }
+
+  .badge-risk-low {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium;
+    background: hsl(159 40% 94%);
+    color: var(--cursor-success);
+  }
+  .dark .badge-risk-low {
+    background: hsl(159 30% 14%);
+  }
+
+  /* Category tag pills — Cursor pill style */
+  .tag-pill {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-medium;
+    background: var(--cursor-surface-400);
+    color: var(--cursor-border-55);
+    letter-spacing: var(--tracking-body);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+  .tag-pill:hover {
+    color: var(--cursor-error);
+    background: var(--cursor-surface-500);
+  }
+
+  /* Metric card for dashboard */
+  .metric-card {
+    @apply rounded-lg border p-5;
+    background: var(--cursor-surface-400);
+    border-color: var(--cursor-border-10);
+    transition: box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .metric-card:hover {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Input bar */
+  .chat-input-bar {
+    @apply flex items-center gap-3 rounded-xl border px-4 py-3;
+    background: var(--cursor-surface-100);
+    border-color: var(--cursor-border-10);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .chat-input-bar:focus-within {
+    border-color: var(--cursor-border-20);
+    box-shadow: var(--shadow-focus);
+  }
+
+  /* Sidebar item — Cursor hover */
+  .sidebar-item {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm cursor-pointer;
+    color: var(--cursor-border-55);
+    transition: background var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-body);
+  }
+  .sidebar-item:hover {
+    background: var(--cursor-surface-300);
+    color: var(--cursor-error);
+  }
+  .sidebar-item.active {
+    background: var(--cursor-surface-500);
+    color: var(--cursor-ink);
+    font-weight: 500;
+  }
+
+  /* Quick prompt card on welcome screen */
+  .quick-prompt {
+    @apply rounded-lg border p-4 cursor-pointer;
+    background: var(--cursor-surface-400);
+    border-color: var(--cursor-border-10);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+  }
+  .quick-prompt:hover {
+    border-color: var(--cursor-border-20);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-1px);
+  }
+
+  /* Typing indicator */
+  .typing-indicator {
+    @apply flex items-center gap-1.5;
+  }
+  .typing-indicator .dot {
+    @apply w-2 h-2 rounded-full;
+    background: var(--cursor-orange);
+  }
+
+  /* Knowledge tree node */
+  .tree-node {
+    @apply flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm cursor-pointer;
+    color: var(--cursor-border-55);
+    transition: background var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+  }
+  .tree-node:hover {
+    background: var(--cursor-surface-300);
+    color: var(--cursor-error);
+  }
+  .tree-node.selected {
+    background: var(--cursor-surface-500);
+    color: var(--cursor-ink);
+    font-weight: 500;
+  }
+
+  /* Alert banner for high-risk */
+  .alert-banner {
+    @apply flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium;
+  }
+  .alert-banner--high {
+    background: hsl(345 60% 96%);
+    color: var(--cursor-error);
+    border: 1px solid var(--cursor-error-border);
+  }
+  .dark .alert-banner--high {
+    background: hsl(345 40% 14%);
+  }
+  .alert-banner--medium {
+    background: hsl(33 80% 94%);
+    color: var(--cursor-gold);
+    border: 1px solid var(--cursor-gold-border);
+  }
+  .dark .alert-banner--medium {
+    background: hsl(33 40% 14%);
+  }
+
+  /* Button variants — Cursor style */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium;
+    border-radius: var(--seed-radius);
+    background: var(--cursor-surface-300);
+    color: var(--cursor-ink);
+    transition: all var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-body);
+  }
+  .btn-primary:hover {
+    color: var(--cursor-error);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium border;
+    border-radius: var(--seed-radius);
+    background: var(--cursor-surface-400);
+    color: var(--cursor-ink);
+    border-color: var(--cursor-border-10);
+    transition: all var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-body);
+  }
+  .btn-secondary:hover {
+    background: var(--cursor-surface-500);
+    border-color: var(--cursor-border-20);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 text-sm;
+    border-radius: var(--seed-radius);
+    color: var(--cursor-border-55);
+    transition: all var(--duration-fast) var(--ease-out);
+    letter-spacing: var(--tracking-body);
+  }
+  .btn-ghost:hover {
+    background: var(--cursor-surface-300);
+    color: var(--cursor-error);
+  }
+
+  /* Cursor pill button */
+  .btn-pill {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-1 text-xs font-medium;
+    border-radius: 9999px;
+    background: var(--cursor-surface-400);
+    color: var(--cursor-border-55);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+  .btn-pill:hover {
+    color: var(--cursor-error);
+  }
+  .btn-pill.active {
+    background: var(--cursor-surface-500);
+    color: var(--cursor-ink);
+  }
+
+  /* ═══════════════════════════════════════════════
+     Agent Engine Visualization Components
+     ═══════════════════════════════════════════════ */
+
+  /* Decision Card — shows Bayesian classification result inline in chat */
+  .decision-card {
+    @apply rounded-lg border p-3 mt-2 max-w-lg;
+    background: var(--cursor-surface-100);
+    border-color: var(--cursor-border-10);
+    font-size: 12px;
+    transition: box-shadow var(--duration-fast) var(--ease-out);
+  }
+  .decision-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .decision-card__header {
+    @apply flex items-center gap-2 mb-2;
+  }
+  .decision-card__label {
+    @apply font-medium;
+    color: var(--cursor-ink);
+  }
+  .decision-card__confidence {
+    @apply ml-auto text-xs font-medium;
+    color: var(--cursor-orange);
+  }
+  .decision-card__evidence {
+    @apply mt-1.5 space-y-1;
+    color: var(--cursor-border-55);
+  }
+
+  /* Bayesian probability bar */
+  .bayesian-bar {
+    @apply rounded-full overflow-hidden;
+    height: 6px;
+    background: var(--cursor-surface-400);
+  }
+  .bayesian-bar__fill {
+    @apply h-full rounded-full;
+    transition: width 0.5s var(--ease-out);
+    background: var(--cursor-orange);
+  }
+  .bayesian-bar__fill--high {
+    background: var(--cursor-error);
+  }
+  .bayesian-bar__fill--medium {
+    background: var(--cursor-gold);
+  }
+  .bayesian-bar__fill--low {
+    background: var(--cursor-success);
+  }
+
+  /* Workflow Trace Panel — shows 12-node pipeline status */
+  .workflow-trace {
+    @apply rounded-lg border p-3;
+    background: var(--cursor-surface-100);
+    border-color: var(--cursor-border-10);
+  }
+  .workflow-trace__node {
+    @apply flex items-center gap-2 py-1 text-xs;
+    color: var(--cursor-border-55);
+  }
+  .workflow-trace__node-dot {
+    @apply w-2 h-2 rounded-full flex-shrink-0;
+    background: var(--cursor-surface-500);
+  }
+  .workflow-trace__node-dot--completed {
+    background: var(--cursor-success);
+  }
+  .workflow-trace__node-dot--skipped {
+    background: var(--cursor-surface-500);
+    opacity: 0.5;
+  }
+  .workflow-trace__node-dot--active {
+    background: var(--cursor-orange);
+    animation: pulse-soft 1.5s ease-in-out infinite;
+  }
+  .workflow-trace__node-name {
+    @apply flex-1;
+  }
+  .workflow-trace__node-status {
+    @apply text-xs font-medium;
+  }
+
+  /* 七鱼 Session Panel */
+  .qiyu-panel {
+    @apply rounded-lg border;
+    background: var(--cursor-surface-400);
+    border-color: var(--cursor-border-10);
+    overflow: hidden;
+  }
+  .qiyu-panel__header {
+    @apply flex items-center justify-between px-3 py-2;
+    border-bottom: 1px solid var(--cursor-border-10);
+  }
+  .qiyu-panel__section {
+    @apply px-3 py-2;
+    border-bottom: 1px solid var(--cursor-border-10);
+  }
+  .qiyu-panel__section:last-child {
+    border-bottom: none;
+  }
+
+  /* Session state badges */
+  .session-badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium;
+  }
+  .session-badge--active {
+    background: hsl(159 40% 94%);
+    color: var(--cursor-success);
+  }
+  .session-badge--queue {
+    background: hsl(33 80% 94%);
+    color: var(--cursor-gold);
+  }
+  .session-badge--handoff {
+    background: var(--cursor-info-tint);
+    color: var(--cursor-info);
+  }
+  .session-badge--resolved {
+    background: var(--cursor-surface-300);
+    color: var(--cursor-border-55);
+  }
+  .session-badge--closed {
+    background: var(--cursor-surface-300);
+    color: var(--cursor-border-55);
+    opacity: 0.7;
+  }
+  .dark .session-badge--active { background: hsl(159 30% 14%); }
+  .dark .session-badge--queue { background: hsl(33 40% 14%); }
+
+  /* Session timer */
+  .session-timer {
+    @apply inline-flex items-center gap-1 text-xs font-mono;
+    color: var(--cursor-border-55);
+  }
+  .session-timer--warning {
+    color: var(--cursor-gold);
+  }
+  .session-timer--critical {
+    color: var(--cursor-error);
+    animation: pulse-soft 1.5s ease-in-out infinite;
+  }
+
+  /* Emotion indicator */
+  .emotion-indicator {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium;
+  }
+  .emotion-indicator--normal {
+    background: hsl(159 40% 94%);
+    color: var(--cursor-success);
+  }
+  .emotion-indicator--elevated {
+    background: hsl(33 80% 94%);
+    color: var(--cursor-gold);
+  }
+  .emotion-indicator--urgent {
+    background: hsl(345 60% 96%);
+    color: var(--cursor-error);
+    animation: pulse-soft 1.5s ease-in-out infinite;
+  }
+  .dark .emotion-indicator--normal { background: hsl(159 30% 14%); }
+  .dark .emotion-indicator--elevated { background: hsl(33 40% 14%); }
+  .dark .emotion-indicator--urgent { background: hsl(345 40% 14%); }
+
+  /* Red-line audit badge */
+  .redline-badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium;
+  }
+  .redline-badge--pass {
+    background: hsl(159 40% 94%);
+    color: var(--cursor-success);
+  }
+  .redline-badge--fail {
+    background: hsl(345 60% 96%);
+    color: var(--cursor-error);
+  }
+  .dark .redline-badge--pass { background: hsl(159 30% 14%); }
+  .dark .redline-badge--fail { background: hsl(345 40% 14%); }
+
+  /* SLA countdown */
+  .sla-countdown {
+    @apply inline-flex items-center gap-1 text-xs font-mono font-medium;
+  }
+  .sla-countdown--normal {
+    color: var(--cursor-success);
+  }
+  .sla-countdown--warning {
+    color: var(--cursor-gold);
+  }
+  .sla-countdown--critical {
+    color: var(--cursor-error);
+    animation: pulse-soft 1s ease-in-out infinite;
+  }
+
+  /* System message in chat */
+  .system-message {
+    @apply rounded-lg px-3 py-2 mx-auto max-w-lg text-center text-xs;
+    color: var(--cursor-border-55);
+    background: var(--cursor-surface-300);
+    border: 1px dashed var(--cursor-border-10);
+  }
+
+  /* Handoff record */
+  .handoff-record {
+    @apply rounded-lg border p-2 text-xs;
+    background: hsl(217 80% 97%);
+    border-color: var(--cursor-info-border);
+    color: var(--cursor-ink);
+  }
+  .dark .handoff-record {
+    background: hsl(217 40% 14%);
+  }
+
+  /* Human review tag */
+  .human-review-tag {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium;
+    background: hsl(33 80% 94%);
+    color: var(--cursor-gold);
+  }
+  .dark .human-review-tag {
+    background: hsl(33 40% 14%);
+  }
+
+  /* Posteriors distribution list */
+  .posterior-item {
+    @apply flex items-center gap-2 text-xs py-0.5;
+  }
+  .posterior-item__label {
+    @apply flex-1 truncate;
+    color: var(--cursor-border-55);
+  }
+  .posterior-item__prob {
+    @apply font-mono font-medium;
+    color: var(--cursor-ink);
+  }
+
+  /* Quality score */
+  .quality-score {
+    @apply inline-flex items-center gap-1 text-xs font-medium;
+  }
+  .quality-score--high { color: var(--cursor-success); }
+  .quality-score--medium { color: var(--cursor-gold); }
+  .quality-score--low { color: var(--cursor-error); }
+
+  /* Ticket type pill */
+  .ticket-type {
+    @apply inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium;
+    background: var(--cursor-surface-300);
+    color: var(--cursor-border-55);
+  }
+  .ticket-type--store_ticket { color: var(--cursor-ink); }
+  .ticket-type--escalation { color: var(--cursor-error); background: hsl(345 60% 96%); }
+  .ticket-type--dingtalk_alert { color: var(--cursor-info); background: var(--cursor-info-tint); }
+  .ticket-type--customer_complaint { color: var(--cursor-gold); background: hsl(33 80% 94%); }
+  .dark .ticket-type--escalation { background: hsl(345 40% 14%); }
+  .dark .ticket-type--customer_complaint { background: hsl(33 40% 14%); }
+
+  /* Boundary pair visualization */
+  .boundary-pair {
+    @apply flex items-center gap-2 rounded-lg p-2 text-xs;
+    background: hsl(33 80% 94%);
+    border: 1px solid var(--cursor-gold-border);
+    color: var(--cursor-ink);
+  }
+  .dark .boundary-pair {
+    background: hsl(33 30% 14%);
+  }
+  .boundary-pair__arrow {
+    color: var(--cursor-gold);
+  }
+
+  /* Compensation level badge */
+  .comp-level {
+    @apply inline-flex items-center justify-center rounded-full text-[10px] font-bold;
+    width: 24px;
+    height: 24px;
+  }
+  .comp-level--L1 { background: hsl(159 40% 94%); color: var(--cursor-success); }
+  .comp-level--L2 { background: var(--cursor-info-tint); color: var(--cursor-info); }
+  .comp-level--L3 { background: hsl(33 80% 94%); color: var(--cursor-gold); }
+  .comp-level--L4 { background: hsl(345 60% 96%); color: var(--cursor-error); }
+  .comp-level--L5 { background: hsl(345 60% 96%); color: var(--cursor-error); }
+  .dark .comp-level--L1 { background: hsl(159 30% 14%); }
+  .dark .comp-level--L2 { background: var(--cursor-info-tint); }
+  .dark .comp-level--L3 { background: hsl(33 40% 14%); }
+  .dark .comp-level--L4 { background: hsl(345 40% 14%); }
+  .dark .comp-level--L5 { background: hsl(345 40% 14%); }
+}
+
+/* ─── Keyframes ─── */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes typing-dot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+.animate-typing-dot {
+  animation: typing-dot 1.4s infinite;
+}
+.animate-typing-dot-delayed {
+  animation: typing-dot 1.4s infinite 0.2s;
+}
+.animate-typing-dot-delayed-2 {
+  animation: typing-dot 1.4s infinite 0.4s;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 1.5s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s var(--ease-out);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Floating Widget Animations ─── */
+@keyframes float-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.floating-fab {
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s ease;
+}
+.floating-fab:hover {
+  transform: scale(1.08);
+}
+.floating-fab:active {
+  transform: scale(0.95);
+}
+
+/* ─── Smooth Drag Transition ─── */
+.drag-smooth {
+  transition: left 0.3s cubic-bezier(0.4,0,0.2,1), top 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ─── Panel Slide Animation ─── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ─── Utility Layer ─── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Cursor display heading with compressed letter-spacing */
+  .cursor-display {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-display);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+  .cursor-heading {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-heading);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  .cursor-subheading {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-subheading);
+    font-weight: 400;
+    line-height: 1.25;
+  }
+  .cursor-title {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-title);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .cursor-serif {
+    font-family: var(--font-serif);
+    font-feature-settings: "cswh";
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  .scrollbar-thin:hover {
+    scrollbar-color: var(--cursor-border-10) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+  }
+  .scrollbar-thin:hover::-webkit-scrollbar-thumb {
+    background-color: var(--cursor-border-10);
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: var(--cursor-border-20);
+  }
+}
