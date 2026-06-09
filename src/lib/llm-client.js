@@ -61,6 +61,17 @@ const DEFAULT_CONFIG = Object.freeze({
 let _activeConfig = { ...DEFAULT_CONFIG }
 
 /**
+ * 浏览器环境下将 NVIDIA API URL 重写为 Vite 代理路径
+ * 解决 CORS 跨域限制 (dev server proxy → integrate.api.nvidia.com)
+ */
+function _proxyUrl(baseUrl) {
+  if (typeof window !== 'undefined' && baseUrl.includes('integrate.api.nvidia.com')) {
+    return '/api/nvidia/v1'
+  }
+  return baseUrl
+}
+
+/**
  * 设置 LLM API 配置
  * @param {Object} config - 部分或完整配置
  */
@@ -180,7 +191,7 @@ export async function chatCompletion(messages, overrides = {}) {
     for (let attempt = 0; attempt <= config.maxRetries; attempt++) {
       try {
         const response = await _fetchWithTimeout(
-          `${endpoint.baseUrl}/chat/completions`,
+          `${_proxyUrl(endpoint.baseUrl)}/chat/completions`,
           {
             method: 'POST',
             headers: {
@@ -276,7 +287,7 @@ export async function* chatCompletionStream(messages, overrides = {}) {
   })
 
   const response = await _fetchWithTimeout(
-    `${config.baseUrl}/chat/completions`,
+    `${_proxyUrl(config.baseUrl)}/chat/completions`,
     {
       method: 'POST',
       headers: {

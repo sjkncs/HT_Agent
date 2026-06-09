@@ -13,5 +13,13 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 5173,
     strictPort: true,
+    proxy: {
+      '/api/nvidia': {
+        target: 'https://integrate.api.nvidia.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (p) => p.replace(/^\/api\/nvidia/, ''),
+      },
+    },
   },
 })

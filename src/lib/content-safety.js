@@ -19,6 +19,14 @@
 const NVIDIA_SAFETY_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const SAFETY_MODEL = 'nvidia/nemotron-3.5-content-safety'
 
+/** 浏览器环境下使用 Vite 代理绕过 CORS */
+function _safetyEndpoint() {
+  if (typeof window !== 'undefined') {
+    return '/api/nvidia/v1/chat/completions'
+  }
+  return NVIDIA_SAFETY_ENDPOINT
+}
+
 /** 安全检查的安全类别 */
 const SAFETY_CATEGORIES = Object.freeze([
   'violence',          // 暴力内容
@@ -106,7 +114,7 @@ export async function checkContentSafety(text, options = {}) {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), 10000) // 10s timeout
 
-    const response = await fetch(NVIDIA_SAFETY_ENDPOINT, {
+    const response = await fetch(_safetyEndpoint(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
