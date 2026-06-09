@@ -1,0 +1,829 @@
+{
+  "name": "heytea-mcp-tools",
+  "version": "1.0.0",
+  "description": "喜茶自助点单 MCP 工具定义 — 对标瑞幸咖啡 MCP 8 工具模式，适配茶饮生态",
+  "protocol": {
+    "type": "streamablehttp",
+    "version": "2024-11-05",
+    "transport": "Streamable HTTP",
+    "encoding": "JSON-RPC 2.0"
+  },
+  "server": {
+    "url": "https://mcp.heytea.com/api/v1/mcp",
+    "auth": {
+      "type": "Bearer",
+      "header": "Authorization",
+      "format": "Bearer {token}"
+    },
+    "mcpServerConfig": {
+      "mcpServers": {
+        "heytea-order": {
+          "type": "streamablehttp",
+          "url": "https://mcp.heytea.com/api/v1/mcp",
+          "headers": {
+            "Authorization": "Bearer {YOUR_HEYTEA_MCP_TOKEN}"
+          }
+        }
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "queryStoreList",
+      "category": "门店",
+      "description": "喜茶查询门店列表 — 根据地理位置查询附近喜茶门店，支持按名称搜索",
+      "luckinEquivalent": "queryShopList",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "storeName": {
+            "type": "string",
+            "required": false,
+            "description": "门店名称关键词，用于模糊搜索"
+          },
+          "longitude": {
+            "type": "number",
+            "required": true,
+            "description": "用户经度，如 113.94441"
+          },
+          "latitude": {
+            "type": "number",
+            "required": true,
+            "description": "用户纬度，如 22.52736"
+          }
+        },
+        "required": ["longitude", "latitude"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number", "description": "状态码，0=成功" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "storeId": { "type": "number", "description": "门店ID" },
+                "storeName": { "type": "string", "description": "门店名称" },
+                "address": { "type": "string", "description": "门店地址" },
+                "storeTags": { "type": "array", "items": { "type": "string" }, "description": "门店标签：堂食/外卖/24h/新店" },
+                "longitude": { "type": "number" },
+                "latitude": { "type": "number" },
+                "workTimeStart": { "type": "string", "description": "营业开始时间，如 08:00" },
+                "workTimeEnd": { "type": "string", "description": "营业结束时间，如 22:00" },
+                "businessStatus": { "type": "number", "description": "营业状态：1=营业中, 2=休息中, 3=即将打烊" },
+                "distance": { "type": "number", "description": "距离，单位千米" },
+                "storeNo": { "type": "string", "description": "门店编号" },
+                "phone": { "type": "string", "description": "门店电话" }
+              }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": {
+          "storeName": "",
+          "longitude": 113.94441,
+          "latitude": 22.52736
+        },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": [
+            {
+              "storeId": 10086,
+              "storeName": "喜茶·深圳万象天地店",
+              "address": "深圳市南山区深南大道9668号万象天地LG层",
+              "storeTags": ["堂食", "外卖"],
+              "longitude": 113.94512,
+              "latitude": 22.52891,
+              "workTimeStart": "10:00",
+              "workTimeEnd": "22:00",
+              "businessStatus": 1,
+              "distance": 0.23,
+              "storeNo": "SZ-0086",
+              "phone": "0755-88886666"
+            }
+          ],
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "searchProduct",
+      "category": "商品",
+      "description": "喜茶根据用户 query 匹配商品推荐结果 — 支持品类搜索、关键词搜索、热门推荐",
+      "luckinEquivalent": "searchProductForMcp",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "storeId": {
+            "type": "integer",
+            "required": true,
+            "description": "门店ID"
+          },
+          "query": {
+            "type": "string",
+            "required": true,
+            "description": "用户原始查询文本，如「多肉葡萄」「有什么新品」「果茶推荐」"
+          }
+        },
+        "required": ["storeId", "query"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": { "type": "number", "description": "商品ID" },
+                "productName": { "type": "string", "description": "商品名称" },
+                "skuCode": { "type": "string", "description": "商品SKU编码" },
+                "pictureUrl": { "type": "string", "description": "商品图片URL" },
+                "category": { "type": "string", "description": "商品分类：芝芝系列/多肉系列/纯茶/果茶/季节限定/小食" },
+                "description": { "type": "string", "description": "商品描述" },
+                "productAttrs": {
+                  "type": "array",
+                  "description": "商品属性列表",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "attributeId": { "type": "number", "description": "属性组ID (1=糖度,2=冰量,3=加料,4=杯型)" },
+                      "attributeName": { "type": "string", "description": "属性组名称" },
+                      "multiSelect": { "type": "boolean", "description": "是否可多选（加料支持多选）" },
+                      "productSubAttrs": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "attributeId": { "type": "number" },
+                            "attributeName": { "type": "string" },
+                            "selected": { "type": ["boolean", "null"] },
+                            "price": { "type": "number", "description": "属性加价" },
+                            "canSelected": { "type": ["number", "null"] }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "tags": { "type": "array", "items": { "type": "string" }, "description": "商品标签：新品/热销/限定" },
+                "initialPrice": { "type": "number", "description": "面价（元）" },
+                "estimatePrice": { "type": "number", "description": "预估到手价（元）" }
+              }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": {
+          "storeId": 10086,
+          "query": "多肉葡萄"
+        },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": [
+            {
+              "productId": 2001,
+              "productName": "多肉葡萄",
+              "skuCode": "HT-2001-001",
+              "pictureUrl": "https://cdn.heytea.com/products/multigrape.jpg",
+              "category": "多肉系列",
+              "description": "手剥巨峰葡萄搭配清新茶底，果肉满满",
+              "productAttrs": [
+                {
+                  "attributeId": 1,
+                  "attributeName": "糖度",
+                  "multiSelect": false,
+                  "productSubAttrs": [
+                    { "attributeId": 101, "attributeName": "全糖", "selected": null, "price": 0 },
+                    { "attributeId": 102, "attributeName": "七分糖", "selected": null, "price": 0 },
+                    { "attributeId": 103, "attributeName": "五分糖", "selected": null, "price": 0 },
+                    { "attributeId": 104, "attributeName": "三分糖", "selected": null, "price": 0 },
+                    { "attributeId": 105, "attributeName": "无糖", "selected": null, "price": 0 }
+                  ]
+                },
+                {
+                  "attributeId": 2,
+                  "attributeName": "冰量",
+                  "multiSelect": false,
+                  "productSubAttrs": [
+                    { "attributeId": 201, "attributeName": "正常冰", "selected": null, "price": 0 },
+                    { "attributeId": 202, "attributeName": "少冰", "selected": null, "price": 0 },
+                    { "attributeId": 203, "attributeName": "去冰", "selected": null, "price": 0 },
+                    { "attributeId": 204, "attributeName": "温", "selected": null, "price": 0 },
+                    { "attributeId": 205, "attributeName": "热", "selected": null, "price": 0 }
+                  ]
+                },
+                {
+                  "attributeId": 3,
+                  "attributeName": "加料",
+                  "multiSelect": true,
+                  "productSubAttrs": [
+                    { "attributeId": 301, "attributeName": "芝士", "selected": null, "price": 3 },
+                    { "attributeId": 302, "attributeName": "椰果", "selected": null, "price": 2 },
+                    { "attributeId": 303, "attributeName": "珍珠", "selected": null, "price": 2 },
+                    { "attributeId": 304, "attributeName": "芋圆", "selected": null, "price": 3 },
+                    { "attributeId": 305, "attributeName": "红豆", "selected": null, "price": 2 },
+                    { "attributeId": 306, "attributeName": "芦荟", "selected": null, "price": 2 }
+                  ]
+                },
+                {
+                  "attributeId": 4,
+                  "attributeName": "杯型",
+                  "multiSelect": false,
+                  "productSubAttrs": [
+                    { "attributeId": 401, "attributeName": "中杯", "selected": null, "price": 0 },
+                    { "attributeId": 402, "attributeName": "大杯", "selected": null, "price": 3 }
+                  ]
+                }
+              ],
+              "tags": ["热销", "经典"],
+              "initialPrice": 29,
+              "estimatePrice": 29
+            }
+          ],
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "customizeProduct",
+      "category": "商品",
+      "description": "喜茶商品属性定制切换 — 支持糖度/冰量/加料（多选）/杯型的组合定制",
+      "luckinEquivalent": "switchProduct",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "storeId": { "type": "integer", "required": true, "description": "门店ID" },
+          "productId": { "type": "integer", "required": true, "description": "商品ID" },
+          "skuCode": { "type": "string", "required": true, "description": "商品SKU编码" },
+          "attrOperationParam": {
+            "type": "object",
+            "required": true,
+            "description": "属性切换参数",
+            "properties": {
+              "attributeId": { "type": "integer", "description": "属性组ID (1=糖度,2=冰量,3=加料,4=杯型)" },
+              "subAttr": {
+                "type": "object",
+                "properties": {
+                  "attributeId": { "type": "integer", "description": "属性值ID" },
+                  "operation": { "type": "integer", "description": "操作类型：3=选中, 1=取消（加料多选时使用取消）" }
+                }
+              }
+            }
+          },
+          "amount": { "type": "integer", "required": true, "description": "商品数量" }
+        },
+        "required": ["storeId", "productId", "skuCode", "attrOperationParam", "amount"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "productId": { "type": "number" },
+              "productName": { "type": "string" },
+              "skuCode": { "type": "string", "description": "切换后的SKU编码" },
+              "pictureUrl": { "type": "string" },
+              "productAttrs": { "type": "array", "description": "切换后的属性状态" },
+              "tags": { "type": "array" },
+              "initialPrice": { "type": "number", "description": "更新后的面价" },
+              "estimatePrice": { "type": "number", "description": "更新后的预估到手价" }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": {
+          "storeId": 10086,
+          "productId": 2001,
+          "skuCode": "HT-2001-001",
+          "attrOperationParam": {
+            "attributeId": 1,
+            "subAttr": {
+              "attributeId": 103,
+              "operation": 3
+            }
+          },
+          "amount": 1
+        },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": {
+            "productId": 2001,
+            "productName": "多肉葡萄",
+            "skuCode": "HT-2001-003",
+            "pictureUrl": "https://cdn.heytea.com/products/multigrape.jpg",
+            "productAttrs": [
+              {
+                "attributeId": 1,
+                "attributeName": "糖度",
+                "productSubAttrs": [
+                  { "attributeId": 101, "attributeName": "全糖", "selected": false, "price": 0, "canSelected": 1 },
+                  { "attributeId": 102, "attributeName": "七分糖", "selected": false, "price": 0, "canSelected": 1 },
+                  { "attributeId": 103, "attributeName": "五分糖", "selected": true, "price": 0, "canSelected": 1 },
+                  { "attributeId": 104, "attributeName": "三分糖", "selected": false, "price": 0, "canSelected": 1 },
+                  { "attributeId": 105, "attributeName": "无糖", "selected": false, "price": 0, "canSelected": 1 }
+                ]
+              }
+            ],
+            "tags": ["热销"],
+            "initialPrice": 29,
+            "estimatePrice": 29
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "queryProductDetail",
+      "category": "商品",
+      "description": "喜茶查询商品详情 — 包含完整属性选项、原料成分、过敏原、营养信息",
+      "luckinEquivalent": "queryProductDetailInfo",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "storeId": { "type": "integer", "required": true, "description": "门店ID" },
+          "productId": { "type": "integer", "required": true, "description": "商品ID" }
+        },
+        "required": ["storeId", "productId"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "productId": { "type": "number" },
+              "productName": { "type": "string" },
+              "skuCode": { "type": "string" },
+              "pictureUrl": { "type": "string" },
+              "category": { "type": "string" },
+              "description": { "type": "string", "description": "商品描述" },
+              "ingredients": { "type": "array", "items": { "type": "string" }, "description": "原料成分" },
+              "allergens": { "type": "array", "items": { "type": "string" }, "description": "过敏原信息" },
+              "nutritionInfo": {
+                "type": "object",
+                "description": "营养信息",
+                "properties": {
+                  "calories": { "type": "string", "description": "热量" },
+                  "sugar": { "type": "string", "description": "含糖量" },
+                  "caffeine": { "type": "string", "description": "咖啡因含量" }
+                }
+              },
+              "productAttrs": { "type": "array", "description": "商品属性列表" },
+              "tags": { "type": "array" },
+              "initialPrice": { "type": "number" },
+              "estimatePrice": { "type": "number" }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": { "storeId": 10086, "productId": 2001 },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": {
+            "productId": 2001,
+            "productName": "多肉葡萄",
+            "skuCode": "HT-2001-001",
+            "pictureUrl": "https://cdn.heytea.com/products/multigrape.jpg",
+            "category": "多肉系列",
+            "description": "手剥巨峰葡萄搭配清新茉莉绿茶底，果肉满满，清爽酸甜",
+            "ingredients": ["巨峰葡萄", "茉莉绿茶", "糖浆", "冰块"],
+            "allergens": [],
+            "nutritionInfo": {
+              "calories": "约260kcal",
+              "sugar": "约32g",
+              "caffeine": "约35mg"
+            },
+            "productAttrs": [],
+            "tags": ["热销", "经典"],
+            "initialPrice": 29,
+            "estimatePrice": 29
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "previewOrder",
+      "category": "订单",
+      "description": "喜茶订单预览 — 显示商品明细、价格计算、优惠券匹配、预计取餐时间",
+      "luckinEquivalent": "previewOrder",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "storeId": { "type": "integer", "required": true, "description": "门店ID" },
+          "productList": {
+            "type": "array",
+            "required": true,
+            "description": "商品列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": { "type": "integer", "required": true, "description": "数量" },
+                "productId": { "type": "integer", "required": true, "description": "商品ID" },
+                "skuCode": { "type": "string", "required": true, "description": "SKU编码" }
+              }
+            }
+          },
+          "pickupType": {
+            "type": "string",
+            "required": false,
+            "enum": ["self_pickup", "delivery"],
+            "description": "取餐方式：self_pickup=到店自取, delivery=外卖配送"
+          }
+        },
+        "required": ["storeId", "productList"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "aboutTime": { "type": "number", "description": "预计取餐/送达时间戳(ms)" },
+              "estimatedWaitMinutes": { "type": "number", "description": "预计等待分钟数" },
+              "discountPrice": { "type": "number", "description": "实付金额" },
+              "totalInitialPrice": { "type": "number", "description": "商品总面价" },
+              "privilegeMoney": { "type": "number", "description": "优惠金额" },
+              "deliveryFee": { "type": "number", "description": "配送费（外卖时）" },
+              "pickupType": { "type": "string", "description": "取餐方式" },
+              "storeInfo": {
+                "type": "object",
+                "properties": {
+                  "storeId": { "type": "number" },
+                  "storeName": { "type": "string" },
+                  "address": { "type": "string" }
+                }
+              },
+              "productInfoList": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "productId": { "type": "number" },
+                    "skuCode": { "type": "string" },
+                    "name": { "type": "string" },
+                    "amount": { "type": "number" },
+                    "additionDesc": { "type": "string", "description": "属性描述，如「五分糖/少冰/加芝士」" },
+                    "breviaryPicUrl": { "type": "string" },
+                    "initPrice": { "type": "number" },
+                    "estimatePrice": { "type": "number" },
+                    "estimateTotalPrice": { "type": "number" }
+                  }
+                }
+              },
+              "couponCodeList": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": {
+          "storeId": 10086,
+          "productList": [
+            { "amount": 1, "productId": 2001, "skuCode": "HT-2001-003" }
+          ],
+          "pickupType": "self_pickup"
+        },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": {
+            "aboutTime": 1718000400000,
+            "estimatedWaitMinutes": 12,
+            "discountPrice": 29,
+            "totalInitialPrice": 29,
+            "privilegeMoney": 0,
+            "deliveryFee": 0,
+            "pickupType": "self_pickup",
+            "storeInfo": {
+              "storeId": 10086,
+              "storeName": "喜茶·深圳万象天地店",
+              "address": "深圳市南山区深南大道9668号"
+            },
+            "productInfoList": [
+              {
+                "productId": 2001,
+                "skuCode": "HT-2001-003",
+                "name": "多肉葡萄",
+                "amount": 1,
+                "additionDesc": "五分糖/正常冰",
+                "breviaryPicUrl": "https://cdn.heytea.com/products/multigrape_s.jpg",
+                "initPrice": 29,
+                "estimatePrice": 29,
+                "estimateTotalPrice": 29
+              }
+            ],
+            "couponCodeList": []
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "createOrder",
+      "category": "订单",
+      "description": "喜茶创建订单 — 返回微信支付链接和二维码，支持自取/外卖",
+      "luckinEquivalent": "createOrder",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "storeId": { "type": "integer", "required": true },
+          "productList": { "type": "array", "required": true, "description": "商品列表（同previewOrder）" },
+          "longitude": { "type": "number", "required": true, "description": "用户经度" },
+          "latitude": { "type": "number", "required": true, "description": "用户纬度" },
+          "couponCodeList": { "type": "array", "items": { "type": "string" }, "required": false },
+          "pickupType": { "type": "string", "enum": ["self_pickup", "delivery"], "required": false },
+          "remark": { "type": "string", "required": false, "description": "订单备注，如「少放冰」「多加糖」" }
+        },
+        "required": ["storeId", "productList", "longitude", "latitude"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "orderId": { "type": "number" },
+              "orderIdStr": { "type": "string" },
+              "payOrderUrl": { "type": "string", "description": "微信支付URL" },
+              "payOrderQrCodeUrl": { "type": "string", "description": "支付二维码链接" },
+              "discountPrice": { "type": "number", "description": "实付金额" },
+              "needPay": { "type": "boolean", "description": "是否需要支付" },
+              "tradeNo": { "type": ["string", "null"] },
+              "description": { "type": ["string", "null"] }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": {
+          "storeId": 10086,
+          "productList": [{ "amount": 1, "productId": 2001, "skuCode": "HT-2001-003" }],
+          "longitude": 113.94441,
+          "latitude": 22.52736,
+          "couponCodeList": [],
+          "pickupType": "self_pickup",
+          "remark": ""
+        },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": {
+            "orderId": 8829301847562910000,
+            "orderIdStr": "8829301847562910000",
+            "payOrderUrl": "weixin://wxpay/bizpayurl?pr=heytea_xxxx",
+            "payOrderQrCodeUrl": "https://pay.heytea.com/qrcode?token=xxxx",
+            "discountPrice": 29,
+            "needPay": true,
+            "tradeNo": null,
+            "description": null
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "queryOrderDetail",
+      "category": "订单",
+      "description": "喜茶查询订单详情 — 含订单状态、取餐码、商品明细、门店/配送信息",
+      "luckinEquivalent": "queryOrderDetailInfo",
+      "orderStatusMap": {
+        "10": "待付款",
+        "20": "已接单",
+        "30": "制作中",
+        "40": "待取餐",
+        "50": "配送中（外卖）",
+        "80": "已完成",
+        "100": "已取消"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": { "type": "string", "required": true, "description": "订单ID" }
+        },
+        "required": ["orderId"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "orderId": { "type": "string" },
+              "orderStatus": { "type": "number", "description": "10=待付款,20=已接单,30=制作中,40=待取餐,50=配送中,80=已完成,100=已取消" },
+              "orderStatusName": { "type": "string" },
+              "aboutTime": { "type": "number", "description": "预计取餐/送达时间戳" },
+              "takeMealTime": { "type": "string", "description": "实际取餐时间" },
+              "takeMealCodeInfo": {
+                "type": "object",
+                "properties": {
+                  "code": { "type": "string", "description": "取餐码" },
+                  "shelfNo": { "type": "string", "description": "取餐架编号" },
+                  "takeOrderId": { "type": "string", "description": "取餐单ID" }
+                }
+              },
+              "storeInfo": { "type": "object" },
+              "productInfoList": { "type": ["array", "null"] },
+              "orderPayAmount": { "type": "number" },
+              "pickupType": { "type": "string" },
+              "dispatchInfo": {
+                "type": "object",
+                "properties": {
+                  "dispatcherName": { "type": "string" },
+                  "dispatcherMobile": { "type": "string" },
+                  "dispatchAboutTime": { "type": "string" },
+                  "destinationDistance": { "type": "number" }
+                }
+              },
+              "orderCommodityList": { "type": "array" },
+              "orderType": { "type": "string" },
+              "remark": { "type": "string" }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": { "orderId": "8829301847562910000" },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": {
+            "orderId": "8829301847562910000",
+            "orderStatus": 40,
+            "orderStatusName": "待取餐",
+            "aboutTime": 1718000400000,
+            "takeMealTime": "",
+            "takeMealCodeInfo": {
+              "code": "A086",
+              "shelfNo": "3号架",
+              "takeOrderId": "htRmJK3AAo="
+            },
+            "storeInfo": {
+              "storeId": 10086,
+              "storeName": "喜茶·深圳万象天地店",
+              "address": "深圳市南山区深南大道9668号"
+            },
+            "productInfoList": [
+              {
+                "productId": 2001,
+                "skuCode": "HT-2001-003",
+                "name": "多肉葡萄",
+                "amount": 1,
+                "additionDesc": "五分糖/正常冰",
+                "breviaryPicUrl": "https://cdn.heytea.com/products/multigrape_s.jpg"
+              }
+            ],
+            "orderPayAmount": 29,
+            "pickupType": "self_pickup",
+            "dispatchInfo": {
+              "dispatcherName": "",
+              "dispatcherMobile": "",
+              "dispatchAboutTime": "",
+              "destinationDistance": 0
+            },
+            "orderCommodityList": [
+              {
+                "commodityId": 2001,
+                "commodityCode": "HT-2001",
+                "commodityName": "多肉葡萄",
+                "payableMoney": 29,
+                "payMoney": 29
+              }
+            ],
+            "orderType": "self_pickup",
+            "remark": ""
+          },
+          "success": true
+        }
+      }
+    },
+    {
+      "name": "cancelOrder",
+      "category": "订单",
+      "description": "喜茶取消订单 — 制作前免费取消，制作中需门店审核",
+      "luckinEquivalent": "cancelOrder",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": { "type": "string", "required": true, "description": "订单ID" },
+          "cancelReason": { "type": "string", "required": false, "description": "取消原因，如「计划有变」「选错了」" }
+        },
+        "required": ["orderId"]
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "msg": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "success": { "type": "boolean", "description": "是否取消成功" },
+              "refundAmount": { "type": "number", "description": "退款金额" },
+              "needReview": { "type": "boolean", "description": "是否需要门店审核（制作中的订单）" },
+              "message": { "type": "string", "description": "取消结果说明" }
+            }
+          },
+          "success": { "type": "boolean" }
+        }
+      },
+      "example": {
+        "request": { "orderId": "8829301847562910000", "cancelReason": "计划有变" },
+        "response": {
+          "code": 0,
+          "msg": "success",
+          "data": {
+            "success": true,
+            "refundAmount": 29,
+            "needReview": false,
+            "message": "订单已取消，退款将在1-3个工作日内原路返回"
+          },
+          "success": true
+        }
+      }
+    }
+  ],
+  "orderFlowSequence": [
+    "1. queryStoreList → 用户选择门店",
+    "2. searchProduct → 浏览/搜索商品",
+    "3. queryProductDetail → 查看商品详情（可选）",
+    "4. customizeProduct → 选择糖度/冰量/加料/杯型",
+    "5. previewOrder → 预览订单明细和价格",
+    "6. createOrder → 创建订单获取支付链接",
+    "7. queryOrderDetail → 追踪订单状态和取餐码",
+    "8. cancelOrder → 取消订单（如需）"
+  ],
+  "differencesFromLuckin": [
+    {
+      "aspect": "商品属性",
+      "luckin": "温度(热/冰)、杯型(大杯/超大杯)",
+      "heytea": "糖度(5档)、冰量(5档)、加料(6+种,可多选)、杯型(中杯/大杯)"
+    },
+    {
+      "aspect": "商品分类",
+      "luckin": "咖啡为主（拿铁/美式/特调）",
+      "heytea": "茶饮为主（芝芝/多肉/纯茶/果茶/季节限定）"
+    },
+    {
+      "aspect": "门店标签",
+      "luckin": "deptTags 通用标签",
+      "heytea": "storeTags 含堂食/外卖/24h + businessStatus 营业状态"
+    },
+    {
+      "aspect": "取餐方式",
+      "luckin": "默认自取",
+      "heytea": "显式 pickupType: self_pickup / delivery"
+    },
+    {
+      "aspect": "订单状态",
+      "luckin": "6个状态(10/20/30/60/80/100)",
+      "heytea": "7个状态(+40待取餐, +50配送中)"
+    },
+    {
+      "aspect": "取消策略",
+      "luckin": "直接取消",
+      "heytea": "制作前免费取消, 制作中需审核, 增加 cancelReason"
+    },
+    {
+      "aspect": "取餐信息",
+      "luckin": "取餐码 + 取餐单ID",
+      "heytea": "取餐码 + 取餐架编号(shelfNo) + 取餐单ID"
+    },
+    {
+      "aspect": "商品详情",
+      "luckin": "基础属性+价格",
+      "heytea": "增加 description, ingredients, allergens, nutritionInfo"
+    }
+  ]
+}

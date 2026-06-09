@@ -77,6 +77,9 @@ export function buildSystemPrompt(perception = null, session = {}, options = {})
   // ═══ 7. 真实客服话术参考（来自 70 个 Excel 提取的策略库）═══
   sections.push(_buildRealScriptGuide(perception))
 
+  // ═══ 8. 自助点单能力 ═══
+  sections.push(_buildOrderingCapability())
+
   // ═══ 6. ICL 示例 (LIMA 原则: 少而精) ═══
   if (includeICL && perception) {
     const iclResult = retrieveICLExamples(perception, { maxExamples: maxICLExamples })
@@ -399,6 +402,27 @@ function _buildRealScriptGuide(perception) {
 - 工单跟进："阿喜已为您创建工单，后续会有负责人与您联系，请留意来电"`)
 
   return parts.join('\n')
+}
+
+/**
+ * 自助点单能力说明 — 让 AI 了解可以帮助用户点单
+ */
+function _buildOrderingCapability() {
+  return `## 自助点单能力
+你可以帮助用户通过对话完成自助点单。当用户表达点单意图时（如"我想点一杯""有什么推荐""帮我查订单"），你应该：
+
+1. **引导点单**：告诉用户可以点击右下角的 🧋 按钮打开自助点单面板，或在对话中描述想喝的饮品
+2. **推荐饮品**：根据用户口味偏好推荐喜茶热门饮品，如多肉葡萄、芝芝莓莓、满杯红柚等
+3. **定制建议**：主动询问糖度（全糖/七分/五分/三分/无糖）、冰量（正常冰/少冰/去冰/温/热）、加料（芝士/椰果/珍珠/芋圆）
+4. **订单查询**：用户提供订单号后可以帮忙查询订单状态和取餐码
+
+### 热门饮品速查
+- 🍇 多肉葡萄 ¥29 — 巨峰葡萄+茉莉绿茶，清爽酸甜
+- 🧀 芝芝莓莓 ¥32 — 草莓+芝士奶盖，经典人气王
+- 🍑 芝芝桃桃 ¥32 — 鲜桃+芝士奶盖，夏日限定
+- 🍋 满杯红柚 ¥25 — 红柚+绿茶，微苦回甘
+- 🌸 杨梅冰茶 ¥28 — 季节限定，消暑首选
+- 🍵 茉莉绿茶 ¥12 — 纯茶，花香悠长`
 }
 
 function _buildICLSection(iclResult) {

@@ -33,20 +33,20 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex h-screen items-center justify-center p-6" style={{ background: 'var(--cursor-bg)' }}>
-          <div className="max-w-md text-center space-y-3">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: '#e74c3c15' }}>
-              <AlertCircle className="h-6 w-6" style={{ color: '#e74c3c' }} />
+        <div className="flex h-screen items-center justify-center p-6" style={{ background: 'var(--cursor-bg)' }} data-qoder-id="qel-flex-24e11d14" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-24e11d14&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:36,&quot;column&quot;:9}}">
+          <div className="max-w-md text-center space-y-3" data-qoder-id="qel-max-w-md-5adb2b12" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-max-w-md-5adb2b12&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;max-w-md&quot;,&quot;loc&quot;:{&quot;line&quot;:37,&quot;column&quot;:11}}">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: '#e74c3c15' }} data-qoder-id="qel-mx-auto-4205e86a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mx-auto-4205e86a&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;mx-auto&quot;,&quot;loc&quot;:{&quot;line&quot;:38,&quot;column&quot;:13}}">
+              <AlertCircle className="h-6 w-6" style={{ color: '#e74c3c' }}  data-qoder-id="qel-h-6-970c27ae" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-6-970c27ae&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;h-6&quot;,&quot;loc&quot;:{&quot;line&quot;:39,&quot;column&quot;:15}}"/>
             </div>
-            <h2 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }}>页面加载出错</h2>
-            <p className="text-xs" style={{ color: 'var(--cursor-border-55)' }}>
+            <h2 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-text-sm-9acfa0d2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-9acfa0d2&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:41,&quot;column&quot;:13}}">页面加载出错</h2>
+            <p className="text-xs" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-xs-9cd836f2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-xs-9cd836f2&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;text-xs&quot;,&quot;loc&quot;:{&quot;line&quot;:42,&quot;column&quot;:13}}">
               {this.state.error?.message || '未知错误'}
             </p>
             <button
               className="px-4 py-2 rounded-md text-xs font-medium"
               style={{ background: 'var(--cursor-orange)', color: '#fff' }}
               onClick={() => { this.setState({ hasError: false, error: null }); window.location.hash = '#/' }}
-            >
+             data-qoder-id="qel-px-4-ece821d3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-px-4-ece821d3&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;ErrorBoundary&quot;,&quot;elementRole&quot;:&quot;px-4&quot;,&quot;loc&quot;:{&quot;line&quot;:45,&quot;column&quot;:13}}">
               返回首页
             </button>
           </div>
@@ -168,9 +168,9 @@ function NavBar({ role, onToggleRole, sidebarOpen, onToggleSidebar, ...qoderProp
                   : 'text-[var(--cursor-border-55)] hover:text-[var(--cursor-ink)] hover:bg-[var(--cursor-surface-300)]'
               )}
               style={{ borderRadius: 'var(--seed-radius)' }}
-            >
-              <Icon className="h-4 w-4" />
-              <span className="hidden md:inline">{item.label}</span>
+             data-qoder-id="qel-link-87343aea" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-link-87343aea&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;NavBar&quot;,&quot;elementRole&quot;:&quot;link&quot;,&quot;loc&quot;:{&quot;line&quot;:161,&quot;column&quot;:13}}">
+              <Icon className="h-4 w-4"  data-qoder-id="qel-h-4-21f8ed85" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-4-21f8ed85&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;NavBar&quot;,&quot;elementRole&quot;:&quot;h-4&quot;,&quot;loc&quot;:{&quot;line&quot;:172,&quot;column&quot;:15}}"/>
+              <span className="hidden md:inline" data-qoder-id="qel-hidden-45b95204" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-hidden-45b95204&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;NavBar&quot;,&quot;elementRole&quot;:&quot;hidden&quot;,&quot;loc&quot;:{&quot;line&quot;:173,&quot;column&quot;:15}}">{item.label}</span>
             </Link>
           )
         })}
@@ -258,15 +258,15 @@ function AppLayout(qoderProps) {
             <Route path="/chat/:id" element={<ChatInterface role={role} />}  data-qoder-id="qel-route-c9626b12" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c9626b12&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:176,&quot;column&quot;:13}}"/>
             {role === 'staff' && (
               <>
-                <Route path="/qiyu" element={<QiyuSessionPanel />} />
+                <Route path="/qiyu" element={<QiyuSessionPanel />}  data-qoder-id="qel-route-d16277aa" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-d16277aa&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:261,&quot;column&quot;:17}}"/>
                 <Route path="/dashboard" element={<DashboardView />}  data-qoder-id="qel-route-c862697f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c862697f&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:177,&quot;column&quot;:13}}"/>
                 <Route path="/workflow" element={<WorkflowView />}  data-qoder-id="qel-route-c76267ec" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c76267ec&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:178,&quot;column&quot;:13}}"/>
                 <Route path="/knowledge" element={<KnowledgeBase />}  data-qoder-id="qel-route-c6626659" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c6626659&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:179,&quot;column&quot;:13}}"/>
-                <Route path="/settings" element={<LLMConfigPanel />} />
+                <Route path="/settings" element={<LLMConfigPanel />}  data-qoder-id="qel-route-575afbd7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-575afbd7&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:265,&quot;column&quot;:17}}"/>
               </>
             )}
             {/* Fallback: any unmatched or unauthorized route → ChatInterface */}
-            <Route path="*" element={<ChatInterface role={role} />} />
+            <Route path="*" element={<ChatInterface role={role} />}  data-qoder-id="qel-route-545af71e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-545af71e&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:269,&quot;column&quot;:13}}"/>
           </Routes>
         </main>
       </div>
@@ -277,7 +277,7 @@ function AppLayout(qoderProps) {
 /* ─── App Root ─── */
 export default function App() {
   return (
-    <ErrorBoundary>
+    <ErrorBoundary data-qoder-id="qel-errorboundary-3609f703" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-errorboundary-3609f703&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;App&quot;,&quot;elementRole&quot;:&quot;errorboundary&quot;,&quot;loc&quot;:{&quot;line&quot;:280,&quot;column&quot;:5}}">
       <AppContext.Provider value={{}} data-qoder-id="qel-appcontext-provider-49cc65c7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-appcontext-provider-49cc65c7&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;App&quot;,&quot;elementRole&quot;:&quot;appcontext-provider&quot;,&quot;loc&quot;:{&quot;line&quot;:190,&quot;column&quot;:5}}">
         <HashRouter data-qoder-id="qel-browserrouter-fb600161" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-browserrouter-fb600161&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;App&quot;,&quot;elementRole&quot;:&quot;browserrouter&quot;,&quot;loc&quot;:{&quot;line&quot;:191,&quot;column&quot;:7}}">
           <AppLayout  data-qoder-id="qel-applayout-c18149b2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-applayout-c18149b2&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;App&quot;,&quot;elementRole&quot;:&quot;applayout&quot;,&quot;loc&quot;:{&quot;line&quot;:192,&quot;column&quot;:9}}"/>

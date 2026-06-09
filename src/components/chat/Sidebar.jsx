@@ -117,7 +117,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
         <div
           className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm lg:hidden"
           onClick={onClose}
-        />
+         data-qoder-id="qel-fixed-07af3d26" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-fixed-07af3d26&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;fixed&quot;,&quot;loc&quot;:{&quot;line&quot;:117,&quot;column&quot;:9}}"/>
       )}
 
       <aside
@@ -134,14 +134,14 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
           borderRight: '1px solid var(--cursor-border-10)',
         }}
         data-component="sidebar"
-      >
+       data-qoder-id="qel-sidebar-9f67231e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-sidebar-9f67231e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;sidebar&quot;,&quot;loc&quot;:{&quot;line&quot;:123,&quot;column&quot;:7}}">
         {/* New chat button */}
-        <div className="px-3 pt-2 pb-1">
+        <div className="px-3 pt-2 pb-1" data-qoder-id="qel-px-3-f1b848e0" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-px-3-f1b848e0&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;px-3&quot;,&quot;loc&quot;:{&quot;line&quot;:139,&quot;column&quot;:9}}">
           <Button
             onClick={handleNew}
             className="w-full gap-2"
-          >
-            <Plus className="h-4 w-4" />
+           data-qoder-id="qel-w-full-a2df3eb1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-w-full-a2df3eb1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;w-full&quot;,&quot;loc&quot;:{&quot;line&quot;:140,&quot;column&quot;:11}}">
+            <Plus className="h-4 w-4"  data-qoder-id="qel-h-4-86eaaf56" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-4-86eaaf56&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-4&quot;,&quot;loc&quot;:{&quot;line&quot;:144,&quot;column&quot;:13}}"/>
             新对话
           </Button>
         </div>
@@ -150,7 +150,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
         <div className="mx-3 mb-2 flex gap-1 rounded-lg p-0.5" style={{
           border: '1px solid var(--cursor-border-10)',
           background: 'var(--cursor-surface-300)',
-        }}>
+        }} data-qoder-id="qel-mx-3-4ec44fd6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mx-3-4ec44fd6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mx-3&quot;,&quot;loc&quot;:{&quot;line&quot;:150,&quot;column&quot;:9}}">
           <Button
             variant="ghost"
             size="sm"
@@ -160,8 +160,8 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
               background: viewMode === 'conversations' ? 'var(--cursor-surface-500)' : 'transparent',
               color: viewMode === 'conversations' ? 'var(--cursor-ink)' : 'var(--cursor-border-55)',
             }}
-          >
-            <MessageSquare className="h-3 w-3" />
+           data-qoder-id="qel-flex-1-739e0780" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-1-739e0780&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex-1&quot;,&quot;loc&quot;:{&quot;line&quot;:154,&quot;column&quot;:11}}">
+            <MessageSquare className="h-3 w-3"  data-qoder-id="qel-h-3-758af708" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-758af708&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:164,&quot;column&quot;:13}}"/>
             对话
           </Button>
           {role === 'staff' && (
@@ -174,17 +174,17 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                 background: viewMode === 'sessions' ? 'var(--cursor-surface-500)' : 'transparent',
                 color: viewMode === 'sessions' ? 'var(--cursor-ink)' : 'var(--cursor-border-55)',
               }}
-            >
-              <Users className="h-3 w-3" />
+             data-qoder-id="qel-flex-1-819e1d8a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-1-819e1d8a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex-1&quot;,&quot;loc&quot;:{&quot;line&quot;:168,&quot;column&quot;:13}}">
+              <Users className="h-3 w-3"  data-qoder-id="qel-h-3-fc0bb549" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-fc0bb549&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:178,&quot;column&quot;:15}}"/>
               七鱼会话
             </Button>
           )}
         </div>
 
         {/* Search */}
-        <div className="px-3 pb-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: 'var(--cursor-border-55)' }} />
+        <div className="px-3 pb-2" data-qoder-id="qel-px-3-e21ffa95" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-px-3-e21ffa95&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;px-3&quot;,&quot;loc&quot;:{&quot;line&quot;:185,&quot;column&quot;:9}}">
+          <div className="relative" data-qoder-id="qel-relative-7a9ca8f8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-relative-7a9ca8f8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;relative&quot;,&quot;loc&quot;:{&quot;line&quot;:186,&quot;column&quot;:11}}">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: 'var(--cursor-border-55)' }}  data-qoder-id="qel-absolute-70658723" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-absolute-70658723&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;absolute&quot;,&quot;loc&quot;:{&quot;line&quot;:187,&quot;column&quot;:13}}"/>
             <input
               type="text"
               placeholder={viewMode === 'sessions' ? '搜索会话...' : '搜索对话...'}
@@ -205,13 +205,13 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                 e.target.style.borderColor = 'var(--cursor-border-10)'
                 e.target.style.boxShadow = 'none'
               }}
-            />
+             data-qoder-id="qel-w-full-90eefb22" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-w-full-90eefb22&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;w-full&quot;,&quot;loc&quot;:{&quot;line&quot;:188,&quot;column&quot;:13}}"/>
           </div>
         </div>
 
         {/* Filters */}
         {viewMode === 'conversations' ? (
-          <div className="flex flex-wrap gap-1.5 px-3 pb-3" data-component="sidebar-filters">
+          <div className="flex flex-wrap gap-1.5 px-3 pb-3" data-component="sidebar-filters" data-qoder-id="qel-sidebar-filters-57ec5471" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-sidebar-filters-57ec5471&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;sidebar-filters&quot;,&quot;loc&quot;:{&quot;line&quot;:214,&quot;column&quot;:11}}">
             {filterOptions.map((label) => (
               <Button
                 key={label || 'all'}
@@ -227,37 +227,37 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                     ? 'var(--cursor-orange)'
                     : 'var(--cursor-border-55)',
                 }}
-              >
+               data-qoder-id="qel-rounded-full-5453d858" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-full-5453d858&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;rounded-full&quot;,&quot;loc&quot;:{&quot;line&quot;:216,&quot;column&quot;:15}}">
                 {label || '全部'}
               </Button>
             ))}
           </div>
         ) : (
           /* 七鱼 session quick stats */
-          <div className="flex items-center gap-2 px-3 pb-3">
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-success)' }}>
-              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#1f8a65' }} />
+          <div className="flex items-center gap-2 px-3 pb-3" data-qoder-id="qel-flex-6da27fa6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-6da27fa6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:237,&quot;column&quot;:11}}">
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-success)' }} data-qoder-id="qel-flex-cab9add8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-cab9add8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:238,&quot;column&quot;:13}}">
+              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#1f8a65' }}  data-qoder-id="qel-h-1-5-3f1d1187" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-3f1d1187&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:239,&quot;column&quot;:15}}"/>
               {activeSessions} 对话中
             </span>
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-gold)' }}>
-              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#c08532' }} />
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-gold)' }} data-qoder-id="qel-flex-54c142db" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-54c142db&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:242,&quot;column&quot;:13}}">
+              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#c08532' }}  data-qoder-id="qel-h-1-5-4723d9e4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-4723d9e4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:243,&quot;column&quot;:15}}"/>
               {queueSessions} 排队
             </span>
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-error)' }}>
-              <AlertTriangle className="h-2.5 w-2.5" />
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-error)' }} data-qoder-id="qel-flex-56c14601" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-56c14601&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:246,&quot;column&quot;:13}}">
+              <AlertTriangle className="h-2.5 w-2.5"  data-qoder-id="qel-h-2-5-b81cbcf2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-b81cbcf2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:247,&quot;column&quot;:15}}"/>
               {highRiskSessions} 高风险
             </span>
           </div>
         )}
 
         {/* Content list */}
-        <div className="flex-1 overflow-y-auto scrollbar-thin px-2 pb-4">
+        <div className="flex-1 overflow-y-auto scrollbar-thin px-2 pb-4" data-qoder-id="qel-flex-1-0478ec3a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-1-0478ec3a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex-1&quot;,&quot;loc&quot;:{&quot;line&quot;:254,&quot;column&quot;:9}}">
           {viewMode === 'conversations' ? (
             <>
               {!hasAnyResults && (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <MessageSquare className="mb-3 h-8 w-8" style={{ color: 'var(--cursor-border-20)' }} />
-                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }}>
+                <div className="flex flex-col items-center justify-center py-12 text-center" data-qoder-id="qel-flex-fb9b106b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-fb9b106b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:258,&quot;column&quot;:17}}">
+                  <MessageSquare className="mb-3 h-8 w-8" style={{ color: 'var(--cursor-border-20)' }}  data-qoder-id="qel-mb-3-0b108bad" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mb-3-0b108bad&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mb-3&quot;,&quot;loc&quot;:{&quot;line&quot;:259,&quot;column&quot;:19}}"/>
+                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-sm-885a1849" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-885a1849&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:260,&quot;column&quot;:19}}">
                     {searchQuery ? '没有找到匹配的对话' : '暂无历史对话'}
                   </p>
                 </div>
@@ -266,10 +266,10 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
               {Object.entries(filtered).map(([group, convs]) => {
                 if (convs.length === 0) return null
                 return (
-                  <div key={group} className="mb-4">
-                    <div className="flex items-center gap-2 px-2 py-1.5">
-                      <Clock className="h-3 w-3" style={{ color: 'var(--cursor-border-55)', opacity: 0.6 }} />
-                      <span className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--cursor-border-55)' }}>
+                  <div key={group} className="mb-4" data-qoder-id="qel-mb-4-0ed0780f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mb-4-0ed0780f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mb-4&quot;,&quot;loc&quot;:{&quot;line&quot;:269,&quot;column&quot;:19}}">
+                    <div className="flex items-center gap-2 px-2 py-1.5" data-qoder-id="qel-flex-f79b0a1f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-f79b0a1f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:270,&quot;column&quot;:21}}">
+                      <Clock className="h-3 w-3" style={{ color: 'var(--cursor-border-55)', opacity: 0.6 }}  data-qoder-id="qel-h-3-dcdad25d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-dcdad25d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:271,&quot;column&quot;:23}}"/>
+                      <span className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-11px-753e9a40" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-11px-753e9a40&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-11px&quot;,&quot;loc&quot;:{&quot;line&quot;:272,&quot;column&quot;:23}}">
                         {GROUP_LABELS[group]}
                       </span>
                     </div>
@@ -284,14 +284,14 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                             'sidebar-item w-full text-left mb-0.5 justify-start h-auto',
                             isActive && 'active'
                           )}
-                        >
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
+                         data-qoder-id="qel-button-d874706d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-d874706d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:279,&quot;column&quot;:25}}">
+                          <div className="flex-1 min-w-0" data-qoder-id="qel-flex-1-077b2f8a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-1-077b2f8a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex-1&quot;,&quot;loc&quot;:{&quot;line&quot;:288,&quot;column&quot;:27}}">
+                            <div className="flex items-center gap-2" data-qoder-id="qel-flex-809e2061" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-809e2061&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:289,&quot;column&quot;:29}}">
                               <div
                                 className="h-2 w-2 rounded-full flex-shrink-0"
                                 style={RISK_DOT_STYLE[conv.riskLevel]}
-                              />
-                              <span className="truncate text-sm font-medium" style={{ color: 'var(--cursor-ink)' }}>
+                               data-qoder-id="qel-h-2-57d945c8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-57d945c8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2&quot;,&quot;loc&quot;:{&quot;line&quot;:290,&quot;column&quot;:31}}"/>
+                              <span className="truncate text-sm font-medium" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-truncate-bce9a1d7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-truncate-bce9a1d7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;truncate&quot;,&quot;loc&quot;:{&quot;line&quot;:294,&quot;column&quot;:31}}">
                                 {conv.title}
                               </span>
                               {/* Session state indicator */}
@@ -299,25 +299,25 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                 <div
                                   className="h-1.5 w-1.5 rounded-full flex-shrink-0"
                                   style={SESSION_STATE_DOT[conv.session_state] || {}}
-                                />
+                                 data-qoder-id="qel-h-1-5-45219827" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-45219827&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:299,&quot;column&quot;:33}}"/>
                               )}
                             </div>
-                            <p className="mt-0.5 truncate text-xs pl-4" style={{ color: 'var(--cursor-border-55)' }}>
+                            <p className="mt-0.5 truncate text-xs pl-4" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-mt-0-5-19536e29" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-0-5-19536e29&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:305,&quot;column&quot;:29}}">
                               {conv.lastMessage}
                             </p>
                             {/* Extra meta info */}
                             {conv.handler && (
-                              <div className="mt-0.5 flex items-center gap-2 pl-4">
-                                <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>
+                              <div className="mt-0.5 flex items-center gap-2 pl-4" data-qoder-id="qel-mt-0-5-b2a04225" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-0-5-b2a04225&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:310,&quot;column&quot;:31}}">
+                                <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-dbdbd8cf" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-dbdbd8cf&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:311,&quot;column&quot;:33}}">
                                   {conv.handler === 'AI' ? '阿喜AI' : conv.handler}
                                 </span>
                                 {conv.turn_count && (
-                                  <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>
+                                  <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-dadbd73c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-dadbd73c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:315,&quot;column&quot;:35}}">
                                     {conv.turn_count}轮
                                   </span>
                                 )}
                                 {conv.sla_status === 'warning' && (
-                                  <AlertTriangle className="h-2.5 w-2.5" style={{ color: 'var(--cursor-gold)' }} />
+                                  <AlertTriangle className="h-2.5 w-2.5" style={{ color: 'var(--cursor-gold)' }}  data-qoder-id="qel-h-2-5-310e70e3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-310e70e3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:320,&quot;column&quot;:35}}"/>
                                 )}
                               </div>
                             )}
@@ -333,9 +333,9 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
             /* 七鱼 sessions list */
             <>
               {filteredSessions.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <Users className="mb-3 h-8 w-8" style={{ color: 'var(--cursor-border-20)' }} />
-                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }}>
+                <div className="flex flex-col items-center justify-center py-12 text-center" data-qoder-id="qel-flex-f196837f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-f196837f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:336,&quot;column&quot;:17}}">
+                  <Users className="mb-3 h-8 w-8" style={{ color: 'var(--cursor-border-20)' }}  data-qoder-id="qel-mb-3-26923f01" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mb-3-26923f01&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mb-3&quot;,&quot;loc&quot;:{&quot;line&quot;:337,&quot;column&quot;:19}}"/>
+                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-sm-1a54edf1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-1a54edf1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:338,&quot;column&quot;:19}}">
                     没有匹配的会话
                   </p>
                 </div>
@@ -346,31 +346,31 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                   key={session.sessionId}
                   onClick={() => navigate('/qiyu')}
                   className="sidebar-item w-full text-left mb-0.5 justify-start h-auto"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
+                 data-qoder-id="qel-sidebar-item-9e6a677a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-sidebar-item-9e6a677a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;sidebar-item&quot;,&quot;loc&quot;:{&quot;line&quot;:344,&quot;column&quot;:17}}">
+                  <div className="flex-1 min-w-0" data-qoder-id="qel-flex-1-0369e01d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-1-0369e01d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex-1&quot;,&quot;loc&quot;:{&quot;line&quot;:350,&quot;column&quot;:19}}">
+                    <div className="flex items-center gap-2" data-qoder-id="qel-flex-fa9691aa" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-fa9691aa&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:351,&quot;column&quot;:21}}">
                       <div
                         className="h-2 w-2 rounded-full flex-shrink-0"
                         style={SESSION_STATE_DOT[session.session_state] || {}}
-                      />
-                      <span className="truncate text-xs font-medium" style={{ color: 'var(--cursor-ink)' }}>
+                       data-qoder-id="qel-h-2-4bc7e9c3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-4bc7e9c3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2&quot;,&quot;loc&quot;:{&quot;line&quot;:352,&quot;column&quot;:23}}"/>
+                      <span className="truncate text-xs font-medium" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-truncate-bef8af87" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-truncate-bef8af87&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;truncate&quot;,&quot;loc&quot;:{&quot;line&quot;:356,&quot;column&quot;:23}}">
                         {session.sessionId}
                       </span>
                       {session.risk_level === 'high' && (
-                        <AlertTriangle className="h-2.5 w-2.5 flex-shrink-0" style={{ color: 'var(--cursor-error)' }} />
+                        <AlertTriangle className="h-2.5 w-2.5 flex-shrink-0" style={{ color: 'var(--cursor-error)' }}  data-qoder-id="qel-h-2-5-ae0b6413" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-ae0b6413&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:360,&quot;column&quot;:25}}"/>
                       )}
                     </div>
                     {session.classification && (
-                      <p className="mt-0.5 truncate text-[10px] pl-4" style={{ color: 'var(--cursor-border-55)' }}>
+                      <p className="mt-0.5 truncate text-[10px] pl-4" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-mt-0-5-27628ebd" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-0-5-27628ebd&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:364,&quot;column&quot;:23}}">
                         {session.classification.split('/').pop()}
                       </p>
                     )}
-                    <div className="mt-0.5 flex items-center gap-2 pl-4">
-                      <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>
+                    <div className="mt-0.5 flex items-center gap-2 pl-4" data-qoder-id="qel-mt-0-5-28a57915" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-0-5-28a57915&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:368,&quot;column&quot;:21}}">
+                      <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-d9d99712" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-d9d99712&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:369,&quot;column&quot;:23}}">
                         {session.handler === 'AI' ? '阿喜AI' : session.handler || '待分配'}
                       </span>
                       {session.turn_count > 0 && (
-                        <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }}>
+                        <span className="text-[9px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-dad998a5" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-dad998a5&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:373,&quot;column&quot;:25}}">
                           {session.turn_count}轮
                         </span>
                       )}
@@ -383,8 +383,8 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
         </div>
 
         {/* Footer */}
-        <div className="p-3" style={{ borderTop: '1px solid var(--cursor-border-10)' }}>
-          <p className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>
+        <div className="p-3" style={{ borderTop: '1px solid var(--cursor-border-10)' }} data-qoder-id="qel-p-3-9156063a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-p-3-9156063a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;p-3&quot;,&quot;loc&quot;:{&quot;line&quot;:386,&quot;column&quot;:9}}">
+          <p className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-10px-1145be79" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-1145be79&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:387,&quot;column&quot;:11}}">
             {viewMode === 'conversations'
               ? `${MOCK_CONVERSATIONS.length} 条历史对话`
               : `${MOCK_SESSIONS.length} 个七鱼会话 · ${activeSessions} 进行中`}
