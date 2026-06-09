@@ -1443,7 +1443,7 @@ function WelcomeScreen({ onSend }) {
           </h2>
         </div>
         <p className="max-w-md text-sm leading-relaxed" style={{ color: 'var(--cursor-border-55)' }}>
-          食品安全智能服务系统 — 多模型智能质检 · 感知-决策-执行全链路闭环 · 实时风险识别与守护
+          喜茶智能客服 — 食安咨询 · 订单处理 · 产品推荐 · 门店查询，阿喜随时为您服务
         </p>
       </div>
 

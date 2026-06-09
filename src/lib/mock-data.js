@@ -1062,6 +1062,10 @@ export const QUICK_PROMPTS = [
   { icon: 'alert-triangle', text: '饮品味道不对', description: '异味、变质、过期' },
   { icon: 'heart-pulse', text: '喝了身体不舒服', description: '腹泻、过敏、呕吐' },
   { icon: 'package', text: '包装食品问题', description: '蛋糕、瓶装、OEM产品' },
+  { icon: 'coffee', text: '推荐一下新品', description: '当季热门饮品推荐' },
+  { icon: 'map-pin', text: '附近门店查询', description: '门店地址、营业时间' },
+  { icon: 'ticket', text: '会员积分/优惠券', description: '会员权益、优惠券使用' },
+  { icon: 'shopping-bag', text: '查一下我的订单', description: '订单状态、催单、退款' },
 ]
 
 // ═══════════════════════════════════════════════════════
