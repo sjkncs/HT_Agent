@@ -1325,6 +1325,102 @@ function SvgChipTest() {
     </svg>
   )
 }
+
+// ═══ TriggerActionCard — 触发条件后续动作卡片 ═══
+function TriggerActionCard({ message, onSend }) {
+  const { triggerActions, triggersSummary, emotionLevel, shouldEscalate } = message
+  if (!triggerActions || triggerActions.length === 0) return null
+
+  const handleAction = (action) => {
+    switch (action.action) {
+      case 'transfer':
+        onSend('请帮我转接人工客服')
+        break
+      case 'upload_image':
+        onSend('我要上传食安相关的照片')
+        break
+      case 'compensation':
+        onSend('请问可以给我什么补偿方案？')
+        break
+      case 'medical':
+        onSend('我需要就医指引和帮助')
+        break
+      case 'batch_check':
+        onSend('请排查同批次产品是否有相同问题')
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <div data-component="trigger-action-card" style={{
+      maxWidth: '420px',
+      marginLeft: '48px',
+      marginTop: '4px',
+      animation: 'fadeIn 0.3s ease-out',
+    }}>
+      {shouldEscalate && (
+        <div style={{
+          background: emotionLevel === 'angry' ? '#fff5f5' : '#fffff0',
+          border: `1px solid ${emotionLevel === 'angry' ? '#feb2b2' : '#fefcbf'}`,
+          borderRadius: '8px',
+          padding: '8px 12px',
+          marginBottom: '8px',
+          fontSize: '12px',
+          color: emotionLevel === 'angry' ? '#c53030' : '#744210',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+        }}>
+          <span>{emotionLevel === 'angry' ? '⚠️' : 'ℹ️'}</span>
+          <span>{shouldEscalate ? '已触发升级处理，建议转接人工客服或门店负责人' : '检测到特殊场景，提供快捷操作'}</span>
+        </div>
+      )}
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '8px',
+      }}>
+        {triggerActions.map((action) => (
+          <button
+            key={action.id}
+            onClick={() => handleAction(action)}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 14px',
+              borderRadius: '20px',
+              border: `1px solid ${action.color}30`,
+              background: `${action.color}08`,
+              color: action.color,
+              fontSize: '13px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = `${action.color}15`
+              e.currentTarget.style.borderColor = `${action.color}50`
+              e.currentTarget.style.transform = 'translateY(-1px)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = `${action.color}08`
+              e.currentTarget.style.borderColor = `${action.color}30`
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+          >
+            <span>{action.icon}</span>
+            <span>{action.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function WelcomeScreen({ onSend }) {
   return (
     <div className="flex flex-col items-center justify-center flex-1 px-4" data-component="welcome-screen">
@@ -2983,7 +3079,7 @@ export default function ChatInterface({ role = 'consumer' }) {
   }, [id])
 
   // Streaming response with Agent Engine integration
-  const simulateStream = useCallback(async (responseText, engineResult, llmSource = 'template') => {
+  const simulateStream = useCallback(async (responseText, engineResult, llmSource = 'template', triggersData = null) => {
     setIsStreaming(true)
     streamAbortRef.current = false
 
@@ -3006,6 +3102,7 @@ export default function ChatInterface({ role = 'consumer' }) {
       aiqc_v2: engineResult?.aiqc_v2 || null,
       orderResult: engineResult?.orderResult || null,
       agentFramework: engineResult?.agent_framework || null,
+      triggersData: triggersData || null,
     }
 
     setMessages((prev) => [...prev, aiMessage])
@@ -3038,6 +3135,48 @@ export default function ChatInterface({ role = 'consumer' }) {
             : m
         )
       )
+    }
+
+    // ── 触发条件后续动作卡片 ──
+    // 根据触发条件在回复后显示快捷操作按钮
+    if (triggersData && triggersData.triggers && triggersData.triggers.length > 0) {
+      const actions = []
+      const triggerTypes = triggersData.triggers.map(t => t.type)
+      const triggerSubtypes = triggersData.triggers.map(t => t.subtype).filter(Boolean)
+
+      if (triggersData.shouldEscalate || triggerTypes.includes('emotion_escalation') || triggerTypes.includes('human_transfer')) {
+        actions.push({ id: 'transfer_human', label: '转接人工客服', icon: '👤', color: '#e53e3e', action: 'transfer' })
+      }
+      if (triggerTypes.includes('food_safety') && (triggerSubtypes.includes('external_foreign') || triggerSubtypes.includes('body_discomfort') || triggerSubtypes.includes('spoilage'))) {
+        actions.push({ id: 'upload_photo', label: '上传食安图片', icon: '📸', color: '#dd6b20', action: 'upload_image' })
+      }
+      if (triggerTypes.includes('compensation') || triggerSubtypes.includes('external_foreign') || triggerSubtypes.includes('body_discomfort')) {
+        actions.push({ id: 'view_compensation', label: '查看补偿方案', icon: '💰', color: '#38a169', action: 'compensation' })
+      }
+      if (triggerTypes.includes('food_safety') && triggerSubtypes.includes('body_discomfort')) {
+        actions.push({ id: 'medical_guide', label: '就医指引', icon: '🏥', color: '#e53e3e', action: 'medical' })
+      }
+      if (triggerSubtypes.includes('spoilage')) {
+        actions.push({ id: 'batch_check', label: '同批次排查', icon: '🔍', color: '#805ad5', action: 'batch_check' })
+      }
+
+      if (actions.length > 0) {
+        // 在回复完成后添加一个系统动作卡片消息
+        const actionCard = {
+          id: 'm-' + Date.now() + '-actions',
+          role: 'system_action',
+          content: '',
+          timestamp: new Date().toISOString(),
+          triggerActions: actions,
+          triggersSummary: triggersData.triggers.map(t => t.reason).join('；'),
+          emotionLevel: triggersData.emotionLevel,
+          shouldEscalate: triggersData.shouldEscalate,
+        }
+        // 延迟添加，让回复先完整显示
+        setTimeout(() => {
+          setMessages((prev) => [...prev, actionCard])
+        }, 300)
+      }
     }
 
     setIsStreaming(false)
@@ -3252,7 +3391,7 @@ export default function ChatInterface({ role = 'consumer' }) {
       engineResult.agent_framework.safety = safetyResult
     }
 
-    setTimeout(() => simulateStream(finalReply, engineResult, llmSource), 600)
+    setTimeout(() => simulateStream(finalReply, engineResult, llmSource, triggers), 600)
 
     } finally {
       isSendingRef.current = false
@@ -3280,11 +3419,15 @@ export default function ChatInterface({ role = 'consumer' }) {
             <div className="mx-auto max-w-[820px] px-4 py-6">
               <div className="space-y-4">
                 {messages.map((msg, idx) => (
-                  <MessageBubble
-                    key={msg.id}
-                    message={msg}
-                    isStreaming={isStreaming && msg === messages[messages.length - 1] && msg.role === 'assistant'}
-                  />
+                  msg.role === 'system_action' ? (
+                    <TriggerActionCard key={msg.id} message={msg} onSend={handleSend} />
+                  ) : (
+                    <MessageBubble
+                      key={msg.id}
+                      message={msg}
+                      isStreaming={isStreaming && msg === messages[messages.length - 1] && msg.role === 'assistant'}
+                    />
+                  )
                 ))}
               </div>
 

@@ -63,7 +63,15 @@ export function buildSystemPrompt(perception = null, session = {}, options = {})
     sections.push(_buildCompensationGuide())
   }
 
-  // ═══ 5. 沟通规范 ═══
+  // ═══ 5. 业务触发条件响应策略 ═══
+  if (perception?._triggers) {
+    const triggerSection = _buildTriggerResponseGuide(perception._triggers)
+    if (triggerSection) {
+      sections.push(triggerSection)
+    }
+  }
+
+  // ═══ 6. 沟通规范 ═══
   sections.push(_buildCommunicationRules())
 
   // ═══ 6. ICL 示例 (LIMA 原则: 少而精) ═══
@@ -174,6 +182,144 @@ function _buildCommunicationRules() {
 - **禁止行为**：主动说"我帮您退款"（越权）、命令语气、推卸责任、敷衍
 - 回复长度适中：信息收集阶段简短（50-100字），给出方案时可适当详细（100-200字）
 - 每次回复末尾引导下一步动作（提供信息/等待处理/确认方案）`
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SECTION 2.5 — 业务触发条件响应策略
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * 根据 detectBusinessTriggers 检测结果，生成具体的行为指令
+ * 这是核心差异化逻辑：不同触发组合 → 不同回复策略
+ *
+ * @param {Object} triggersData - { triggers: [...], emotionLevel, shouldEscalate }
+ * @returns {string|null} 提示段落，无有效触发时返回 null
+ */
+function _buildTriggerResponseGuide(triggersData) {
+  if (!triggersData || !triggersData.triggers || triggersData.triggers.length === 0) {
+    return null
+  }
+
+  const { triggers, emotionLevel, shouldEscalate } = triggersData
+  const parts = ['# 当前场景触发条件 — 请严格按以下策略回复']
+
+  // ── 优先级 1：升级/转人工（最高优先级）──
+  if (shouldEscalate) {
+    const escalationReasons = triggers
+      .filter(t => t.action === 'transfer_human' || t.type === 'emotion_escalation' || t.type === 'human_transfer' || (t.type === 'food_safety' && t.subtype === 'body_discomfort'))
+      .map(t => t.reason)
+
+    if (escalationReasons.length > 0) {
+      parts.push(`
+⚠️ **需要升级处理**（触发原因：${escalationReasons.join('；')}）
+- 必须在本轮回复中明确告知顾客将转接人工客服或升级至门店负责人
+- 先安抚情绪，再告知转接安排，不要继续收集信息
+- 给出明确的等待时间预期（如"5分钟内由人工客服与您联系"）
+- 不要使用"帮您查询""帮您核实"等拖延性话术`)
+    }
+  }
+
+  // ── 优先级 2：身体不适（健康安全红线）──
+  const bodyTrigger = triggers.find(t => t.type === 'food_safety' && t.subtype === 'body_discomfort')
+  if (bodyTrigger) {
+    parts.push(`
+🏥 **身体不适场景**
+- 第一句话必须关心顾客健康状况："请先确认目前的身体状况，如有不适请尽快就医"
+- 提醒保留就医凭证（病历、发票等），后续可作为补偿依据
+- 身体不适类补偿自动提升 1-2 级，可建议 L3-L5 级别方案
+- 不要质疑顾客的身体不适描述，不要要求"证明确实是因为我们的产品"`)
+  }
+
+  // ── 优先级 3：外源性异物（食品安全严重问题）──
+  const externalTrigger = triggers.find(t => t.type === 'food_safety' && t.subtype === 'external_foreign')
+  if (externalTrigger) {
+    parts.push(`
+🔴 **外源性异物**（头发/塑料/金属/虫等非食品本身物质）
+- 这是较严重的食品安全问题，需要认真对待
+- 请顾客拍照留存异物（如果还未提供照片）
+- 收集信息：订单号或手机号、产品名、门店、异物描述
+- 补偿建议：退款 + 额外优惠券补偿（L3-L4 级别）
+- 不要说"这很正常"或"偶尔会发生"，避免激怒顾客`)
+  }
+
+  // ── 优先级 4：原料变质（红线，需紧急升级）──
+  const spoilageTrigger = triggers.find(t => t.type === 'food_safety' && t.subtype === 'spoilage')
+  if (spoilageTrigger) {
+    parts.push(`
+🚨 **原料变质/过期**（红线场景）
+- 这是最严重的食品安全问题之一，必须紧急处理
+- 首先确认顾客是否已食用、有无身体不适
+- 立即道歉，不要推脱或质疑
+- 告知将紧急升级至品质部门和门店负责人
+- 同批次产品可能需要排查，告知顾客"我们会立即排查同批次产品"
+- 补偿建议：全额退款 + 高阶补偿（L4-L5 级别）`)
+  }
+
+  // ── 优先级 5：内源性异物（相对轻微）──
+  const internalTrigger = triggers.find(t => t.type === 'food_safety' && t.subtype === 'internal_foreign')
+  if (internalTrigger) {
+    parts.push(`
+🟡 **内源性异物**（果核/茶叶梗/椰果等食品原料本身物质）
+- 相对轻微，通常是制作工艺未完全过滤导致
+- 可以轻松处理：安排重做或优惠券补偿（L1-L2 级别）
+- 语气可以相对轻松，告知这是可以改进的工艺问题
+- 如果顾客不满，再升级到 L3`)
+  }
+
+  // ── 赔偿/优惠券/退款 ──
+  const compensationTrigger = triggers.find(t => t.type === 'compensation')
+  if (compensationTrigger) {
+    parts.push(`
+💰 **涉及赔偿/退款/优惠券**
+- 不要直接承诺具体金额，说"为您申请合适的补偿方案"
+- 退款流程：由门店核实后 24 小时内处理
+- 可以建议两种方案让顾客选择：重做一份 + 退款
+- 如果顾客坚持要赔偿，说"帮您记录并转交门店负责人，他们会与您确认方案"
+- 不要说"我可以给您退"（越权），用"帮您申请""为您跟进"`)
+  }
+
+  // ── 检测到订单号 ──
+  const orderTrigger = triggers.find(t => t.type === 'order_detected')
+  if (orderTrigger) {
+    parts.push(`
+📋 **已检测到订单号 ${orderTrigger.orderId || ''}**
+- 确认收到订单号，告知正在查询订单明细
+- 询问产品具体信息以辅助判断（如"请问是哪个产品出现的问题？"）
+- 不要编造订单状态，说"正在查询中"`)
+  }
+
+  // ── 图片上传意图 ──
+  const imageTrigger = triggers.find(t => t.type === 'image_upload')
+  if (imageTrigger) {
+    parts.push(`
+📸 **图片上传意图**
+- 引导顾客上传食安相关照片（异物、产品、包装等）
+- 告知照片用途："照片将帮助我们更快定位问题和处理方案"
+- 如果是食安类投诉，照片是重要的证据收集环节`)
+  }
+
+  // ── 非食安类 ──
+  const nonSafetyTrigger = triggers.find(t => t.type === 'non_safety')
+  if (nonSafetyTrigger && triggers.length === 1) {
+    parts.push(`
+💬 **非食安类咨询**
+- 这是常规咨询，不需要走食安处理流程
+- 根据问题类型提供准确信息（产品/门店/活动/会员等）
+- 如果不确定具体信息，建议"帮您转接门店确认"
+- 语气可以轻松友好，不需要过度正式`)
+  }
+
+  // ── 情绪等级附加指导 ──
+  if (emotionLevel === 'angry' || emotionLevel === 'distressed') {
+    parts.push(`
+😤 **情绪状态：${emotionLevel === 'angry' ? '愤怒' : '焦虑/困扰'}**
+- 回复开头必须先共情安抚，不要直接跳到业务处理
+- 使用"非常抱歉给您带来了这样的体验""完全理解您的心情"等共情话术
+- 回复语气要诚恳，避免机械化的客服套话
+- ${emotionLevel === 'angry' ? '避免使用过于轻松的语气，保持严肃专业' : '可以适当温暖，让顾客感到被重视'}`)
+  }
+
+  return parts.join('\n')
 }
 
 function _buildICLSection(iclResult) {
