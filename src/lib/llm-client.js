@@ -18,17 +18,17 @@
 // SECTION 1 — API 配置管理
 // ═══════════════════════════════════════════════════════════════════════════
 
-/** 默认 API 配置 (可在运行时覆盖) */
+/** 默认 API 配置 (可在运行时覆盖) — 预配置 NVIDIA 生态 */
 const DEFAULT_CONFIG = Object.freeze({
-  // API 端点 (OpenAI 兼容)
-  baseUrl: 'https://api.openai.com/v1',
-  apiKey: '',
-  model: 'gpt-4o-mini',
+  // API 端点 (NVIDIA 生态集成)
+  baseUrl: 'https://integrate.api.nvidia.com/v1',
+  apiKey: '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',
+  model: 'nvidia/nemotron-3-ultra-550b-a55b',
 
   // 请求参数
   temperature: 0.3,       // 低温度 = 更确定性 (客服场景偏好稳定)
-  maxTokens: 2048,        // 回复最大 token
-  topP: 0.9,
+  maxTokens: 16384,       // 回复最大 token (NVIDIA 支持 16K)
+  topP: 0.95,
   frequencyPenalty: 0.1,  // 轻微惩罚重复 (对应 Reward Hacking 防御 §6.5)
   presencePenalty: 0.05,
 
@@ -40,17 +40,21 @@ const DEFAULT_CONFIG = Object.freeze({
   // 流式
   stream: false,
 
-  // 备用配置 (主 API 失败时降级)
-  fallback: null,         // { baseUrl, apiKey, model }
+  // 备用配置 (主 API 失败时降级 → kimi-k2.6 快速响应)
+  fallback: {
+    baseUrl: 'https://integrate.api.nvidia.com/v1',
+    apiKey: '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',
+    model: 'moonshotai/kimi-k2.6',
+  },
 
   // NVIDIA Reasoning Model 专属
-  enableThinking: false,       // 启用 reasoning chain (nemotron-3-ultra)
-  reasoningBudget: 8192,       // reasoning token 预算 (max 16384)
+  enableThinking: true,        // 启用 reasoning chain (nemotron-3-ultra)
+  reasoningBudget: 16384,      // reasoning token 预算 (max 16384)
   extraBody: null,             // 额外请求体参数 (如 chat_template_kwargs)
 
   // 内容安全护栏 (独立 API key)
-  contentSafetyKey: '',        // nemotron-3.5-content-safety API key
-  contentSafetyEnabled: false, // 是否启用内容安全检查
+  contentSafetyKey: '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',
+  contentSafetyEnabled: true,  // 默认启用内容安全检查
 })
 
 /** 当前活跃配置 (运行时可变) */
@@ -80,14 +84,36 @@ export function getLLMConfig() {
 
 /**
  * 从 localStorage 恢复配置
+ * 如果保存的配置缺少 apiKey 但默认配置有，则使用默认配置的值
  */
 export function restoreLLMConfig() {
   try {
     if (typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem('llm_config')
       if (saved) {
-        _activeConfig = { ...DEFAULT_CONFIG, ...JSON.parse(saved) }
+        const parsed = JSON.parse(saved)
+        // 合并策略: 已保存值优先，但空值回退到 DEFAULT_CONFIG
+        _activeConfig = { ...DEFAULT_CONFIG, ...parsed }
+        // 如果保存的 apiKey 为空但默认有值，使用默认
+        if (!_activeConfig.apiKey && DEFAULT_CONFIG.apiKey) {
+          _activeConfig.apiKey = DEFAULT_CONFIG.apiKey
+          _activeConfig.baseUrl = DEFAULT_CONFIG.baseUrl
+          _activeConfig.model = DEFAULT_CONFIG.model
+        }
+        if (!_activeConfig.contentSafetyKey && DEFAULT_CONFIG.contentSafetyKey) {
+          _activeConfig.contentSafetyKey = DEFAULT_CONFIG.contentSafetyKey
+          _activeConfig.contentSafetyEnabled = DEFAULT_CONFIG.contentSafetyEnabled
+        }
+        if (!_activeConfig.fallback && DEFAULT_CONFIG.fallback) {
+          _activeConfig.fallback = DEFAULT_CONFIG.fallback
+        }
+        // 自动保存合并后的配置
+        localStorage.setItem('llm_config', JSON.stringify(_activeConfig))
+        return
       }
+      // 无已保存配置 → 直接使用默认并保存
+      _activeConfig = { ...DEFAULT_CONFIG }
+      localStorage.setItem('llm_config', JSON.stringify(_activeConfig))
     }
   } catch { /* 静默 */ }
 }

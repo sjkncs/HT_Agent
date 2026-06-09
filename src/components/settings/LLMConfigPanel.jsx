@@ -60,7 +60,13 @@ function Toggle({ label, checked, onChange, desc }) {
 
 export default function LLMConfigPanel() {
   const [config, setConfig] = useState(getLLMConfig())
-  const [selectedPreset, setSelectedPreset] = useState('custom')
+  const [selectedPreset, setSelectedPreset] = useState(() => {
+    const current = getLLMConfig()
+    for (const [key, preset] of Object.entries(API_PRESETS)) {
+      if (key !== 'custom' && current.baseUrl === preset.baseUrl) return key
+    }
+    return 'nvidia' // 默认 NVIDIA
+  })
   const [testStatus, setTestStatus] = useState(null)
   const [testResult, setTestResult] = useState('')
   const [saved, setSaved] = useState(false)
