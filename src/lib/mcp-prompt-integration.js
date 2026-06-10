@@ -16,11 +16,18 @@ import {
 // ─── 点单意图检测 ───
 
 const ORDER_INTENT_PATTERNS = [
-  // 点单意图
-  { pattern: /(?:想|要|来|点|买|订)(?:一杯|一份|一|两|个|杯)?/i, type: 'order', subType: 'create' },
-  { pattern: /(?:推荐|什么好喝|有什么|菜单|看看)/i, type: 'order', subType: 'browse' },
-  { pattern: /(?:新品|限定|当季|季节)/i, type: 'order', subType: 'browse_new' },
-  { pattern: /(?:附近|门店|哪里|地址|位置)/i, type: 'order', subType: 'store' },
+  // 点单意图 — 需要明确的点单信号 (动词+量词 或 点单短语)
+  { pattern: /(?:想|要|来|点|买|订)(?:一杯|一份|一个|两杯|两|个杯)/i, type: 'order', subType: 'create' },
+  { pattern: /(?:帮我|给我|帮忙).*(?:点|买|订|来)(?:一杯|一份|一个|两杯)/i, type: 'order', subType: 'create' },
+  { pattern: /(?:帮我|给我|帮忙|我想).*(?:点单|下单|点奶茶|点一杯|点喝的)/i, type: 'order', subType: 'create' },
+  { pattern: /(?:点单|下单|来一杯|点一杯|帮我点)/i, type: 'order', subType: 'create' },
+  // 浏览意图 — 需要饮品/喜茶上下文（防止"路线推荐""餐厅推荐"误匹配）
+  { pattern: /(?:有什么|看看|菜单|什么好喝).*(?:喝|饮品|奶茶|茶)/i, type: 'order', subType: 'browse' },
+  { pattern: /(?:有什么好喝|有什么喝的|看看菜单|推荐.*喝|喝.*推荐)/i, type: 'order', subType: 'browse' },
+  { pattern: /(?:新品|限定|当季|季节).*(?:推荐|喝|饮品|上市|有什么)/i, type: 'order', subType: 'browse_new' },
+  // 门店意图 — 双信号 (位置词 + 门店/喜茶上下文)
+  { pattern: /(?:附近|哪里).*(?:门店|喜茶|喝茶|奶茶)/i, type: 'order', subType: 'store' },
+  { pattern: /(?:门店|喜茶).*(?:附近|哪里|地址|位置)/i, type: 'order', subType: 'store' },
   // 查单意图
   { pattern: /(?:查|看|我的).*(?:订单|单号|取餐)/i, type: 'query_order' },
   { pattern: /(?:订单号|取餐码).*(\d{4,})/i, type: 'query_order', subType: 'by_id' },
@@ -30,7 +37,7 @@ const ORDER_INTENT_PATTERNS = [
   { pattern: /(?:取消|退).*(\d{4,})/i, type: 'cancel_order' },
   // 定制意图
   { pattern: /(?:少糖|无糖|三分糖|五分糖|七分糖|全糖)/i, type: 'customize', subType: 'sugar' },
-  { pattern: /(?:少冰|去冰|正常冰|热|温)/i, type: 'customize', subType: 'ice' },
+  { pattern: /(?:少冰|去冰|正常冰)|(?:^|[,，、\s])(?:热|温)(?:$|[的了吗吧啊\s,，、])/i, type: 'customize', subType: 'ice' },
   { pattern: /(?:加|多).*(?:珍珠|椰果|芝士|芋圆|红豆|芦荟)/i, type: 'customize', subType: 'topping' },
   { pattern: /(?:大杯|中杯|杯型)/i, type: 'customize', subType: 'cup' },
 ]

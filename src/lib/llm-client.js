@@ -177,6 +177,12 @@ export async function chatCompletion(messages, overrides = {}) {
     stream: false,
   }
 
+  // Function Calling 支持：传入 tools 和 tool_choice
+  if (overrides.tools && Array.isArray(overrides.tools) && overrides.tools.length > 0) {
+    body.tools = overrides.tools
+    body.tool_choice = overrides.toolChoice || 'auto'
+  }
+
   // NVIDIA Reasoning Model: enable_thinking + reasoning_budget (top-level body)
   if (config.enableThinking) {
     body.chat_template_kwargs = { enable_thinking: true }
@@ -232,6 +238,7 @@ export async function chatCompletion(messages, overrides = {}) {
           reasoning_content: choice?.message?.reasoning_content || null,
           role: choice?.message?.role || 'assistant',
           finish_reason: choice?.finish_reason || 'unknown',
+          tool_calls: choice?.message?.tool_calls || null,
           usage: {
             prompt_tokens: data.usage?.prompt_tokens || 0,
             completion_tokens: data.usage?.completion_tokens || 0,

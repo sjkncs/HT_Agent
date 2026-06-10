@@ -67,7 +67,7 @@ export const MOCK_WORKFLOWS = [
         x: 260, y: 200,
         config: {
           model: 'qwen2.5-vl-finetuned',
-          categories: ['外源性异物', '内源性异物', '身体不适', '原料变质', '产品有效期', '饮品异味', '包装问题', '温度异常', '其他/未分类'],
+          categories: ['外源性异物', '内源性异物', '身体不适', '原料变质', '产品有效期', '饮品异味', '包装问题', '温度异常', '食安待确认', 'OEM变质', 'OEM过期', '其他/未分类'],
           confidence_threshold: 0.85,
           sample_weights_enabled: true,
           fallback_to_human: true,

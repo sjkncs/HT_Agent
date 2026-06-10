@@ -467,6 +467,74 @@ export function getMCPToolDefinitions() {
         },
       },
     },
+    // ─── 食安客服插件 (PRD) ───
+    {
+      type: 'function',
+      function: {
+        name: 'query_compensation',
+        description: '根据食安标签、订单核验、风险等级、图片状态和当前轮次，查询或生成可建议的补偿方案。该工具只返回内部处理建议，不实际执行退款、发券或赔付。',
+        parameters: {
+          type: 'object',
+          properties: {
+            food_safety_label: { type: 'string', description: '食安细类标签（如 食安问题/内源性异物/果核）' },
+            risk_level: { type: 'string', enum: ['high', 'medium', 'low'], description: '风险等级' },
+            order_verified: { type: 'boolean', description: '订单是否已核验' },
+            order_id: { type: 'string', description: '订单号' },
+            phone: { type: 'string', description: '下单手机号' },
+            store_name: { type: 'string', description: '门店名称' },
+            product_name: { type: 'string', description: '商品名称' },
+            amount: { type: 'string', description: '订单实付金额' },
+            image_status: { type: 'string', description: '图片状态：已提供/未提供未引导/引导未提供/已提供但无效/无图片需求' },
+            need_human_review: { type: 'boolean', description: '是否需要人工复核' },
+            turn_index: { type: 'integer', description: '当前轮次' },
+            solution_offered: { type: 'boolean', description: '是否已给过方案' },
+            case_id: { type: 'string', description: '案件ID' },
+          },
+          required: ['food_safety_label', 'risk_level', 'order_verified'],
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'query_history',
+        description: '查询顾客历史投诉和历史食安记录，用于判断是否为重复投诉、高风险顾客、同店重复问题或需要升级人工复核。',
+        parameters: {
+          type: 'object',
+          properties: {
+            phone: { type: 'string', description: '手机号' },
+            customer_id: { type: 'string', description: '顾客ID' },
+            order_id: { type: 'string', description: '订单号' },
+            food_safety_label: { type: 'string', description: '食安标签' },
+            store_name: { type: 'string', description: '门店' },
+            lookback_days: { type: 'integer', description: '回看天数，默认30' },
+            case_id: { type: 'string', description: '案件ID' },
+          },
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'store_query',
+        description: '查询订单或门店对应的门店信息、区域信息和回访处理建议，用于食安工单升级、门店核查和回访分支。该工具不认定责任。',
+        parameters: {
+          type: 'object',
+          properties: {
+            risk_level: { type: 'string', enum: ['high', 'medium', 'low'], description: '风险等级' },
+            store_id: { type: 'string', description: '门店ID' },
+            store_name: { type: 'string', description: '门店名称' },
+            order_id: { type: 'string', description: '订单号' },
+            city: { type: 'string', description: '城市' },
+            food_safety_label: { type: 'string', description: '食安标签' },
+            need_callback: { type: 'boolean', description: '是否需要回访' },
+            sla_hours: { type: 'integer', description: 'SLA小时' },
+            case_id: { type: 'string', description: '案件ID' },
+          },
+          required: ['risk_level'],
+        },
+      },
+    },
   ]
 }
 

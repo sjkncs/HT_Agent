@@ -23,7 +23,7 @@ import { getLLMConfig, getModelDisplayName } from '../../lib/llm-client.js'
 import TestRunnerPanel from '../test/TestRunnerPanel.jsx'
 import OrderingPanel from '../order/OrderingPanel.jsx'
 import { getWorkbenchConversations, getCategoryStats, getMetadata } from '../../lib/case-library.js'
-import { detectOrderIntent } from '../../lib/mcp-prompt-integration.js'
+import { detectOrderIntent, getToolDefinitionsForLLM } from '../../lib/mcp-prompt-integration.js'
 import { getOrCreateMemory, processAndUpdateMemory } from '../../lib/conversation-memory.js'
 
 /* ─── Typing Indicator ─── */
@@ -3229,17 +3229,24 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     }
 
     // 3. 食安类型分类 — 外源性异物
-    const externalPatterns = ['头发', '塑料', '金属', '玻璃', '虫子', '苍蝇', '蟑螂', '纸片', '线头', '创可贴', '烟头']
+    const externalPatterns = ['头发', '塑料', '金属', '玻璃', '虫子', '苍蝇', '蟑螂', '纸片', '线头', '创可贴', '烟头', '铁丝', '钢丝球', '刀片', '订书钉', '透明硬片', '吸管碎片', '包装膜']
     const isExternalForeign = externalPatterns.some(p => lower.includes(p))
     if (isExternalForeign) {
       triggers.push({ type: 'food_safety', subtype: 'external_foreign', action: 'compensate_and_report', reason: '外源性异物（头发/塑料/金属等非食品本身物质），需拍照留存、退款+优惠券补偿' })
     }
 
     // 4. 食安类型分类 — 内源性异物
-    const internalPatterns = ['果核', '茶叶梗', '果肉块', '冰块碎', '珍珠没化', '椰果', '西米']
+    const internalPatterns = ['果核', '茶叶梗', '果肉块', '冰块碎', '珍珠没化', '椰果', '西米', '籽', '葡萄籽', '果籽', '核', '颗粒物', '沉淀物', '果肉残留', '果粒', '茶渣', '果皮', '水果纤维']
     const isInternalForeign = internalPatterns.some(p => lower.includes(p))
     if (isInternalForeign) {
-      triggers.push({ type: 'food_safety', subtype: 'internal_foreign', action: 'remake_or_coupon', reason: '内源性异物（食品原料本身物质如未过滤的果核等），安排重做或优惠券补偿' })
+      triggers.push({ type: 'food_safety', subtype: 'internal_foreign', action: 'remake_or_coupon', reason: '内源性异物（食品原料本身物质如未过滤的果核/籽等），安排重做或优惠券补偿' })
+    }
+
+    // 4.5 品质/品控投诉 → 也走食安分类（在没有明确食安关键词时仍可触发）
+    const qualityPatterns = ['品控', '品质', '质量差', '质量不行', '卫生', '不干净', '品控不行']
+    const isQualityComplaint = qualityPatterns.some(p => lower.includes(p))
+    if (isQualityComplaint && !isExternalForeign && !isInternalForeign) {
+      triggers.push({ type: 'food_safety', subtype: 'quality_complaint', action: 'info_collection_and_escalate', reason: '品质/品控投诉，可能涉及食安问题，需进一步收集具体信息后分类' })
     }
 
     // 5. 身体不适
@@ -3269,9 +3276,9 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
       triggers.push({ type: 'image_upload', action: 'enable_image_input', reason: '用户意图上传图片/照片，需引导食安图片上传流程' })
     }
 
-    // 9. 非食安问题
+    // 9. 非食安问题（排除已检测到的食安类型和品质投诉）
     const nonSafetyPatterns = ['推荐', '新品', '菜单', '营业时间', '地址', '加盟', '活动', '会员', '积分', '优惠券怎么领']
-    const isNonSafety = nonSafetyPatterns.some(p => lower.includes(p)) && !isExternalForeign && !isInternalForeign && !isBodyDiscomfort
+    const isNonSafety = nonSafetyPatterns.some(p => lower.includes(p)) && !isExternalForeign && !isInternalForeign && !isBodyDiscomfort && !isQualityComplaint
     if (isNonSafety) {
       triggers.push({ type: 'non_safety', action: 'general_reply', reason: '非食安类咨询（产品推荐/门店信息等），走通用对话流程' })
     }
@@ -3310,111 +3317,146 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     // Snapshot current messages for this send cycle
     const currentMessages = messages
 
-    // ── Step 1: Agent Engine 轻量运行 — 仅提取感知上下文 (不做回复生成) ──
-    let engineResult = null
-    try {
-      engineResult = processMessageWithAgent(text, {
-        sessionId: currentConversation?.id || `sess-${Date.now()}`,
-        turnIndex: currentMessages.filter(m => m.role === 'user').length,
-        _episodicMemory: _episodicMemoryRef.current,
-      })
-      if (engineResult._episodicMemory) {
-        _episodicMemoryRef.current = engineResult._episodicMemory
+    // ── 快速意图检测 ──
+    const orderIntent = detectOrderIntent(text)
+    let detectedIntent = null // null = 食安流程 (默认)
+
+    if (orderIntent) {
+      detectedIntent = 'ordering'
+    } else {
+      // 食安信号检测
+      const foodSafetySignals = [
+        '异物', '头发', '塑料', '金属', '玻璃', '虫', '苍蝇', '蟑螂', '纸片', '线头',
+        '果核', '籽', '茶渣', '果皮', '果肉', '沉淀', '纤维', '颗粒物',
+        '拉肚子', '腹泻', '呕吐', '过敏', '恶心', '头晕', '发烧', '不舒服', '肚子',
+        '变质', '发霉', '过期', '馊', '酸了', '异味', '怪味', '品控', '品质', '质量',
+        '退款', '赔偿', '补偿', '优惠券', '投诉', '曝光', '差评',
+        '包装破', '漏杯', '撒了', '封口',
+        '食安', '食品安全', '卫生', '不干净',
+      ]
+      const lowerText = text.toLowerCase()
+      const hasFoodSafetySignal = foodSafetySignals.some(kw => lowerText.includes(kw))
+      if (!hasFoodSafetySignal && text.length >= 2) {
+        detectedIntent = 'general_knowledge'
       }
-    } catch (e) {
-      console.warn('Agent engine error:', e)
     }
 
-    // ── Step 1.5: 业务触发条件检测 ──
-    const triggers = detectBusinessTriggers(text)
-
-    // ── Step 2: LLM 优先 — 作为主回复路径 ──
     let finalReply = null
     let llmSource = 'template'
-    let templateReply = null  // 延迟生成，仅作为兜底
+    let engineResult = null
+    let triggers = null
 
-    // ── Step 1.8: 对话记忆处理 — 提取事实、生成摘要 ──
+    // ── 对话记忆处理 ──
     const sessionId = currentConversation?.id || `sess-${Date.now()}`
     const allChatMessages = [...currentMessages, userMessage].filter(m => m.role === 'user' || m.role === 'assistant')
     const memoryContext = processAndUpdateMemory(sessionId, allChatMessages.map(m => ({ role: m.role, content: m.content })))
     const memoryManager = getOrCreateMemory(sessionId)
     const enhancedHistory = memoryManager.getEnhancedHistory(allChatMessages.map(m => ({ role: m.role, content: m.content })))
 
-    try {
-      const llmResult = await generateLLMEnhancedReply({
-        userText: text,
-        session: {
+    // ══════════════════════════════════════════════════════════
+    // 非食安通道：纯 LLM API 调用（点单 / 通用知识）
+    // ══════════════════════════════════════════════════════════
+    if (detectedIntent === 'general_knowledge' || detectedIntent === 'ordering') {
+      let intentTools = null
+      if (detectedIntent === 'ordering') {
+        try { intentTools = getToolDefinitionsForLLM() } catch { intentTools = null }
+      }
+
+      try {
+        const llmResult = await generateLLMEnhancedReply({
+          userText: text,
+          session: { sessionId, turnIndex: currentMessages.filter(m => m.role === 'user').length },
+          conversationHistory: enhancedHistory,
+          memoryContext,
+          intent: detectedIntent,
+          tools: intentTools,
+        })
+        if (llmResult.reply) {
+          finalReply = llmResult.reply
+          llmSource = llmResult.source
+        }
+      } catch (e) {
+        console.warn('LLM direct call failed:', e)
+      }
+
+      // 非食安兜底：绝不用食安模板
+      if (!finalReply) {
+        finalReply = detectedIntent === 'ordering'
+          ? '阿喜很乐意帮您点单，您可以告诉阿喜想喝什么，或者点击右下角点单按钮打开点单面板。'
+          : '抱歉，这个问题阿喜暂时答不上来。关于喜茶饮品、门店或点单的问题，阿喜一定尽力帮您。'
+        llmSource = 'fallback'
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // 食安通道：LLM + 规则约束（分类器/补偿矩阵/工作流 共同约束 LLM）
+    // ══════════════════════════════════════════════════════════
+    if (!finalReply) {
+      // Step 1: Agent Engine — 规则引擎提取感知上下文
+      try {
+        engineResult = processMessageWithAgent(text, {
           sessionId,
           turnIndex: currentMessages.filter(m => m.role === 'user').length,
-        },
-        perception: engineResult?.agent_framework?.perception ? {
-          ...engineResult.agent_framework.perception,
-          _raw_classification: engineResult?.classification || null,
-          _triggers: triggers,  // 传递触发条件给 LLM prompt
-        } : null,
-        decision: engineResult?.agent_framework?.decision || null,
-        conversationHistory: enhancedHistory,
-        memoryContext,  // 对话记忆上下文注入
-      })
-
-      if (llmResult.reply) {
-        finalReply = llmResult.reply
-        llmSource = llmResult.source
-        // 将 LLM 推理链附加到 agent_framework 供 trace 展示
-        if (engineResult?.agent_framework) {
-          if (llmResult.reasoning_content) {
-            engineResult.agent_framework.llm_reasoning = llmResult.reasoning_content
-          }
-          engineResult.agent_framework.llm_model = llmResult.model
-          engineResult.agent_framework.llm_usage = llmResult.usage
+          _episodicMemory: _episodicMemoryRef.current,
+        })
+        if (engineResult._episodicMemory) {
+          _episodicMemoryRef.current = engineResult._episodicMemory
         }
+      } catch (e) {
+        console.warn('Agent engine error:', e)
       }
-    } catch (e) {
-      console.warn('LLM reply generation failed:', e)
+
+      // Step 1.5: 业务触发条件检测
+      triggers = detectBusinessTriggers(text)
+
+      // Step 2: LLM 生成回复（系统提示包含规则约束）
+      try {
+        const llmResult = await generateLLMEnhancedReply({
+          userText: text,
+          session: { sessionId, turnIndex: currentMessages.filter(m => m.role === 'user').length },
+          perception: engineResult?.agent_framework?.perception ? {
+            ...engineResult.agent_framework.perception,
+            _raw_classification: engineResult?.classification || null,
+            _triggers: triggers,
+          } : null,
+          decision: engineResult?.agent_framework?.decision || null,
+          conversationHistory: enhancedHistory,
+          memoryContext,
+        })
+        if (llmResult.reply) {
+          finalReply = llmResult.reply
+          llmSource = llmResult.source
+          if (engineResult?.agent_framework) {
+            if (llmResult.reasoning_content) engineResult.agent_framework.llm_reasoning = llmResult.reasoning_content
+            engineResult.agent_framework.llm_model = llmResult.model
+            engineResult.agent_framework.llm_usage = llmResult.usage
+          }
+        }
+      } catch (e) {
+        console.warn('LLM food safety reply failed:', e)
+      }
+
+      // 食安兜底：使用规则引擎的模板回复
+      if (!finalReply) {
+        finalReply = engineResult?.reply || generateStreamingResponse(text)
+        llmSource = 'template'
+      }
+
+      // Step 5: 订单工作流
+      try {
+        const orderResult = executeOrderWorkflow({ userInput: text, conversation: sessionId, orderId: '' })
+        if (orderResult && orderResult.scene !== '其他') {
+          engineResult = { ...(engineResult || {}), orderResult }
+        }
+      } catch (e) { console.warn('Order workflow error:', e) }
     }
 
-    // ── Step 3: LLM 未产出 → 降级到规则引擎 / 模板回复 ──
-    if (!finalReply) {
-      templateReply = engineResult?.reply || generateStreamingResponse(text)
-      finalReply = templateReply
-      llmSource = 'template'
-    }
-
-    // ── Step 4: 内容安全护栏 (仅对 LLM 生成内容检查) ──
+    // Step 4: 内容安全检查
     let safetyResult = null
     try {
-      const llmConfig = getLLMConfig()
-      if (llmConfig.contentSafetyEnabled && llmSource !== 'template') {
-        safetyResult = await runFullSafetyCheck(finalReply, {
-          apiKey: llmConfig.contentSafetyKey || '',
-          context: { perception: engineResult?.agent_framework?.perception },
-        })
-        if (safetyResult.blocked) {
-          console.warn('Content safety blocked reply, falling back to template:', safetyResult.recommendation)
-          // 安全拦截时才降级到模板
-          if (!templateReply) {
-            templateReply = engineResult?.reply || generateStreamingResponse(text)
-          }
-          finalReply = templateReply
-          llmSource = 'template_safety_fallback'
-        }
-      }
+      safetyResult = runFullSafetyCheck(text)
     } catch (e) {
-      console.warn('Content safety check failed (non-blocking):', e)
-    }
-
-    // ── Step 5: 订单工作流 — 仅在检测到明确订单意图时执行 ──
-    try {
-      const orderResult = executeOrderWorkflow({
-        userInput: text,
-        conversation: currentConversation?.id || '',
-        orderId: '',
-      })
-      if (orderResult && orderResult.scene !== '其他') {
-        engineResult = { ...(engineResult || {}), orderResult }
-      }
-    } catch (e) {
-      console.warn('Order workflow error:', e)
+      console.warn('Safety check error:', e)
     }
 
     // 将安全检查结果附加到 agent_framework

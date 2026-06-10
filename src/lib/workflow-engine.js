@@ -176,11 +176,30 @@ registerExecutor('classifier', async (node, context, options) => {
   
   // Simple keyword-based mock classification
   const categoryMap = {
-    '异物': '外源性异物', '毛发': '外源性异物', '塑料': '外源性异物',
-    '变质': '原料变质', '过期': '产品有效期', '味道': '饮品异味',
-    '肚子': '身体不适', '腹泻': '身体不适', '过敏': '身体不适',
-    '包装': '包装问题', '漏杯': '包装问题',
+    // 外源性异物
+    '异物': '外源性异物', '毛发': '外源性异物', '头发': '外源性异物', '塑料': '外源性异物',
+    '金属': '外源性异物', '铁丝': '外源性异物', '玻璃': '外源性异物', '刀片': '外源性异物',
+    '苍蝇': '外源性异物', '蟑螂': '外源性异物', '虫子': '外源性异物', '纸片': '外源性异物',
+    '线头': '外源性异物', '烟头': '外源性异物', '钢丝球': '外源性异物', '订书钉': '外源性异物',
+    // 内源性异物
+    '籽': '内源性异物', '果核': '内源性异物', '果籽': '内源性异物', '葡萄籽': '内源性异物',
+    '茶渣': '内源性异物', '茶叶': '内源性异物', '果肉': '内源性异物', '果皮': '内源性异物',
+    '颗粒物': '内源性异物', '沉淀': '内源性异物', '纤维': '内源性异物',
+    // 变质/效期
+    '变质': '原料变质', '发霉': '原料变质', '腐烂': '原料变质', '过期': '产品有效期',
+    '保质期': '产品有效期', '有效期': '产品有效期', '涨袋': 'OEM变质',
+    // 身体不适
+    '肚子': '身体不适', '腹泻': '身体不适', '过敏': '身体不适', '拉肚子': '身体不适',
+    '呕吐': '身体不适', '恶心': '身体不适', '发烧': '身体不适', '头晕': '身体不适',
+    // 异味/口感
+    '味道': '饮品异味', '异味': '饮品异味', '怪味': '饮品异味', '馊味': '饮品异味',
+    '酸臭': '饮品异味', '变味': '饮品异味',
+    // 包装
+    '包装': '包装问题', '漏杯': '包装问题', '撒了': '包装问题', '封口': '包装问题',
+    // 温度
     '温度': '温度异常', '不热': '温度异常', '不冷': '温度异常',
+    // 品质投诉
+    '品控': '食安待确认', '品质': '食安待确认', '卫生': '食安待确认',
   }
   
   let result = '其他/未分类'
@@ -224,8 +243,9 @@ registerExecutor('condition', async (node, context, options) => {
   // Default: assign risk level based on classifier output
   const classifyResult = context['n-classify']?.result || ''
   let risk_level = 'low'
-  if (['身体不适', '原料变质'].includes(classifyResult)) risk_level = 'high'
-  else if (['外源性异物', '饮品异味', '包装问题'].includes(classifyResult)) risk_level = 'medium'
+  if (['身体不适', '原料变质', 'OEM变质', 'OEM过期'].includes(classifyResult)) risk_level = 'high'
+  else if (['外源性异物', '饮品异味', '包装问题', '食安待确认'].includes(classifyResult)) risk_level = 'medium'
+  else if (['内源性异物', '产品有效期', '原料未熟'].includes(classifyResult)) risk_level = 'medium'
   
   return { matched_branch: risk_level, risk_level }
 })
@@ -235,12 +255,16 @@ registerExecutor('plugin', async (node, context, options) => {
   const pluginName = node.config?.plugin || ''
   const params = deepInterpolate(node.config?.params || {}, context)
   
-  // Map plugin names to MCP tool names
+  // Map plugin names to MCP/Skill tool names
   const pluginToMCP = {
-    'query_compensation': null, // No direct MCP equivalent
-    'query_history': 'queryOrderHistory',
-    'store_query': 'queryStoreList',
-    'query_order': 'queryOrderDetail',
+    'query_compensation': 'query_compensation',   // → Skill tool (food safety)
+    'query_history': 'query_history',             // → Skill tool (food safety)
+    'store_query': 'store_query',                 // → Skill tool (food safety)
+    'query_order': 'queryOrderDetail',             // → MCP tool
+    'queryStoreList': 'queryStoreList',            // → MCP tool
+    'queryOrderDetail': 'queryOrderDetail',        // → MCP tool
+    'createOrder': 'createOrder',                  // → MCP tool
+    'searchProduct': 'searchProduct',              // → MCP tool
   }
   
   const mcpTool = pluginToMCP[pluginName]

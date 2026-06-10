@@ -442,18 +442,18 @@ const KEYWORD_LIKELIHOOD = {
   '食安问题/外源性异物/纸类':            ['纸', '标签', '便签', '纸屑', '纸片'],
   '食安问题/外源性异物/金属':            ['金属', '铁丝', '刀片', '订书钉', '铁屑', '玻璃'],
   '食安问题/外源性异物/杯盖或小白塞':    ['杯盖', '小白塞', '封口塞', '盖子'],
-  '食安问题/外源性异物/不明物':          ['异物', '黑点', '不明物', '有东西'],
-  '食安问题/内源性异物/果核':            ['果核', '籽', '核'],
+  '食安问题/外源性异物/不明物':          ['异物', '黑点', '不明物', '有东西', '品控不行', '品控', '品质问题', '质量问题'],
+  '食安问题/内源性异物/果核':            ['果核', '籽', '核', '葡萄籽', '果籽', '颗粒物'],
   '食安问题/内源性异物/果皮':            ['果皮', '葡萄皮', '柠檬皮'],
-  '食安问题/内源性异物/茶渣':            ['茶渣', '茶叶', '茶梗'],
-  '食安问题/内源性异物/水果纤维':        ['水果纤维', '果肉丝', '纤维丝'],
+  '食安问题/内源性异物/茶渣':            ['茶渣', '茶叶', '茶梗', '茶叶梗'],
+  '食安问题/内源性异物/水果纤维':        ['水果纤维', '果肉丝', '纤维丝', '果肉块', '果肉残留'],
   '食安问题/内源性异物/果蔬杂质或其它原料': ['原料碎屑', '果蔬杂质'],
   '食安问题/产品有效期':                 ['生产日期', '保质期', '推荐赏味期', '有效期', '日期看不清'],
   '食安问题/OEM/OEM过期':               ['过期'],
   '食安问题/OEM/OEM变质':               ['发霉', '涨袋', '变质', '发酸', '腐坏'],
-  '食安问题/饮品异味':                   ['酸臭', '馊味', '异味', '味道不对', '怪味'],
-  '食安问题/原料变质':                   ['原料发霉', '腐烂', '明显坏了'],
-  '食安问题/原料未熟':                   ['夹生', '没熟', '未煮熟', '硬'],
+  '食安问题/饮品异味':                   ['酸臭', '馊味', '异味', '味道不对', '怪味', '味道怪', '难喝', '变味'],
+  '食安问题/原料变质':                   ['原料发霉', '腐烂', '明显坏了', '发霉', '变质', '馊了', '酸了'],
+  '食安问题/原料未熟':                   ['夹生', '没熟', '未煮熟', '硬', '没煮熟', '半生不熟'],
 }
 
 const OEM_CONTEXT_KEYWORDS = ['蛋糕', '瓶装', '包装', '袋装', '茶包', '糕点', '周边食品']
@@ -3005,13 +3005,13 @@ function _computeIntentDistribution(text, classification, session) {
 
   // 关键词信号增强
   const intentSignals = {
-    food_safety_foreign_object: ['头发', '虫子', '异物', '塑料', '铁丝', '异物', '苍蝇', '蟑螂', '指甲'],
-    food_safety_body_discomfort: ['拉肚子', '不舒服', '过敏', '恶心', '呕吐', '肚子疼', '身体不适', '医院'],
-    food_safety_internal_material: ['果肉', '茶叶', '沉淀', '原料', '残渣', '纤维'],
-    food_safety_bad_taste: ['味道怪', '口感不对', '难喝', '变味', '酸了', '过期'],
-    food_safety_packaging: ['撒了', '漏了', '包装破', '杯子裂', '封口'],
+    food_safety_foreign_object: ['头发', '虫子', '异物', '塑料', '铁丝', '异物', '苍蝇', '蟑螂', '指甲', '金属', '玻璃', '刀片', '线头', '烟头', '创可贴', '钢丝球'],
+    food_safety_body_discomfort: ['拉肚子', '不舒服', '过敏', '恶心', '呕吐', '肚子疼', '身体不适', '医院', '腹泻', '发烧', '头晕', '食物中毒', '腹痛'],
+    food_safety_internal_material: ['果肉', '茶叶', '沉淀', '原料', '残渣', '纤维', '籽', '果核', '果籽', '核', '葡萄籽', '颗粒物', '沉淀物', '果肉块', '果粒', '茶渣', '果皮'],
+    food_safety_bad_taste: ['味道怪', '口感不对', '难喝', '变味', '酸了', '过期', '品控', '品质不行', '质量差', '异味', '馊味', '酸臭', '怪味'],
+    food_safety_packaging: ['撒了', '漏了', '包装破', '杯子裂', '封口', '漏杯', '撒出来', '包装问题', '封口不严'],
     order_issue: ['订单', '催单', '退款', '配送', '没收到', '送错', '少送'],
-    general_complaint: ['投诉', '差评', '不满意', '态度差', '曝光'],
+    general_complaint: ['投诉', '差评', '不满意', '态度差', '曝光', '品控不行', '质量差'],
     consultation: ['请问', '想问', '咨询', '怎么', '如何', '能不能'],
   }
 
@@ -5505,6 +5505,109 @@ export function detectRewardHacking(reply, episodicMemory = null) {
 //   提供 LLM 增强的回复生成能力。当 API 未配置时，自动降级到模板回复。
 // ═══════════════════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════════════════
+// SECTION 12 — LLM Function Calling Loop (ReAct 架构)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * 执行 LLM Function Calling 循环 (ReAct 架构)
+ * LLM 生成工具调用 → 执行工具 → 结果回传 → LLM 生成最终回复
+ *
+ * @param {Object} llmClient - LLM 客户端模块
+ * @param {Object} mcpIntegration - MCP 集成模块
+ * @param {Array} messages - 初始消息列表
+ * @param {Array} tools - OpenAI function calling 格式的工具定义
+ * @param {Object} llmOptions - LLM 调用选项
+ * @param {Array} conversationHistory - 对话历史（用于结果回传）
+ * @param {string} userText - 用户原始输入
+ * @returns {Promise<Object>} { reply, source, usage, tool_calls_made }
+ */
+async function _executeToolCallingLoop(llmClient, mcpIntegration, messages, tools, llmOptions, conversationHistory, userText) {
+  const MAX_TOOL_ROUNDS = 5
+  const allToolCalls = []
+
+  for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
+    const result = await llmClient.chatCompletion(messages, {
+      ...llmOptions,
+      tools,
+      toolChoice: 'auto',
+    })
+
+    // LLM 返回了工具调用
+    if (result.tool_calls && result.tool_calls.length > 0) {
+      // 把 assistant 的 tool_calls 消息加入上下文
+      messages.push({
+        role: 'assistant',
+        content: result.content || null,
+        tool_calls: result.tool_calls,
+      })
+
+      // 逐个执行工具调用，把结果加入上下文
+      for (const toolCall of result.tool_calls) {
+        const toolName = toolCall.function?.name || toolCall.name
+        let toolArgs = {}
+        try {
+          toolArgs = JSON.parse(toolCall.function?.arguments || '{}')
+        } catch {
+          toolArgs = {}
+        }
+
+        let toolResultText = ''
+        try {
+          const toolResult = await mcpIntegration.executeMCPTool(toolName, toolArgs)
+          toolResultText = mcpIntegration.formatToolResult(toolName, toolResult) || JSON.stringify(toolResult)
+        } catch (err) {
+          toolResultText = `工具调用失败: ${err.message}`
+        }
+
+        allToolCalls.push({ tool: toolName, args: toolArgs, result: toolResultText })
+
+        messages.push({
+          role: 'tool',
+          tool_call_id: toolCall.id,
+          content: toolResultText,
+        })
+      }
+
+      // 继续下一轮循环，让 LLM 看到工具结果后生成回复
+      continue
+    }
+
+    // LLM 没有调用工具，直接返回文本 → 这是最终回复
+    const reply = (result.content || '').trim()
+
+    // 自动修正禁用词
+    let cleanedReply = reply
+    if (/亲亲|亲(?!爱的|情)|宝贝/.test(cleanedReply)) {
+      cleanedReply = cleanedReply.replace(/亲亲/g, '您').replace(/亲(?!爱的|情)/g, '').replace(/宝贝/g, '您')
+    }
+
+    return {
+      reply: cleanedReply || '抱歉，阿喜暂时无法处理这个请求，请稍后再试。',
+      source: 'llm_with_tools',
+      model: result.model,
+      usage: result.usage,
+      tool_calls_made: allToolCalls,
+      reasoning_content: result.reasoning_content || null,
+    }
+  }
+
+  // 达到最大轮次，强制生成文本回复（不带 tools）
+  const fallbackMessages = messages.filter(m => m.role !== 'tool' || m.content)
+  const finalResult = await llmClient.chatCompletion(fallbackMessages, {
+    ...llmOptions,
+    // 不再传 tools，强制 LLM 输出文本
+  })
+
+  return {
+    reply: (finalResult.content || '抱歉，处理时间较长，请稍后再试。').trim(),
+    source: 'llm_with_tools_max_rounds',
+    model: finalResult.model,
+    usage: finalResult.usage,
+    tool_calls_made: allToolCalls,
+  }
+}
+
 /**
  * LLM 增强的回复生成
  * 当 LLM API 已配置时使用真实 LLM 生成回复，否则降级到模板
@@ -5518,6 +5621,8 @@ export function detectRewardHacking(reply, episodicMemory = null) {
  * @param {Object} params.decision - 决策层输出
  * @param {Object} params.actionResult - 执行层输出
  * @param {Array} params.conversationHistory - 对话历史
+ * @param {string} params.intent - 意图路由: 'ordering' | 'general_knowledge' | null
+ * @param {Array} params.tools - MCP 工具定义 (OpenAI function calling)
  * @returns {Promise<Object>} { reply, source, usage, prompt_tokens }
  */
 export async function generateLLMEnhancedReply(params) {
@@ -5529,13 +5634,16 @@ export async function generateLLMEnhancedReply(params) {
     actionResult = null,
     conversationHistory = [],
     memoryContext = '',  // 对话记忆上下文
+    intent = null,       // 意图路由: 'ordering' | 'general_knowledge' | null(食安默认)
+    tools = null,        // MCP/Skill 工具定义 (OpenAI function calling 格式)
   } = params
 
   // 动态导入 (避免循环依赖 + 按需加载)
-  let llmClient, promptBuilder
+  let llmClient, promptBuilder, mcpIntegration
   try {
     llmClient = await import('./llm-client.js')
     promptBuilder = await import('./prompt-builder.js')
+    mcpIntegration = await import('./mcp-prompt-integration.js')
   } catch (err) {
     return {
       reply: null,
@@ -5554,17 +5662,54 @@ export async function generateLLMEnhancedReply(params) {
   }
 
   try {
-    // 1. 构建系统提示 (CAMEL + ICL + 工作流 + 记忆上下文)
-    const systemPrompt = promptBuilder.buildSystemPrompt(perception, session, {
-      includeICL: true,
-      maxICLExamples: 3,
-      includeCompensation: true,
-      includeWorkflow: true,
-      memoryContext,
-    })
+    // ── 根据意图构建不同的系统提示 ──
+    let systemPrompt, messages
 
-    // 2. 构建消息列表（支持增强历史，含摘要 system 消息）
-    const messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
+    if (intent === 'ordering') {
+      // 点单意图: 使用点单专用提示词 + MCP工具定义
+      const orderingSection = mcpIntegration.getOrderingPromptSection()
+      const memoryHint = memoryContext ? `\n\n## 对话记忆\n${memoryContext}` : ''
+      systemPrompt = `你是阿喜，喜茶智能客服助手。你可以帮助用户完成自助点单。
+
+${orderingSection}${memoryHint}
+
+## 沟通规范
+- 自称"阿喜"，称呼顾客"您"
+- 语气轻松活泼，符合喜茶年轻品牌调性
+- 推荐商品时简要描述口味特点
+- 下单前一定要让用户确认商品和价格
+- 如果用户问非点单问题，也可以友好回答`
+
+      messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
+
+      // 如果有工具定义，注入 tools 进入 ReAct 循环
+      if (tools && tools.length > 0) {
+        return _executeToolCallingLoop(llmClient, mcpIntegration, messages, tools, {
+          temperature: 0.3, maxTokens: 1024,
+        }, conversationHistory, userText)
+      }
+      // 无工具可用时仍用点单提示词做对话式回复（不降级到食安流程）
+    } else if (intent === 'general_knowledge') {
+      // 通用知识意图: 轻量提示词，不走食安流程
+      const memoryHint = memoryContext ? `\n对话记忆：${memoryContext}` : ''
+      systemPrompt = `你是阿喜，喜茶智能客服助手。${memoryHint}
+- 自称"阿喜"，称呼顾客"您"
+- 对于喜茶业务以外的问题，友好、简洁地回答即可
+- 如果问题涉及喜茶产品、门店、活动，可以热情推荐
+- 语气亲切自然，不要太正式`
+
+      messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
+    } else {
+      // 默认: 食安客服流程 (原有逻辑)
+      systemPrompt = promptBuilder.buildSystemPrompt(perception, session, {
+        includeICL: true,
+        maxICLExamples: 3,
+        includeCompensation: true,
+        includeWorkflow: true,
+        memoryContext,
+      })
+      messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
+    }
 
     // 3. 调用 LLM API
     const result = await llmClient.chatCompletion(messages, {
