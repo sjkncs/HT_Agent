@@ -508,13 +508,58 @@ function ok(data) {
   return { code: 0, msg: 'success', data, success: true }
 }
 
-function handleQueryStoreList({ storeName, longitude, latitude }) {
+function handleQueryStoreList({ address, storeName, longitude, latitude }) {
   let results = [...STORES]
+
+  // 地址关键词匹配（优先）
+  if (address) {
+    const keywords = _extractAddressKeywords(address)
+    if (keywords.length > 0) {
+      const scored = results.map(s => {
+        let score = 0
+        const text = (s.address || '') + (s.storeName || '')
+        for (const kw of keywords) {
+          if (text.includes(kw)) score += 1
+        }
+        return { ...s, _score: score }
+      })
+      scored.sort((a, b) => {
+        if (b._score !== a._score) return b._score - a._score
+        return a.distance - b.distance
+      })
+      // 取有匹配的门店，如无匹配则取全部（兜底）
+      const matched = scored.filter(s => s._score > 0)
+      results = (matched.length > 0 ? matched : scored).slice(0, 5)
+      results = results.map(({ _score, ...rest }) => rest)
+    }
+  }
+
+  // 门店名称筛选
   if (storeName) {
     results = results.filter(s => s.storeName.includes(storeName))
   }
-  results.sort((a, b) => a.distance - b.distance)
+
+  // 无地址无店名时按距离排序
+  if (!address && !storeName) {
+    results.sort((a, b) => a.distance - b.distance)
+  }
+
   return ok(results)
+}
+
+/**
+ * 从地址文本提取关键词
+ */
+function _extractAddressKeywords(address) {
+  const noise = /[市区省县镇街道号栋座楼层室路大道大街交叉口交汇处]/g
+  const cleaned = address.replace(noise, ' ').replace(/\s+/g, ' ').trim()
+  const keywords = []
+  const parts = cleaned.split(/\s+/).filter(p => p.length >= 2)
+  for (const part of parts) {
+    keywords.push(part)
+    if (part.length > 3) keywords.push(part.slice(0, 3))
+  }
+  return [...new Set(keywords)]
 }
 
 function handleSearchProduct({ storeId, query }) {

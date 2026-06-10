@@ -152,10 +152,10 @@ async function parseSSEResponse(resp) {
 
 /**
  * 1. 查询门店列表
- * @param {Object} params - { longitude: number, latitude: number, storeName?: string }
+ * @param {Object} params - { address?: string, longitude?: number, latitude?: number, storeName?: string }
  */
-export async function queryStoreList({ longitude, latitude, storeName }) {
-  return callMCPTool('queryStoreList', { longitude, latitude, storeName: storeName || '' })
+export async function queryStoreList({ address, longitude, latitude, storeName }) {
+  return callMCPTool('queryStoreList', { address: address || '', longitude, latitude, storeName: storeName || '' })
 }
 
 /**
@@ -274,15 +274,16 @@ export function getMCPToolDefinitions() {
       type: 'function',
       function: {
         name: 'queryStoreList',
-        description: '查询附近喜茶门店列表，支持按名称搜索和按距离排序',
+        description: '查询附近喜茶门店列表。支持文字地址、门店名称搜索。用户给出地址后直接传入 address 参数，系统自动解析坐标。',
         parameters: {
           type: 'object',
           properties: {
-            longitude: { type: 'number', description: '用户经度' },
-            latitude: { type: 'number', description: '用户纬度' },
-            storeName: { type: 'string', description: '门店名称关键词（选填）' },
+            address: { type: 'string', description: '用户提供的文字地址（如"深圳前海鸿荣源中心A座"），系统自动解析为坐标并搜索附近门店' },
+            longitude: { type: 'number', description: '用户经度（如果已知坐标可直接传入，优先级高于 address）' },
+            latitude: { type: 'number', description: '用户纬度（如果已知坐标可直接传入，优先级高于 address）' },
+            storeName: { type: 'string', description: '门店名称关键词（选填，可进一步筛选）' },
           },
-          required: ['longitude', 'latitude'],
+          required: [],
         },
       },
     },

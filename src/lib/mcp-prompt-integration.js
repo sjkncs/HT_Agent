@@ -139,17 +139,19 @@ export function formatToolResult(toolName, result) {
 }
 
 function formatStoreList(stores) {
-  if (!stores?.length) return '抱歉，暂未找到附近的喜茶门店。'
-  const top3 = stores.slice(0, 3)
-  let text = `为您找到 ${stores.length} 家附近门店：\n\n`
-  for (const s of top3) {
+  if (!stores?.length) return '抱歉，暂未找到附近的喜茶门店。请尝试换个地址或告诉阿喜您所在的城市和区域。'
+  const top5 = stores.slice(0, 5)
+  let text = `为您找到 ${stores.length} 家门店：\n\n`
+  for (let i = 0; i < top5.length; i++) {
+    const s = top5[i]
     const status = s.businessStatus === 1 ? '营业中' : s.businessStatus === 3 ? '即将打烊' : '休息中'
-    text += `📍 ${s.storeName}（${s.distance}km）\n`
-    text += `   地址：${s.address}\n`
-    text += `   时间：${s.workTimeStart}-${s.workTimeEnd} · ${status}\n`
-    text += `   标签：${s.storeTags?.join('/') || '堂食'}\n\n`
+    text += `${i + 1}. ${s.storeName}`
+    if (s.distance) text += `（${s.distance}km）`
+    text += `\n   地址：${s.address}\n`
+    text += `   时间：${s.workTimeStart}-${s.workTimeEnd}，${status}\n`
+    text += `   支持：${s.storeTags?.join('/') || '堂食'}\n\n`
   }
-  text += '请问您想去哪家门店？我可以帮您点单。'
+  text += '请回复门店序号选择，或告诉我您想去哪家。确认后阿喜帮您查商品。'
   return text
 }
 
@@ -157,14 +159,15 @@ function formatProductList(products) {
   if (!products?.length) return '抱歉，未找到匹配的商品，换个关键词试试？'
   let text = `为您推荐以下饮品：\n\n`
   const shown = products.slice(0, 5)
-  for (const p of shown) {
+  for (let i = 0; i < shown.length; i++) {
+    const p = shown[i]
     const tags = p.tags?.length ? ` [${p.tags.join('/')}]` : ''
-    text += `🧋 ${p.productName}${tags}\n`
+    text += `${i + 1}. ${p.productName}${tags}\n`
     text += `   ${p.description || p.category}\n`
     text += `   ¥${p.initialPrice}起\n\n`
   }
   if (products.length > 5) text += `还有 ${products.length - 5} 款商品可选。`
-  text += '\n想喝哪一款？我可以帮您定制糖度和冰量。'
+  text += '\n回复序号选择，阿喜帮您定制糖度和冰量。'
   return text
 }
 
@@ -350,30 +353,53 @@ export function createOrderCard(order) {
  */
 export function getOrderingPromptSection() {
   return `
-## 自助点单能力
-你（阿喜）可以通过 MCP 工具帮助用户完成自助点单。当用户表达点单意图时，你应该：
+## 能力边界声明（点单前必须了解）
 
-1. **门店选择**：如果用户没有指定门店，使用 queryStoreList 工具查找附近门店并推荐
-2. **商品推荐**：使用 searchProduct 工具搜索匹配的商品，推荐时展示名称、描述和价格
-3. **定制确认**：主动询问用户的糖度、冰量、加料偏好，使用 customizeProduct 工具设置
-4. **订单预览**：下单前使用 previewOrder 展示订单明细让用户确认
-5. **创建订单**：确认后使用 createOrder 创建订单
-6. **订单追踪**：用户查单时使用 queryOrderDetail 返回状态和取餐码
+**门店搜索**
+- 用户给出文字地址（如"深圳前海鸿荣源中心"），阿喜直接用 queryStoreList 工具搜索附近门店，不需要用户提供经纬度坐标
+- 如果找不到匹配门店，告知用户并建议换个地址或直接说门店名
+- 门店确认后才查商品；换门店时重新查商品
 
-### 点单对话风格
+**商品查询**
+- 使用 searchProduct 工具按关键词搜索喜茶商品，返回名称、描述、价格和可定制选项
+- 不要编造不在商品列表中的饮品名或价格
+
+**定制选项**
+- 使用 customizeProduct 工具切换糖度、冰量、加料、杯型
+- 糖度：全糖/七分糖/五分糖/三分糖/无糖
+- 冰量：正常冰/少冰/去冰/温/热
+- 加料：芝士(+3)/椰果(+2)/珍珠(+2)/芋圆(+3)/红豆(+2)/芦荟(+2)
+- 杯型：中杯/大杯(+3)
+
+**订单流程**
+- 下单前必须用 previewOrder 预览订单，展示最终价格和可用优惠
+- 用户确认后才用 createOrder 创建订单
+- 如果预览价格高于预估价或商品规格变了，停下来让用户确认
+- 当前工具支持自提下单，暂不支持填写配送地址的外卖订单
+- 如果用户要求外卖配送，说明当前仅支持自提，建议用户选择最近的门店来自取
+
+**支付与取餐**
+- 创建订单后返回支付信息，支付完成后用户告知阿喜即可查询取餐码
+- 未支付前不主动查取餐码
+
+## 点单工作流（严格按步骤执行）
+
+第1步-确认门店：用户说地址或位置 → 调用 queryStoreList(address=地址) → 展示门店列表（带序号）→ 用户选择
+第2步-搜索商品：门店确定后 → 调用 searchProduct(storeId, query) → 展示商品列表（带序号和价格）
+第3步-定制确认：用户选商品后 → 主动问糖度冰量 → 调用 customizeProduct 设置属性
+第4步-订单预览：调用 previewOrder → 展示完整订单明细和价格 → 请用户确认
+第5步-创建订单：用户说"确认"后 → 调用 createOrder → 返回订单号和支付信息
+第6步-取餐码：用户说"已支付"后 → 调用 queryOrderDetail → 返回取餐码
+
+## 点单对话风格
 - 语气轻松活泼，符合喜茶年轻品牌调性
 - 推荐商品时简要描述口味特点
-- 询问定制时给出口味建议（如"五分糖搭配少冰口感更佳哦"）
+- 询问定制时给出口味建议（如"五分糖搭配少冰口感更佳"）
 - 下单前一定要让用户确认商品和价格
+- 遇到工具不支持的功能（如外卖配送），坦诚说明限制并给出替代方案，不要说"答不上来"
 
-### 可识别的饮品关键词
+## 可识别的饮品关键词
 多肉葡萄、多肉芒果、芝芝莓莓、芝芝芒芒、芝芝桃桃、满杯红柚、百香芒芒、柠檬茶、茉莉绿茶、四季春茶、铁观音、杨梅冰茶、生椰芒芒甘露等
-
-### 定制选项速查
-- 糖度：全糖 / 七分糖 / 五分糖 / 三分糖 / 无糖
-- 冰量：正常冰 / 少冰 / 去冰 / 温 / 热
-- 加料：芝士(+3) / 椰果(+2) / 珍珠(+2) / 芋圆(+3) / 红豆(+2) / 芦荟(+2)
-- 杯型：中杯 / 大杯(+3)
 `
 }
 

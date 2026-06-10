@@ -5557,7 +5557,8 @@ async function _executeToolCallingLoop(llmClient, mcpIntegration, messages, tool
           const toolResult = await mcpIntegration.executeMCPTool(toolName, toolArgs)
           toolResultText = mcpIntegration.formatToolResult(toolName, toolResult) || JSON.stringify(toolResult)
         } catch (err) {
-          toolResultText = `工具调用失败: ${err.message}`
+          // 给 LLM 提供可操作的错误信息，而不是笼统的"失败"
+          toolResultText = `工具 ${toolName} 调用失败：${err.message}。请向用户说明当前操作暂时无法完成，并给出替代建议（如换个关键词、手动选择门店等），不要说"答不上来"。`
         }
 
         allToolCalls.push({ tool: toolName, args: toolArgs, result: toolResultText })
@@ -5666,20 +5667,19 @@ export async function generateLLMEnhancedReply(params) {
     let systemPrompt, messages
 
     if (intent === 'ordering') {
-      // 点单意图: 使用点单专用提示词 + MCP工具定义
+      // 点单意图: 能力感知型 Agent — 使用带能力边界声明的点单提示词 + MCP工具定义
       const orderingSection = mcpIntegration.getOrderingPromptSection()
       const memoryHint = memoryContext ? `\n\n## 对话记忆\n${memoryContext}` : ''
-      systemPrompt = `你是阿喜，喜茶智能客服助手。你可以帮助用户完成自助点单。
+      systemPrompt = `你是阿喜，喜茶智能客服助手，专注于帮用户完成自助点单。
 
 ${orderingSection}${memoryHint}
 
 ## 沟通规范
 - 自称"阿喜"，称呼顾客"您"
 - 语气轻松活泼，符合喜茶年轻品牌调性
-- 推荐商品时简要描述口味特点
-- 下单前一定要让用户确认商品和价格
 - 如果用户问非点单问题，也可以友好回答
-- 严禁使用任何emoji表情图案，回复中只能使用纯文字。如果需要图标或图形，只能使用SVG`
+- 严禁使用任何emoji表情图案，回复中只能使用纯文字。如果需要图标或图形，只能使用SVG
+- 遇到工具不支持的功能时，坦诚说明限制并给出替代方案，绝不说"答不上来"`
 
       messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
 
