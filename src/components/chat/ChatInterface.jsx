@@ -1084,8 +1084,8 @@ function MessageBubble({ message, isStreaming, ...qoderProps }) {
       )}
       data-component="message-bubble"
      data-qoder-id="qel-message-bubble-a1bb5c90" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-message-bubble-a1bb5c90&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;message-bubble&quot;,&quot;loc&quot;:{&quot;line&quot;:1077,&quot;column&quot;:5}}">
-      <div className={cn('max-w-[85%]', isUser ? 'items-end' : 'items-start')} data-qoder-id="qel-div-280c4532" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-280c4532&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1084,&quot;column&quot;:7}}">
-        <div className={isUser ? 'bubble-user' : 'bubble-ai'} data-qoder-id="qel-div-270c439f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-270c439f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1085,&quot;column&quot;:9}}">
+      <div className={cn('max-w-[85%] flex flex-col', isUser ? 'items-end' : 'items-start')} data-qoder-id="qel-div-280c4532" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-280c4532&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1084,&quot;column&quot;:7}}">
+        <div className={cn(isUser ? 'bubble-user' : 'bubble-ai', 'text-sm leading-relaxed')} data-qoder-id="qel-div-270c439f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-270c439f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1085,&quot;column&quot;:9}}">
           {isStreaming ? (
             <>
               {renderContent(message.content)}
@@ -1095,7 +1095,7 @@ function MessageBubble({ message, isStreaming, ...qoderProps }) {
                data-qoder-id="qel-ml-0-5-a2ba8dbe" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-ml-0-5-a2ba8dbe&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;ml-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:1089,&quot;column&quot;:15}}"/>
             </>
           ) : (
-            <div className="text-sm leading-relaxed" data-qoder-id="qel-text-sm-a381efb4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-a381efb4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:1095,&quot;column&quot;:13}}">
+            <div data-qoder-id="qel-text-sm-a381efb4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-a381efb4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:1095,&quot;column&quot;:13}}">
               {renderContent(message.content)}
             </div>
           )}
@@ -1600,16 +1600,16 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
 
   return (
     <div
-      className={["px-4 py-3", qoderProps?.className].filter(Boolean).join(" ")}
+      className={["px-4 py-2", qoderProps?.className].filter(Boolean).join(" ")}
       style={{ ...({
         borderTop: '1px solid var(--cursor-border-10)',
-        background: 'var(--cursor-surface-400)',
+        background: 'var(--cursor-surface-200)',
       }), ...(qoderProps?.style) }}
       data-component="chat-input-bar"
      data-qoder-id={qoderProps?.["data-qoder-id"]} data-qoder-source={qoderProps?.["data-qoder-source"]}>
       <div className="mx-auto max-w-[820px]" data-qoder-id="qel-mx-auto-1353ed22" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mx-auto-1353ed22&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;mx-auto&quot;,&quot;loc&quot;:{&quot;line&quot;:1607,&quot;column&quot;:7}}">
         {/* Quick Action Chips — compact, centered */}
-        <div className="flex items-center justify-center gap-1.5 mb-2 flex-wrap" data-qoder-id="qel-flex-4ada3e97" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-4ada3e97&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:1609,&quot;column&quot;:9}}">
+        <div className="flex items-center justify-center gap-1.5 mb-1.5 flex-wrap" data-qoder-id="qel-flex-4ada3e97" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-4ada3e97&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:1609,&quot;column&quot;:9}}">
           {QUICK_ACTIONS.map((action, i) => {
             const { Svg } = action
             return (

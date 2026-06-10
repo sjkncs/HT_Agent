@@ -217,7 +217,7 @@
 @layer components {
   /* Chat bubbles — Cursor warm style */
   .bubble-user {
-    @apply rounded-xl px-4 py-2.5;
+    @apply rounded-2xl px-4 py-2.5;
     background: var(--cursor-surface-300);
     color: var(--cursor-ink);
     border: 1px solid var(--cursor-border-10);
@@ -225,9 +225,10 @@
   }
 
   .bubble-ai {
-    @apply px-4 py-2.5;
-    background: transparent;
+    @apply rounded-2xl px-4 py-3;
+    background: var(--cursor-surface-100);
     color: var(--cursor-ink);
+    border: 1px solid var(--cursor-border-10);
     max-width: min(85%, 560px);
   }
 
@@ -296,9 +297,9 @@
 
   /* Input bar */
   .chat-input-bar {
-    @apply flex items-center gap-3 rounded-xl border px-4 py-3;
+    @apply flex items-center gap-2 rounded-xl border px-3 py-2.5;
     background: var(--cursor-surface-100);
-    border-color: var(--cursor-border-10);
+    border-color: var(--cursor-border-20);
     transition: border-color var(--duration-fast) var(--ease-out),
                 box-shadow var(--duration-fast) var(--ease-out);
   }
@@ -639,10 +640,10 @@
 
   /* System message in chat */
   .system-message {
-    @apply rounded-lg px-3 py-2 mx-auto max-w-lg text-center text-xs;
+    @apply rounded-lg px-3 py-1.5 mx-auto max-w-md text-center text-xs;
     color: var(--cursor-border-55);
     background: var(--cursor-surface-300);
-    border: 1px dashed var(--cursor-border-10);
+    border: 1px solid var(--cursor-border-10);
   }
 
   /* Handoff record */
