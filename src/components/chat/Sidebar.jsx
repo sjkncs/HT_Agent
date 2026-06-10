@@ -122,7 +122,7 @@ function Highlight({ text, query, maxLen = 60 }) {
       <mark style={{
         background: 'rgba(245, 78, 0, 0.18)', color: 'var(--cursor-orange)',
         borderRadius: '2px', padding: '0 1px',
-      }}>{match}</mark>
+      }} data-qoder-id="qel-mark-8ed4f789" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mark-8ed4f789&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Highlight&quot;,&quot;elementRole&quot;:&quot;mark&quot;,&quot;loc&quot;:{&quot;line&quot;:122,&quot;column&quot;:7}}">{match}</mark>
       {after.length > 30 ? after.slice(0, 30) + '...' : after}
     </>
   )
@@ -274,9 +274,9 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
         </div>
 
         {/* Search */}
-        <div className="px-3 pb-2" data-component="sidebar-search">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2" style={{ color: 'var(--cursor-border-55)' }} />
+        <div className="px-3 pb-2" data-component="sidebar-search" data-qoder-id="qel-sidebar-search-99bc15c9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-sidebar-search-99bc15c9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;sidebar-search&quot;,&quot;loc&quot;:{&quot;line&quot;:277,&quot;column&quot;:9}}">
+          <div className="relative" data-qoder-id="qel-relative-7b9caa8b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-relative-7b9caa8b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;relative&quot;,&quot;loc&quot;:{&quot;line&quot;:278,&quot;column&quot;:11}}">
+            <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2" style={{ color: 'var(--cursor-border-55)' }}  data-qoder-id="qel-absolute-75658f02" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-absolute-75658f02&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;absolute&quot;,&quot;loc&quot;:{&quot;line&quot;:279,&quot;column&quot;:13}}"/>
             <input
               type="text"
               placeholder={viewMode === 'sessions'
@@ -299,7 +299,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                 e.target.style.borderColor = 'var(--cursor-border-10)'
                 e.target.style.boxShadow = 'none'
               }}
-            />
+             data-qoder-id="qel-w-full-91eefcb5" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-w-full-91eefcb5&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;w-full&quot;,&quot;loc&quot;:{&quot;line&quot;:280,&quot;column&quot;:13}}"/>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
@@ -307,15 +307,15 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                 style={{ color: 'var(--cursor-border-55)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--cursor-ink)'; e.currentTarget.style.background = 'var(--cursor-surface-300)' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--cursor-border-55)'; e.currentTarget.style.background = 'transparent' }}
-              >
-                <X className="h-3.5 w-3.5" />
+               data-qoder-id="qel-absolute-16c8ec94" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-absolute-16c8ec94&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;absolute&quot;,&quot;loc&quot;:{&quot;line&quot;:304,&quot;column&quot;:15}}">
+                <X className="h-3.5 w-3.5"  data-qoder-id="qel-h-3-5-e47c5b3a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-5-e47c5b3a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-3-5&quot;,&quot;loc&quot;:{&quot;line&quot;:311,&quot;column&quot;:17}}"/>
               </button>
             )}
           </div>
           {/* 搜索结果反馈 */}
           {searchQuery && (
-            <div className="mt-1.5 flex items-center justify-between px-0.5">
-              <span className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>
+            <div className="mt-1.5 flex items-center justify-between px-0.5" data-qoder-id="qel-mt-1-5-79468a35" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-1-5-79468a35&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:317,&quot;column&quot;:13}}">
+              <span className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-10px-89fa3463" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-89fa3463&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:318,&quot;column&quot;:15}}">
                 {viewMode === 'conversations'
                   ? `${Object.values(filtered).flat().length} 条匹配`
                   : `${filteredSessions.length} 条匹配`}
@@ -324,7 +324,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                 onClick={() => setSearchQuery('')}
                 className="text-[10px] transition-colors"
                 style={{ color: 'var(--cursor-orange)', opacity: 0.8 }}
-              >
+               data-qoder-id="qel-text-10px-435c216f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-435c216f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:323,&quot;column&quot;:15}}">
                 清除搜索
               </button>
             </div>
@@ -333,9 +333,9 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
 
         {/* Filters */}
         {viewMode === 'conversations' ? (
-          <div className="px-3 pb-3 space-y-2" data-component="sidebar-filters">
+          <div className="px-3 pb-3 space-y-2" data-component="sidebar-filters" data-qoder-id="qel-sidebar-filters-53ea0f8e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-sidebar-filters-53ea0f8e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;sidebar-filters&quot;,&quot;loc&quot;:{&quot;line&quot;:336,&quot;column&quot;:11}}">
             {/* 风险等级筛选 */}
-            <div className="flex flex-wrap gap-1" data-component="risk-filters">
+            <div className="flex flex-wrap gap-1" data-component="risk-filters" data-qoder-id="qel-risk-filters-7c1a90a8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-risk-filters-7c1a90a8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;risk-filters&quot;,&quot;loc&quot;:{&quot;line&quot;:338,&quot;column&quot;:13}}">
               {riskCounts.map((r) => (
                 <button
                   key={r.key || 'all-risk'}
@@ -347,15 +347,15 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                     color: riskFilter === r.key ? 'var(--cursor-ink)' : 'var(--cursor-border-55)',
                     border: `1px solid ${riskFilter === r.key ? r.dotColor : 'transparent'}`,
                   }}
-                >
-                  <div className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: r.dotColor }} />
+                 data-qoder-id="qel-flex-da37e64a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-da37e64a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:340,&quot;column&quot;:17}}">
+                  <div className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: r.dotColor }}  data-qoder-id="qel-h-1-5-4423d52b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-4423d52b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:351,&quot;column&quot;:19}}"/>
                   {r.label}
-                  <span style={{ opacity: 0.6, fontSize: '9px' }}>{r.count}</span>
+                  <span style={{ opacity: 0.6, fontSize: '9px' }} data-qoder-id="qel-span-2e3573ad" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-2e3573ad&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:353,&quot;column&quot;:19}}">{r.count}</span>
                 </button>
               ))}
             </div>
             {/* 会话分类筛选 */}
-            <div className="flex flex-wrap gap-1" data-component="category-filters">
+            <div className="flex flex-wrap gap-1" data-component="category-filters" data-qoder-id="qel-category-filters-bf0c1039" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-category-filters-bf0c1039&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;category-filters&quot;,&quot;loc&quot;:{&quot;line&quot;:358,&quot;column&quot;:13}}">
               {categoryCounts.map((cat) => {
                 const IconComp = CATEGORY_ICON_MAP[cat.key]
                 const isActive = filterLabel === cat.key
@@ -369,10 +369,10 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                       background: isActive ? 'var(--cursor-surface-500)' : 'var(--cursor-surface-300)',
                       color: isActive ? 'var(--cursor-orange)' : 'var(--cursor-border-55)',
                     }}
-                  >
-                    {IconComp && <IconComp className="h-2.5 w-2.5" />}
+                   data-qoder-id="qel-flex-d637dffe" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-d637dffe&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:363,&quot;column&quot;:19}}">
+                    {IconComp && <IconComp className="h-2.5 w-2.5"  data-qoder-id="qel-h-2-5-5e0d7597" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-5e0d7597&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:373,&quot;column&quot;:34}}"/>}
                     {cat.label}
-                    <span style={{ opacity: 0.6, fontSize: '9px' }}>{cat.count}</span>
+                    <span style={{ opacity: 0.6, fontSize: '9px' }} data-qoder-id="qel-span-223560c9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-223560c9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:375,&quot;column&quot;:21}}">{cat.count}</span>
                   </button>
                 )
               })}
@@ -380,17 +380,17 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
           </div>
         ) : (
           /* 七鱼 session quick stats */
-          <div className="flex items-center gap-2 px-3 pb-3">
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-success)' }}>
-              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#1f8a65' }} />
+          <div className="flex items-center gap-2 px-3 pb-3" data-qoder-id="qel-flex-849e26ad" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-849e26ad&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:383,&quot;column&quot;:11}}">
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-success)' }} data-qoder-id="qel-flex-4fbefc65" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-4fbefc65&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:384,&quot;column&quot;:13}}">
+              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#1f8a65' }}  data-qoder-id="qel-h-1-5-40219048" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-40219048&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:385,&quot;column&quot;:15}}"/>
               {activeSessions} 对话中
             </span>
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-gold)' }}>
-              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#c08532' }} />
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-gold)' }} data-qoder-id="qel-flex-4dbef93f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-4dbef93f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:388,&quot;column&quot;:13}}">
+              <div className="h-1.5 w-1.5 rounded-full" style={{ background: '#c08532' }}  data-qoder-id="qel-h-1-5-462199ba" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-462199ba&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:389,&quot;column&quot;:15}}"/>
               {queueSessions} 排队
             </span>
-            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-error)' }}>
-              <AlertTriangle className="h-2.5 w-2.5" />
+            <span className="flex items-center gap-1 text-[10px]" style={{ color: 'var(--cursor-error)' }} data-qoder-id="qel-flex-4bbef619" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-4bbef619&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:392,&quot;column&quot;:13}}">
+              <AlertTriangle className="h-2.5 w-2.5"  data-qoder-id="qel-h-2-5-b31a767c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-b31a767c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:393,&quot;column&quot;:15}}"/>
               {highRiskSessions} 高风险
             </span>
           </div>
@@ -403,7 +403,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
               {!hasAnyResults && (
                 <div className="flex flex-col items-center justify-center py-12 text-center" data-qoder-id="qel-flex-fb9b106b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-fb9b106b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:258,&quot;column&quot;:17}}">
                   <MessageSquare className="mb-3 h-8 w-8" style={{ color: 'var(--cursor-border-20)' }}  data-qoder-id="qel-mb-3-0b108bad" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mb-3-0b108bad&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mb-3&quot;,&quot;loc&quot;:{&quot;line&quot;:259,&quot;column&quot;:19}}"/>
-                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }}>
+                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-sm-1d54f2aa" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-1d54f2aa&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:406,&quot;column&quot;:19}}">
                     {searchQuery
                       ? `未找到包含"${searchQuery}"的对话`
                       : filterLabel || riskFilter
@@ -441,8 +441,8 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                 className="h-2 w-2 rounded-full flex-shrink-0"
                                 style={RISK_DOT_STYLE[conv.riskLevel]}
                                data-qoder-id="qel-h-2-57d945c8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-57d945c8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2&quot;,&quot;loc&quot;:{&quot;line&quot;:290,&quot;column&quot;:31}}"/>
-                              <span className="truncate text-sm font-medium" style={{ color: 'var(--cursor-ink)' }}>
-                                {searchQuery ? <Highlight text={conv.title} query={searchQuery} maxLen={40} /> : conv.title}
+                              <span className="truncate text-sm font-medium" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-truncate-31f592f9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-truncate-31f592f9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;truncate&quot;,&quot;loc&quot;:{&quot;line&quot;:444,&quot;column&quot;:31}}">
+                                {searchQuery ? <Highlight text={conv.title} query={searchQuery} maxLen={40}  data-qoder-id="qel-highlight-40d93271" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-highlight-40d93271&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;highlight&quot;,&quot;loc&quot;:{&quot;line&quot;:445,&quot;column&quot;:48}}"/> : conv.title}
                               </span>
                               {/* Session state indicator */}
                               {conv.session_state && (
@@ -452,8 +452,8 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                  data-qoder-id="qel-h-1-5-45219827" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-45219827&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:299,&quot;column&quot;:33}}"/>
                               )}
                             </div>
-                            <p className="mt-0.5 truncate text-xs pl-4" style={{ color: 'var(--cursor-border-55)' }}>
-                              {searchQuery ? <Highlight text={conv.lastMessage} query={searchQuery} maxLen={50} /> : conv.lastMessage}
+                            <p className="mt-0.5 truncate text-xs pl-4" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-mt-0-5-27628ebd" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-0-5-27628ebd&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:455,&quot;column&quot;:29}}">
+                              {searchQuery ? <Highlight text={conv.lastMessage} query={searchQuery} maxLen={50}  data-qoder-id="qel-highlight-3dd92db8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-highlight-3dd92db8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;highlight&quot;,&quot;loc&quot;:{&quot;line&quot;:456,&quot;column&quot;:46}}"/> : conv.lastMessage}
                             </p>
                             {/* Extra meta info */}
                             {conv.handler && (
@@ -465,7 +465,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                   <span className="rounded text-[8px] px-1 py-px" style={{
                                     background: 'var(--cursor-surface-300)',
                                     color: 'var(--cursor-border-55)',
-                                  }}>
+                                  }} data-qoder-id="qel-rounded-22a6a820" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-22a6a820&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;rounded&quot;,&quot;loc&quot;:{&quot;line&quot;:465,&quot;column&quot;:35}}">
                                     {conv.label.split('/').pop()}
                                   </span>
                                 )}
@@ -493,7 +493,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
               {filteredSessions.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-12 text-center" data-qoder-id="qel-flex-f196837f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-f196837f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:336,&quot;column&quot;:17}}">
                   <Users className="mb-3 h-8 w-8" style={{ color: 'var(--cursor-border-20)' }}  data-qoder-id="qel-mb-3-26923f01" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mb-3-26923f01&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mb-3&quot;,&quot;loc&quot;:{&quot;line&quot;:337,&quot;column&quot;:19}}"/>
-                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }}>
+                  <p className="text-sm" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-sm-924f9aab" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-924f9aab&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:496,&quot;column&quot;:19}}">
                     {searchQuery
                       ? `未找到包含"${searchQuery}"的会话`
                       : '没有匹配的会话'}
@@ -513,17 +513,17 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                         className="h-2 w-2 rounded-full flex-shrink-0"
                         style={SESSION_STATE_DOT[session.session_state] || {}}
                        data-qoder-id="qel-h-2-4bc7e9c3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-4bc7e9c3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2&quot;,&quot;loc&quot;:{&quot;line&quot;:352,&quot;column&quot;:23}}"/>
-                      <span className="truncate text-xs font-medium" style={{ color: 'var(--cursor-ink)' }}>
-                        {searchQuery ? <Highlight text={session.sessionId} query={searchQuery} maxLen={40} /> : session.sessionId}
+                      <span className="truncate text-xs font-medium" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-truncate-2af10ac6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-truncate-2af10ac6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;truncate&quot;,&quot;loc&quot;:{&quot;line&quot;:516,&quot;column&quot;:23}}">
+                        {searchQuery ? <Highlight text={session.sessionId} query={searchQuery} maxLen={40}  data-qoder-id="qel-highlight-41db729b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-highlight-41db729b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;highlight&quot;,&quot;loc&quot;:{&quot;line&quot;:517,&quot;column&quot;:40}}"/> : session.sessionId}
                       </span>
                       {session.risk_level === 'high' && (
                         <AlertTriangle className="h-2.5 w-2.5 flex-shrink-0" style={{ color: 'var(--cursor-error)' }}  data-qoder-id="qel-h-2-5-ae0b6413" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-ae0b6413&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:360,&quot;column&quot;:25}}"/>
                       )}
                     </div>
                     {session.classification && (
-                      <p className="mt-0.5 truncate text-[10px] pl-4" style={{ color: 'var(--cursor-border-55)' }}>
+                      <p className="mt-0.5 truncate text-[10px] pl-4" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-mt-0-5-9c5af827" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-0-5-9c5af827&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;mt-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:524,&quot;column&quot;:23}}">
                         {searchQuery
-                          ? <Highlight text={session.classification.split('/').pop()} query={searchQuery} maxLen={40} />
+                          ? <Highlight text={session.classification.split('/').pop()} query={searchQuery} maxLen={40}  data-qoder-id="qel-highlight-acde59a3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-highlight-acde59a3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;highlight&quot;,&quot;loc&quot;:{&quot;line&quot;:526,&quot;column&quot;:29}}"/>
                           : session.classification.split('/').pop()}
                       </p>
                     )}

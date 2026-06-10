@@ -14,9 +14,17 @@ import LLMConfigPanel from './components/settings/LLMConfigPanel.jsx'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from './lib/utils.js'
 import { restoreLLMConfig } from './lib/llm-client.js'
+import { initMCPClient } from './lib/mcp-client.js'
 
 // Restore saved LLM config on app startup (before first render)
 restoreLLMConfig()
+
+// Initialize MCP client — auto-register mock handler
+initMCPClient().then(status => {
+  console.log('[App] MCP 初始化完成:', status)
+}).catch(err => {
+  console.warn('[App] MCP 初始化警告:', err.message)
+})
 
 /* ─── Error Boundary ─── */
 class ErrorBoundary extends Component {

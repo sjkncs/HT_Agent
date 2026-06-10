@@ -4,15 +4,17 @@ import {
   BookOpen, UserCheck, Clock, Settings, ChevronRight, GripVertical,
   Plus, Trash2, Copy, Eye, PlayCircle, PauseCircle, MoreVertical,
   ArrowRight, AlertCircle, CheckCircle2, XCircle, Download, Upload,
-  Save, RotateCcw, Link2, Unlink
+  Save, RotateCcw, Link2, Unlink,
+  Code, Variable, Globe, Square, HelpCircle, Repeat
 } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
 import { NODE_TYPES, MOCK_WORKFLOWS, EXECUTION_LOG } from '../../lib/workflow-data.js'
+import { executeWorkflow, getExecutionState, cancelWorkflow } from '../../lib/workflow-engine.js'
 
 const iconMap = {
   Zap, Brain, GitBranch, GitFork, Puzzle, MessageCircle, Play,
-  BookOpen, UserCheck, Clock,
+  BookOpen, UserCheck, Clock, Code, Variable, Globe, Square, HelpCircle, Repeat,
 }
 
 /* ─── Deep clone helper ─── */
@@ -379,6 +381,8 @@ export default function WorkflowEditor(qoderProps) {
   const [connectSource, setConnectSource] = useState(null)
   const [showCozeDialog, setShowCozeDialog] = useState(null)
   const [hasChanges, setHasChanges] = useState(false)
+  const [isExecuting, setIsExecuting] = useState(false)
+  const [executionResult, setExecutionResult] = useState(null)
   const svgRef = useRef(null)
 
   const selectedWorkflow = workflows.find((w) => w.id === selectedWfId) || workflows[0]
@@ -398,7 +402,7 @@ export default function WorkflowEditor(qoderProps) {
     const maxX = Math.max(...nodes.map((n) => n.x), 200)
     const newNode = {
       id: genId('n'), type, label: nodeType.label, x: maxX + 60, y: 120 + Math.random() * 200,
-      config: type === 'llm' ? { model: 'qwen-max', temperature: 0.7, max_tokens: 800 } : type === 'classifier' ? { model: 'qwen2.5-vl-finetuned', categories: [], confidence_threshold: 0.85 } : type === 'plugin' ? { plugin: '', params: {} } : type === 'condition' ? { branches: [] } : type === 'knowledge' ? { index: 'food_safety_kb_v2', topK: 3, similarity_threshold: 0.7 } : type === 'script' ? { template_id: '', variables: [] } : type === 'action' ? { action: '' } : type === 'human' ? { escalation_group: '', sla_hours: 4 } : type === 'delay' ? { seconds: 5 } : { triggerType: 'message' },
+      config: type === 'llm' ? { model: 'qwen-max', temperature: 0.7, max_tokens: 800 } : type === 'classifier' ? { model: 'qwen2.5-vl-finetuned', categories: [], confidence_threshold: 0.85 } : type === 'plugin' ? { plugin: '', params: {} } : type === 'condition' ? { branches: [] } : type === 'knowledge' ? { index: 'food_safety_kb_v2', topK: 3, similarity_threshold: 0.7 } : type === 'script' ? { template_id: '', variables: [] } : type === 'action' ? { action: '' } : type === 'human' ? { escalation_group: '', sla_hours: 4 } : type === 'delay' ? { seconds: 5 } : type === 'code' ? { language: 'javascript', code: 'return { result: "processed" }', inputs: {}, outputs: ['result'] } : type === 'variable' ? { assignments: [{ name: 'myVar', value: '', type: 'string' }] } : type === 'http_request' ? { url: 'https://api.example.com', method: 'POST', headers: {}, body: {}, timeout: 5000 } : type === 'end' ? { outputs: [] } : type === 'question' ? { question: '请输入信息', type: 'text', options: [] } : type === 'loop' ? { array: '[]', itemVariable: 'item' } : { triggerType: 'message' },
     }
     updateWorkflow(selectedWorkflow.id, (wf) => { wf.nodes.push(newNode); return wf })
     setSelectedNode(newNode)
@@ -470,6 +474,28 @@ export default function WorkflowEditor(qoderProps) {
     const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `${selectedWorkflow.name}_${selectedWorkflow.version}.json`; a.click(); URL.revokeObjectURL(url)
   }, [selectedWorkflow])
 
+  const handleExecuteWorkflow = useCallback(async () => {
+    if (!selectedWorkflow || isExecuting) return
+    setIsExecuting(true)
+    setExecutionResult(null)
+    try {
+      const result = await executeWorkflow(selectedWorkflow, {
+        message: '测试食安投诉：饮品中发现异物（头发），在南山科技园店购买的多肉葡萄',
+        user_input: '我在你们店里喝到了有头发的奶茶，太恶心了',
+      }, {
+        mockMode: true,
+        skipDelay: true,
+        autoAnswer: '非常满意',
+        onNodeStart: (node) => console.log(`[执行] 开始: ${node.label} (${node.type})`),
+        onNodeComplete: (node, result) => console.log(`[执行] 完成: ${node.label}`, result),
+      })
+      setExecutionResult(result)
+    } catch (err) {
+      setExecutionResult({ success: false, error: err.message })
+    }
+    setIsExecuting(false)
+  }, [selectedWorkflow, isExecuting])
+
   const maxX = Math.max(...nodes.map((n) => n.x), 800) + 220
   const maxY = Math.max(...nodes.map((n) => n.y), 400) + 100
 
@@ -500,6 +526,10 @@ export default function WorkflowEditor(qoderProps) {
           <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setZoom(Math.min(1.5, zoom + 0.1))} data-qoder-id="qel-h-8-8ff01b45" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-8-8ff01b45&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;h-8&quot;,&quot;loc&quot;:{&quot;line&quot;:500,&quot;column&quot;:11}}"><span className="text-xs font-mono" data-qoder-id="qel-text-xs-a2f88cf4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-xs-a2f88cf4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;text-xs&quot;,&quot;loc&quot;:{&quot;line&quot;:500,&quot;column&quot;:118}}">+</span></Button>
           <div className="h-4 w-px" style={{ background: 'var(--cursor-border-10)' }}  data-qoder-id="qel-h-4-ebae985e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-4-ebae985e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;h-4&quot;,&quot;loc&quot;:{&quot;line&quot;:501,&quot;column&quot;:11}}"/>
           <Button variant="accent" size="sm" onClick={() => setHasChanges(false)} data-qoder-id="qel-button-4af1a123" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-4af1a123&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:502,&quot;column&quot;:11}}"><Play className="h-3.5 w-3.5 mr-1"  data-qoder-id="qel-h-3-5-94c10f58" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-5-94c10f58&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;h-3-5&quot;,&quot;loc&quot;:{&quot;line&quot;:502,&quot;column&quot;:83}}"/>发布</Button>
+          <Button variant="ghost" size="sm" onClick={handleExecuteWorkflow} disabled={isExecuting} style={{ borderRadius: 'var(--seed-radius)' }} title="执行当前工作流（Mock 模式）">
+            {isExecuting ? <RotateCcw className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Zap className="h-3.5 w-3.5 mr-1" />}
+            {isExecuting ? '执行中...' : '执行'}
+          </Button>
         </div>
       </div>
 
@@ -569,6 +599,52 @@ export default function WorkflowEditor(qoderProps) {
       </div>
 
       {showLog && <ExecutionLogPanel  data-qoder-id="qel-executionlogpanel-e092f650" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-executionlogpanel-e092f650&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;executionlogpanel&quot;,&quot;loc&quot;:{&quot;line&quot;:571,&quot;column&quot;:19}}"/>}
+      {executionResult && (
+        <div className="border-t px-4 py-3 space-y-2" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {executionResult.success ? (
+                <CheckCircle2 className="h-4 w-4" style={{ color: 'var(--cursor-success)' }} />
+              ) : (
+                <XCircle className="h-4 w-4" style={{ color: 'var(--cursor-error)' }} />
+              )}
+              <span className="text-xs font-semibold" style={{ color: executionResult.success ? 'var(--cursor-success)' : 'var(--cursor-error)' }}>
+                {executionResult.success ? '执行成功' : '执行失败'}
+              </span>
+              {executionResult.duration && (
+                <span className="text-[10px] font-mono" style={{ color: 'var(--cursor-border-55)' }}>{executionResult.duration}</span>
+              )}
+            </div>
+            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={() => setExecutionResult(null)}>
+              <XCircle className="h-3 w-3 mr-1" />关闭
+            </Button>
+          </div>
+          {executionResult.success && (
+            <div className="flex items-center gap-3 text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>
+              <span>节点执行: {executionResult.nodes_executed}</span>
+              <span>跳过: {executionResult.nodes_skipped}</span>
+              <span>错误: {executionResult.nodes_errored}</span>
+            </div>
+          )}
+          {!executionResult.success && executionResult.error && (
+            <p className="text-xs" style={{ color: 'var(--cursor-error)' }}>{executionResult.error}</p>
+          )}
+          {executionResult.logs && (
+            <div className="max-h-24 overflow-y-auto scrollbar-thin space-y-0.5">
+              {executionResult.logs.map((log, i) => (
+                <div key={i} className="flex items-center gap-2 text-[10px] px-2 py-1 rounded" style={{ background: log.status === 'success' ? 'hsl(159 40% 96%)' : log.status === 'error' ? 'hsl(345 60% 96%)' : log.status === 'skipped' ? 'var(--cursor-surface-300)' : 'transparent' }}>
+                  {log.status === 'success' && <CheckCircle2 className="h-3 w-3 flex-shrink-0" style={{ color: 'var(--cursor-success)' }} />}
+                  {log.status === 'error' && <XCircle className="h-3 w-3 flex-shrink-0" style={{ color: 'var(--cursor-error)' }} />}
+                  {log.status === 'skipped' && <AlertCircle className="h-3 w-3 flex-shrink-0" style={{ color: 'var(--cursor-border-55)' }} />}
+                  <span className="font-mono" style={{ color: 'var(--cursor-border-55)' }}>{log.nodeId}</span>
+                  <span className="flex-1 truncate" style={{ color: 'var(--cursor-ink)' }}>{log.label || log.message || log.error || ''}</span>
+                  {log.duration && <span className="flex-shrink-0" style={{ color: 'var(--cursor-border-55)' }}>{log.duration}</span>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       {showCozeDialog && (<CozeImportExportDialog mode={showCozeDialog} onClose={() => setShowCozeDialog(null)} onImport={handleImportWorkflow}  data-qoder-id="qel-cozeimportexportdialog-c19398f3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-cozeimportexportdialog-c19398f3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/WorkflowEditor.jsx&quot;,&quot;componentName&quot;:&quot;WorkflowEditor&quot;,&quot;elementRole&quot;:&quot;cozeimportexportdialog&quot;,&quot;loc&quot;:{&quot;line&quot;:572,&quot;column&quot;:27}}"/>)}
     </div>
   )

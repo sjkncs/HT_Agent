@@ -8,6 +8,8 @@ import {
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
 import { PLUGINS } from '../../lib/workflow-data.js'
+import { getMCPToolDefinitions, getConnectionStatus, healthCheck } from '../../lib/mcp-client.js'
+import { listAvailableTools, executeSkillTool, getSkillStatus } from '../../lib/skill-runner.js'
 
 /* ─── Plugin Status Badge — Cursor warm ─── */
 function PluginStatusBadge({ status, ...qoderProps }) {
@@ -211,6 +213,34 @@ export default function PluginManager(qoderProps) {
   const [plugins] = useState(PLUGINS)
   const [selectedPlugin, setSelectedPlugin] = useState(null)
   const [filterStatus, setFilterStatus] = useState('all')
+  const [mcpTools, setMcpTools] = useState([])
+  const [skillTools, setSkillTools] = useState([])
+  const [showMcpSection, setShowMcpSection] = useState(false)
+  const [mcpStatus, setMcpStatus] = useState(null)
+
+  // Load MCP tools and Skill tools on mount
+  useState(() => {
+    try {
+      const mcpDefs = getMCPToolDefinitions()
+      setMcpTools(mcpDefs.map(t => ({
+        name: t.function.name,
+        description: t.function.description,
+        params: t.function.parameters?.properties || {},
+        required: t.function.parameters?.required || [],
+      })))
+    } catch (e) { /* silent */ }
+    try {
+      setSkillTools(listAvailableTools())
+      setMcpStatus(getSkillStatus())
+    } catch (e) { /* silent */ }
+  })
+
+  const handleHealthCheck = async () => {
+    try {
+      const result = await healthCheck()
+      setMcpStatus(prev => ({ ...prev, ...result }))
+    } catch (e) { /* silent */ }
+  }
 
   const filtered = filterStatus === 'all' ? plugins : plugins.filter((p) => p.status === filterStatus)
   const totalCalls = plugins.reduce((sum, p) => sum + p.callCount, 0)
@@ -257,7 +287,73 @@ export default function PluginManager(qoderProps) {
         {filtered.map((plugin) => (
           <PluginDetailCard key={plugin.id} plugin={plugin} isSelected={selectedPlugin?.id === plugin.id} onSelect={setSelectedPlugin}  data-qoder-id="qel-plugindetailcard-8e9bd1db" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-plugindetailcard-8e9bd1db&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;plugindetailcard&quot;,&quot;loc&quot;:{&quot;line&quot;:257,&quot;column&quot;:11}}"/>
         ))}
-        {filtered.length === 0 && (
+
+        {/* MCP Tools Section */}
+        {mcpTools.length > 0 && (
+          <div className="mt-6">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4" style={{ color: 'var(--cursor-orange)' }} />
+                <h3 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }}>MCP 工具 ({mcpTools.length})</h3>
+                <span className="text-[10px] rounded-full px-2 py-0.5" style={{ background: mcpStatus?.mockMode ? 'var(--cursor-surface-500)' : 'hsl(159 40% 94%)', color: mcpStatus?.mockMode ? 'var(--cursor-border-55)' : 'var(--cursor-success)' }}>
+                  {mcpStatus?.mockMode ? 'Mock 模式' : '在线'}
+                </span>
+              </div>
+              <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={handleHealthCheck} style={{ borderRadius: 'var(--seed-radius)' }}>
+                <Activity className="h-3 w-3 mr-1" />健康检查
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {mcpTools.map((tool) => (
+                <div key={tool.name} className="rounded-lg border p-3" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Zap className="h-3 w-3" style={{ color: '#6366f1' }} />
+                    <span className="text-xs font-semibold font-mono" style={{ color: 'var(--cursor-ink)' }}>{tool.name}</span>
+                  </div>
+                  <p className="text-[10px] line-clamp-2 mb-2" style={{ color: 'var(--cursor-border-55)' }}>{tool.description}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {Object.keys(tool.params).slice(0, 4).map(p => (
+                      <span key={p} className="text-[9px] font-mono rounded px-1.5 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-border-55)' }}>
+                        {p}{tool.required.includes(p) ? '*' : ''}
+                      </span>
+                    ))}
+                    {Object.keys(tool.params).length > 4 && (
+                      <span className="text-[9px] rounded px-1.5 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-border-55)' }}>
+                        +{Object.keys(tool.params).length - 4}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Skill Tools Section */}
+        {skillTools.length > 0 && (
+          <div className="mt-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap className="h-4 w-4" style={{ color: '#8b5cf6' }} />
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }}>Skill 工具 ({skillTools.length})</h3>
+              <span className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>
+                类别: {[...new Set(skillTools.map(t => t.category))].join(', ')}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {skillTools.map((tool) => (
+                <div key={tool.name} className="rounded-lg border p-2.5" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }}>
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-[10px] font-mono font-semibold" style={{ color: 'var(--cursor-ink)' }}>{tool.name}</span>
+                    <span className="text-[8px] rounded px-1 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: '#8b5cf6' }}>{tool.category}</span>
+                  </div>
+                  <p className="text-[9px] line-clamp-1" style={{ color: 'var(--cursor-border-55)' }}>{tool.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {filtered.length === 0 && mcpTools.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 text-center" data-qoder-id="qel-flex-d62a75d6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-d62a75d6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:260,&quot;column&quot;:11}}">
             <Puzzle className="h-10 w-10 mb-3" style={{ color: 'var(--cursor-border-55)', opacity: 0.4 }}  data-qoder-id="qel-h-10-a875c677" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-10-a875c677&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;h-10&quot;,&quot;loc&quot;:{&quot;line&quot;:261,&quot;column&quot;:13}}"/>
             <p className="text-sm cursor-serif" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-sm-96188926" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-96188926&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:262,&quot;column&quot;:13}}">暂无该状态的插件</p>
@@ -268,9 +364,9 @@ export default function PluginManager(qoderProps) {
       {/* Footer status bar */}
       <div className="flex items-center justify-between border-t px-6 py-2" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }} data-component="plugin-footer" data-qoder-id="qel-plugin-footer-7d967c05" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-plugin-footer-7d967c05&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;plugin-footer&quot;,&quot;loc&quot;:{&quot;line&quot;:268,&quot;column&quot;:7}}">
         <div className="flex items-center gap-4 text-[10px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-flex-de2cc105" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-de2cc105&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:269,&quot;column&quot;:9}}">
-          <span data-qoder-id="qel-span-a805eba2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a805eba2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:270,&quot;column&quot;:11}}">Coze API: <span className="font-medium" style={{ color: 'var(--cursor-success)' }} data-qoder-id="qel-font-medium-17274aee" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-font-medium-17274aee&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;font-medium&quot;,&quot;loc&quot;:{&quot;line&quot;:270,&quot;column&quot;:27}}">已连接</span></span>
-          <span data-qoder-id="qel-span-a605e87c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a605e87c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:271,&quot;column&quot;:11}}">Endpoint: api.coze.cn/v3</span>
-          <span data-qoder-id="qel-span-a505e6e9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a505e6e9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:272,&quot;column&quot;:11}}">延迟: 42ms</span>
+          <span data-qoder-id="qel-span-a805eba2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a805eba2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:270,&quot;column&quot;:11}}">MCP: <span className="font-medium" style={{ color: mcpStatus?.mockMode ? 'var(--cursor-gold)' : 'var(--cursor-success)' }} data-qoder-id="qel-font-medium-17274aee" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-font-medium-17274aee&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;font-medium&quot;,&quot;loc&quot;:{&quot;line&quot;:270,&quot;column&quot;:27}}">{mcpStatus?.mockMode ? 'Mock' : '在线'}</span></span>
+          <span data-qoder-id="qel-span-a605e87c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a605e87c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:271,&quot;column&quot;:11}}">工具: {mcpTools.length} MCP + {skillTools.length} Skill + {plugins.length} Coze</span>
+          <span data-qoder-id="qel-span-a505e6e9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a505e6e9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:272,&quot;column&quot;:11}}">延迟: {mcpStatus?.latency || '--'}ms</span>
         </div>
         <span className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-10px-58708813" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-58708813&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:274,&quot;column&quot;:9}}">
           最后同步: {new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}

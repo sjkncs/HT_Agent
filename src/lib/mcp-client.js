@@ -591,3 +591,41 @@ export function exportCurlCommand(toolName, args) {
   -H "Accept: application/json, text/event-stream" \\
   -d '${body}'`
 }
+
+// ─── 初始化：自动注册 Mock Handler ───
+
+/**
+ * 初始化 MCP 客户端
+ * - 自动从 heytea-mock-data.js 注册 mock handler
+ * - 确保应用启动后所有 11 个工具可调用
+ * @param {Object} config - 可选配置覆盖
+ */
+export async function initMCPClient(config = {}) {
+  // 应用配置覆盖
+  if (Object.keys(config).length > 0) {
+    configureMCP(config)
+  }
+
+  // 仅在 mock 模式下注册 handler
+  if (_config.useMock && !_mockHandler) {
+    try {
+      // heytea-mock-data.js 在模块级别自动调用 registerMockHandler()
+      // 动态导入即可触发注册
+      await import('./heytea-mock-data.js')
+      if (_mockHandler) {
+        console.log('[MCP] Mock handler 已自动注册')
+      } else {
+        console.warn('[MCP] heytea-mock-data.js 导入完成但 handler 未注册')
+      }
+    } catch (err) {
+      console.warn('[MCP] Mock handler 注册失败:', err.message)
+    }
+  }
+
+  return {
+    mockMode: _config.useMock,
+    serverUrl: _config.serverUrl,
+    toolsRegistered: getMCPToolDefinitions().length,
+    handlerReady: !!_mockHandler,
+  }
+}
