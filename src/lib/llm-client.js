@@ -20,37 +20,37 @@
 
 /** 默认 API 配置 (可在运行时覆盖) — 预配置 NVIDIA 生态 */
 const DEFAULT_CONFIG = Object.freeze({
-  // API 端点 (NVIDIA 生态集成 — llama-3.3-70b 主力模型)
+  // API 端点 (NVIDIA 生态集成 — kimi-k2.6 主力模型)
   baseUrl: 'https://integrate.api.nvidia.com/v1',
   apiKey: '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',
-  model: 'meta/llama-3.3-70b-instruct',
+  model: 'moonshotai/kimi-k2.6',
 
   // 请求参数
-  temperature: 0.3,       // 低温度 = 更确定性 (客服场景偏好稳定)
-  maxTokens: 4096,        // 回复最大 token
+  temperature: 0,           // ★ kimi-k2.6 必须 temperature=0，否则中文 tokenization 异常
+  maxTokens: 4096,          // 回复最大 token
   topP: 0.95,
-  frequencyPenalty: 0.1,  // 轻微惩罚重复 (对应 Reward Hacking 防御 §6.5)
-  presencePenalty: 0.05,
+  frequencyPenalty: 0,      // kimi 不需要 frequency penalty
+  presencePenalty: 0,
 
   // 网络参数
-  timeout: 60000,         // 60s 超时 (llama-3.3-70b 偶尔较慢)
-  maxRetries: 2,          // 最多重试 2 次
-  retryDelay: 1000,       // 重试间隔 1s
+  timeout: 60000,           // 60s 超时
+  maxRetries: 3,            // 最多重试 3 次 (含 429 限流重试)
+  retryDelay: 2000,         // 重试间隔 2s
 
   // 流式
   stream: false,
 
-  // 备用配置 (主 API 失败时降级 → llama-3.1-8b 轻量模型)
+  // 备用配置 (主 API 限流/失败时降级 → llama-3.3-70b)
   fallback: {
     baseUrl: 'https://integrate.api.nvidia.com/v1',
     apiKey: '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',
-    model: 'meta/llama-3.1-8b-instruct',
+    model: 'meta/llama-3.3-70b-instruct',
   },
 
-  // Reasoning Model 专属 (llama-3.3 不支持，置 false)
+  // Reasoning Model 专属 (kimi-k2.6 不支持，置 false)
   enableThinking: false,
   reasoningBudget: 0,
-  extraBody: null,             // 额外请求体参数
+  extraBody: null,
 
   // 内容安全护栏 (独立 API key)
   contentSafetyKey: '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',
@@ -106,8 +106,8 @@ export function restoreLLMConfig() {
         // 合并策略: 已保存值优先，但空值回退到 DEFAULT_CONFIG
         _activeConfig = { ...DEFAULT_CONFIG, ...parsed }
 
-        // 检测不可用模型 (已知问题：nemotron超时、kimi输出垃圾)，强制回退到默认模型
-        const unavailableModels = ['nvidia/nemotron-3-ultra-550b-a55b', 'moonshotai/kimi-k2.6']
+        // 检测不可用模型，强制回退到默认模型
+        const unavailableModels = ['nvidia/nemotron-3-ultra-550b-a55b']
         if (unavailableModels.includes(_activeConfig.model)) {
           _activeConfig.apiKey = DEFAULT_CONFIG.apiKey
           _activeConfig.baseUrl = DEFAULT_CONFIG.baseUrl
@@ -252,6 +252,16 @@ export async function chatCompletion(messages, overrides = {}) {
         lastError = err
         if (err instanceof LLMError && err.statusCode === 401) {
           // 认证失败不重试，直接跳到下一个端点
+          break
+        }
+        if (err instanceof LLMError && err.statusCode === 429) {
+          // 限流: 更长的退避等待 (5s, 10s, 15s)
+          if (attempt < config.maxRetries) {
+            console.warn(`LLM 429 rate limited, retry ${attempt + 1}/${config.maxRetries} after ${(attempt + 1) * 5}s`)
+            await _sleep(5000 * (attempt + 1))
+            continue
+          }
+          // 主端点限流重试全部失败，跳到 fallback 端点
           break
         }
         if (attempt < config.maxRetries) {
