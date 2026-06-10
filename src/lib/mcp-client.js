@@ -219,6 +219,30 @@ export async function cancelOrder({ orderId, cancelReason }) {
   return callMCPTool('cancelOrder', { orderId, cancelReason: cancelReason || '' })
 }
 
+/**
+ * 9. 查询优惠券列表
+ * @param {Object} params - { storeId?: number }
+ */
+export async function queryCouponList({ storeId } = {}) {
+  return callMCPTool('queryCouponList', { storeId: storeId || null })
+}
+
+/**
+ * 10. 查询订单历史
+ * @param {Object} params - { page?: number, pageSize?: number, status?: number }
+ */
+export async function queryOrderHistory({ page, pageSize, status } = {}) {
+  return callMCPTool('queryOrderHistory', { page: page || 1, pageSize: pageSize || 10, status: status || null })
+}
+
+/**
+ * 11. 查询支付状态
+ * @param {Object} params - { orderId: string }
+ */
+export async function queryPaymentStatus({ orderId }) {
+  return callMCPTool('queryPaymentStatus', { orderId })
+}
+
 // ─── Mock 工具调用路由 ───
 let _mockHandler = null
 
@@ -399,5 +423,171 @@ export function getMCPToolDefinitions() {
         },
       },
     },
+    // ─── 新增工具定义（对标瑞幸扩展） ───
+    {
+      type: 'function',
+      function: {
+        name: 'queryCouponList',
+        description: '查询用户可用的优惠券列表，支持按门店筛选',
+        parameters: {
+          type: 'object',
+          properties: {
+            storeId: { type: 'integer', description: '门店ID（可选，筛选门店专属券）' },
+          },
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'queryOrderHistory',
+        description: '查询用户历史订单，支持分页和状态筛选',
+        parameters: {
+          type: 'object',
+          properties: {
+            page: { type: 'integer', description: '页码，默认1' },
+            pageSize: { type: 'integer', description: '每页数量，默认10' },
+            status: { type: 'integer', description: '订单状态筛选（可选）' },
+          },
+          required: [],
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'queryPaymentStatus',
+        description: '查询订单支付状态，用于下单后轮询支付结果',
+        parameters: {
+          type: 'object',
+          properties: {
+            orderId: { type: 'string', description: '订单ID' },
+          },
+          required: ['orderId'],
+        },
+      },
+    },
   ]
+}
+
+// ─── MCP 服务端工具发现（tools/list） ───
+
+/**
+ * 从 MCP 服务端获取可用工具列表（JSON-RPC tools/list）
+ * 对标瑞幸 MCP 的服务端工具发现机制
+ * @returns {Promise<Object[]>} 服务端工具定义列表
+ */
+export async function listServerTools() {
+  if (_config.useMock) {
+    // Mock 模式：返回本地定义
+    return getMCPToolDefinitions().map(t => ({
+      name: t.function.name,
+      description: t.function.description,
+      inputSchema: t.function.parameters,
+    }))
+  }
+
+  const body = buildJsonRpcRequest('tools/list', {})
+  try {
+    const resp = await fetch(_config.serverUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json, text/event-stream',
+        ...(_config.token ? { 'Authorization': `Bearer ${_config.token}` } : {}),
+      },
+      body: JSON.stringify(body),
+    })
+    const json = await resp.json()
+    if (json.error) throw new Error(`MCP Error: ${json.error.message}`)
+    return json.result?.tools || []
+  } catch (err) {
+    throw new Error(`获取服务端工具列表失败: ${err.message}`)
+  }
+}
+
+// ─── 连接健康检查 ───
+
+let _connectionState = {
+  status: 'disconnected', // 'connected' | 'disconnected' | 'degraded' | 'checking'
+  lastCheck: null,
+  latency: null,
+  error: null,
+  toolCount: 0,
+}
+
+/**
+ * MCP 连接健康检查
+ * 发送 tools/list 探测服务端可用性
+ * @returns {Promise<Object>} 连接状态
+ */
+export async function healthCheck() {
+  _connectionState.status = 'checking'
+
+  const start = Date.now()
+  try {
+    const tools = await listServerTools()
+    const latency = Date.now() - start
+
+    _connectionState = {
+      status: latency > 5000 ? 'degraded' : 'connected',
+      lastCheck: Date.now(),
+      latency,
+      error: null,
+      toolCount: tools.length,
+    }
+  } catch (err) {
+    _connectionState = {
+      ..._connectionState,
+      status: 'disconnected',
+      lastCheck: Date.now(),
+      latency: null,
+      error: err.message,
+    }
+  }
+
+  return { ..._connectionState }
+}
+
+/**
+ * 获取当前连接状态（不触发新检查）
+ */
+export function getConnectionStatus() {
+  return { ..._connectionState }
+}
+
+// ─── MCP 配置导出 ───
+
+/**
+ * 导出标准 MCP Server 配置（用于 Claude Desktop / Cursor / Qoder 等客户端）
+ * 对标瑞幸 mcpServers JSON 配置格式
+ * @returns {Object} mcpServers 配置对象
+ */
+export function getMCPConfigExport() {
+  return {
+    mcpServers: {
+      'heytea-order': {
+        type: 'streamableHttp',
+        url: _config.serverUrl,
+        headers: {
+          'Authorization': `Bearer \${HEYTEA_MCP_TOKEN}`,
+        },
+      },
+    },
+  }
+}
+
+/**
+ * 导出 curl 测试命令（用于调试和文档）
+ * @param {string} toolName - 工具名
+ * @param {Object} args - 参数
+ * @returns {string} curl 命令
+ */
+export function exportCurlCommand(toolName, args) {
+  const body = JSON.stringify(buildJsonRpcRequest('tools/call', { name: toolName, arguments: args }))
+  return `curl -s -N "${_config.serverUrl}" \\
+  -H "Authorization: Bearer \${HEYTEA_MCP_TOKEN}" \\
+  -H "Content-Type: application/json" \\
+  -H "Accept: application/json, text/event-stream" \\
+  -d '${body}'`
 }

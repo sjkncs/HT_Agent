@@ -464,6 +464,41 @@ function mockHandler(toolName, args) {
       return handleQueryOrderDetail(args)
     case 'cancelOrder':
       return handleCancelOrder(args)
+    case 'queryCouponList':
+      return {
+        data: [
+          { couponId: 'CP001', name: '新人专享 8 折券', discount: 0.8, minOrder: 20, maxDiscount: 10, validUntil: '2026-07-01', applicableStores: '全部门店' },
+          { couponId: 'CP002', name: '满 30 减 5', discount: 5, type: 'fixed', minOrder: 30, validUntil: '2026-06-30', applicableStores: '深圳区域门店' },
+          { couponId: 'CP003', name: '多肉系列第二杯半价', discount: 0.5, type: 'bogo', minOrder: 2, validUntil: '2026-06-15', applicableStores: '全部门店', category: '多肉系列' },
+        ],
+        success: true,
+      }
+    case 'queryOrderHistory':
+      return {
+        data: {
+          total: 3,
+          page: args.page || 1,
+          pageSize: args.pageSize || 10,
+          orders: [
+            { orderId: '8829301847562910001', orderStatus: 80, orderStatusName: '已完成', storeName: '喜茶·深圳万象天地店', totalAmount: 29, orderTime: '2026-06-08 14:30', itemCount: 1, productNames: ['多肉葡萄'] },
+            { orderId: '8829301847562910002', orderStatus: 80, orderStatusName: '已完成', storeName: '喜茶·深圳海岸城店', totalAmount: 62, orderTime: '2026-06-05 11:20', itemCount: 2, productNames: ['芝芝莓莓', '多肉芒果'] },
+            { orderId: '8829301847562910003', orderStatus: 100, orderStatusName: '已取消', storeName: '喜茶·深圳万象天地店', totalAmount: 32, orderTime: '2026-06-01 16:45', itemCount: 1, productNames: ['满杯红柚'] },
+          ],
+        },
+        success: true,
+      }
+    case 'queryPaymentStatus':
+      return {
+        data: {
+          orderId: args.orderId,
+          paymentStatus: 'paid',
+          paymentMethod: '微信支付',
+          paidAmount: 29,
+          paidAt: Date.now() - 600000,
+          refundStatus: null,
+        },
+        success: true,
+      }
     default:
       throw new Error(`Unknown MCP tool: ${toolName}`)
   }

@@ -10,6 +10,7 @@ import {
   queryStoreList, searchProduct, customizeProduct,
   queryProductDetail, previewOrder, createOrder,
   queryOrderDetail, cancelOrder,
+  queryCouponList, queryOrderHistory, queryPaymentStatus,
 } from './mcp-client.js'
 
 // ─── 点单意图检测 ───
@@ -81,6 +82,9 @@ export async function executeMCPTool(toolName, args) {
     createOrder: () => createOrder(args),
     queryOrderDetail: () => queryOrderDetail(args),
     cancelOrder: () => cancelOrder(args),
+    queryCouponList: () => queryCouponList(args),
+    queryOrderHistory: () => queryOrderHistory(args),
+    queryPaymentStatus: () => queryPaymentStatus(args),
   }
 
   const handler = handlers[toolName]
@@ -116,6 +120,12 @@ export function formatToolResult(toolName, result) {
       return formatOrderDetail(result.data)
     case 'cancelOrder':
       return formatCancelOrder(result.data)
+    case 'queryCouponList':
+      return formatCouponList(result.data)
+    case 'queryOrderHistory':
+      return formatOrderHistory(result.data)
+    case 'queryPaymentStatus':
+      return formatPaymentStatus(result.data)
     default:
       return JSON.stringify(result.data)
   }
@@ -247,6 +257,44 @@ function formatCancelOrder(result) {
     return `✅ 订单已取消。\n退款金额 ¥${result.refundAmount?.toFixed(2)} 将在1-3个工作日内原路返回。`
   }
   return '取消失败，请稍后重试或联系客服。'
+}
+
+function formatCouponList(coupons) {
+  if (!coupons?.length) return '暂无可用优惠券。'
+  let text = `🎫 您有 ${coupons.length} 张优惠券：\n\n`
+  for (const c of coupons) {
+    text += `  ${c.name}\n`
+    if (c.type === 'bogo') text += `     适用：${c.category || '全部'} · 限${c.minOrder}件起\n`
+    else if (c.type === 'fixed') text += `     满${c.minOrder}元减${c.discount}元 · ${c.applicableStores || '全部门店'}\n`
+    else text += `     ${Math.round(c.discount * 100)}折 · 最高减${c.maxDiscount || '不限'}元\n`
+    text += `     有效期至：${c.validUntil}\n\n`
+  }
+  text += '下单时会自动匹配最优优惠券。'
+  return text
+}
+
+function formatOrderHistory(data) {
+  if (!data?.orders?.length) return '暂无历史订单记录。'
+  let text = `📋 最近 ${data.orders.length} 笔订单（共 ${data.total} 笔）：\n\n`
+  for (const o of data.orders) {
+    const emoji = o.orderStatus === 80 ? '✅' : o.orderStatus === 100 ? '❌' : '📋'
+    text += `${emoji} ${o.orderTime} · ${o.storeName}\n`
+    text += `   ${o.productNames.join('、')} · ¥${o.totalAmount} · ${o.orderStatusName}\n\n`
+  }
+  text += '想再点哪一款？我可以帮您快速下单。'
+  return text
+}
+
+function formatPaymentStatus(data) {
+  if (!data) return '支付状态查询失败。'
+  const statusMap = { paid: '已支付', pending: '待支付', refunded: '已退款', failed: '支付失败' }
+  const statusText = statusMap[data.paymentStatus] || data.paymentStatus
+  let text = `💳 支付状态：${statusText}\n`
+  if (data.paidAmount) text += `   支付金额：¥${data.paidAmount}\n`
+  if (data.paymentMethod) text += `   支付方式：${data.paymentMethod}\n`
+  if (data.paidAt) text += `   支付时间：${new Date(data.paidAt).toLocaleString('zh-CN')}\n`
+  if (data.refundStatus) text += `   退款状态：${data.refundStatus}\n`
+  return text
 }
 
 // ─── 对话中的富文本卡片生成 ───
