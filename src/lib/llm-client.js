@@ -20,10 +20,10 @@
 
 /** 默认 API 配置 (可在运行时覆盖) — 预配置 NVIDIA 生态 */
 const DEFAULT_CONFIG = Object.freeze({
-  // API 端点 (NVIDIA 生态集成 — kimi-k2.6 主力模型)
+  // API 端点 (NVIDIA 生态集成 — llama-3.3-70b 主力模型)
   baseUrl: 'https://integrate.api.nvidia.com/v1',
   apiKey: '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',
-  model: 'moonshotai/kimi-k2.6',
+  model: 'meta/llama-3.3-70b-instruct',
 
   // 请求参数
   temperature: 0.3,       // 低温度 = 更确定性 (客服场景偏好稳定)
@@ -33,24 +33,24 @@ const DEFAULT_CONFIG = Object.freeze({
   presencePenalty: 0.05,
 
   // 网络参数
-  timeout: 30000,         // 30s 超时
+  timeout: 60000,         // 60s 超时 (llama-3.3-70b 偶尔较慢)
   maxRetries: 2,          // 最多重试 2 次
   retryDelay: 1000,       // 重试间隔 1s
 
   // 流式
   stream: false,
 
-  // 备用配置 (主 API 失败时降级 → nemotron reasoning model)
+  // 备用配置 (主 API 失败时降级 → llama-3.1-8b 轻量模型)
   fallback: {
     baseUrl: 'https://integrate.api.nvidia.com/v1',
-    apiKey: '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',
-    model: 'nvidia/nemotron-3-ultra-550b-a55b',
+    apiKey: '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',
+    model: 'meta/llama-3.1-8b-instruct',
   },
 
-  // Reasoning Model 专属 (kimi-k2.6 不支持，置 false)
-  enableThinking: false,       // kimi-k2.6 不支持 reasoning chain
-  reasoningBudget: 0,          // 不适用
-  extraBody: null,             // 额外请求体参数 (如 chat_template_kwargs)
+  // Reasoning Model 专属 (llama-3.3 不支持，置 false)
+  enableThinking: false,
+  reasoningBudget: 0,
+  extraBody: null,             // 额外请求体参数
 
   // 内容安全护栏 (独立 API key)
   contentSafetyKey: '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',
@@ -106,8 +106,8 @@ export function restoreLLMConfig() {
         // 合并策略: 已保存值优先，但空值回退到 DEFAULT_CONFIG
         _activeConfig = { ...DEFAULT_CONFIG, ...parsed }
 
-        // 检测不可用模型 (nemotron-3-ultra 已知超时)，强制回退到默认模型
-        const unavailableModels = ['nvidia/nemotron-3-ultra-550b-a55b']
+        // 检测不可用模型 (已知问题：nemotron超时、kimi输出垃圾)，强制回退到默认模型
+        const unavailableModels = ['nvidia/nemotron-3-ultra-550b-a55b', 'moonshotai/kimi-k2.6']
         if (unavailableModels.includes(_activeConfig.model)) {
           _activeConfig.apiKey = DEFAULT_CONFIG.apiKey
           _activeConfig.baseUrl = DEFAULT_CONFIG.baseUrl
