@@ -5678,7 +5678,8 @@ ${orderingSection}${memoryHint}
 - 语气轻松活泼，符合喜茶年轻品牌调性
 - 推荐商品时简要描述口味特点
 - 下单前一定要让用户确认商品和价格
-- 如果用户问非点单问题，也可以友好回答`
+- 如果用户问非点单问题，也可以友好回答
+- 严禁使用任何emoji表情图案，回复中只能使用纯文字。如果需要图标或图形，只能使用SVG`
 
       messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
 
@@ -5696,7 +5697,8 @@ ${orderingSection}${memoryHint}
 - 自称"阿喜"，称呼顾客"您"
 - 对于喜茶业务以外的问题，友好、简洁地回答即可
 - 如果问题涉及喜茶产品、门店、活动，可以热情推荐
-- 语气亲切自然，不要太正式`
+- 语气亲切自然，不要太正式
+- 严禁使用任何emoji表情图案，回复中只能使用纯文字`
 
       messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
     } else {
@@ -5741,6 +5743,12 @@ ${orderingSection}${memoryHint}
     if (hasForbiddenWords) {
       cleanedReply = reply.replace(/亲亲/g, '您').replace(/亲(?!爱的|情)/g, '').replace(/宝贝/g, '您')
     }
+
+    // 自动清除 emoji（严禁 emoji 策略的最后防线）
+    cleanedReply = cleanedReply.replace(
+      /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{200D}\u{20E3}\u{E0020}-\u{E007F}]/gu,
+      ''
+    ).replace(/\s{2,}/g, ' ').trim()
 
     return {
       reply: cleanedReply,

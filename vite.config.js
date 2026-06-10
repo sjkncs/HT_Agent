@@ -14,6 +14,12 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     proxy: {
+      '/api/longcat': {
+        target: 'https://api.longcat.chat',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (p) => p.replace(/^\/api\/longcat/, ''),
+      },
       '/api/nvidia': {
         target: 'https://integrate.api.nvidia.com',
         changeOrigin: true,

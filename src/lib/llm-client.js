@@ -18,55 +18,60 @@
 // SECTION 1 — API 配置管理
 // ═══════════════════════════════════════════════════════════════════════════
 
-/** 默认 API 配置 (可在运行时覆盖) — 预配置 NVIDIA 生态 */
+/** 默认 API 配置 (可在运行时覆盖) — LongCat 主力 + NVIDIA 备用 */
 const DEFAULT_CONFIG = Object.freeze({
-  // API 端点 (NVIDIA 生态集成 — kimi-k2.6 主力模型)
-  baseUrl: 'https://integrate.api.nvidia.com/v1',
-  apiKey: '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',
-  model: 'moonshotai/kimi-k2.6',
+  // API 端点 (LongCat — LongCat-2.0-Preview 主力模型)
+  baseUrl: 'https://api.longcat.chat/openai/v1',
+  apiKey: 'ak_2yB7yX46I2wR32C4tZ30i3sf5zM3j',
+  model: 'LongCat-2.0-Preview',
 
   // 请求参数
-  temperature: 0,           // ★ kimi-k2.6 必须 temperature=0，否则中文 tokenization 异常
-  maxTokens: 4096,          // 回复最大 token
+  temperature: 0.3,
+  maxTokens: 4096,
   topP: 0.95,
-  frequencyPenalty: 0,      // kimi 不需要 frequency penalty
+  frequencyPenalty: 0,
   presencePenalty: 0,
 
   // 网络参数
-  timeout: 60000,           // 60s 超时
-  maxRetries: 3,            // 最多重试 3 次 (含 429 限流重试)
-  retryDelay: 2000,         // 重试间隔 2s
+  timeout: 60000,
+  maxRetries: 3,
+  retryDelay: 2000,
 
   // 流式
   stream: false,
 
-  // 备用配置 (主 API 限流/失败时降级 → llama-3.3-70b)
+  // 备用配置 (主 API 失败时降级 → NVIDIA kimi-k2.6，需 temperature=0)
   fallback: {
     baseUrl: 'https://integrate.api.nvidia.com/v1',
     apiKey: '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',
-    model: 'meta/llama-3.3-70b-instruct',
+    model: 'moonshotai/kimi-k2.6',
   },
 
-  // Reasoning Model 专属 (kimi-k2.6 不支持，置 false)
+  // Reasoning Model 专属
   enableThinking: false,
   reasoningBudget: 0,
   extraBody: null,
 
-  // 内容安全护栏 (独立 API key)
+  // 内容安全护栏
   contentSafetyKey: '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',
-  contentSafetyEnabled: true,  // 默认启用内容安全检查
+  contentSafetyEnabled: true,
 })
 
 /** 当前活跃配置 (运行时可变) */
 let _activeConfig = { ...DEFAULT_CONFIG }
 
 /**
- * 浏览器环境下将 NVIDIA API URL 重写为 Vite 代理路径
- * 解决 CORS 跨域限制 (dev server proxy → integrate.api.nvidia.com)
+ * 浏览器环境下将外部 API URL 重写为 Vite 代理路径
+ * 解决 CORS 跨域限制
  */
 function _proxyUrl(baseUrl) {
-  if (typeof window !== 'undefined' && baseUrl.includes('integrate.api.nvidia.com')) {
-    return '/api/nvidia/v1'
+  if (typeof window !== 'undefined') {
+    if (baseUrl.includes('api.longcat.chat')) {
+      return '/api/longcat/openai/v1'
+    }
+    if (baseUrl.includes('integrate.api.nvidia.com')) {
+      return '/api/nvidia/v1'
+    }
   }
   return baseUrl
 }
@@ -206,6 +211,15 @@ export async function chatCompletion(messages, overrides = {}) {
   ]
 
   for (const endpoint of endpoints) {
+    // Fallback 端点参数覆盖: kimi-k2.6 在 NVIDIA 上必须 temperature=0 才能正确输出中文
+    const isFallback = config.fallback && endpoint.baseUrl === config.fallback.baseUrl
+    if (isFallback && config.fallback.model) {
+      body.model = config.fallback.model
+    }
+    if (isFallback && (body.model?.includes('kimi') || body.model?.includes('moonshotai'))) {
+      body.temperature = 0
+    }
+
     for (let attempt = 0; attempt <= config.maxRetries; attempt++) {
       try {
         const response = await _fetchWithTimeout(
@@ -422,6 +436,7 @@ export function estimateTokens(text) {
  * 底层使用第三方 API，UI 统一显示 Heytea 品牌名称
  */
 export const HEYTEA_BRAND = Object.freeze({
+  'LongCat-2.0-Preview': 'Heytea-V1-Pro',
   'nvidia/nemotron-3-super-120b-a12b': 'Heytea-V1-Pro',
   'nvidia/nemotron-3-ultra-550b-a55b': 'Heytea-V1-Thinking-High',
   'moonshotai/kimi-k2.6': 'Heytea-V1-Flash',
@@ -441,6 +456,14 @@ export function getModelDisplayName(modelId) {
  * Heytea 品牌化：底层 NVIDIA 生态，UI 显示 Heytea 系列
  */
 export const API_PRESETS = Object.freeze({
+  longcat: {
+    name: 'Heytea 阿喜模型 (LongCat)',
+    baseUrl: 'https://api.longcat.chat/openai/v1',
+    models: ['LongCat-2.0-Preview'],
+    modelMeta: {
+      'LongCat-2.0-Preview': { thinking: false, label: 'Heytea-V1-Pro (LongCat 主力模型)', maxTokens: 4096 },
+    },
+  },
   nvidia: {
     name: 'Heytea 阿喜模型',
     baseUrl: 'https://integrate.api.nvidia.com/v1',
