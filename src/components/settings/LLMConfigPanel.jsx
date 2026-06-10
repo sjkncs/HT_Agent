@@ -157,9 +157,9 @@ export default function LLMConfigPanel(qoderProps) {
         </div>
 
         {/* 状态指示 */}
-        <div className="flex items-center gap-2 p-2 rounded-md" style={{ background: configured ? '#27ae6008' : '#e74c3c08', border: `1px solid ${configured ? '#27ae6020' : '#e74c3c20'}` }} data-qoder-id="qel-flex-f5af6173" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-f5af6173&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:160,&quot;column&quot;:9}}">
-          <div className="h-2.5 w-2.5 rounded-full" style={{ background: configured ? '#27ae60' : '#e74c3c' }}  data-qoder-id="qel-h-2-5-dd17c870" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-dd17c870&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:161,&quot;column&quot;:11}}"/>
-          <span className="text-[11px] font-medium" style={{ color: configured ? '#27ae60' : '#e74c3c' }} data-qoder-id="qel-text-11px-e391eca7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-11px-e391eca7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;text-11px&quot;,&quot;loc&quot;:{&quot;line&quot;:162,&quot;column&quot;:11}}">
+        <div className="flex items-center gap-2 p-2 rounded-md" style={{ background: configured ? 'hsl(159 40% 94%)' : 'hsl(345 60% 96%)', border: `1px solid ${configured ? 'hsl(159 63% 33% / 0.12)' : 'hsl(345 63% 33% / 0.12)'}` }} data-qoder-id="qel-flex-f5af6173" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-f5af6173&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:160,&quot;column&quot;:9}}">
+          <div className="h-2.5 w-2.5 rounded-full" style={{ background: configured ? 'var(--cursor-success)' : 'var(--cursor-error)' }}  data-qoder-id="qel-h-2-5-dd17c870" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-dd17c870&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:161,&quot;column&quot;:11}}"/>
+          <span className="text-[11px] font-medium" style={{ color: configured ? 'var(--cursor-success)' : 'var(--cursor-error)' }} data-qoder-id="qel-text-11px-e391eca7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-11px-e391eca7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;text-11px&quot;,&quot;loc&quot;:{&quot;line&quot;:162,&quot;column&quot;:11}}">
             {configured ? `已连接 — ${getModelDisplayName(config.model)}` : '未配置 (使用模板引擎回复)'}
           </span>
         </div>
@@ -440,8 +440,10 @@ export default function LLMConfigPanel(qoderProps) {
             onClick={handleSave}
             className="px-4 py-2 rounded-md text-xs font-medium transition-colors"
             style={{
-              background: saved ? '#27ae60' : 'var(--cursor-orange)',
+              background: saved ? 'var(--cursor-success)' : 'var(--cursor-orange)',
               color: '#fff',
+              transition: 'all 0.15s ease',
+              borderRadius: '8px',
             }}
            data-qoder-id="qel-px-4-ab7a3e46" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-px-4-ab7a3e46&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;px-4&quot;,&quot;loc&quot;:{&quot;line&quot;:439,&quot;column&quot;:11}}">
             {saved ? '已保存' : '保存配置'}
@@ -452,9 +454,11 @@ export default function LLMConfigPanel(qoderProps) {
             className="px-4 py-2 rounded-md text-xs font-medium border transition-colors"
             style={{
               borderColor: 'var(--cursor-border-10)',
-              background: testStatus === 'success' ? '#27ae6015' : testStatus === 'error' ? '#e74c3c15' : 'var(--cursor-surface-300)',
-              color: testStatus === 'success' ? '#27ae60' : testStatus === 'error' ? '#e74c3c' : 'var(--cursor-ink)',
+              background: testStatus === 'success' ? 'hsl(159 40% 94%)' : testStatus === 'error' ? 'hsl(345 60% 96%)' : 'var(--cursor-surface-300)',
+              color: testStatus === 'success' ? 'var(--cursor-success)' : testStatus === 'error' ? 'var(--cursor-error)' : 'var(--cursor-ink)',
               opacity: (!config.apiKey || testStatus === 'testing') ? 0.5 : 1,
+              transition: 'all 0.15s ease',
+              borderRadius: '8px',
             }}
            data-qoder-id="qel-px-4-aa7a3cb3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-px-4-aa7a3cb3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;px-4&quot;,&quot;loc&quot;:{&quot;line&quot;:449,&quot;column&quot;:11}}">
             {testStatus === 'testing' ? '测试中...' : '测试连接'}
@@ -464,9 +468,9 @@ export default function LLMConfigPanel(qoderProps) {
         {/* 测试结果 */}
         {testResult && (
           <div className="rounded-md p-2.5 text-[10px] leading-relaxed" style={{
-            background: testStatus === 'success' ? '#27ae6008' : '#e74c3c08',
-            border: `1px solid ${testStatus === 'success' ? '#27ae6025' : '#e74c3c25'}`,
-            color: testStatus === 'success' ? '#27ae60' : '#e74c3c',
+            background: testStatus === 'success' ? 'hsl(159 40% 94%)' : 'hsl(345 60% 96%)',
+            border: `1px solid ${testStatus === 'success' ? 'hsl(159 63% 33% / 0.15)' : 'hsl(345 63% 33% / 0.15)'}`,
+            color: testStatus === 'success' ? 'var(--cursor-success)' : 'var(--cursor-error)',
           }} data-qoder-id="qel-rounded-md-c29a0871" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-md-c29a0871&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;rounded-md&quot;,&quot;loc&quot;:{&quot;line&quot;:466,&quot;column&quot;:11}}">
             {testResult}
           </div>

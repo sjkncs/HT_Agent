@@ -128,6 +128,7 @@ function Highlight({ text, query, maxLen = 60 }) {
   )
 }
 
+// NOTE: matches --cursor-error/gold/success, consider CSS classes for dark mode
 const RISK_DOT_STYLE = {
   high: { background: '#cf2d56' },
   medium: { background: '#c08532' },
@@ -340,7 +341,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                 <button
                   key={r.key || 'all-risk'}
                   onClick={() => setRiskFilter(r.key)}
-                  className="flex items-center gap-1 rounded-full text-[10px] transition-all"
+                  className="flex items-center gap-1 rounded-full text-[11px] transition-all"
                   style={{
                     padding: '2px 7px',
                     background: riskFilter === r.key ? 'var(--cursor-surface-500)' : 'var(--cursor-surface-300)',
@@ -350,7 +351,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                  data-qoder-id="qel-flex-da37e64a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-da37e64a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:340,&quot;column&quot;:17}}">
                   <div className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: r.dotColor }}  data-qoder-id="qel-h-1-5-4423d52b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-1-5-4423d52b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:351,&quot;column&quot;:19}}"/>
                   {r.label}
-                  <span style={{ opacity: 0.6, fontSize: '9px' }} data-qoder-id="qel-span-2e3573ad" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-2e3573ad&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:353,&quot;column&quot;:19}}">{r.count}</span>
+                  <span style={{ opacity: 0.6, fontSize: '10px' }} data-qoder-id="qel-span-2e3573ad" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-2e3573ad&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:353,&quot;column&quot;:19}}">{r.count}</span>
                 </button>
               ))}
             </div>
@@ -363,7 +364,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                   <button
                     key={cat.key || 'all-cat'}
                     onClick={() => setFilterLabel(cat.key)}
-                    className="flex items-center gap-1 rounded-full text-[10px] transition-all"
+                    className="flex items-center gap-1 rounded-full text-[11px] transition-all"
                     style={{
                       padding: '2px 7px',
                       background: isActive ? 'var(--cursor-surface-500)' : 'var(--cursor-surface-300)',
@@ -372,7 +373,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                    data-qoder-id="qel-flex-d637dffe" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-d637dffe&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:363,&quot;column&quot;:19}}">
                     {IconComp && <IconComp className="h-2.5 w-2.5"  data-qoder-id="qel-h-2-5-5e0d7597" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-5-5e0d7597&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;h-2-5&quot;,&quot;loc&quot;:{&quot;line&quot;:373,&quot;column&quot;:34}}"/>}
                     {cat.label}
-                    <span style={{ opacity: 0.6, fontSize: '9px' }} data-qoder-id="qel-span-223560c9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-223560c9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:375,&quot;column&quot;:21}}">{cat.count}</span>
+                    <span style={{ opacity: 0.6, fontSize: '10px' }} data-qoder-id="qel-span-223560c9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-223560c9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:375,&quot;column&quot;:21}}">{cat.count}</span>
                   </button>
                 )
               })}

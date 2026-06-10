@@ -193,7 +193,7 @@ export default function DashboardView(qoderProps) {
 
         {/* ═══ Overview Tab: KPI + Charts + Trend ═══ */}
         {activeTab === 'overview' && (<>
-        <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-8" data-component="metrics-grid" data-qoder-id="qel-metrics-grid-ac324ac1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-metrics-grid-ac324ac1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/dashboard/DashboardView.jsx&quot;,&quot;componentName&quot;:&quot;DashboardView&quot;,&quot;elementRole&quot;:&quot;metrics-grid&quot;,&quot;loc&quot;:{&quot;line&quot;:196,&quot;column&quot;:9}}">
+        <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4" data-component="metrics-grid" data-qoder-id="qel-metrics-grid-ac324ac1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-metrics-grid-ac324ac1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/dashboard/DashboardView.jsx&quot;,&quot;componentName&quot;:&quot;DashboardView&quot;,&quot;elementRole&quot;:&quot;metrics-grid&quot;,&quot;loc&quot;:{&quot;line&quot;:196,&quot;column&quot;:9}}">
           {/* Time range indicator badge */}
           <div className="col-span-full flex items-center gap-2 mb-1" data-qoder-id="qel-col-span-full-b3a430ff" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-col-span-full-b3a430ff&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/dashboard/DashboardView.jsx&quot;,&quot;componentName&quot;:&quot;DashboardView&quot;,&quot;elementRole&quot;:&quot;col-span-full&quot;,&quot;loc&quot;:{&quot;line&quot;:198,&quot;column&quot;:11}}">
             <span className="text-[10px] font-mono px-2 py-0.5 rounded" style={{

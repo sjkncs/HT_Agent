@@ -290,35 +290,35 @@ export default function PluginManager(qoderProps) {
 
         {/* MCP Tools Section */}
         {mcpTools.length > 0 && (
-          <div className="mt-6">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Globe className="h-4 w-4" style={{ color: 'var(--cursor-orange)' }} />
-                <h3 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }}>MCP 工具 ({mcpTools.length})</h3>
-                <span className="text-[10px] rounded-full px-2 py-0.5" style={{ background: mcpStatus?.mockMode ? 'var(--cursor-surface-500)' : 'hsl(159 40% 94%)', color: mcpStatus?.mockMode ? 'var(--cursor-border-55)' : 'var(--cursor-success)' }}>
+          <div className="mt-6" data-qoder-id="qel-mt-6-9c737f7f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-6-9c737f7f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;mt-6&quot;,&quot;loc&quot;:{&quot;line&quot;:293,&quot;column&quot;:11}}">
+            <div className="flex items-center justify-between mb-3" data-qoder-id="qel-flex-d72a7769" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-d72a7769&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:294,&quot;column&quot;:13}}">
+              <div className="flex items-center gap-2" data-qoder-id="qel-flex-e02a8594" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-e02a8594&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:295,&quot;column&quot;:15}}">
+                <Globe className="h-4 w-4" style={{ color: 'var(--cursor-orange)' }}  data-qoder-id="qel-h-4-b5789e0b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-4-b5789e0b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;h-4&quot;,&quot;loc&quot;:{&quot;line&quot;:296,&quot;column&quot;:17}}"/>
+                <h3 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-text-sm-3024dc8c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-3024dc8c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:297,&quot;column&quot;:17}}">MCP 工具 ({mcpTools.length})</h3>
+                <span className="text-[10px] rounded-full px-2 py-0.5" style={{ background: mcpStatus?.mockMode ? 'var(--cursor-surface-500)' : 'hsl(159 40% 94%)', color: mcpStatus?.mockMode ? 'var(--cursor-border-55)' : 'var(--cursor-success)' }} data-qoder-id="qel-text-10px-5c708e5f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-5c708e5f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:298,&quot;column&quot;:17}}">
                   {mcpStatus?.mockMode ? 'Mock 模式' : '在线'}
                 </span>
               </div>
-              <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={handleHealthCheck} style={{ borderRadius: 'var(--seed-radius)' }}>
-                <Activity className="h-3 w-3 mr-1" />健康检查
+              <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={handleHealthCheck} style={{ borderRadius: 'var(--seed-radius)' }} data-qoder-id="qel-h-7-2f233fd5" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-7-2f233fd5&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;h-7&quot;,&quot;loc&quot;:{&quot;line&quot;:302,&quot;column&quot;:15}}">
+                <Activity className="h-3 w-3 mr-1"  data-qoder-id="qel-h-3-e64761cf" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-e64761cf&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:303,&quot;column&quot;:17}}"/>健康检查
               </Button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2" data-qoder-id="qel-grid-ed7ce29e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-grid-ed7ce29e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;grid&quot;,&quot;loc&quot;:{&quot;line&quot;:306,&quot;column&quot;:13}}">
               {mcpTools.map((tool) => (
-                <div key={tool.name} className="rounded-lg border p-3" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <Zap className="h-3 w-3" style={{ color: '#6366f1' }} />
-                    <span className="text-xs font-semibold font-mono" style={{ color: 'var(--cursor-ink)' }}>{tool.name}</span>
+                <div key={tool.name} className="rounded-lg border p-3" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }} data-qoder-id="qel-rounded-lg-e6a80434" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-lg-e6a80434&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;rounded-lg&quot;,&quot;loc&quot;:{&quot;line&quot;:308,&quot;column&quot;:17}}">
+                  <div className="flex items-center gap-2 mb-1" data-qoder-id="qel-flex-d82cb793" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-d82cb793&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:309,&quot;column&quot;:19}}">
+                    <Zap className="h-3 w-3" style={{ color: 'var(--cursor-info)' }}  data-qoder-id="qel-h-3-5cead9c3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-5cead9c3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:310,&quot;column&quot;:21}}"/>
+                    <span className="text-xs font-semibold font-mono" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-text-xs-3636c748" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-xs-3636c748&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-xs&quot;,&quot;loc&quot;:{&quot;line&quot;:311,&quot;column&quot;:21}}">{tool.name}</span>
                   </div>
-                  <p className="text-[10px] line-clamp-2 mb-2" style={{ color: 'var(--cursor-border-55)' }}>{tool.description}</p>
-                  <div className="flex flex-wrap gap-1">
+                  <p className="text-[10px] line-clamp-2 mb-2" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-10px-3e1f3525" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-3e1f3525&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:313,&quot;column&quot;:19}}">{tool.description}</p>
+                  <div className="flex flex-wrap gap-1" data-qoder-id="qel-flex-642fd28e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-642fd28e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:314,&quot;column&quot;:19}}">
                     {Object.keys(tool.params).slice(0, 4).map(p => (
-                      <span key={p} className="text-[9px] font-mono rounded px-1.5 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-border-55)' }}>
+                      <span key={p} className="text-[9px] font-mono rounded px-1.5 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-35052540" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-35052540&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:316,&quot;column&quot;:23}}">
                         {p}{tool.required.includes(p) ? '*' : ''}
                       </span>
                     ))}
                     {Object.keys(tool.params).length > 4 && (
-                      <span className="text-[9px] rounded px-1.5 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-border-55)' }}>
+                      <span className="text-[9px] rounded px-1.5 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-380529f9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-380529f9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:321,&quot;column&quot;:23}}">
                         +{Object.keys(tool.params).length - 4}
                       </span>
                     )}
@@ -331,22 +331,22 @@ export default function PluginManager(qoderProps) {
 
         {/* Skill Tools Section */}
         {skillTools.length > 0 && (
-          <div className="mt-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Zap className="h-4 w-4" style={{ color: '#8b5cf6' }} />
-              <h3 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }}>Skill 工具 ({skillTools.length})</h3>
-              <span className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }}>
+          <div className="mt-4" data-qoder-id="qel-mt-4-6269eab0" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-4-6269eab0&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;mt-4&quot;,&quot;loc&quot;:{&quot;line&quot;:334,&quot;column&quot;:11}}">
+            <div className="flex items-center gap-2 mb-3" data-qoder-id="qel-flex-682fd8da" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-682fd8da&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:335,&quot;column&quot;:13}}">
+              <Zap className="h-4 w-4" style={{ color: 'var(--cursor-gold)' }}  data-qoder-id="qel-h-4-d76e3c47" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-4-d76e3c47&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;h-4&quot;,&quot;loc&quot;:{&quot;line&quot;:336,&quot;column&quot;:15}}"/>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-text-sm-c02c7b01" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-c02c7b01&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:337,&quot;column&quot;:15}}">Skill 工具 ({skillTools.length})</h3>
+              <span className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-10px-ea7829ae" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-ea7829ae&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:338,&quot;column&quot;:15}}">
                 类别: {[...new Set(skillTools.map(t => t.category))].join(', ')}
               </span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2" data-qoder-id="qel-grid-e37a9449" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-grid-e37a9449&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;grid&quot;,&quot;loc&quot;:{&quot;line&quot;:342,&quot;column&quot;:13}}">
               {skillTools.map((tool) => (
-                <div key={tool.name} className="rounded-lg border p-2.5" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }}>
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className="text-[10px] font-mono font-semibold" style={{ color: 'var(--cursor-ink)' }}>{tool.name}</span>
-                    <span className="text-[8px] rounded px-1 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: '#8b5cf6' }}>{tool.category}</span>
+                <div key={tool.name} className="rounded-lg border p-2.5" style={{ background: 'var(--cursor-surface-400)', borderColor: 'var(--cursor-border-10)' }} data-qoder-id="qel-rounded-lg-5aa06c0b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-lg-5aa06c0b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;rounded-lg&quot;,&quot;loc&quot;:{&quot;line&quot;:344,&quot;column&quot;:17}}">
+                  <div className="flex items-center gap-1.5 mb-1" data-qoder-id="qel-flex-6a321a97" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-6a321a97&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:345,&quot;column&quot;:19}}">
+                    <span className="text-[10px] font-mono font-semibold" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-text-10px-e875e7f1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-e875e7f1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:346,&quot;column&quot;:21}}">{tool.name}</span>
+                    <span className="text-[8px] rounded px-1 py-0.5" style={{ background: 'var(--cursor-surface-300)', color: 'var(--cursor-gold)' }} data-qoder-id="qel-text-8px-01da75af" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-8px-01da75af&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-8px&quot;,&quot;loc&quot;:{&quot;line&quot;:347,&quot;column&quot;:21}}">{tool.category}</span>
                   </div>
-                  <p className="text-[9px] line-clamp-1" style={{ color: 'var(--cursor-border-55)' }}>{tool.description}</p>
+                  <p className="text-[9px] line-clamp-1" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-9px-ce58d1a1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-9px-ce58d1a1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/workflow/PluginManager.jsx&quot;,&quot;componentName&quot;:&quot;PluginManager&quot;,&quot;elementRole&quot;:&quot;text-9px&quot;,&quot;loc&quot;:{&quot;line&quot;:349,&quot;column&quot;:19}}">{tool.description}</p>
                 </div>
               ))}
             </div>

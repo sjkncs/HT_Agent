@@ -22,15 +22,15 @@ import {
 // Mock 数据导入会自动注册 mockHandler
 import '../../lib/heytea-mock-data.js'
 
-// ─── 样式常量（灰白色调） ───
-const ACCENT = '#333'          // 主色调：深炭灰
-const ACCENT_LIGHT = '#555'    // 次要强调
-const ACCENT_BG = '#f5f5f5'    // 浅灰背景
-const SURFACE = '#fafafa'
-const BORDER = '#e8e8e8'
-const TEXT_PRIMARY = '#1a1a1a'
-const TEXT_SECONDARY = '#666'
-const TEXT_TERTIARY = '#999'
+// ─── 样式常量（使用 CSS 变量系统） ───
+const ACCENT = 'var(--cursor-orange)'          // 主色调：品牌橙
+const ACCENT_LIGHT = 'var(--cursor-gold)'      // 次要强调：金色
+const ACCENT_BG = 'var(--cursor-surface-300)'  // 浅灰背景
+const SURFACE = 'var(--cursor-surface-100)'
+const BORDER = 'var(--cursor-border-10)'
+const TEXT_PRIMARY = 'var(--cursor-ink)'
+const TEXT_SECONDARY = 'var(--cursor-border-55)'
+const TEXT_TERTIARY = 'var(--cursor-border-55)'
 
 // ─── 面板步骤 ───
 const STEPS = {
@@ -281,7 +281,7 @@ export default function OrderingPanel({ onClose, onOrderCreated, embedded = fals
   // ─── 渲染 ───
   const panelStyle = {
     display: 'flex', flexDirection: 'column', height: '100%',
-    background: '#fff', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    background: 'var(--cursor-cream)', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     position: embedded ? 'relative' : 'fixed',
     ...(embedded ? {} : { top: 0, right: 0, bottom: 0, width: 420, zIndex: 1000, boxShadow: '-4px 0 24px rgba(0,0,0,0.12)' }),
   }
@@ -330,9 +330,9 @@ export default function OrderingPanel({ onClose, onOrderCreated, embedded = fals
 
       {/* ─── 错误提示 ─── */}
       {error && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: '#fff3f0', borderBottom: '1px solid #ffd8d2' }} data-qoder-id="qel-div-93afe179" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-93afe179&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:333,&quot;column&quot;:9}}">
-          <AlertCircle size={14} color="#e74c3c"  data-qoder-id="qel-alertcircle-64d769f6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-alertcircle-64d769f6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;alertcircle&quot;,&quot;loc&quot;:{&quot;line&quot;:334,&quot;column&quot;:11}}"/>
-          <span style={{ fontSize: 12, color: '#e74c3c', flex: 1 }} data-qoder-id="qel-span-cabf4653" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-cabf4653&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:335,&quot;column&quot;:11}}">{error}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'var(--cursor-error-bg, #fff3f0)', borderBottom: '1px solid var(--cursor-error-border, #ffd8d2)' }} data-qoder-id="qel-div-93afe179" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-93afe179&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:333,&quot;column&quot;:9}}">
+          <AlertCircle size={14} color="var(--cursor-error, #e74c3c)"  data-qoder-id="qel-alertcircle-64d769f6" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-alertcircle-64d769f6&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;alertcircle&quot;,&quot;loc&quot;:{&quot;line&quot;:334,&quot;column&quot;:11}}"/>
+          <span style={{ fontSize: 12, color: 'var(--cursor-error, #e74c3c)', flex: 1 }} data-qoder-id="qel-span-cabf4653" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-cabf4653&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:335,&quot;column&quot;:11}}">{error}</span>
           <button onClick={() => setError(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, display: 'flex' }} data-qoder-id="qel-button-8ce59250" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-8ce59250&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:336,&quot;column&quot;:11}}">
             <X size={12}  data-qoder-id="qel-x-818efb19" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-x-818efb19&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;x&quot;,&quot;loc&quot;:{&quot;line&quot;:337,&quot;column&quot;:13}}"/>
           </button>
@@ -406,7 +406,7 @@ export default function OrderingPanel({ onClose, onOrderCreated, embedded = fals
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             padding: '10px 16px', borderTop: `1px solid ${BORDER}`,
-            background: '#fff', cursor: 'pointer',
+            background: 'var(--cursor-cream)', cursor: 'pointer',
           }}
          data-qoder-id="qel-div-17a86280" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-17a86280&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:404,&quot;column&quot;:9}}">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} data-qoder-id="qel-div-18a86413" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-18a86413&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:412,&quot;column&quot;:11}}">
@@ -414,7 +414,7 @@ export default function OrderingPanel({ onClose, onOrderCreated, embedded = fals
               <ShoppingBag size={22} color={ACCENT}  data-qoder-id="qel-shoppingbag-2c50bd56" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-shoppingbag-2c50bd56&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;shoppingbag&quot;,&quot;loc&quot;:{&quot;line&quot;:414,&quot;column&quot;:15}}"/>
               <span style={{
                 position: 'absolute', top: -6, right: -8,
-                background: '#e74c3c', color: '#fff', borderRadius: '50%',
+                background: 'var(--cursor-error, #e74c3c)', color: '#fff', borderRadius: '50%',
                 width: 16, height: 16, fontSize: 10, fontWeight: 700,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }} data-qoder-id="qel-span-e0baebc7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-e0baebc7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderingPanel&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:415,&quot;column&quot;:15}}">{cartCount}</span>
@@ -435,9 +435,9 @@ export default function OrderingPanel({ onClose, onOrderCreated, embedded = fals
 // ─── 门店列表（增强版：定位+筛选+排序+状态） ───
 // ═══════════════════════════════════════════════════
 const STORE_STATUS_MAP = {
-  1: { label: '营业中', color: '#444', bg: '#f0f0f0' },
-  2: { label: '休息中', color: '#999', bg: '#f5f5f5' },
-  3: { label: '即将打烊', color: '#e65100', bg: '#fff3e0' },
+  1: { label: '营业中', color: 'var(--cursor-ink)', bg: 'var(--cursor-surface-300)' },
+  2: { label: '休息中', color: TEXT_TERTIARY, bg: 'var(--cursor-surface-300)' },
+  3: { label: '即将打烊', color: 'var(--cursor-orange)', bg: 'var(--cursor-surface-200)' },
 }
 const STORE_TAGS_OPTIONS = ['堂食', '外卖', '新店', '旗舰店']
 const DISTANCE_OPTIONS = [
@@ -513,7 +513,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
             fontSize: 11, color: ACCENT_LIGHT, padding: '2px 6px',
             borderRadius: 4, transition: 'background 0.15s',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = '#eaeaea'}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--cursor-surface-400)'}
           onMouseLeave={e => e.currentTarget.style.background = 'none'}
          data-qoder-id="qel-button-2a8841a8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-2a8841a8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:508,&quot;column&quot;:9}}">
           <LocateFixed size={12}  data-qoder-id="qel-locatefixed-52d1257d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-locatefixed-52d1257d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;locatefixed&quot;,&quot;loc&quot;:{&quot;line&quot;:519,&quot;column&quot;:11}}"/>
@@ -550,7 +550,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
           style={{
             padding: '3px 10px', borderRadius: 14, border: 'none',
             fontSize: 11, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap',
-            background: !tagFilter ? ACCENT : '#f5f5f5',
+            background: !tagFilter ? ACCENT : 'var(--cursor-surface-300)',
             color: !tagFilter ? '#fff' : TEXT_SECONDARY,
           }}
          data-qoder-id="qel-button-a58531b2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a58531b2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:548,&quot;column&quot;:9}}">全部服务</button>
@@ -561,7 +561,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
             style={{
               padding: '3px 10px', borderRadius: 14, border: 'none',
               fontSize: 11, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap',
-              background: tagFilter === tag ? ACCENT : '#f5f5f5',
+              background: tagFilter === tag ? ACCENT : 'var(--cursor-surface-300)',
               color: tagFilter === tag ? '#fff' : TEXT_SECONDARY,
             }}
            data-qoder-id="qel-button-a6853345" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a6853345&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:558,&quot;column&quot;:11}}">{tag}</button>
@@ -571,7 +571,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
       {/* 状态 + 距离 + 排序 */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '0 16px 8px', overflowX: 'auto', scrollbarWidth: 'none' }} data-qoder-id="qel-div-de0abaf4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-de0abaf4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:572,&quot;column&quot;:7}}">
         {[0, 1, 3].map(s => {
-          const info = s === 0 ? { label: '全部状态', color: TEXT_SECONDARY, bg: '#f5f5f5' } : STORE_STATUS_MAP[s]
+          const info = s === 0 ? { label: '全部状态', color: TEXT_SECONDARY, bg: 'var(--cursor-surface-300)' } : STORE_STATUS_MAP[s]
           const isActive = statusFilter === s
           return (
             <button
@@ -580,7 +580,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
               style={{
                 padding: '2px 8px', borderRadius: 10, border: 'none',
                 fontSize: 10, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap',
-                background: isActive ? info.color : '#f5f5f5',
+                background: isActive ? info.color : 'var(--cursor-surface-300)',
                 color: isActive ? '#fff' : TEXT_TERTIARY,
               }}
              data-qoder-id="qel-button-a485301f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a485301f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:577,&quot;column&quot;:13}}">{info.label}</button>
@@ -596,7 +596,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
               style={{
                 padding: '2px 8px', borderRadius: 10, border: 'none',
                 fontSize: 10, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap',
-                background: isActive ? ACCENT : '#f5f5f5',
+                background: isActive ? ACCENT : 'var(--cursor-surface-300)',
                 color: isActive ? '#fff' : TEXT_TERTIARY,
               }}
              data-qoder-id="qel-button-a2852cf9" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a2852cf9&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:593,&quot;column&quot;:13}}">{d.label}</button>
@@ -606,7 +606,7 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
         <select
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
-          style={{ padding: '2px 6px', borderRadius: 6, border: `1px solid ${BORDER}`, fontSize: 10, color: TEXT_SECONDARY, background: '#fff', cursor: 'pointer', outline: 'none' }}
+          style={{ padding: '2px 6px', borderRadius: 6, border: `1px solid ${BORDER}`, fontSize: 10, color: TEXT_SECONDARY, background: 'var(--cursor-cream)', cursor: 'pointer', outline: 'none' }}
          data-qoder-id="qel-select-15c822d7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-select-15c822d7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;select&quot;,&quot;loc&quot;:{&quot;line&quot;:606,&quot;column&quot;:9}}">
           {SORT_OPTIONS.map(opt => <option key={opt.key} value={opt.key} data-qoder-id="qel-option-7f511688" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-option-7f511688&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;option&quot;,&quot;loc&quot;:{&quot;line&quot;:611,&quot;column&quot;:36}}">{opt.label}</option>)}
         </select>
@@ -667,8 +667,8 @@ function StoreList({ stores, loading, onSelect, ...qoderProps }) {
                 {store.storeTags?.map(tag => (
                   <span key={tag} style={{
                     fontSize: 10, padding: '1px 6px', borderRadius: 4,
-                    background: (tag === '新店' || tag === '旗舰店') ? '#eaeaea' : '#f5f5f5',
-                    color: (tag === '新店' || tag === '旗舰店') ? '#444' : TEXT_TERTIARY,
+                    background: (tag === '新店' || tag === '旗舰店') ? 'var(--cursor-surface-400)' : 'var(--cursor-surface-300)',
+                    color: (tag === '新店' || tag === '旗舰店') ? 'var(--cursor-ink)' : TEXT_TERTIARY,
                     fontWeight: (tag === '新店' || tag === '旗舰店') ? 500 : 400,
                   }} data-qoder-id="qel-span-a2857b78" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-a2857b78&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;StoreList&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:668,&quot;column&quot;:19}}">{tag}</span>
                 ))}
@@ -722,7 +722,7 @@ function ProductBrowse({ products, categories, categoryCounts, selectedCategory,
               padding: '4px 12px', borderRadius: 16, border: 'none',
               fontSize: 12, fontWeight: 500, cursor: 'pointer',
               whiteSpace: 'nowrap', transition: 'all 0.15s',
-              background: selectedCategory === cat ? ACCENT : '#f5f5f5',
+              background: selectedCategory === cat ? ACCENT : 'var(--cursor-surface-300)',
               color: selectedCategory === cat ? '#fff' : TEXT_SECONDARY,
             }}
            data-qoder-id="qel-button-a4236da0" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a4236da0&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductBrowse&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:718,&quot;column&quot;:11}}">{cat}{categoryCounts?.[cat] != null ? ` ${categoryCounts[cat]}` : ''}</button>
@@ -737,7 +737,7 @@ function ProductBrowse({ products, categories, categoryCounts, selectedCategory,
           <select
             value={productSort}
             onChange={e => onSortChange(e.target.value)}
-            style={{ padding: '2px 6px', borderRadius: 6, border: `1px solid ${BORDER}`, fontSize: 10, color: TEXT_SECONDARY, background: '#fff', cursor: 'pointer', outline: 'none' }}
+            style={{ padding: '2px 6px', borderRadius: 6, border: `1px solid ${BORDER}`, fontSize: 10, color: TEXT_SECONDARY, background: 'var(--cursor-cream)', cursor: 'pointer', outline: 'none' }}
            data-qoder-id="qel-select-3b261c5b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-select-3b261c5b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductBrowse&quot;,&quot;elementRole&quot;:&quot;select&quot;,&quot;loc&quot;:{&quot;line&quot;:737,&quot;column&quot;:11}}">
             <option value="default" data-qoder-id="qel-option-4e13348c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-option-4e13348c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductBrowse&quot;,&quot;elementRole&quot;:&quot;option&quot;,&quot;loc&quot;:{&quot;line&quot;:742,&quot;column&quot;:13}}">默认排序</option>
             <option value="price-asc" data-qoder-id="qel-option-4f13361f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-option-4f13361f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductBrowse&quot;,&quot;elementRole&quot;:&quot;option&quot;,&quot;loc&quot;:{&quot;line&quot;:743,&quot;column&quot;:13}}">价格低→高</option>
@@ -775,7 +775,7 @@ function ProductBrowse({ products, categories, categoryCounts, selectedCategory,
                 <span style={{
                   position: 'absolute', top: -2, right: -2,
                   fontSize: 8, padding: '1px 4px', borderRadius: 4,
-                  background: '#e74c3c', color: '#fff', fontWeight: 600,
+                  background: 'var(--cursor-error, #e74c3c)', color: '#fff', fontWeight: 600,
                 }} data-qoder-id="qel-span-df265ecf" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-df265ecf&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductBrowse&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:775,&quot;column&quot;:17}}">HOT</span>
               )}
             </div>
@@ -786,8 +786,8 @@ function ProductBrowse({ products, categories, categoryCounts, selectedCategory,
                 {product.tags?.map(tag => (
                   <span key={tag} style={{
                     fontSize: 9, padding: '0px 4px', borderRadius: 3,
-                    background: tag === '新品' ? '#fff3e0' : tag === '热销' ? '#fce4ec' : tag === '季节限定' ? '#eaeaea' : '#f5f5f5',
-                    color: tag === '新品' ? '#e65100' : tag === '热销' ? '#c62828' : tag === '季节限定' ? '#555' : TEXT_TERTIARY,
+                    background: tag === '新品' ? 'var(--cursor-surface-200)' : tag === '热销' ? 'var(--cursor-surface-200)' : tag === '季节限定' ? 'var(--cursor-surface-400)' : 'var(--cursor-surface-300)',
+                    color: tag === '新品' ? 'var(--cursor-orange)' : tag === '热销' ? 'var(--cursor-error, #c62828)' : tag === '季节限定' ? 'var(--cursor-light)' : TEXT_TERTIARY,
                     fontWeight: 500,
                   }} data-qoder-id="qel-span-e128a08c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-e128a08c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductBrowse&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:787,&quot;column&quot;:19}}">{tag}</span>
                 ))}
@@ -867,7 +867,7 @@ function ProductCustomize({ item, onToggle, onAmountChange, onNoteChange, onAdd,
                     padding: '6px 14px', borderRadius: 18, cursor: 'pointer',
                     fontSize: 12, fontWeight: 500, transition: 'all 0.15s',
                     border: `1.5px solid ${isSelected ? ACCENT : BORDER}`,
-                    background: isSelected ? ACCENT_BG : '#fff',
+                    background: isSelected ? ACCENT_BG : 'var(--cursor-cream)',
                     color: isSelected ? ACCENT : TEXT_SECONDARY,
                     display: 'flex', alignItems: 'center', gap: 4,
                   }}
@@ -885,8 +885,8 @@ function ProductCustomize({ item, onToggle, onAmountChange, onNoteChange, onAdd,
       {/* 过敏原提示 */}
       {product.allergens?.length > 0 && (
         <div style={{
-          padding: '8px 12px', borderRadius: 8, background: '#fff8e1',
-          marginBottom: 16, fontSize: 11, color: '#f57f17',
+          padding: '8px 12px', borderRadius: 8, background: 'var(--cursor-surface-100)',
+          marginBottom: 16, fontSize: 11, color: 'var(--cursor-gold)',
           display: 'flex', alignItems: 'center', gap: 6,
         }} data-qoder-id="qel-div-c276e523" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-c276e523&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:887,&quot;column&quot;:9}}">
           <AlertCircle size={13}  data-qoder-id="qel-alertcircle-dfdeb96a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-alertcircle-dfdeb96a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;alertcircle&quot;,&quot;loc&quot;:{&quot;line&quot;:892,&quot;column&quot;:11}}"/>
@@ -913,19 +913,19 @@ function ProductCustomize({ item, onToggle, onAmountChange, onNoteChange, onAdd,
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '16px 0', borderTop: `1px solid ${BORDER}`,
-        position: 'sticky', bottom: 0, background: '#fff',
+        position: 'sticky', bottom: 0, background: 'var(--cursor-cream)',
       }} data-qoder-id="qel-div-d77dc1f7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-d77dc1f7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:913,&quot;column&quot;:7}}">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }} data-qoder-id="qel-div-d67dc064" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-d67dc064&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:918,&quot;column&quot;:9}}">
           <button onClick={() => onAmountChange(-1)} style={{
             width: 30, height: 30, borderRadius: '50%', border: `1px solid ${BORDER}`,
-            background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'var(--cursor-cream)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
           }} data-qoder-id="qel-button-8734d795" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-8734d795&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:919,&quot;column&quot;:11}}">
             <Minus size={14} color={TEXT_SECONDARY}  data-qoder-id="qel-minus-dbf5001a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-minus-dbf5001a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;minus&quot;,&quot;loc&quot;:{&quot;line&quot;:923,&quot;column&quot;:13}}"/>
           </button>
           <span style={{ fontSize: 16, fontWeight: 600, minWidth: 20, textAlign: 'center' }} data-qoder-id="qel-span-135a831f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-135a831f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:925,&quot;column&quot;:11}}">{amount}</span>
           <button onClick={() => onAmountChange(1)} style={{
             width: 30, height: 30, borderRadius: '50%', border: `1px solid ${BORDER}`,
-            background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'var(--cursor-cream)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
           }} data-qoder-id="qel-button-8434d2dc" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-8434d2dc&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:926,&quot;column&quot;:11}}">
             <Plus size={14} color={TEXT_SECONDARY}  data-qoder-id="qel-plus-840c5899" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-plus-840c5899&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;ProductCustomize&quot;,&quot;elementRole&quot;:&quot;plus&quot;,&quot;loc&quot;:{&quot;line&quot;:930,&quot;column&quot;:13}}"/>
           </button>
@@ -967,7 +967,7 @@ function CartView({ cart, cartTotal, cartCount, onRemove, onUpdateAmount, onClea
             fontSize: 11, color: TEXT_TERTIARY, padding: '4px 8px', borderRadius: 6,
             transition: 'background 0.15s',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = '#f5f5f5'}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--cursor-surface-300)'}
           onMouseLeave={e => e.currentTarget.style.background = 'none'}
          data-qoder-id="qel-button-63d3511a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-63d3511a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:962,&quot;column&quot;:9}}">
           <Trash2 size={11}  data-qoder-id="qel-trash2-a226b64f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-trash2-a226b64f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;trash2&quot;,&quot;loc&quot;:{&quot;line&quot;:973,&quot;column&quot;:11}}"/>
@@ -1005,14 +1005,14 @@ function CartView({ cart, cartTotal, cartCount, onRemove, onUpdateAmount, onClea
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }} data-qoder-id="qel-div-a92ea01b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-a92ea01b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1005,&quot;column&quot;:17}}">
                   <button onClick={() => onUpdateAmount(item.id, -1)} style={{
                     width: 22, height: 22, borderRadius: '50%', border: `1px solid ${BORDER}`,
-                    background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: 'var(--cursor-cream)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }} data-qoder-id="qel-button-4bd7a880" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-4bd7a880&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1006,&quot;column&quot;:19}}">
                     <Minus size={11}  data-qoder-id="qel-minus-5215b165" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-minus-5215b165&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;minus&quot;,&quot;loc&quot;:{&quot;line&quot;:1010,&quot;column&quot;:21}}"/>
                   </button>
                   <span style={{ fontSize: 13, fontWeight: 600, minWidth: 16, textAlign: 'center' }} data-qoder-id="qel-span-873ff2f2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-873ff2f2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1012,&quot;column&quot;:19}}">{item.amount}</span>
                   <button onClick={() => onUpdateAmount(item.id, 1)} style={{
                     width: 22, height: 22, borderRadius: '50%', border: `1px solid ${BORDER}`,
-                    background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: 'var(--cursor-cream)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }} data-qoder-id="qel-button-50d7b05f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-50d7b05f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1013,&quot;column&quot;:19}}">
                     <Plus size={11}  data-qoder-id="qel-plus-60034434" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-plus-60034434&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;plus&quot;,&quot;loc&quot;:{&quot;line&quot;:1017,&quot;column&quot;:21}}"/>
                   </button>
@@ -1026,7 +1026,7 @@ function CartView({ cart, cartTotal, cartCount, onRemove, onUpdateAmount, onClea
       {/* 结算按钮 */}
       <div style={{
         padding: '16px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        position: 'sticky', bottom: 0, background: '#fff',
+        position: 'sticky', bottom: 0, background: 'var(--cursor-cream)',
       }} data-qoder-id="qel-div-af2ea98d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-af2ea98d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1027,&quot;column&quot;:7}}">
         <div data-qoder-id="qel-div-ae2ea7fa" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-ae2ea7fa&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1031,&quot;column&quot;:9}}">
           <span style={{ fontSize: 12, color: TEXT_TERTIARY }} data-qoder-id="qel-span-8e3ffdf7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-8e3ffdf7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;CartView&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1032,&quot;column&quot;:11}}">合计</span>
@@ -1101,7 +1101,7 @@ function OrderPreview({ preview, store, onCreateOrder, loading, ...qoderProps })
         {preview.privilegeMoney > 0 && (
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }} data-qoder-id="qel-div-4abaeb1e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-4abaeb1e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderPreview&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1102,&quot;column&quot;:11}}">
             <span style={{ fontSize: 12, color: TEXT_SECONDARY }} data-qoder-id="qel-span-c7216655" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-c7216655&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderPreview&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1103,&quot;column&quot;:13}}">优惠</span>
-            <span style={{ fontSize: 12, color: '#e74c3c' }} data-qoder-id="qel-span-c421619c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-c421619c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderPreview&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1104,&quot;column&quot;:13}}">-¥{preview.privilegeMoney?.toFixed(2)}</span>
+            <span style={{ fontSize: 12, color: 'var(--cursor-error, #e74c3c)' }} data-qoder-id="qel-span-c421619c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-c421619c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderPreview&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1104,&quot;column&quot;:13}}">-¥{preview.privilegeMoney?.toFixed(2)}</span>
           </div>
         )}
         {preview.deliveryFee > 0 && (
@@ -1122,7 +1122,7 @@ function OrderPreview({ preview, store, onCreateOrder, loading, ...qoderProps })
         disabled={loading}
         style={{
           width: '100%', padding: '12px', borderRadius: 22, border: 'none',
-          background: loading ? '#ccc' : ACCENT, color: '#fff',
+          background: loading ? 'var(--cursor-surface-400)' : ACCENT, color: '#fff',
           fontSize: 15, fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
         }}
@@ -1162,7 +1162,7 @@ function OrderTracking({ order, onCancel, loading, ...qoderProps }) {
         <div style={{ fontSize: 36, marginBottom: 8 }} data-qoder-id="qel-div-513b376b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-513b376b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderTracking&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1162,&quot;column&quot;:9}}">
           {isCancelled ? '❌' : (ORDER_TIMELINE.find(t => t.status === order.orderStatus)?.icon || '📋')}
         </div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: isCancelled ? '#e74c3c' : ACCENT, marginBottom: 4 }} data-qoder-id="qel-div-4e3b32b2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-4e3b32b2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderTracking&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1165,&quot;column&quot;:9}}">
+        <div style={{ fontSize: 18, fontWeight: 700, color: isCancelled ? 'var(--cursor-error, #e74c3c)' : ACCENT, marginBottom: 4 }} data-qoder-id="qel-div-4e3b32b2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-4e3b32b2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderTracking&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1165,&quot;column&quot;:9}}">
           {order.orderStatusName}
         </div>
         {order.takeMealCodeInfo?.code && order.takeMealCodeInfo.code !== '生成中' && (
@@ -1196,7 +1196,7 @@ function OrderTracking({ order, onCancel, loading, ...qoderProps }) {
                     <div style={{
                       width: isCurrent ? 12 : 8, height: isCurrent ? 12 : 8,
                       borderRadius: '50%',
-                      background: isPast ? ACCENT : isCurrent ? ACCENT : '#ddd',
+                      background: isPast ? ACCENT : isCurrent ? ACCENT : 'var(--cursor-surface-300)',
                       border: isCurrent ? `2px solid ${ACCENT}` : 'none',
                       boxShadow: isCurrent ? `0 0 0 3px ${ACCENT_BG}` : 'none',
                       transition: 'all 0.3s',
@@ -1204,7 +1204,7 @@ function OrderTracking({ order, onCancel, loading, ...qoderProps }) {
                     {idx < ORDER_TIMELINE.length - 1 && (
                       <div style={{
                         width: 2, height: 24,
-                        background: isPast && order.orderStatus >= ORDER_TIMELINE[idx + 1]?.status ? ACCENT : '#e0e0e0',
+                        background: isPast && order.orderStatus >= ORDER_TIMELINE[idx + 1]?.status ? ACCENT : 'var(--cursor-surface-400)',
                       }}  data-qoder-id="qel-div-4738e916" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-4738e916&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderTracking&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1205,&quot;column&quot;:23}}"/>
                     )}
                   </div>
@@ -1265,7 +1265,7 @@ function OrderTracking({ order, onCancel, loading, ...qoderProps }) {
       </div>
 
       {order.remark && (
-        <div style={{ padding: '8px 12px', borderRadius: 8, background: '#fff8e1', fontSize: 11, color: '#f57f17', marginBottom: 16 }} data-qoder-id="qel-div-4b47f9ec" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-4b47f9ec&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderTracking&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1268,&quot;column&quot;:9}}">
+        <div style={{ padding: '8px 12px', borderRadius: 8, background: 'var(--cursor-surface-100)', fontSize: 11, color: 'var(--cursor-gold)', marginBottom: 16 }} data-qoder-id="qel-div-4b47f9ec" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-4b47f9ec&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/order/OrderingPanel.jsx&quot;,&quot;componentName&quot;:&quot;OrderTracking&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1268,&quot;column&quot;:9}}">
           备注：{order.remark}
         </div>
       )}
@@ -1277,7 +1277,7 @@ function OrderTracking({ order, onCancel, loading, ...qoderProps }) {
           disabled={loading}
           style={{
             width: '100%', padding: '10px', borderRadius: 20,
-            border: `1px solid ${BORDER}`, background: '#fff',
+            border: `1px solid ${BORDER}`, background: 'var(--cursor-cream)',
             fontSize: 13, fontWeight: 500, color: TEXT_SECONDARY,
             cursor: loading ? 'not-allowed' : 'pointer',
           }}

@@ -38,6 +38,7 @@ export default function WorkflowView(qoderProps) {
               variant="ghost"
               size="sm"
               onClick={() => setActiveTab(tab.id)}
+              title={tab.label}
               className={cn(
                 'gap-2',
                 isActive
