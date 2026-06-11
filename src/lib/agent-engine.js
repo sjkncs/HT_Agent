@@ -5571,8 +5571,9 @@ async function _executeToolCallingLoop(llmClient, mcpIntegration, messages, tool
         const analysisType = toolArgs.analysisType || 'general'
         const prompt = _visionService.HEYTEA_VISION_PROMPTS[analysisType] || _visionService.HEYTEA_VISION_PROMPTS.general
         _visionService.configureVision({ prompt })
-        return _visionService.analyzeImage({ type: mediaType, arrayBuffer: () => Promise.resolve(new Uint8Array()) })
-          .catch(() => _visionService.describeImage?.(imageData, mediaType, null, 1) || '图片分析失败')
+        // 直接使用 describeImage 传入 base64 数据（describeImage 已 export）
+        return _visionService.describeImage(imageData, mediaType, null, 1)
+          .catch(err => `图片分析失败: ${err.message}`)
       }
       default:
         return `未知本地工具: ${toolName}`

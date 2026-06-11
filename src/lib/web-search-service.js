@@ -11,7 +11,7 @@
 // ── 配置 ──
 const SEARCH_CONFIG = {
   provider: 'tavily',   // 'tavily' | 'brave'
-  apiKey: '',           // 搜索引擎 API Key
+  apiKey: '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',           // 搜索引擎 API Key
   maxResults: 5,        // 单次搜索最大结果数
   maxUses: 3,           // 单次对话最大搜索次数
   searchDepth: 'basic', // Tavily: 'basic' | 'advanced'

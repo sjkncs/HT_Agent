@@ -1056,29 +1056,7 @@ function MessageBubble({ message, isStreaming, ...qoderProps }) {
     )
   }
 
-  // Simple HTML escape to prevent XSS before applying markdown-like transforms
-  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-
-  const renderContent = (text) => {
-    return text.split('\n').map((line, i) => {
-      let rendered = esc(line)
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/^- (.*)$/g, '<span class="flex gap-2"><span style="color: var(--cursor-orange)" class="mt-0.5">•</span><span>$1</span></span>')
-        .replace(/^(\d+)\. (.*)$/g, '<span class="flex gap-2"><span style="color: var(--cursor-orange)" class="font-medium">$1.</span><span>$2</span></span>')
-
-      if (line.trim() === '') {
-        return <div key={i} className="h-2"  data-qoder-id="qel-h-2-7da405d7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-2-7da405d7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;h-2&quot;,&quot;loc&quot;:{&quot;line&quot;:1063,&quot;column&quot;:16}}"/>
-      }
-
-      return (
-        <div
-          key={i}
-          className={cn('leading-relaxed', i > 0 && 'mt-1')}
-          dangerouslySetInnerHTML={{ __html: rendered }}
-         data-qoder-id="qel-div-220c3bc0" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-220c3bc0&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1067,&quot;column&quot;:9}}"/>
-      )
-    })
-  }
+  // MarkdownRenderer replaces the old renderContent for rich text rendering
 
   return (
     <div
@@ -1508,6 +1486,7 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
   const [showMore, setShowMore] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [attachedFile, setAttachedFile] = useState(null)
+  const [attachedImage, setAttachedImage] = useState(null) // { file, base64, preview, analysis }
   const [mediaError, setMediaError] = useState('')
   const textareaRef = useRef(null)
   const fileInputRef = useRef(null)
@@ -1522,6 +1501,14 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
     if (attachedFile) {
       finalText = `[已上传文件: ${attachedFile.name}]\n${text}`
       setAttachedFile(null)
+    }
+    if (attachedImage) {
+      const imgNote = attachedImage.analysis
+        ? `[用户上传图片: ${attachedImage.file.name}]\n[图片分析结果: ${attachedImage.analysis}]\n${finalText}`
+        : `[用户上传图片: ${attachedImage.file.name}]\n${finalText}`
+      finalText = imgNote
+      URL.revokeObjectURL(attachedImage.preview)
+      setAttachedImage(null)
     }
     onSend(finalText)
     setInput('')
@@ -1545,12 +1532,29 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
   }
 
   /* ── File upload handler ── */
-  const handleFileSelect = (e, type) => {
+  const handleFileSelect = async (e, type) => {
     const file = e.target.files?.[0]
     if (!file) return
-    setAttachedFile(file)
-    setInput(prev => prev ? prev : `[${type === 'image' ? '图片' : '文件'}: ${file.name}] `)
     e.target.value = '' // reset so same file can be re-selected
+
+    if (type === 'image') {
+      // 图片上传：转 base64 并调用视觉 API 分析
+      const preview = URL.createObjectURL(file)
+      setAttachedImage({ file, preview, analysis: '分析中...' })
+      setInput(prev => prev ? prev : `请帮我看看这张图片 `)
+      try {
+        const { analyzeImage } = await import('../../lib/vision-service.js')
+        const description = await analyzeImage(file)
+        setAttachedImage(prev => prev ? { ...prev, analysis: description } : null)
+      } catch (err) {
+        console.warn('[ImageUpload] 视觉分析失败:', err.message)
+        setAttachedImage(prev => prev ? { ...prev, analysis: null } : null)
+        setMediaError(`图片分析失败: ${err.message}（图片仍将随消息发送）`)
+      }
+    } else {
+      setAttachedFile(file)
+      setInput(prev => prev ? prev : `[文件: ${file.name}] `)
+    }
   }
 
   /* ── Voice recording handler (Web MediaRecorder API) ── */
@@ -1674,6 +1678,32 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
             <span style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-span-8a39a016" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-8a39a016&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1665,&quot;column&quot;:13}}">({(attachedFile.size / 1024).toFixed(1)}KB)</span>
             <button className="ml-auto flex-shrink-0" onClick={() => { setAttachedFile(null); setInput(prev => prev.replace(/\[(已上传文件|图片|文件):.*?\]\s*/, '')) }} data-qoder-id="qel-ml-auto-33f1f5ee" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-ml-auto-33f1f5ee&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;ml-auto&quot;,&quot;loc&quot;:{&quot;line&quot;:1666,&quot;column&quot;:13}}">
               <X className="h-3 w-3" style={{ color: 'var(--cursor-border-55)' }}  data-qoder-id="qel-h-3-cc0748c4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-cc0748c4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:1667,&quot;column&quot;:15}}"/>
+            </button>
+          </div>
+        )}
+
+        {/* Attached image preview with vision analysis status */}
+        {attachedImage && (
+          <div className="flex items-center gap-2 mb-1.5 px-2 py-1.5 rounded-md text-[11px] animate-fade-in" style={{
+            background: 'var(--cursor-surface-300)',
+            color: 'var(--cursor-ink)',
+            border: '1px solid var(--cursor-border-10)',
+          }}>
+            <img src={attachedImage.preview} alt={attachedImage.file.name} style={{
+              width: '36px', height: '36px', borderRadius: '6px', objectFit: 'cover', border: '1px solid #e5e5e5',
+            }} />
+            <div className="flex-1 min-w-0">
+              <div className="truncate" style={{ fontSize: '11px' }}>{attachedImage.file.name}</div>
+              <div style={{ fontSize: '10px', color: attachedImage.analysis === '分析中...' ? 'var(--cursor-orange)' : '#27ae60' }}>
+                {attachedImage.analysis === '分析中...' ? '🔍 AI 视觉分析中...' : '✓ 已分析'}
+              </div>
+            </div>
+            <button className="flex-shrink-0" onClick={() => {
+              URL.revokeObjectURL(attachedImage.preview)
+              setAttachedImage(null)
+              setInput(prev => prev.replace(/请帮我看看这张图片\s*/, ''))
+            }}>
+              <X className="h-3 w-3" style={{ color: 'var(--cursor-border-55)' }} />
             </button>
           </div>
         )}

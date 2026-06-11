@@ -13,7 +13,7 @@ const VISION_CONFIG = {
   // 默认使用阿里云 DashScope (qwen-vl) 或可配置为 GPT-4o / GLM-4V 等
   // 默认使用 Vite 代理避免 CORS（/api/vision → DashScope）
   baseUrl: '/api/vision',
-  apiKey: '',        // API Key
+  apiKey: 'sk-ae08dbba7ec94b9dbdbac405c035b057',        // API Key (DashScope)
   model: 'qwen-vl-max', // 视觉模型名称
   maxImages: 5,      // 单次请求最大图片数
   prompt: '请详细描述这张图片的内容，包括：主体物品、文字内容（如有）、颜色、布局。如果是食品相关，请特别关注食品的外观、包装、标签等信息。',
@@ -42,7 +42,7 @@ export function isVisionEnabled() {
  * @param {number} index - 图片序号
  * @returns {Promise<string>} 图片描述文本
  */
-async function describeImage(imageData, mediaType, imageUrl, index) {
+export async function describeImage(imageData, mediaType, imageUrl, index) {
   const { baseUrl, apiKey, model, prompt, timeout } = VISION_CONFIG
   const url = `${baseUrl.replace(/\/$/, '')}/chat/completions`
 
