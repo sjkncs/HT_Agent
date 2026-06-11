@@ -44,10 +44,11 @@ function loadServiceConfig() {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) return JSON.parse(raw)
   } catch { /* ignore */ }
+  // 预填各服务模块的硬编码默认值
   return {
-    vision: { apiKey: '', baseUrl: '/api/vision', model: 'qwen-vl-max' },
-    search: { apiKey: '', provider: 'tavily' },
-    memory: { apiKey: '', enabled: false, baseUrl: 'https://memos.memtensor.cn/api/openmem/v1' },
+    vision: { apiKey: 'sk-ae08dbba7ec94b9dbdbac405c035b057', baseUrl: '/api/vision', model: 'qwen-vl-max' },
+    search: { apiKey: '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', provider: 'tavily' },
+    memory: { apiKey: 'mpg-B8vt02G3gwlMsZ6sJ4u8yTJalxdHD6os9+Ep5dLP', enabled: true, baseUrl: 'https://memos.memtensor.cn/api/openmem/v1' },
   }
 }
 

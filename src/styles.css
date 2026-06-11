@@ -19,6 +19,7 @@
     --font-size-base: 1rem;
 
     /* ─── Cursor Surface Scale ─── */
+    --cursor-bg: #f2f1ed;
     --cursor-surface-100: #f7f7f4;
     --cursor-surface-200: #f2f1ed;
     --cursor-surface-300: #ebeae5;
@@ -141,6 +142,7 @@
     --seed-surface: #26251e;
     --seed-radius: 8px;
 
+    --cursor-bg: #1a1916;
     --cursor-surface-100: #2a2923;
     --cursor-surface-200: #1a1916;
     --cursor-surface-300: #33322b;

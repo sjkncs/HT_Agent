@@ -1133,10 +1133,7 @@ function RichCardRenderer({ toolCalls }) {
           if (m) products.push({ name: m[2].trim(), price: m[3] })
         }
         if (products.length > 0) {
-          cards.push({
-            type: 'products',
-            data: products.slice(0, 6),
-          })
+          cards.push({ type: 'products', data: products.slice(0, 6) })
         }
       }
 
@@ -1145,14 +1142,12 @@ function RichCardRenderer({ toolCalls }) {
         const orderIdMatch = tc.result.match(/订单号[：:]\s*(\S+)/)
         const priceMatch = tc.result.match(/[¥￥](\d+(?:\.\d+)?)/)
         const storeMatch = tc.result.match(/门店[：:]\s*(.+)/)
-        const payMatch = tc.result.match(/扫码支付[：:]\s*(.+)/)
         cards.push({
           type: 'order',
           data: {
             orderId: orderIdMatch?.[1] || '',
             price: priceMatch?.[1] || '',
             store: storeMatch?.[1]?.trim() || '',
-            payUrl: payMatch?.[1]?.trim() || '',
           },
         })
       }
@@ -1167,32 +1162,30 @@ function RichCardRenderer({ toolCalls }) {
         if (card.type === 'products') {
           return (
             <div key={i} style={{
-              border: '1px solid #eee',
+              border: '1px solid var(--cursor-border-10)',
               borderRadius: '10px',
               overflow: 'hidden',
-              background: 'var(--cursor-surface-200, #fafafa)',
+              background: 'var(--cursor-surface-200)',
             }}>
               <div style={{
                 padding: '8px 12px',
-                background: 'linear-gradient(135deg, #fff5f0, #fff)',
-                borderBottom: '1px solid #f0f0f0',
+                background: 'var(--cursor-surface-300)',
+                borderBottom: '1px solid var(--cursor-border-10)',
                 fontSize: '12px',
                 fontWeight: 600,
-                color: '#333',
-              }}>
-                🍵 推荐商品
-              </div>
+                color: 'var(--cursor-ink)',
+              }}>推荐商品</div>
               {card.data.map((p, j) => (
                 <div key={j} style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   padding: '8px 12px',
-                  borderBottom: j < card.data.length - 1 ? '1px solid #f5f5f5' : 'none',
+                  borderBottom: j < card.data.length - 1 ? '1px solid var(--cursor-border-10)' : 'none',
                   fontSize: '13px',
                 }}>
-                  <span style={{ color: '#333' }}>{p.name}</span>
-                  <span style={{ color: '#f54e00', fontWeight: 600, fontSize: '13px' }}>¥{p.price}</span>
+                  <span style={{ color: 'var(--cursor-ink)' }}>{p.name}</span>
+                  <span style={{ color: 'var(--cursor-orange)', fontWeight: 600, fontSize: '13px' }}>¥{p.price}</span>
                 </div>
               ))}
             </div>
@@ -1202,25 +1195,23 @@ function RichCardRenderer({ toolCalls }) {
         if (card.type === 'order') {
           return (
             <div key={i} style={{
-              border: '1px solid #e8f5e9',
+              border: '1px solid var(--cursor-border-10)',
               borderRadius: '10px',
               overflow: 'hidden',
-              background: 'var(--cursor-surface-200, #fafafa)',
+              background: 'var(--cursor-surface-200)',
             }}>
               <div style={{
                 padding: '8px 12px',
-                background: 'linear-gradient(135deg, #e8f5e9, #fff)',
-                borderBottom: '1px solid #e8f5e9',
+                background: 'hsl(159 40% 94%)',
+                borderBottom: '1px solid var(--cursor-border-10)',
                 fontSize: '12px',
                 fontWeight: 600,
-                color: '#2e7d32',
-              }}>
-                ✅ 订单已创建
-              </div>
-              <div style={{ padding: '10px 12px', fontSize: '13px', lineHeight: '1.8' }}>
-                {card.data.store && <div>📍 门店：<strong>{card.data.store}</strong></div>}
-                {card.data.orderId && <div>📋 订单号：{card.data.orderId}</div>}
-                {card.data.price && <div>💰 需支付：<span style={{ color: '#f54e00', fontWeight: 600 }}>¥{card.data.price}</span></div>}
+                color: 'var(--cursor-success)',
+              }}>订单已创建</div>
+              <div style={{ padding: '10px 12px', fontSize: '13px', lineHeight: '1.8', color: 'var(--cursor-ink)' }}>
+                {card.data.store && <div>门店：<strong>{card.data.store}</strong></div>}
+                {card.data.orderId && <div>订单号：{card.data.orderId}</div>}
+                {card.data.price && <div>需支付：<span style={{ color: 'var(--cursor-orange)', fontWeight: 600 }}>¥{card.data.price}</span></div>}
               </div>
             </div>
           )
