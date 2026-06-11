@@ -1084,7 +1084,7 @@ function OrderingQuickReplies({ text, onSend, isStreaming }) {
   if (replies.length === 0) return null
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }} data-qoder-id="qel-div-97c5c5c7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-97c5c5c7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;OrderingQuickReplies&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1087,&quot;column&quot;:5}}">
       {replies.map((r, i) => (
         <button
           key={i}
@@ -1108,7 +1108,7 @@ function OrderingQuickReplies({ text, onSend, isStreaming }) {
             e.currentTarget.style.background = 'transparent'
             e.currentTarget.style.color = 'var(--cursor-orange, #f54e00)'
           }}
-        >
+         data-qoder-id="qel-button-98513860" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-98513860&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;OrderingQuickReplies&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1089,&quot;column&quot;:9}}">
           {r.label}
         </button>
       ))}
@@ -1157,7 +1157,7 @@ function RichCardRenderer({ toolCalls }) {
   if (cards.length === 0) return null
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }} data-qoder-id="qel-div-7d2fb72f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7d2fb72f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1160,&quot;column&quot;:5}}">
       {cards.map((card, i) => {
         if (card.type === 'products') {
           return (
@@ -1166,7 +1166,7 @@ function RichCardRenderer({ toolCalls }) {
               borderRadius: '10px',
               overflow: 'hidden',
               background: 'var(--cursor-surface-200)',
-            }}>
+            }} data-qoder-id="qel-div-7c2fb59c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7c2fb59c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1164,&quot;column&quot;:13}}">
               <div style={{
                 padding: '8px 12px',
                 background: 'var(--cursor-surface-300)',
@@ -1174,7 +1174,7 @@ function RichCardRenderer({ toolCalls }) {
                 fontSize: '12px',
                 fontWeight: 600,
                 color: 'var(--cursor-ink)',
-              }}>推荐商品</div>
+              }} data-qoder-id="qel-div-7b2fb409" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7b2fb409&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1170,&quot;column&quot;:15}}">推荐商品</div>
               {card.data.map((p, j) => (
                 <div key={j} style={{
                   display: 'flex',
@@ -1183,9 +1183,9 @@ function RichCardRenderer({ toolCalls }) {
                   padding: '8px 12px',
                   borderBottom: j < card.data.length - 1 ? '1px solid var(--cursor-border-10)' : 'none',
                   fontSize: '13px',
-                }}>
-                  <span style={{ color: 'var(--cursor-ink)' }}>{p.name}</span>
-                  <span style={{ color: 'var(--cursor-orange)', fontWeight: 600, fontSize: '13px' }}>¥{p.price}</span>
+                }} data-qoder-id="qel-div-7a2fb276" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7a2fb276&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1179,&quot;column&quot;:17}}">
+                  <span style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-span-7ce248ff" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-7ce248ff&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1187,&quot;column&quot;:19}}">{p.name}</span>
+                  <span style={{ color: 'var(--cursor-orange)', fontWeight: 600, fontSize: '13px' }} data-qoder-id="qel-span-7be2476c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-7be2476c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1188,&quot;column&quot;:19}}">¥{p.price}</span>
                 </div>
               ))}
             </div>
@@ -1199,7 +1199,7 @@ function RichCardRenderer({ toolCalls }) {
               borderRadius: '10px',
               overflow: 'hidden',
               background: 'var(--cursor-surface-200)',
-            }}>
+            }} data-qoder-id="qel-div-872fc6ed" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-872fc6ed&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1197,&quot;column&quot;:13}}">
               <div style={{
                 padding: '8px 12px',
                 background: 'hsl(159 40% 94%)',
@@ -1207,11 +1207,11 @@ function RichCardRenderer({ toolCalls }) {
                 fontSize: '12px',
                 fontWeight: 600,
                 color: 'var(--cursor-success)',
-              }}>订单已创建</div>
-              <div style={{ padding: '10px 12px', fontSize: '13px', lineHeight: '1.8', color: 'var(--cursor-ink)' }}>
-                {card.data.store && <div>门店：<strong>{card.data.store}</strong></div>}
-                {card.data.orderId && <div>订单号：{card.data.orderId}</div>}
-                {card.data.price && <div>需支付：<span style={{ color: 'var(--cursor-orange)', fontWeight: 600 }}>¥{card.data.price}</span></div>}
+              }} data-qoder-id="qel-div-862fc55a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-862fc55a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1203,&quot;column&quot;:15}}">订单已创建</div>
+              <div style={{ padding: '10px 12px', fontSize: '13px', lineHeight: '1.8', color: 'var(--cursor-ink)' }} data-qoder-id="qel-div-7d13e0b2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7d13e0b2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1211,&quot;column&quot;:15}}">
+                {card.data.store && <div data-qoder-id="qel-div-7e13e245" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7e13e245&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1212,&quot;column&quot;:37}}">门店：<strong data-qoder-id="qel-strong-94c2b4e2" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-strong-94c2b4e2&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;strong&quot;,&quot;loc&quot;:{&quot;line&quot;:1212,&quot;column&quot;:45}}">{card.data.store}</strong></div>}
+                {card.data.orderId && <div data-qoder-id="qel-div-7c13df1f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7c13df1f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1213,&quot;column&quot;:39}}">订单号：{card.data.orderId}</div>}
+                {card.data.price && <div data-qoder-id="qel-div-7913da66" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-7913da66&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1214,&quot;column&quot;:37}}">需支付：<span style={{ color: 'var(--cursor-orange)', fontWeight: 600 }} data-qoder-id="qel-span-8e02b76d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-8e02b76d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;RichCardRenderer&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1214,&quot;column&quot;:46}}">¥{card.data.price}</span></div>}
               </div>
             </div>
           )
@@ -1259,18 +1259,18 @@ function MessageBubble({ message, isStreaming, onSend, ...qoderProps }) {
       <div className={cn('max-w-[85%] flex flex-col', isUser ? 'items-end' : 'items-start')} data-qoder-id="qel-div-280c4532" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-280c4532&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1084,&quot;column&quot;:7}}">
         <div className={cn(isUser ? 'bubble-user' : 'bubble-ai', 'text-sm leading-relaxed')} data-qoder-id="qel-div-270c439f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-270c439f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1085,&quot;column&quot;:9}}">
           {isUser ? (
-            <div style={{ whiteSpace: 'pre-wrap' }}>{message.content}</div>
+            <div style={{ whiteSpace: 'pre-wrap' }} data-qoder-id="qel-div-382ef0a4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-382ef0a4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1262,&quot;column&quot;:13}}">{message.content}</div>
           ) : isStreaming ? (
             <>
-              <MarkdownRenderer content={message.content} />
+              <MarkdownRenderer content={message.content}  data-qoder-id="qel-markdownrenderer-019fda05" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-markdownrenderer-019fda05&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;markdownrenderer&quot;,&quot;loc&quot;:{&quot;line&quot;:1265,&quot;column&quot;:15}}"/>
               <span
                 className="ml-0.5 inline-block h-4 w-0.5 animate-pulse-soft"
                 style={{ background: 'var(--cursor-orange)' }}
                data-qoder-id="qel-ml-0-5-a2ba8dbe" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-ml-0-5-a2ba8dbe&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;ml-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:1089,&quot;column&quot;:15}}"/>
             </>
           ) : (
-            <div>
-              <MarkdownRenderer content={message.content} />
+            <div data-qoder-id="qel-div-352eebeb" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-352eebeb&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1272,&quot;column&quot;:13}}">
+              <MarkdownRenderer content={message.content}  data-qoder-id="qel-markdownrenderer-fa9fcf00" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-markdownrenderer-fa9fcf00&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;markdownrenderer&quot;,&quot;loc&quot;:{&quot;line&quot;:1273,&quot;column&quot;:15}}"/>
             </div>
           )}
         </div>
@@ -1299,12 +1299,12 @@ function MessageBubble({ message, isStreaming, onSend, ...qoderProps }) {
 
         {/* Rich Cards from tool call results */}
         {!isUser && message.toolCallsMade && (
-          <RichCardRenderer toolCalls={message.toolCallsMade} />
+          <RichCardRenderer toolCalls={message.toolCallsMade}  data-qoder-id="qel-richcardrenderer-09a2fbd4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-richcardrenderer-09a2fbd4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;richcardrenderer&quot;,&quot;loc&quot;:{&quot;line&quot;:1302,&quot;column&quot;:11}}"/>
         )}
 
         {/* Ordering Quick Reply Buttons */}
         {!isUser && (
-          <OrderingQuickReplies text={message.content} onSend={onSend} isStreaming={isStreaming} />
+          <OrderingQuickReplies text={message.content} onSend={onSend} isStreaming={isStreaming}  data-qoder-id="qel-orderingquickreplies-7992ac75" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-orderingquickreplies-7992ac75&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;orderingquickreplies&quot;,&quot;loc&quot;:{&quot;line&quot;:1307,&quot;column&quot;:11}}"/>
         )}
 
         {/* Actions */}
@@ -1888,13 +1888,13 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
             background: 'var(--cursor-surface-300)',
             color: 'var(--cursor-ink)',
             border: '1px solid var(--cursor-border-10)',
-          }}>
+          }} data-qoder-id="qel-flex-c9d07928" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-c9d07928&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:1887,&quot;column&quot;:11}}">
             <img src={attachedImage.preview} alt={attachedImage.file.name} style={{
               width: '36px', height: '36px', borderRadius: '6px', objectFit: 'cover', border: '1px solid #e5e5e5',
-            }} />
-            <div className="flex-1 min-w-0">
-              <div className="truncate" style={{ fontSize: '11px' }}>{attachedImage.file.name}</div>
-              <div style={{ fontSize: '10px', color: attachedImage.analysis === '分析中...' ? 'var(--cursor-orange)' : '#27ae60' }}>
+            }}  data-qoder-id="qel-img-9c781cd5" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-img-9c781cd5&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;img&quot;,&quot;loc&quot;:{&quot;line&quot;:1892,&quot;column&quot;:13}}"/>
+            <div className="flex-1 min-w-0" data-qoder-id="qel-flex-1-2ee0f36c" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-1-2ee0f36c&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;flex-1&quot;,&quot;loc&quot;:{&quot;line&quot;:1895,&quot;column&quot;:13}}">
+              <div className="truncate" style={{ fontSize: '11px' }} data-qoder-id="qel-truncate-3df61dc4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-truncate-3df61dc4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;truncate&quot;,&quot;loc&quot;:{&quot;line&quot;:1896,&quot;column&quot;:15}}">{attachedImage.file.name}</div>
+              <div style={{ fontSize: '10px', color: attachedImage.analysis === '分析中...' ? 'var(--cursor-orange)' : '#27ae60' }} data-qoder-id="qel-div-0cbae011" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-0cbae011&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1897,&quot;column&quot;:15}}">
                 {attachedImage.analysis === '分析中...' ? '🔍 AI 视觉分析中...' : '✓ 已分析'}
               </div>
             </div>
@@ -1902,8 +1902,8 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
               URL.revokeObjectURL(attachedImage.preview)
               setAttachedImage(null)
               setInput(prev => prev.replace(/请帮我看看这张图片\s*/, ''))
-            }}>
-              <X className="h-3 w-3" style={{ color: 'var(--cursor-border-55)' }} />
+            }} data-qoder-id="qel-flex-shrink-0-55b70be8" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-shrink-0-55b70be8&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;flex-shrink-0&quot;,&quot;loc&quot;:{&quot;line&quot;:1901,&quot;column&quot;:13}}">
+              <X className="h-3 w-3" style={{ color: 'var(--cursor-border-55)' }}  data-qoder-id="qel-h-3-c9fa79ab" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-h-3-c9fa79ab&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;h-3&quot;,&quot;loc&quot;:{&quot;line&quot;:1906,&quot;column&quot;:15}}"/>
             </button>
           </div>
         )}

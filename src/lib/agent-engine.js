@@ -5746,7 +5746,7 @@ ${orderingSection}${memoryHint}
       // 如果有工具定义，注入 tools 进入 ReAct 循环
       if (tools && tools.length > 0) {
         return _executeToolCallingLoop(llmClient, mcpIntegration, messages, tools, {
-          temperature: 0.3, maxTokens: 1024,
+          temperature: 0.3, maxTokens: 2048,
         }, conversationHistory, userText)
       }
       // 无工具可用时仍用点单提示词做对话式回复（不降级到食安流程）
@@ -5767,7 +5767,7 @@ ${orderingSection}${memoryHint}
       // 通用知识意图也支持工具调用（web_search, memory 等）
       if (tools && tools.length > 0) {
         return _executeToolCallingLoop(llmClient, mcpIntegration, messages, tools, {
-          temperature: 0.3, maxTokens: 1024,
+          temperature: 0.3, maxTokens: 2048,
         }, conversationHistory, userText)
       }
     } else {
@@ -5785,7 +5785,7 @@ ${orderingSection}${memoryHint}
     // 3. 调用 LLM API
     const result = await llmClient.chatCompletion(messages, {
       temperature: 0.3,
-      maxTokens: 1024,
+      maxTokens: 1536,
     })
 
     // 4. 后处理: 检查回复质量

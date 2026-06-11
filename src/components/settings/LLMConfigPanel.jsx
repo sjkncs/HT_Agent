@@ -150,7 +150,7 @@ export default function LLMConfigPanel(qoderProps) {
     <div className={["flex-1 overflow-y-auto p-4 lg:p-6", qoderProps?.className].filter(Boolean).join(" ")} style={qoderProps?.style} data-qoder-id={qoderProps?.["data-qoder-id"]} data-qoder-source={qoderProps?.["data-qoder-source"]}>
       <div className="max-w-2xl mx-auto space-y-1" data-qoder-id="qel-max-w-2xl-95b45f75" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-max-w-2xl-95b45f75&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;max-w-2xl&quot;,&quot;loc&quot;:{&quot;line&quot;:150,&quot;column&quot;:7}}">
         {/* Settings Tab Navigation */}
-        <div className="flex gap-1 mb-4 pb-2" style={{ borderBottom: '1px solid var(--cursor-border-10)' }}>
+        <div className="flex gap-1 mb-4 pb-2" style={{ borderBottom: '1px solid var(--cursor-border-10)' }} data-qoder-id="qel-flex-faaf6952" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-flex-faaf6952&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;flex&quot;,&quot;loc&quot;:{&quot;line&quot;:153,&quot;column&quot;:9}}">
           <Link to="/settings" style={{
             padding: '6px 14px',
             borderRadius: '6px 6px 0 0',
@@ -160,7 +160,7 @@ export default function LLMConfigPanel(qoderProps) {
             color: 'var(--cursor-orange)',
             borderBottom: '2px solid var(--cursor-orange)',
             background: 'transparent',
-          }}>模型设置</Link>
+          }} data-qoder-id="qel-link-85755495" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-link-85755495&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;link&quot;,&quot;loc&quot;:{&quot;line&quot;:154,&quot;column&quot;:11}}">模型设置</Link>
           <Link to="/settings/services" style={{
             padding: '6px 14px',
             borderRadius: '6px 6px 0 0',
@@ -170,7 +170,7 @@ export default function LLMConfigPanel(qoderProps) {
             color: 'var(--cursor-border-55)',
             borderBottom: '2px solid transparent',
             background: 'transparent',
-          }}>服务 API 设置</Link>
+          }} data-qoder-id="qel-link-7e754990" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-link-7e754990&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;link&quot;,&quot;loc&quot;:{&quot;line&quot;:164,&quot;column&quot;:11}}">服务 API 设置</Link>
         </div>
 
         {/* 页面标题 */}

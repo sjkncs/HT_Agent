@@ -21,10 +21,13 @@
 
 // ─── 配置 ───
 const CONFIG = {
-  MAX_DIRECT_HISTORY: 8,         // 直接传给LLM的最大消息对数
-  SUMMARY_THRESHOLD: 10,         // 超过此数量触发摘要
-  MAX_FACTS: 20,                 // 最多追踪的事实数
-  FACT_DECAY_TURNS: 30,          // 事实经过多少轮后降权
+  MAX_DIRECT_HISTORY: 20,        // 直接传给LLM的消息对数（20对=40条，现代LLM上下文足够承载）
+  SUMMARY_THRESHOLD: 6,          // 超过6条消息即触发摘要（3轮对话后开始压缩早期内容）
+  SUMMARY_KEEP_RECENT: 6,        // 摘要时保留最近6条消息不压缩（与 MAX_DIRECT_HISTORY 解耦）
+  MAX_FACTS: 30,                 // 最多追踪的事实数（扩展以覆盖更多对话细节）
+  FACT_DECAY_TURNS: 50,          // 事实经过多少轮后降权（延长衰减以保留更多上下文）
+  COMPRESS_MAX_CHARS: 250,       // 单条消息压缩后最大字符数（从100提升，保留更多语义）
+  SUMMARY_MAX_CHARS: 2500,       // 摘要注入 system prompt 时的最大字符数
   STORAGE_KEY: 'heytea_conv_memory',
 }
 
@@ -173,12 +176,16 @@ export function createConversationMemory(sessionId) {
 
     /**
      * 生成历史摘要 — 将早期对话压缩为结构化摘要
+     * 与 MAX_DIRECT_HISTORY 解耦：摘要覆盖旧消息，直接历史窗口独立控制
      * @param {Array} messages - 完整消息列表 [{role, content}]
      */
     generateSummary(messages) {
       if (messages.length <= CONFIG.SUMMARY_THRESHOLD) return
 
-      const toSummarize = messages.slice(memory.summarizedUpTo, messages.length - CONFIG.MAX_DIRECT_HISTORY * 2)
+      // 摘要范围：从上次摘要位置到「最近 N 条消息」之前
+      // 使用 SUMMARY_KEEP_RECENT（小窗口）而非 MAX_DIRECT_HISTORY * 2（大窗口）
+      const recentStart = Math.max(0, messages.length - CONFIG.SUMMARY_KEEP_RECENT)
+      const toSummarize = messages.slice(memory.summarizedUpTo, recentStart)
       if (toSummarize.length < 2) return
 
       const summaryParts = []
@@ -209,11 +216,15 @@ export function createConversationMemory(sessionId) {
       const newSummary = summaryParts.join('\n')
       if (memory.summary) {
         memory.summary = `[早期对话]\n${memory.summary}\n\n[后续对话]\n${newSummary}`
+        // 摘要膨胀保护：超过上限时只保留最新部分
+        if (memory.summary.length > CONFIG.SUMMARY_MAX_CHARS * 2) {
+          memory.summary = memory.summary.slice(-CONFIG.SUMMARY_MAX_CHARS)
+        }
       } else {
         memory.summary = newSummary
       }
 
-      memory.summarizedUpTo = messages.length - CONFIG.MAX_DIRECT_HISTORY * 2
+      memory.summarizedUpTo = recentStart
       _saveMemory(memory)
     },
 
@@ -238,9 +249,9 @@ export function createConversationMemory(sessionId) {
       if (memory.summary) {
         parts.push('')
         parts.push('## 此前对话摘要')
-        // 截断过长的摘要
-        const truncated = memory.summary.length > 800 
-          ? memory.summary.slice(0, 800) + '...(更早的对话已省略)'
+        // 截断过长的摘要（使用配置的上限）
+        const truncated = memory.summary.length > CONFIG.SUMMARY_MAX_CHARS 
+          ? memory.summary.slice(0, CONFIG.SUMMARY_MAX_CHARS) + '...(更早的对话已省略)'
           : memory.summary
         parts.push(truncated)
       }
@@ -273,9 +284,12 @@ export function createConversationMemory(sessionId) {
 
       // 如果有摘要，将摘要作为第一条"system"级别上下文
       if (memory.summary) {
+        const summaryText = memory.summary.length > CONFIG.SUMMARY_MAX_CHARS
+          ? memory.summary.slice(0, CONFIG.SUMMARY_MAX_CHARS) + '...'
+          : memory.summary
         const summaryMsg = {
           role: 'system',
-          content: `[此前对话摘要 — 请参考但不要直接复述]\n${memory.summary.slice(0, 500)}`,
+          content: `[此前对话摘要 — 请参考但不要直接复述]\n${summaryText}`,
         }
         return [summaryMsg, ...recentMessages]
       }
@@ -344,15 +358,15 @@ function _extractIntentKeywords(text) {
 
 function _compressMessage(text, role) {
   if (!text) return ''
-  // 简单压缩策略：去除重复、保留核心信息
+  // 压缩策略：去除多余空白，保留核心信息
   const cleaned = text
     .replace(/\n{2,}/g, '\n')
     .replace(/\s{2,}/g, ' ')
     .trim()
 
-  // 截断过长消息
-  if (cleaned.length > 100) {
-    return cleaned.slice(0, 100) + '...'
+  // 截断过长消息（使用配置的上限，保留更多语义）
+  if (cleaned.length > CONFIG.COMPRESS_MAX_CHARS) {
+    return cleaned.slice(0, CONFIG.COMPRESS_MAX_CHARS) + '...'
   }
   return cleaned
 }

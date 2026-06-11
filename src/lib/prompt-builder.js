@@ -483,28 +483,30 @@ export function buildMessages(systemPrompt, conversationHistory = [], userMessag
     { role: 'system', content: systemPrompt },
   ]
 
-  // 添加对话历史 — 支持增强的历史（含摘要 system 消息）
-  const MAX_HISTORY = 8  // 从 6 提升到 8
-  let directHistory = conversationHistory
-
-  // 如果历史中包含 summary system 消息（来自 conversation-memory），单独处理
+  // 对话历史已由 conversation-memory 的 getEnhancedHistory() 管理截断和摘要
+  // 这里不再做二次截断，直接信任上游的记忆管理器
   const summaryMsgs = conversationHistory.filter(m => m.role === 'system')
   const chatMsgs = conversationHistory.filter(m => m.role === 'user' || m.role === 'assistant')
 
-  // 加入摘要消息
+  // 加入摘要消息（来自 conversation-memory 的对话摘要）
   for (const msg of summaryMsgs) {
     messages.push({ role: 'system', content: msg.content })
   }
 
-  // 加入最近的聊天消息
-  const recentHistory = chatMsgs.slice(-MAX_HISTORY * 2)
-  for (const msg of recentHistory) {
+  // 加入聊天历史（去重：如果最后一条与 userMessage 相同则跳过）
+  for (const msg of chatMsgs) {
     messages.push({ role: msg.role, content: msg.content })
   }
 
-  // 添加当前用户输入
+  // 添加当前用户输入（仅当历史中不包含该消息时）
   if (userMessage) {
-    messages.push({ role: 'user', content: userMessage })
+    const lastChatMsg = chatMsgs[chatMsgs.length - 1]
+    const isDuplicate = lastChatMsg &&
+      lastChatMsg.role === 'user' &&
+      lastChatMsg.content === userMessage
+    if (!isDuplicate) {
+      messages.push({ role: 'user', content: userMessage })
+    }
   }
 
   return messages
