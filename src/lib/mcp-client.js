@@ -243,6 +243,14 @@ export async function queryPaymentStatus({ orderId }) {
   return callMCPTool('queryPaymentStatus', { orderId })
 }
 
+/**
+ * 12. 从历史订单快速复购
+ * @param {Object} params - { orderId: string, storeId?: number }
+ */
+export async function reorderFromHistory({ orderId, storeId }) {
+  return callMCPTool('reorderFromHistory', { orderId, storeId: storeId || null })
+}
+
 // ─── Mock 工具调用路由 ───
 let _mockHandler = null
 
@@ -458,11 +466,26 @@ export function getMCPToolDefinitions() {
       type: 'function',
       function: {
         name: 'queryPaymentStatus',
-        description: '查询订单支付状态，用于下单后轮询支付结果',
+        description: '查询订单支付状态，用于下单后轮询支付结果。用户说"已支付"后先调用此工具确认状态。',
         parameters: {
           type: 'object',
           properties: {
             orderId: { type: 'string', description: '订单ID' },
+          },
+          required: ['orderId'],
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'reorderFromHistory',
+        description: '从历史订单快速复购。用户说"再来一杯""上次那个""老样子"时使用，检查商品是否仍可点、门店是否营业，返回可下单的商品清单和预估价格。',
+        parameters: {
+          type: 'object',
+          properties: {
+            orderId: { type: 'string', description: '历史订单ID' },
+            storeId: { type: 'number', description: '可选：指定门店ID（不传则使用原订单门店）' },
           },
           required: ['orderId'],
         },

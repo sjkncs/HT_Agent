@@ -248,7 +248,7 @@ const PRODUCTS = [
     ingredients: ['桃李', '四季春茶', '糖浆', '冰块'],
     allergens: [],
     nutritionInfo: { calories: '约230kcal', sugar: '约28g', caffeine: '约40mg' },
-    productAttrs: buildAttrs(), tags: ['季节限定'], initialPrice: 26, estimatePrice: 26,
+    productAttrs: buildAttrs(), tags: ['季节限定'], initialPrice: 26, estimatePrice: 26, soldOut: true,
   },
   // 芝芝系列
   {
@@ -361,7 +361,7 @@ const PRODUCTS = [
     ingredients: ['鸡蛋', '面粉', '奶油', '糖'],
     allergens: ['鸡蛋', '小麦', '乳制品'],
     nutritionInfo: { calories: '约280kcal', sugar: '约18g', caffeine: '约0mg' },
-    productAttrs: [], tags: [], initialPrice: 15, estimatePrice: 15,
+    productAttrs: [], tags: [], initialPrice: 15, estimatePrice: 15, soldOut: true,
   },
   {
     productId: 7002, productName: '芋泥麻薯', skuCode: 'HT-7002',
@@ -445,6 +445,55 @@ ORDERS.set('8829301847562910003', {
   remark: '少放冰',
 })
 
+// ─── 售罄替代品推荐 ───
+function recommendSimilar(productId) {
+  const soldOutProduct = PRODUCTS.find(p => p.productId === productId)
+  if (!soldOutProduct) return null
+  const similar = PRODUCTS.filter(p => p.category === soldOutProduct.category && !p.soldOut && p.productId !== productId)
+  return similar.slice(0, 2).map(p => ({ productId: p.productId, productName: p.productName, estimatePrice: p.estimatePrice }))
+}
+
+// ─── 支付状态模拟（轮询用） ───
+const _paymentState = new Map() // orderId -> { status, createdAt, pollCount }
+
+function _initPaymentPolling(orderId) {
+  _paymentState.set(String(orderId), { status: 'pending', createdAt: Date.now(), pollCount: 0 })
+}
+
+function _getPaymentStatus(orderId) {
+  const state = _paymentState.get(String(orderId))
+  if (!state) return { paymentStatus: 'paid', paidAmount: 29, paymentMethod: '微信支付', paidAt: Date.now() - 600000 }
+  state.pollCount++
+  // 模拟：第3次轮询后变为已支付（约6-9秒后）
+  if (state.pollCount >= 3) {
+    state.status = 'paid'
+  }
+  return {
+    orderId: String(orderId),
+    paymentStatus: state.status,
+    paymentMethod: state.status === 'paid' ? '微信支付' : null,
+    paidAmount: state.status === 'paid' ? 29 : null,
+    paidAt: state.status === 'paid' ? Date.now() : null,
+    refundStatus: null,
+    pollCount: state.pollCount,
+  }
+}
+
+// ─── 门店打烊时间检查 ───
+function _isClosingSoon(store) {
+  if (store.businessStatus === 3) return true // 已经标记为即将打烊
+  if (store.businessStatus === 2) return false // 休息中
+  // 动态检查：距打烊不到30分钟
+  try {
+    const now = new Date()
+    const [h, m] = store.workTimeEnd.split(':').map(Number)
+    const closing = new Date(now)
+    closing.setHours(h, m, 0, 0)
+    const diffMin = (closing - now) / 60000
+    return diffMin > 0 && diffMin <= 30
+  } catch { return false }
+}
+
 // ─── Mock Handler ───
 function mockHandler(toolName, args) {
   switch (toolName) {
@@ -489,16 +538,11 @@ function mockHandler(toolName, args) {
       }
     case 'queryPaymentStatus':
       return {
-        data: {
-          orderId: args.orderId,
-          paymentStatus: 'paid',
-          paymentMethod: '微信支付',
-          paidAmount: 29,
-          paidAt: Date.now() - 600000,
-          refundStatus: null,
-        },
+        data: _getPaymentStatus(args.orderId),
         success: true,
       }
+    case 'reorderFromHistory':
+      return handleReorderFromHistory(args)
     default:
       throw new Error(`Unknown MCP tool: ${toolName}`)
   }
@@ -544,7 +588,12 @@ function handleQueryStoreList({ address, storeName, longitude, latitude }) {
     results.sort((a, b) => a.distance - b.distance)
   }
 
-  return ok(results)
+  return ok(results.map(s => ({
+    ...s,
+    // P1-5: 附加打烊预警信息
+    closingSoon: _isClosingSoon(s),
+    closingTime: s.workTimeEnd,
+  })))
 }
 
 /**
@@ -584,9 +633,10 @@ function handleSearchProduct({ storeId, query }) {
     })
   }
 
-  // 深拷贝避免修改原始数据
+  // 深拷贝避免修改原始数据，附加可售状态
   return ok(results.map(p => ({
     ...p,
+    available: !p.soldOut,
     productAttrs: p.productAttrs.map(a => ({
       ...a,
       productSubAttrs: a.productSubAttrs.map(sa => ({ ...sa })),
@@ -645,13 +695,24 @@ function handlePreviewOrder({ storeId, productList, pickupType }) {
   const store = STORES.find(s => s.storeId === storeId)
   if (!store) throw new Error(`门店 ${storeId} 不存在`)
 
+  // P1-5: 门店打烊检查
+  const closingSoon = _isClosingSoon(store)
+  const storeClosed = store.businessStatus === 2
+
   let totalInit = 0
   let totalEstimate = 0
   const productInfoList = []
+  const soldOutItems = [] // P1-3: 售罄商品收集
 
   for (const item of productList) {
     const product = PRODUCTS.find(p => p.productId === item.productId)
     if (!product) continue
+    // P1-3: 售罄检查
+    if (product.soldOut) {
+      const alternatives = recommendSimilar(product.productId)
+      soldOutItems.push({ productId: product.productId, name: product.productName, alternatives })
+      continue // 售罄商品不加入订单
+    }
     const initTotal = product.initialPrice * item.amount
     const estTotal = product.estimatePrice * item.amount
     totalInit += initTotal
@@ -670,7 +731,10 @@ function handlePreviewOrder({ storeId, productList, pickupType }) {
   }
 
   const deliveryFee = pickupType === 'delivery' ? 5 : 0
-  const waitMinutes = pickupType === 'delivery' ? 30 : 12
+  // P1-4: 动态制作时长 — 基础8分钟 + 每杯2分钟，上限25分钟
+  const cupCount = productInfoList.reduce((sum, p) => sum + p.amount, 0)
+  const baseWait = pickupType === 'delivery' ? 30 : 8
+  const waitMinutes = Math.min(baseWait + cupCount * 2, 25)
 
   return ok({
     aboutTime: Date.now() + waitMinutes * 60 * 1000,
@@ -683,6 +747,11 @@ function handlePreviewOrder({ storeId, productList, pickupType }) {
     storeInfo: { storeId: store.storeId, storeName: store.storeName, address: store.address },
     productInfoList,
     couponCodeList: [],
+    // P1-3/P1-4/P1-5: 新增字段
+    soldOutItems: soldOutItems.length > 0 ? soldOutItems : undefined,
+    closingSoon: closingSoon || undefined,
+    storeClosed: storeClosed || undefined,
+    storeClosingTime: store.workTimeEnd,
   })
 }
 
@@ -717,6 +786,7 @@ function handleCreateOrder({ storeId, productList, longitude, latitude, couponCo
   }
 
   ORDERS.set(orderId, order)
+  _initPaymentPolling(orderId) // P2-1: 初始化支付轮询状态
 
   return ok({
     orderId: Number(orderId),
@@ -759,6 +829,48 @@ function handleCancelOrder({ orderId, cancelReason }) {
     refundAmount: order.orderPayAmount,
     needReview: false,
     message: '订单已取消，退款将在1-3个工作日内原路返回',
+  })
+}
+
+// P1-6: 历史订单快速复购
+function handleReorderFromHistory({ orderId, storeId }) {
+  const order = ORDERS.get(orderId)
+  if (!order) throw new Error(`历史订单 ${orderId} 不存在`)
+
+  // 提取商品列表
+  const productList = (order.orderCommodityList || []).map(item => {
+    const product = PRODUCTS.find(p => p.productId === item.commodityId)
+    return {
+      productId: item.commodityId,
+      productName: item.commodityName,
+      amount: Math.max(1, Math.round(item.payableMoney / (product?.initialPrice || 1))),
+      available: product ? !product.soldOut : false,
+      currentPrice: product?.estimatePrice || item.payMoney,
+    }
+  })
+
+  // 检查门店是否仍然营业
+  const targetStoreId = storeId || order.storeInfo?.storeId
+  const store = STORES.find(s => s.storeId === targetStoreId)
+  const storeAvailable = store && store.businessStatus !== 2
+  const closingSoon = store ? _isClosingSoon(store) : false
+
+  // 检查售罄商品
+  const unavailableItems = productList.filter(p => !p.available)
+  const availableItems = productList.filter(p => p.available)
+
+  return ok({
+    originalOrderId: orderId,
+    storeInfo: store ? { storeId: store.storeId, storeName: store.storeName, address: store.address } : order.storeInfo,
+    storeAvailable,
+    closingSoon,
+    productList: availableItems,
+    unavailableItems: unavailableItems.length > 0 ? unavailableItems.map(item => ({
+      ...item,
+      alternatives: recommendSimilar(item.productId),
+    })) : undefined,
+    estimatedTotal: availableItems.reduce((sum, p) => sum + p.currentPrice * p.amount, 0),
+    canReorder: availableItems.length > 0 && storeAvailable,
   })
 }
 
