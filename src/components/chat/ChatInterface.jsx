@@ -12,7 +12,6 @@ import {
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
 import {
-  MOCK_CONVERSATIONS,
   QUICK_PROMPTS,
   generateStreamingResponse,
 } from '../../lib/mock-data.js'
@@ -29,7 +28,7 @@ import MarkdownRenderer from './MarkdownRenderer.jsx'
 import { configureVision, isVisionEnabled, processImagesInMessages, analyzeImage } from '../../lib/vision-service.js'
 import { configureSearch, isWebSearchAvailable } from '../../lib/web-search-service.js'
 import { configureMemory, isMemoryAvailable, addMemory, searchMemory, formatSearchResult } from '../../lib/memos-client.js'
-import { saveAndSync, buildConversationRecord } from '../../lib/conversation-store.js'
+import { saveAndSync, buildConversationRecord, getConversation } from '../../lib/conversation-store.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -3306,11 +3305,15 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
   // Load conversation if navigating to a specific one
   useEffect(() => {
     if (id) {
-      const conv = MOCK_CONVERSATIONS.find((c) => c.id === id)
-      if (conv && conv.messages.length > 0) {
-        setMessages(conv.messages)
-        setCurrentConversation(conv)
-      }
+      // 从 IndexedDB 加载真实对话历史
+      getConversation(id).then(conv => {
+        if (conv && conv.messages && conv.messages.length > 0) {
+          setMessages(conv.messages)
+          setCurrentConversation(conv)
+        }
+      }).catch(err => {
+        console.warn('[ChatInterface] 加载对话失败:', err)
+      })
     } else {
       setMessages([])
       setCurrentConversation(null)

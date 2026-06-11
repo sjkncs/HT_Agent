@@ -40,6 +40,12 @@ function openDB() {
 
     request.onsuccess = (event) => {
       _db = event.target.result
+      // 连接失效时自动重置缓存，避免后续操作抛出 InvalidStateError
+      _db.onclose = () => { _db = null }
+      _db.onversionchange = () => {
+        _db.close()
+        _db = null
+      }
       resolve(_db)
     }
 
@@ -247,27 +253,35 @@ export async function searchConversations(query, limit = 20) {
  */
 export async function getConversationStats() {
   try {
-    const all = await getConversations()
-    const byLabel = {}
-    const byRisk = { high: 0, medium: 0, low: 0 }
-    const byState = {}
+    const db = await openDB()
+    return new Promise((resolve) => {
+      const tx = db.transaction(STORE_NAME, 'readonly')
+      const store = tx.objectStore(STORE_NAME)
+      const request = store.openCursor()
+      let total = 0
+      const byLabel = {}
+      const byRisk = { high: 0, medium: 0, low: 0 }
+      const byState = {}
 
-    for (const conv of all) {
-      // 按分类统计
-      const label = conv.label || '未分类'
-      byLabel[label] = (byLabel[label] || 0) + 1
-
-      // 按风险统计
-      if (conv.riskLevel && byRisk[conv.riskLevel] !== undefined) {
-        byRisk[conv.riskLevel]++
+      request.onsuccess = (event) => {
+        const cursor = event.target.result
+        if (!cursor) {
+          resolve({ total, byLabel, byRisk, byState })
+          return
+        }
+        const conv = cursor.value
+        total++
+        const label = conv.label || '未分类'
+        byLabel[label] = (byLabel[label] || 0) + 1
+        if (conv.riskLevel && byRisk[conv.riskLevel] !== undefined) {
+          byRisk[conv.riskLevel]++
+        }
+        const state = conv.session_state || 'active'
+        byState[state] = (byState[state] || 0) + 1
+        cursor.continue()
       }
-
-      // 按状态统计
-      const state = conv.session_state || 'active'
-      byState[state] = (byState[state] || 0) + 1
-    }
-
-    return { total: all.length, byLabel, byRisk, byState }
+      request.onerror = () => resolve({ total: 0, byLabel: {}, byRisk: {}, byState: {} })
+    })
   } catch {
     return { total: 0, byLabel: {}, byRisk: {}, byState: {} }
   }
@@ -285,23 +299,24 @@ export async function syncToMemOS(conversation) {
     const { addMemory, isMemoryAvailable } = await import('./memos-client.js')
     if (!isMemoryAvailable()) return
 
-    // 提取对话中的用户消息和助手回复
+    // 提取对话中的用户消息和助手回复（取最近几条，避免截断导致语义丢失）
     const userMessages = (conversation.messages || [])
       .filter(m => m.role === 'user')
-      .map(m => m.content)
+      .slice(-5) // 只取最后5条用户消息
+      .map(m => m.content?.slice(0, 100)) // 每条最多100字
       .join(' | ')
 
     const assistantMessages = (conversation.messages || [])
       .filter(m => m.role === 'assistant')
-      .map(m => m.content)
-      .slice(0, 3) // 只取前3条避免过长
+      .slice(-3) // 只取最后3条助手回复
+      .map(m => m.content?.slice(0, 150)) // 每条最多150字
       .join(' | ')
 
     if (!userMessages) return
 
     await addMemory({
-      userMessage: userMessages.slice(0, 500),
-      assistantMessage: assistantMessages.slice(0, 500),
+      userMessage: userMessages,
+      assistantMessage: assistantMessages,
       conversationId: conversation.id,
       tags: [
         'heytea-conversation',
@@ -320,12 +335,22 @@ export async function syncToMemOS(conversation) {
  */
 export async function saveAndSync(conversation) {
   const record = await saveConversation(conversation)
+  if (!record) {
+    console.warn('[ConversationStore] saveConversation 返回空，跳过 MemOS 同步')
+    return record
+  }
   // MemOS 同步不阻塞主流程
   syncToMemOS(conversation).catch(() => {})
   return record
 }
 
 // ── 从 ChatInterface 消息构建对话记录 ──
+
+let _msgCounter = 0
+function _genMsgId() {
+  _msgCounter++
+  return `msg-${Date.now()}-${_msgCounter}-${Math.random().toString(36).slice(2, 10)}`
+}
 
 /**
  * 从 ChatInterface 的消息列表构建可存储的对话记录
@@ -364,7 +389,7 @@ export function buildConversationRecord(sessionId, messages, metadata = {}) {
     classification: metadata.classification || null,
     sla_status: metadata.sla_status || 'normal',
     messages: messages.map(m => ({
-      id: m.id || `msg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      id: m.id || _genMsgId(),
       role: m.role,
       content: m.content,
       timestamp: m.timestamp || new Date().toISOString(),
