@@ -3320,6 +3320,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     // ── 快速意图检测 ──
     const orderIntent = detectOrderIntent(text)
     let detectedIntent = null // null = 食安流程 (默认)
+    let _hasFoodSignal = false
 
     if (orderIntent) {
       detectedIntent = 'ordering'
@@ -3335,9 +3336,26 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
         '食安', '食品安全', '卫生', '不干净',
       ]
       const lowerText = text.toLowerCase()
-      const hasFoodSafetySignal = foodSafetySignals.some(kw => lowerText.includes(kw))
+      _hasFoodSignal = foodSafetySignals.some(kw => lowerText.includes(kw))
+      const hasFoodSafetySignal = _hasFoodSignal
       if (!hasFoodSafetySignal && text.length >= 2) {
         detectedIntent = 'general_knowledge'
+      }
+    }
+
+    // ── 意图继承：多轮点单对话中，后续消息自动继承 ordering 意图 ──
+    // 解决"阿喜问位置→用户回答地址"但地址文本没有点单关键词导致路由到 general_knowledge 的问题
+    // 注意：有食安信号时不继承（留给食安通道），其他 null/general_knowledge 可继承
+    if (detectedIntent !== 'ordering' && !_hasFoodSignal) {
+      const chatHistory = [...currentMessages].filter(m => m.role === 'user' || m.role === 'assistant')
+      const lastAssistant = [...chatHistory].reverse().find(m => m.role === 'assistant')
+      if (lastAssistant) {
+        const aContent = lastAssistant.content || ''
+        const isOrderingContext = /门店|位置|城市|地址|哪.*店|选.*店|哪家|自提|配送|点单|糖度|冰量|少冰|去冰|几分糖|确认.*订单|确认.*商品|回复.*序号|回复.*确认/i.test(aContent)
+        const isFollowupReply = /^(确认|好的|就这个|换一家|不要了|已支付|还没支付|支付了|对|是|不是|不了|可以|行|ok|好|嗯|\d{1,2})$/i.test(text.trim())
+        if (isOrderingContext || isFollowupReply) {
+          detectedIntent = 'ordering'
+        }
       }
     }
 
