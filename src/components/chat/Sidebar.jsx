@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Plus, Search, MessageSquare, Clock, AlertTriangle, Users,
@@ -6,7 +6,8 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
-import { MOCK_CONVERSATIONS, MOCK_SESSIONS } from '../../lib/mock-data.js'
+import { MOCK_SESSIONS } from '../../lib/mock-data.js'
+import { getConversations, getConversationStats, searchConversations } from '../../lib/conversation-store.js'
 
 function groupByTime(conversations) {
   const now = new Date()
@@ -151,6 +152,44 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
   const [riskFilter, setRiskFilter] = useState('')
   const [viewMode, setViewMode] = useState('conversations') // conversations | sessions
 
+  // ── 真实对话历史：从 IndexedDB 加载 ──
+  const [conversations, setConversations] = useState([])
+  const [stats, setStats] = useState({ total: 0, byLabel: {}, byRisk: {}, byState: {} })
+  const [isLoading, setIsLoading] = useState(true)
+
+  // 加载对话列表（支持搜索）
+  const loadConversations = useCallback(async () => {
+    setIsLoading(true)
+    try {
+      if (searchQuery) {
+        const results = await searchConversations(searchQuery, 50)
+        setConversations(results)
+      } else {
+        const all = await getConversations({ limit: 100 })
+        setConversations(all)
+      }
+      const s = await getConversationStats()
+      setStats(s)
+    } catch (err) {
+      console.warn('[Sidebar] 加载对话失败:', err)
+      setConversations([])
+    } finally {
+      setIsLoading(false)
+    }
+  }, [searchQuery])
+
+  // 初始加载 + 搜索变化时重新加载
+  useEffect(() => {
+    loadConversations()
+  }, [loadConversations])
+
+  // 监听 storage 事件：其他标签页保存对话时自动刷新
+  useEffect(() => {
+    const handler = () => loadConversations()
+    window.addEventListener('conversation-updated', handler)
+    return () => window.removeEventListener('conversation-updated', handler)
+  }, [loadConversations])
+
   // Reset to conversations view when role switches to consumer
   useEffect(() => {
     if (role === 'consumer') {
@@ -158,7 +197,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
     }
   }, [role])
 
-  const groups = groupByTime(MOCK_CONVERSATIONS)
+  const groups = groupByTime(conversations)
 
   // Filter conversations with multi-field search + smart category + risk matching
   const filtered = Object.entries(groups).reduce((acc, [key, convs]) => {
@@ -176,11 +215,11 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
   // Dynamic counts per filter dimension
   const categoryCounts = CATEGORY_FILTERS.map(cat => ({
     ...cat,
-    count: MOCK_CONVERSATIONS.filter(c => matchConversation(c, cat.key, riskFilter)).length,
+    count: conversations.filter(c => matchConversation(c, cat.key, riskFilter)).length,
   }))
   const riskCounts = RISK_FILTERS.map(r => ({
     ...r,
-    count: MOCK_CONVERSATIONS.filter(c => matchConversation(c, filterLabel, r.key)).length,
+    count: conversations.filter(c => matchConversation(c, filterLabel, r.key)).length,
   }))
 
   // Filter sessions with deep field search
@@ -549,7 +588,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
         <div className="p-3" style={{ borderTop: '1px solid var(--cursor-border-10)' }} data-qoder-id="qel-p-3-9156063a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-p-3-9156063a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;p-3&quot;,&quot;loc&quot;:{&quot;line&quot;:386,&quot;column&quot;:9}}">
           <p className="text-[10px]" style={{ color: 'var(--cursor-border-55)' }} data-qoder-id="qel-text-10px-1145be79" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-10px-1145be79&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;text-10px&quot;,&quot;loc&quot;:{&quot;line&quot;:387,&quot;column&quot;:11}}">
             {viewMode === 'conversations'
-              ? `${MOCK_CONVERSATIONS.length} 条历史对话`
+              ? `${stats.total} 条历史对话${isLoading ? ' · 加载中...' : ''}`
               : `${MOCK_SESSIONS.length} 个七鱼会话 · ${activeSessions} 进行中`}
           </p>
         </div>

@@ -29,6 +29,7 @@ import MarkdownRenderer from './MarkdownRenderer.jsx'
 import { configureVision, isVisionEnabled, processImagesInMessages, analyzeImage } from '../../lib/vision-service.js'
 import { configureSearch, isWebSearchAvailable } from '../../lib/web-search-service.js'
 import { configureMemory, isMemoryAvailable, addMemory, searchMemory, formatSearchResult } from '../../lib/memos-client.js'
+import { saveAndSync, buildConversationRecord } from '../../lib/conversation-store.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -3768,6 +3769,33 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
         conversationId: sessionId,
         tags: ['heytea', detectedIntent || 'general'],
       }).catch(err => console.warn('[MemOS] 自动存储失败:', err.message))
+    }
+
+    // ── IndexedDB 对话历史持久化存储 ──
+    // 将完整对话（含新消息）保存到 IndexedDB，同步到 MemOS 向量知识库
+    try {
+      const allMessages = [...currentMessages, userMessage, {
+        id: `msg-${Date.now()}`,
+        role: 'assistant',
+        content: finalReply || '',
+        timestamp: new Date().toISOString(),
+      }].filter(m => m.role === 'user' || m.role === 'assistant')
+
+      const record = buildConversationRecord(sessionId, allMessages, {
+        timestamp: currentMessages.length === 0 ? Date.now() : undefined,
+        intent: detectedIntent,
+        classification: engineResult?.classification || null,
+        label: engineResult?.classification?.consult_type || '',
+        riskLevel: engineResult?.classification?.risk_level || 'low',
+        handler: 'AI',
+      })
+
+      saveAndSync(record).then(() => {
+        // 通知 Sidebar 刷新对话列表
+        window.dispatchEvent(new Event('conversation-updated'))
+      }).catch(err => console.warn('[IndexedDB] 对话保存失败:', err.message))
+    } catch (err) {
+      console.warn('[IndexedDB] 构建对话记录失败:', err.message)
     }
 
     } finally {
