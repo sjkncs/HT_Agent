@@ -1704,10 +1704,15 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
       setAttachedFile(null)
     }
     if (attachedImage) {
-      const imgNote = attachedImage.analysis
-        ? `[用户上传图片: ${attachedImage.file.name}]\n[图片分析结果: ${attachedImage.analysis}]\n${finalText}`
-        : `[用户上传图片: ${attachedImage.file.name}]\n${finalText}`
-      finalText = imgNote
+      // 构建图片备注：包含文件名、视觉分析结果、后端存储URL
+      const parts = [`[用户上传图片: ${attachedImage.file.name}]`]
+      if (attachedImage.analysis) {
+        parts.push(`[图片分析结果: ${attachedImage.analysis}]`)
+      }
+      if (attachedImage.backendUrl) {
+        parts.push(`[图片证据URL: ${attachedImage.backendUrl}]`)
+      }
+      finalText = parts.join('\n') + '\n' + finalText
       URL.revokeObjectURL(attachedImage.preview)
       setAttachedImage(null)
     }
@@ -1739,10 +1744,12 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
     e.target.value = '' // reset so same file can be re-selected
 
     if (type === 'image') {
-      // 图片上传：转 base64 并调用视觉 API 分析
+      // 图片上传：预览 + 视觉分析 + 后端存储（食安证据留存）
       const preview = URL.createObjectURL(file)
-      setAttachedImage({ file, preview, analysis: '分析中...' })
+      setAttachedImage({ file, preview, analysis: '分析中...', backendUrl: null })
       setInput(prev => prev ? prev : `请帮我看看这张图片 `)
+
+      // 1) 视觉分析（客户端 AI 识别图片内容）
       try {
         const { analyzeImage } = await import('../../lib/vision-service.js')
         const description = await analyzeImage(file)
@@ -1751,6 +1758,18 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
         console.warn('[ImageUpload] 视觉分析失败:', err.message)
         setAttachedImage(prev => prev ? { ...prev, analysis: null } : null)
         setMediaError(`图片分析失败: ${err.message}（图片仍将随消息发送）`)
+      }
+
+      // 2) 后端上传（食安证据存储，便于后续人工复核）
+      try {
+        if (apiClient.isAuthenticated()) {
+          const uploadResult = await apiClient.uploadImage(file)
+          setAttachedImage(prev => prev ? { ...prev, backendUrl: uploadResult.url } : null)
+          console.log('[ImageUpload] 后端上传成功:', uploadResult.url)
+        }
+      } catch (err) {
+        console.warn('[ImageUpload] 后端上传失败:', err.message)
+        // 非关键错误，图片仍可随文本发送
       }
     } else {
       setAttachedFile(file)
@@ -1897,6 +1916,7 @@ function ChatInputBar({ onSend, isStreaming, onStop, ...qoderProps }) {
               <div className="truncate" style={{ fontSize: '11px' }} data-qoder-id="qel-truncate-3df61dc4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-truncate-3df61dc4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;truncate&quot;,&quot;loc&quot;:{&quot;line&quot;:1896,&quot;column&quot;:15}}">{attachedImage.file.name}</div>
               <div style={{ fontSize: '10px', color: attachedImage.analysis === '分析中...' ? 'var(--cursor-orange)' : '#27ae60' }} data-qoder-id="qel-div-0cbae011" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-0cbae011&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInputBar&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1897,&quot;column&quot;:15}}">
                 {attachedImage.analysis === '分析中...' ? '🔍 AI 视觉分析中...' : '✓ 已分析'}
+                {attachedImage.backendUrl ? ' · ☁️ 已存档' : ''}
               </div>
             </div>
             <button className="flex-shrink-0" onClick={() => {
@@ -3570,7 +3590,13 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     // 如果后端可用，通过后端获取 AI 回复（后端处理意图检测 + LLM 调用）
     if (apiClient.isAuthenticated()) {
       try {
-        const backendResult = await apiClient.sendChat(text, backendConvIdRef.current)
+        // 从文本中提取图片证据URL，通过 context 传递给后端
+        const imageUrlMatches = text.match(/\[图片证据URL:\s*(.*?)\]/g)
+        const imageUrls = imageUrlMatches
+          ? imageUrlMatches.map(m => m.replace(/\[图片证据URL:\s*/, '').replace(/\]/, ''))
+          : null
+        const context = imageUrls ? { imageUrls } : null
+        const backendResult = await apiClient.sendChat(text, backendConvIdRef.current, context)
         if (backendResult && backendResult.content) {
           backendConvIdRef.current = backendResult.conversationId
           setTimeout(() => simulateStream(backendResult.content, null, 'backend'), 600)

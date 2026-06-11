@@ -34,6 +34,13 @@ spring:
           max-active: 16
           max-idle: 8
 
+  # ── Multipart Upload ──
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 30MB
+      enabled: true
+
   # ── Jackson ──
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -86,6 +93,10 @@ memos:
 tavily:
   api-key: ${TAVILY_API_KEY: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}
   base-url: https://api.tavily.com
+
+# ── File Upload ──
+upload:
+  dir: C:/Users/Administrator/.qoderwork/workspace/mq0pr2crlh3pe0ap/react-vite/backend/uploads
 
 # ── Logging ──
 logging:

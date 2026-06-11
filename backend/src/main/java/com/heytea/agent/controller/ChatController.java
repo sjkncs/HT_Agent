@@ -83,6 +83,12 @@ public class ChatController {
             log.info("Auto-classified intent: {} for message: {}", intent, truncate(request.getMessage(), 50));
         }
 
+        // 4.5 Log image evidence if provided (food safety channel)
+        if (request.getContext() != null && request.getContext().containsKey("imageUrls")) {
+            Object imageUrlsObj = request.getContext().get("imageUrls");
+            log.info("Received image evidence for conversation {}: {}", conversationId, imageUrlsObj);
+        }
+
         // 5. Call LLM to generate a response
         ChatResponse chatResponse = llmService.chat(conversationId, request.getMessage(), intent, history);
 
@@ -101,6 +107,7 @@ public class ChatController {
 
         // 8. Enrich and return response
         chatResponse.setConversationId(conversationId);
+        chatResponse.setIntent(intent);
         chatResponse.setLatencyMs(latencyMs);
 
         return Result.success(chatResponse);

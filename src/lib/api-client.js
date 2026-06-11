@@ -73,14 +73,54 @@ export async function autoLogin() {
 // ── Chat ─────────────────────────────────────────
 
 /**
+ * Upload an image to the backend for food safety evidence storage.
+ * @param {File} file - Image file to upload
+ * @returns {Promise<{url, filename, size, type}>}
+ */
+export async function uploadImage(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const headers = {};
+  if (_token) {
+    headers['Authorization'] = `Bearer ${_token}`;
+  }
+
+  const url = `${API_BASE}/upload/image`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 60000);
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: formData,
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Upload failed: HTTP ${response.status}`);
+    }
+
+    const res = await response.json();
+    if (res.code !== 200) throw new Error(res.message || 'Upload failed');
+    return res.data;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+/**
  * Send a chat message to the backend and get the AI response.
  * @param {string} message - User message text
  * @param {string} [conversationId] - Optional conversation ID to continue
+ * @param {Object} [context] - Optional context (e.g. { imageUrls: [...] })
  * @returns {Promise<{conversationId, messageId, content, intent, role, metadata, latencyMs, createdAt}>}
  */
-export async function sendChat(message, conversationId = null) {
+export async function sendChat(message, conversationId = null, context = null) {
   const body = { message };
   if (conversationId) body.conversationId = conversationId;
+  if (context) body.context = context;
 
   const res = await _fetch('/chat/send', {
     method: 'POST',
