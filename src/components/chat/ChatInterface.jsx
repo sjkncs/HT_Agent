@@ -28,7 +28,7 @@ import { getOrCreateMemory, processAndUpdateMemory } from '../../lib/conversatio
 import MarkdownRenderer from './MarkdownRenderer.jsx'
 import { configureVision, isVisionEnabled, processImagesInMessages, analyzeImage } from '../../lib/vision-service.js'
 import { configureSearch, isWebSearchAvailable } from '../../lib/web-search-service.js'
-import { configureMemory, isMemoryAvailable } from '../../lib/memos-client.js'
+import { configureMemory, isMemoryAvailable, addMemory, searchMemory, formatSearchResult } from '../../lib/memos-client.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -3604,9 +3604,28 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     // ── 对话记忆处理 ──
     const sessionId = currentConversation?.id || `sess-${Date.now()}`
     const allChatMessages = [...currentMessages, userMessage].filter(m => m.role === 'user' || m.role === 'assistant')
-    const memoryContext = processAndUpdateMemory(sessionId, allChatMessages.map(m => ({ role: m.role, content: m.content })))
+    let memoryContext = processAndUpdateMemory(sessionId, allChatMessages.map(m => ({ role: m.role, content: m.content })))
     const memoryManager = getOrCreateMemory(sessionId)
     const enhancedHistory = memoryManager.getEnhancedHistory(allChatMessages.map(m => ({ role: m.role, content: m.content })))
+
+    // ── MemOS 跨会话记忆主动检索 ──
+    // 每轮对话开始时，从 MemOS 搜索与当前消息相关的历史记忆
+    // 特别是新会话或对话初期（本地记忆为空时）效果最显著
+    if (isMemoryAvailable()) {
+      try {
+        const memosResult = await Promise.race([
+          searchMemory(text, 5),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+        ])
+        const memosText = formatSearchResult(memosResult)
+        if (memosText && memosText !== '暂无相关记忆。') {
+          const separator = memoryContext ? '\n\n' : ''
+          memoryContext = `${memoryContext}${separator}## 跨会话长期记忆 (MemOS)\n${memosText}`
+        }
+      } catch {
+        // MemOS 搜索超时或失败，静默降级
+      }
+    }
 
     // ══════════════════════════════════════════════════════════
     // 非食安通道：纯 LLM API 调用（点单 / 通用知识）
@@ -3739,6 +3758,17 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     }
 
     setTimeout(() => simulateStream(finalReply, engineResult, llmSource, triggers), 600)
+
+    // ── MemOS 跨会话记忆自动存储 ──
+    // 每轮对话结束后异步存储到 MemOS，不阻塞 UI
+    if (isMemoryAvailable() && finalReply && finalReply.length > 10) {
+      addMemory({
+        userMessage: text,
+        assistantMessage: finalReply,
+        conversationId: sessionId,
+        tags: ['heytea', detectedIntent || 'general'],
+      }).catch(err => console.warn('[MemOS] 自动存储失败:', err.message))
+    }
 
     } finally {
       isSendingRef.current = false
