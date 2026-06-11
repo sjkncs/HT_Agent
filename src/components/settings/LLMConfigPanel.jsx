@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { setLLMConfig, getLLMConfig, isLLMConfigured, API_PRESETS, chatCompletion, getModelDisplayName } from '../../lib/llm-client.js'
 
 const PRESET_KEYS = Object.keys(API_PRESETS)
@@ -148,6 +149,30 @@ export default function LLMConfigPanel(qoderProps) {
   return (
     <div className={["flex-1 overflow-y-auto p-4 lg:p-6", qoderProps?.className].filter(Boolean).join(" ")} style={qoderProps?.style} data-qoder-id={qoderProps?.["data-qoder-id"]} data-qoder-source={qoderProps?.["data-qoder-source"]}>
       <div className="max-w-2xl mx-auto space-y-1" data-qoder-id="qel-max-w-2xl-95b45f75" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-max-w-2xl-95b45f75&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;max-w-2xl&quot;,&quot;loc&quot;:{&quot;line&quot;:150,&quot;column&quot;:7}}">
+        {/* Settings Tab Navigation */}
+        <div className="flex gap-1 mb-4 pb-2" style={{ borderBottom: '1px solid var(--cursor-border-10)' }}>
+          <Link to="/settings" style={{
+            padding: '6px 14px',
+            borderRadius: '6px 6px 0 0',
+            fontSize: '12px',
+            fontWeight: 600,
+            textDecoration: 'none',
+            color: 'var(--cursor-orange)',
+            borderBottom: '2px solid var(--cursor-orange)',
+            background: 'transparent',
+          }}>模型设置</Link>
+          <Link to="/settings/services" style={{
+            padding: '6px 14px',
+            borderRadius: '6px 6px 0 0',
+            fontSize: '12px',
+            fontWeight: 500,
+            textDecoration: 'none',
+            color: 'var(--cursor-border-55)',
+            borderBottom: '2px solid transparent',
+            background: 'transparent',
+          }}>服务 API 设置</Link>
+        </div>
+
         {/* 页面标题 */}
         <div className="mb-4" data-qoder-id="qel-mb-4-f69dd851" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mb-4-f69dd851&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;mb-4&quot;,&quot;loc&quot;:{&quot;line&quot;:152,&quot;column&quot;:9}}">
           <h2 className="text-sm font-semibold" style={{ color: 'var(--cursor-ink)' }} data-qoder-id="qel-text-sm-ed1eb56f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-ed1eb56f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/settings/LLMConfigPanel.jsx&quot;,&quot;componentName&quot;:&quot;LLMConfigPanel&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:153,&quot;column&quot;:11}}">模型设置</h2>

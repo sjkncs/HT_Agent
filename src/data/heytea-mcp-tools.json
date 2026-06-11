@@ -572,6 +572,7 @@
             "properties": {
               "orderId": { "type": "number" },
               "orderIdStr": { "type": "string" },
+              "storeInfo": { "type": "object", "description": "门店信息", "properties": { "storeId": { "type": "number" }, "storeName": { "type": "string" }, "address": { "type": "string" } } },
               "payOrderUrl": { "type": "string", "description": "微信支付URL" },
               "payOrderQrCodeUrl": { "type": "string", "description": "支付二维码链接" },
               "discountPrice": { "type": "number", "description": "实付金额" },

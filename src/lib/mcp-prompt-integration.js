@@ -225,8 +225,8 @@ function formatCreateOrder(order) {
   text += `订单号：${order.orderIdStr}\n`
   text += `门店：${order.storeInfo?.storeName || ''}\n`
   text += `需支付：¥${order.discountPrice?.toFixed(2)}\n`
-  if (order.payUrl || order.payQrcode) {
-    text += `\n请扫码支付：${order.payUrl || order.payQrcode}\n`
+  if (order.payOrderUrl || order.payOrderQrCodeUrl) {
+    text += `\n请扫码支付：${order.payOrderQrCodeUrl || order.payOrderUrl}\n`
   }
   text += '\n支付完成后告诉阿喜，阿喜马上帮您查询取餐码。'
   return text

@@ -721,6 +721,7 @@ function handleCreateOrder({ storeId, productList, longitude, latitude, couponCo
   return ok({
     orderId: Number(orderId),
     orderIdStr: orderId,
+    storeInfo: preview.data.storeInfo,
     payOrderUrl: `weixin://wxpay/bizpayurl?pr=heytea_mock_${orderId}`,
     payOrderQrCodeUrl: `https://pay.heytea.com/qrcode?token=mock_${orderId}`,
     discountPrice: preview.data.discountPrice,

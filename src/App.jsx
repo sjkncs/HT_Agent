@@ -11,6 +11,7 @@ import KnowledgeBase from './components/knowledge/KnowledgeBase.jsx'
 import WorkflowView from './components/workflow/WorkflowView.jsx'
 import QiyuSessionPanel from './components/chat/QiyuSessionPanel.jsx'
 import LLMConfigPanel from './components/settings/LLMConfigPanel.jsx'
+import ServiceConfigPanel from './components/settings/ServiceConfigPanel.jsx'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from './lib/utils.js'
 import { restoreLLMConfig } from './lib/llm-client.js'
@@ -115,7 +116,7 @@ function NavBar({ role, onToggleRole, sidebarOpen, onToggleSidebar, ...qoderProp
       { path: '/dashboard', label: '运营看板', icon: LayoutDashboard, match: (p) => p === '/dashboard' },
       { path: '/workflow', label: '工作流', icon: GitBranch, match: (p) => p === '/workflow' },
       { path: '/knowledge', label: '知识库', icon: BookOpen, match: (p) => p === '/knowledge' },
-      { path: '/settings', label: '模型设置', icon: Settings, match: (p) => p === '/settings' },
+      { path: '/settings', label: '模型设置', icon: Settings, match: (p) => p === '/settings' || p.startsWith('/settings/') },
     ] : []),
   ]
 
@@ -272,6 +273,7 @@ function AppLayout(qoderProps) {
                 <Route path="/workflow" element={<WorkflowView />}  data-qoder-id="qel-route-c76267ec" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c76267ec&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:178,&quot;column&quot;:13}}"/>
                 <Route path="/knowledge" element={<KnowledgeBase />}  data-qoder-id="qel-route-c6626659" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c6626659&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:179,&quot;column&quot;:13}}"/>
                 <Route path="/settings" element={<LLMConfigPanel />}  data-qoder-id="qel-route-575afbd7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-575afbd7&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:265,&quot;column&quot;:17}}"/>
+                <Route path="/settings/services" element={<ServiceConfigPanel />} />
               </>
             )}
             {/* Fallback: any unmatched or unauthorized route → ChatInterface */}

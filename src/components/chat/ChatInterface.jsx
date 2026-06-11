@@ -1033,8 +1033,207 @@ function SessionHeaderBar({ conversation }) {
   )
 }
 
+/* ─── Ordering Quick Replies ─── */
+function OrderingQuickReplies({ text, onSend, isStreaming }) {
+  if (isStreaming || !text || !onSend) return null
+
+  const replies = []
+
+  // 门店选择：检测编号列表 "1. xxx\n2. xxx" 或 "1、xxx\n2、xxx"
+  const storeListMatch = text.match(/(?:以下|推荐|附近|这些).*?(?:门店|店铺|店)/s)
+  const numberedItems = text.match(/^\s*(\d+)[.、)\s]\s*(.{2,30})$/gm)
+  if (storeListMatch && numberedItems && numberedItems.length >= 2) {
+    numberedItems.slice(0, 5).forEach(item => {
+      const m = item.match(/^\s*(\d+)[.、)\s]\s*(.{2,30})$/)
+      if (m) replies.push({ label: m[2].trim().slice(0, 15), text: m[1] })
+    })
+  }
+
+  // 糖度选择
+  if (/糖度|甜度|几分糖/.test(text)) {
+    ['正常糖', '七分糖', '五分糖', '三分糖', '不另外加糖'].forEach(s => {
+      if (text.includes(s) || /糖/.test(text)) replies.push({ label: s, text: s })
+    })
+  }
+
+  // 冰量选择
+  if (/冰量|冰度|去冰|少冰|正常冰/.test(text)) {
+    ['正常冰', '少冰', '去冰', '温热'].forEach(s => {
+      if (text.includes(s) || /冰/.test(text)) replies.push({ label: s, text: s })
+    })
+  }
+
+  // 订单确认
+  if (/确认.*订单|确认.*下单|是否.*确认|确认下单/.test(text)) {
+    replies.push({ label: '✅ 确认下单', text: '确认下单' })
+    replies.push({ label: '❌ 取消', text: '取消订单' })
+  }
+
+  // 支付状态
+  if (/支付完成|已支付|付款|扫码支付/.test(text) && !/告诉阿喜/.test(text.slice(-30))) {
+    replies.push({ label: '✅ 已支付', text: '已支付' })
+    replies.push({ label: '❌ 支付失败', text: '支付失败' })
+  }
+
+  // 取餐方式
+  if (/自提|配送|取餐方式|到店/.test(text) && /选择|请问|需要/.test(text)) {
+    replies.push({ label: '🏪 到店自提', text: '到店自提' })
+    replies.push({ label: '🛵 外卖配送', text: '外卖配送' })
+  }
+
+  if (replies.length === 0) return null
+
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
+      {replies.map((r, i) => (
+        <button
+          key={i}
+          onClick={() => onSend(r.text)}
+          style={{
+            padding: '5px 12px',
+            borderRadius: '16px',
+            border: '1px solid var(--cursor-orange, #f54e00)',
+            background: 'transparent',
+            color: 'var(--cursor-orange, #f54e00)',
+            fontSize: '12px',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            whiteSpace: 'nowrap',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = 'var(--cursor-orange, #f54e00)'
+            e.currentTarget.style.color = '#fff'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'transparent'
+            e.currentTarget.style.color = 'var(--cursor-orange, #f54e00)'
+          }}
+        >
+          {r.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/* ─── Rich Card Renderer ─── */
+function RichCardRenderer({ toolCalls }) {
+  if (!toolCalls || !Array.isArray(toolCalls) || toolCalls.length === 0) return null
+
+  const cards = []
+
+  for (const tc of toolCalls) {
+    try {
+      // 商品搜索结果卡片
+      if (tc.tool === 'searchProduct' && tc.result) {
+        const products = []
+        const lines = tc.result.split('\n')
+        for (const line of lines) {
+          const m = line.match(/(\d+)\.\s*(.+?)[\s—-]+[¥￥]?(\d+(?:\.\d+)?)/)
+          if (m) products.push({ name: m[2].trim(), price: m[3] })
+        }
+        if (products.length > 0) {
+          cards.push({
+            type: 'products',
+            data: products.slice(0, 6),
+          })
+        }
+      }
+
+      // 订单创建卡片
+      if (tc.tool === 'createOrder' && tc.result) {
+        const orderIdMatch = tc.result.match(/订单号[：:]\s*(\S+)/)
+        const priceMatch = tc.result.match(/[¥￥](\d+(?:\.\d+)?)/)
+        const storeMatch = tc.result.match(/门店[：:]\s*(.+)/)
+        const payMatch = tc.result.match(/扫码支付[：:]\s*(.+)/)
+        cards.push({
+          type: 'order',
+          data: {
+            orderId: orderIdMatch?.[1] || '',
+            price: priceMatch?.[1] || '',
+            store: storeMatch?.[1]?.trim() || '',
+            payUrl: payMatch?.[1]?.trim() || '',
+          },
+        })
+      }
+    } catch { /* skip malformed */ }
+  }
+
+  if (cards.length === 0) return null
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }}>
+      {cards.map((card, i) => {
+        if (card.type === 'products') {
+          return (
+            <div key={i} style={{
+              border: '1px solid #eee',
+              borderRadius: '10px',
+              overflow: 'hidden',
+              background: 'var(--cursor-surface-200, #fafafa)',
+            }}>
+              <div style={{
+                padding: '8px 12px',
+                background: 'linear-gradient(135deg, #fff5f0, #fff)',
+                borderBottom: '1px solid #f0f0f0',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: '#333',
+              }}>
+                🍵 推荐商品
+              </div>
+              {card.data.map((p, j) => (
+                <div key={j} style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '8px 12px',
+                  borderBottom: j < card.data.length - 1 ? '1px solid #f5f5f5' : 'none',
+                  fontSize: '13px',
+                }}>
+                  <span style={{ color: '#333' }}>{p.name}</span>
+                  <span style={{ color: '#f54e00', fontWeight: 600, fontSize: '13px' }}>¥{p.price}</span>
+                </div>
+              ))}
+            </div>
+          )
+        }
+
+        if (card.type === 'order') {
+          return (
+            <div key={i} style={{
+              border: '1px solid #e8f5e9',
+              borderRadius: '10px',
+              overflow: 'hidden',
+              background: 'var(--cursor-surface-200, #fafafa)',
+            }}>
+              <div style={{
+                padding: '8px 12px',
+                background: 'linear-gradient(135deg, #e8f5e9, #fff)',
+                borderBottom: '1px solid #e8f5e9',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: '#2e7d32',
+              }}>
+                ✅ 订单已创建
+              </div>
+              <div style={{ padding: '10px 12px', fontSize: '13px', lineHeight: '1.8' }}>
+                {card.data.store && <div>📍 门店：<strong>{card.data.store}</strong></div>}
+                {card.data.orderId && <div>📋 订单号：{card.data.orderId}</div>}
+                {card.data.price && <div>💰 需支付：<span style={{ color: '#f54e00', fontWeight: 600 }}>¥{card.data.price}</span></div>}
+              </div>
+            </div>
+          )
+        }
+
+        return null
+      })}
+    </div>
+  )
+}
+
 /* ─── Message Bubble ─── */
-function MessageBubble({ message, isStreaming, ...qoderProps }) {
+function MessageBubble({ message, isStreaming, onSend, ...qoderProps }) {
   const [copied, setCopied] = useState(false)
   const isUser = message.role === 'user'
   const isSystem = message.role === 'system'
@@ -1105,6 +1304,16 @@ function MessageBubble({ message, isStreaming, ...qoderProps }) {
         {/* Order Processing Workflow Card */}
         {!isUser && message.orderResult && (
           <OrderProcessingCard orderResult={message.orderResult}  data-qoder-id="qel-orderprocessingcard-2396ac4f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-orderprocessingcard-2396ac4f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;orderprocessingcard&quot;,&quot;loc&quot;:{&quot;line&quot;:1120,&quot;column&quot;:11}}"/>
+        )}
+
+        {/* Rich Cards from tool call results */}
+        {!isUser && message.toolCallsMade && (
+          <RichCardRenderer toolCalls={message.toolCallsMade} />
+        )}
+
+        {/* Ordering Quick Reply Buttons */}
+        {!isUser && (
+          <OrderingQuickReplies text={message.content} onSend={onSend} isStreaming={isStreaming} />
         )}
 
         {/* Actions */}
@@ -3164,6 +3373,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
       aiqc_v2: engineResult?.aiqc_v2 || null,
       orderResult: engineResult?.orderResult || null,
       agentFramework: engineResult?.agent_framework || null,
+      toolCallsMade: engineResult?.tool_calls_made || null,
       triggersData: triggersData || null,
     }
 
@@ -3571,6 +3781,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
                     <MessageBubble
                       key={msg.id}
                       message={msg}
+                      onSend={handleSend}
                       isStreaming={isStreaming && msg === messages[messages.length - 1] && msg.role === 'assistant'}
                      data-qoder-id="qel-messagebubble-563556b1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-messagebubble-563556b1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;ChatInterface&quot;,&quot;elementRole&quot;:&quot;messagebubble&quot;,&quot;loc&quot;:{&quot;line&quot;:3447,&quot;column&quot;:21}}"/>
                   )

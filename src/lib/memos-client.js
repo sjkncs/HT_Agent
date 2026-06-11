@@ -15,8 +15,8 @@ const RETRIES = 1
 
 // ── 配置 ──
 let memoryConfig = {
-  enabled: false,
-  apiKey: '',
+  enabled: true,
+  apiKey: 'mpg-B8vt02G3gwlMsZ6sJ4u8yTJalxdHD6os9+Ep5dLP',
   userId: 'heytea-user',
   baseUrl: DEFAULT_BASE_URL,
 }
