@@ -42,20 +42,63 @@ public class LLMServiceImpl implements LLMService {
     private static final Map<String, String> SYSTEM_PROMPTS = Map.of(
             "ordering",
             """
-            你是喜茶智能点单助手。你可以帮助用户浏览菜单、推荐饮品、完成点单和查询订单状态。
-            请用友好、简洁的语气回复，主动推荐当季热门饮品。
-            如果用户要下单，请确认饮品名称、规格（杯型、甜度、冰量）和数量。
+            你是喜茶智能点单助手「阿喜」。你的核心职责是帮助用户完成点单流程。
+            
+            能力范围：
+            - 浏览菜单、推荐当季热门饮品
+            - 确认饮品名称、规格（杯型/甜度/冰量）和数量
+            - 查询门店地址和配送范围
+            - 确认订单、模拟下单流程
+            
+            回复规范：
+            1. 主动推荐 2-3 款当季热门饮品
+            2. 用户确认饮品后，主动询问规格偏好
+            3. 点单完成后，汇总确认订单信息
+            4. 用友好、活泼的语气回复，适当使用喜茶品牌调性
             """,
             "general_knowledge",
             """
-            你是喜茶智能客服助手。你可以回答关于喜茶品牌、门店信息、营业时间、会员制度、
-            优惠活动等一般性问题。请用专业、友好的语气回复，如果不确定信息请如实告知。
+            你是喜茶智能客服助手「阿喜」。你可以回答关于喜茶品牌的一般性问题。
+            
+            能力范围：
+            - 门店查询（地址、营业时间、联系方式）
+            - 会员制度、积分规则、会员等级
+            - 优惠活动、新品资讯、联名活动
+            - 配送方式、取餐方式
+            - 品牌故事、企业文化
+            
+            回复规范：
+            1. 用专业、友好的语气回复
+            2. 如果不确定具体信息，建议用户通过喜茶小程序或官方渠道确认
+            3. 可以适当推荐相关饮品或活动
+            4. 回复简洁，不超过 3-4 句话
             """,
             "food_safety",
             """
-            你是喜茶食品安全专员助手。你需要认真对待每一个食品安全问题，详细记录用户描述的问题，
-            安抚用户情绪，并引导用户提供以下信息：问题类型、购买门店、购买时间、具体问题描述。
-            请表达对问题的重视，并告知处理流程和预计处理时间。
+            你是喜茶食品安全专员助手。食品安全是喜茶的生命线，你必须以最高优先级处理每一个食安问题。
+            
+            【核心处理流程】
+            1. 立即表达关切和歉意 — 让用户感受到被重视
+            2. 收集关键信息（按优先级）：
+               - 问题类型：异物/变质/过敏/卫生/其他
+               - 购买渠道：门店堂食/外卖/小程序
+               - 购买时间和门店
+               - 问题详细描述（异物外观、气味异常等）
+               - 是否已造成身体不适
+            3. 告知处理承诺：
+               - 24 小时内专人跟进
+               - 72 小时内给出初步调查结果
+               - 提供工单号供后续查询
+            4. 补偿方案引导：
+               - 退款处理
+               - 就医费用报销（如有身体不适）
+               - 额外补偿券
+            
+            【注意事项】
+            - 绝不推卸责任或质疑用户的描述
+            - 如用户情绪激动，先安抚再收集信息
+            - 如涉及人身安全（过敏/身体不适），建议立即就医并保留就医凭证
+            - 所有信息将用于内部品质改进追溯
             """
     );
 
@@ -162,15 +205,71 @@ public class LLMServiceImpl implements LLMService {
         }
     }
 
+    // ── 关键词快速通道：食安信号词（命中即返回 food_safety）──
+    private static final String[] FOOD_SAFETY_KEYWORDS = {
+            "异物", "头发", "塑料", "金属", "玻璃", "虫", "苍蝇", "蟑螂", "纸片", "线头",
+            "果核", "籽", "茶渣", "果皮", "果肉", "沉淀", "纤维", "颗粒物",
+            "拉肚子", "腹泻", "呕吐", "过敏", "恶心", "头晕", "发烧", "不舒服", "肚子疼",
+            "变质", "发霉", "过期", "馊", "酸了", "异味", "怪味", "品控", "品质问题",
+            "退款", "赔偿", "补偿", "投诉", "曝光", "差评",
+            "包装破", "漏杯", "撒了", "封口不严",
+            "食安", "食品安全", "卫生问题", "不干净", "脏",
+            "foreign object", "refund", "sick", "allergic", "contaminated",
+            "hair", "mold", "expired", "dirty"
+    };
+
+    // ── 关键词快速通道：点单信号词（命中即返回 ordering）──
+    private static final String[] ORDERING_KEYWORDS = {
+            "点单", "下单", "点一杯", "来一杯", "买一杯", "要一杯", "我想点",
+            "推荐饮品", "推荐喝", "菜单", "看看菜单", "有什么喝的",
+            "多肉葡萄", "芝芝莓莓", "烤黑糖波波", "生椰拿铁",
+            "甜度", "冰量", "少冰", "去冰", "几分糖", "加料",
+            "确认订单", "订单确认", "配送地址", "送到", "自提",
+            "order", "menu", "recommend drink", "place order",
+            "how much", "price", "size"
+    };
+
     @Override
     public String classifyIntent(String userMessage) {
+        if (userMessage == null || userMessage.isBlank()) {
+            return "general_knowledge";
+        }
+        String lowerMsg = userMessage.toLowerCase();
+
+        // ── Phase 1: 关键词快速通道（毫秒级） ──
+        // 食安优先级高于点单（安全问题必须第一时间进入食安通道）
+        for (String kw : FOOD_SAFETY_KEYWORDS) {
+            if (lowerMsg.contains(kw.toLowerCase())) {
+                log.info("Keyword fast-path: food_safety (matched: {})", kw);
+                return "food_safety";
+            }
+        }
+        for (String kw : ORDERING_KEYWORDS) {
+            if (lowerMsg.contains(kw.toLowerCase())) {
+                log.info("Keyword fast-path: ordering (matched: {})", kw);
+                return "ordering";
+            }
+        }
+
+        // ── Phase 2: LLM 增强分类（关键词未命中时使用） ──
         try {
             String classificationPrompt = """
-                    你是一个意图分类器。请根据用户消息判断其意图类别。
-                    只返回以下三个类别之一（仅返回类别名称，不要附加任何其他文字）：
-                    - ordering: 用户想要点单、查看菜单、推荐饮品、修改订单、查询订单状态
-                    - general_knowledge: 用户询问门店信息、营业时间、会员、优惠活动等一般性问题
-                    - food_safety: 用户反馈食品安全问题，如异物、变质、过敏、卫生问题等
+                    你是喜茶客服意图分类器。请根据用户消息判断其意图类别。
+                    
+                    【分类规则】
+                    1. food_safety（食品安全）— 最高优先级
+                       用户反馈饮品中有异物、变质、导致身体不适、要求退款赔偿、投诉品质问题
+                       关键词信号：异物/头发/虫子/拉肚子/过敏/变质/退款/投诉/不干净
+                    
+                    2. ordering（点单）
+                       用户想要点饮品、查看菜单、推荐饮品、修改/查询订单、询问价格规格
+                       关键词信号：点单/下单/来一杯/菜单/推荐/甜度/冰量/多少钱
+                    
+                    3. general_knowledge（通用咨询）
+                       用户询问门店信息、营业时间、会员制度、优惠活动、品牌故事等
+                       关键词信号：门店/在哪/几点/会员/积分/优惠/活动/新品
+                    
+                    只返回类别名称（food_safety / ordering / general_knowledge），不要返回其他任何文字。
                     
                     用户消息：%s
                     """.formatted(userMessage);
@@ -178,11 +277,11 @@ public class LLMServiceImpl implements LLMService {
             Map<String, Object> requestBody = new LinkedHashMap<>();
             requestBody.put("model", model);
             requestBody.put("messages", List.of(
-                    Map.of("role", "system", "content", "你是意图分类器，只返回类别名称。"),
+                    Map.of("role", "system", "content", "你是意图分类器，只返回类别名称：food_safety、ordering 或 general_knowledge。"),
                     Map.of("role", "user", "content", classificationPrompt)
             ));
             requestBody.put("max_tokens", 20);
-            requestBody.put("temperature", 0.1);
+            requestBody.put("temperature", 0.0);
 
             String requestBodyJson = objectMapper.writeValueAsString(requestBody);
 
@@ -193,7 +292,7 @@ public class LLMServiceImpl implements LLMService {
                     .bodyValue(requestBodyJson)
                     .retrieve()
                     .bodyToMono(String.class)
-                    .timeout(Duration.ofSeconds(15))
+                    .timeout(Duration.ofSeconds(10))
                     .block();
 
             Map<String, Object> responseMap = objectMapper.readValue(responseBody, new TypeReference<>() {});
@@ -205,18 +304,17 @@ public class LLMServiceImpl implements LLMService {
                 Map<String, Object> messageObj = (Map<String, Object>) choices.get(0).get("message");
                 if (messageObj != null && messageObj.get("content") != null) {
                     String result = messageObj.get("content").toString().trim().toLowerCase();
-                    // Normalize: extract just the intent keyword
-                    if (result.contains("ordering")) return "ordering";
+                    log.info("LLM classified intent: {} (raw: {})", result, result);
                     if (result.contains("food_safety")) return "food_safety";
-                    return "general_knowledge";
+                    if (result.contains("ordering")) return "ordering";
+                    if (result.contains("general_knowledge")) return "general_knowledge";
                 }
             }
 
         } catch (Exception e) {
-            log.error("Intent classification failed: {}", e.getMessage(), e);
+            log.warn("LLM intent classification failed, defaulting to general_knowledge: {}", e.getMessage());
         }
 
-        // Default fallback
         return "general_knowledge";
     }
 

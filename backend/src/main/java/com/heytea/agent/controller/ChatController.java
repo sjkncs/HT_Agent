@@ -79,7 +79,8 @@ public class ChatController {
         // 4. Classify intent if not provided
         String intent = request.getIntent();
         if (intent == null || intent.isBlank()) {
-            intent = "general_knowledge";
+            intent = llmService.classifyIntent(request.getMessage());
+            log.info("Auto-classified intent: {} for message: {}", intent, truncate(request.getMessage(), 50));
         }
 
         // 5. Call LLM to generate a response
