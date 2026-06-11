@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-喜茶 AI Agent — 意图分类准确率验证脚本 v3
+喜茶 AI Agent — 意图分类准确率验证脚本 v4
+v4: Multi-phase agent detection (greeting + professional phrases + user exclusion scoring)
 Uses pandas with selective column loading for fast execution.
 """
 
@@ -52,20 +53,73 @@ def extract_first_user_message(conversation_text):
     if current_speaker and current_msg_lines:
         messages.append((current_speaker, "\n".join(current_msg_lines).strip()))
 
+    # Phase 1: 标准客服问候语（高置信度）
     greeting_re = re.compile(
         r'为您服务|有什么.*帮到|阿喜在的|正在排队|春光明媚|金毫满枝|喜悦发生'
+        r'|很高兴.*服务|感谢.*联系|客服.*号|小喜.*在的'
+        r'|不好意思.*让您久等|火速赶来|稍作等候|先为您查看'
+    )
+    # Phase 2: 客服专业话术（中置信度，需配合其他信号）
+    agent_phrase_re = re.compile(
+        r'理解您的心情|致以.*歉意|马上反馈|详细描述|辛苦您'
+        r'|真挚的歉意|非常重视|尽快联系|尽快核实'
+        r'|给您带来不便|已记录|会.*跟进|帮您查看|帮您查询'
+        r'|感谢您的.*反馈|提供一下|订单编号|门店信息'
+        r'|向您致以|真的非常抱歉|满意.*体验|给您满意'
+        r'|造成困扰|可联系的|抱歉没有给您|尽快核实'
+        r'|门店负责人|排查并|给您造成|非常抱歉没有给'
+        r'|阿喜.*核实|阿喜.*反馈|阿喜.*查看'
+    )
+    # Per-message agent detector (strong phrases that almost certainly indicate agent)
+    strong_agent_re = re.compile(
+        r'向您致以|真挚的歉意|理解您的心情|马上反馈门店'
+        r'|非常重视.*排查|抱歉没有给您满意|造成困扰.*辛苦您'
+        r'|不好意思.*让您久等|阿喜正火速|阿喜.*为您查看'
+    )
+    # Phase 3: 排除用户的特征（用户常用但客服不常用）
+    user_phrase_re = re.compile(
+        r'我要投诉|我要举报|怎么回事|你们.*太|垃圾|差劲|骗人'
+        r'|我的.*什么时候|请问.*怎么|帮我.*退|我想.*问'
     )
     
     agent_speakers = set()
+    speaker_scores = {}  # speaker -> agent likelihood score
+    
     for speaker, msg in messages:
+        if speaker not in speaker_scores:
+            speaker_scores[speaker] = 0
+        
+        # Phase 1: 标准问候语 → 高置信度客服
         if greeting_re.search(msg):
             agent_speakers.add(speaker)
+            speaker_scores[speaker] += 10
+        
+        # Phase 2: 客服专业话术 → 累加中置信度信号
+        agent_matches = agent_phrase_re.findall(msg)
+        if agent_matches:
+            speaker_scores[speaker] += len(agent_matches) * 3
+        
+        # Phase 3: 用户特征 → 扣分
+        if user_phrase_re.search(msg):
+            speaker_scores[speaker] -= 5
     
+    # 按得分排序，得分最高且>0的视为客服
+    if not agent_speakers:
+        sorted_speakers = sorted(speaker_scores.items(), key=lambda x: -x[1])
+        for sp, score in sorted_speakers:
+            if score > 0:
+                agent_speakers.add(sp)
+                break  # 只取最高分的一个
+    
+    # Fallback: 如果仍然没识别出客服，取第一条消息的发言者
     if not agent_speakers and len(messages) >= 2:
         agent_speakers.add(messages[0][0])
 
     for speaker, msg in messages:
         if speaker in agent_speakers:
+            continue
+        # Per-message strong agent check: skip even unknown speakers if msg is clearly agent
+        if strong_agent_re.search(msg):
             continue
         if msg.startswith("http"):
             continue
@@ -202,6 +256,8 @@ def run_test():
         })
         
         msg_preview = test["message"][:45].replace("\n", " ")
+        # Strip emoji/non-BMP chars for Windows GBK console
+        msg_preview = msg_preview.encode('gbk', errors='replace').decode('gbk', errors='replace')
         print(f"  [{i+1:3d}/{len(all_tests)}] {mark} {status:2s} exp={expected:18s} got={intent:18s} | {msg_preview}")
         sys.stdout.flush()
         
@@ -237,7 +293,8 @@ def run_test():
         for e in errors[:15]:
             print(f"    [{e['index']}] {e['status']} exp={e['expected']} got={e['predicted']}")
             print(f"         label={e['label']}/{e['sublabel']}")
-            print(f"         msg={e['message'][:80]}")
+            msg_snippet = e['message'][:80].encode('gbk', errors='replace').decode('gbk', errors='replace')
+            print(f"         msg={msg_snippet}")
     
     # Save
     output_path = os.path.join(RESULTS_DIR, "classification_results.json")

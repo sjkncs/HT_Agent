@@ -81,6 +81,20 @@ public class ChatController {
         if (intent == null || intent.isBlank()) {
             intent = llmService.classifyIntent(request.getMessage());
             log.info("Auto-classified intent: {} for message: {}", intent, truncate(request.getMessage(), 50));
+
+            // 4.1 Intent inheritance: generic messages inherit conversation's prior intent
+            //     Solves "人工"/"转人工"/"你好" etc. defaulting to general_knowledge
+            if ("general_knowledge".equals(intent)) {
+                String prevIntent = conversation.getIntent();
+                String msg = request.getMessage().trim();
+                boolean isGenericMsg = msg.length() <= 5 ||
+                        msg.matches("^(人工|转人工|人工客服|你好|在吗|嗯|好|对|是|继续)$");
+                if (isGenericMsg && prevIntent != null && !prevIntent.isBlank()
+                        && !"general_knowledge".equals(prevIntent)) {
+                    intent = prevIntent;
+                    log.info("Intent inherited from conversation: {} (was general_knowledge)", prevIntent);
+                }
+            }
         }
 
         // 4.5 Log image evidence if provided (food safety channel)

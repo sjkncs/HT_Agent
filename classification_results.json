@@ -1,19 +1,19 @@
 {
-  "timestamp": "2026-06-11T23:04:39.562848",
+  "timestamp": "2026-06-11T23:21:35.392894",
   "total_samples": 100,
   "food_safety_samples": 50,
   "non_food_safety_samples": 50,
   "confusion_matrix": {
-    "TP": 17,
+    "TP": 28,
     "TN": 49,
     "FP": 1,
-    "FN": 33
+    "FN": 22
   },
   "metrics": {
-    "accuracy": 0.66,
-    "precision": 0.9444,
-    "recall": 0.34,
-    "f1_score": 0.5,
+    "accuracy": 0.77,
+    "precision": 0.9655,
+    "recall": 0.56,
+    "f1_score": 0.7089,
     "specificity": 0.98
   },
   "results": [
@@ -39,14 +39,14 @@
       "index": 3,
       "message": "奶茶里面都有封口标签？",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "外源性异物",
-      "status": "FN"
+      "status": "TP"
     },
     {
       "index": 4,
-      "message": "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。",
+      "message": "kitty挂件还会补货吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -66,10 +66,10 @@
       "index": 6,
       "message": "黑糖牛乳里面有股芭乐味",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "饮品异味",
-      "status": "FN"
+      "status": "TP"
     },
     {
       "index": 7,
@@ -109,16 +109,16 @@
     },
     {
       "index": 11,
-      "message": "你好我昨天喝完以后和朋友一直腹泻",
-      "expected": "food_safety",
-      "predicted": "food_safety",
-      "label": "食安问题",
-      "sublabel": "身体不适",
-      "status": "TP"
+      "message": "今天我下单的kitty茶碗公仔 收到了发现公仔头上蝴蝶结上没有樱花🌸",
+      "expected": "general_knowledge",
+      "predicted": "ordering",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
     },
     {
       "index": 12,
-      "message": "没送联名周边给我",
+      "message": "玩偶上面有瑕疵",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -145,7 +145,7 @@
     },
     {
       "index": 15,
-      "message": "你好",
+      "message": "Hello Kitty联名套餐毛绒挂件的大概什么时候能补货？",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -154,7 +154,7 @@
     },
     {
       "index": 16,
-      "message": "玩偶上面有瑕疵",
+      "message": "这个芭乐是松的吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -163,7 +163,7 @@
     },
     {
       "index": 17,
-      "message": "请问限定的联名周边是卖完就没有了还是第二天会补货",
+      "message": "请问您目前是取到了茶碗款的挂件吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -172,7 +172,7 @@
     },
     {
       "index": 18,
-      "message": "如果没有刺绣贴 门店不下架商品 到取货的时候 杯套我问了一次才给 刺绣贴也是我再次询问才告诉我没有了",
+      "message": "我的喜帖大概还有多久呀",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -190,7 +190,7 @@
     },
     {
       "index": 20,
-      "message": "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意",
+      "message": "辛苦您可以提供一下完整的订单号吗，阿喜为您查询订单具体信息，以便更好的为您处理您遇到的问题的",
       "expected": "food_safety",
       "predicted": "general_knowledge",
       "label": "食安问题",
@@ -208,16 +208,7 @@
     },
     {
       "index": 22,
-      "message": "您好，在的，阿喜先为您查看下留言记录，请稍等",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 23,
-      "message": "买套餐没有给小卡片",
+      "message": "阿喜这边联系到门店核实到是还有新品卡库存的确实是我们做的不够好",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线下活动",
@@ -225,8 +216,17 @@
       "status": "TN"
     },
     {
+      "index": 23,
+      "message": "请问限定的联名周边是卖完就没有了还是第二天会补货",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
       "index": 24,
-      "message": "今天买的联名款，纸袋是普通款",
+      "message": "辛苦您详细描述一下遇到的问题，阿喜会尽快核实，感谢您的理解和反馈",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -253,7 +253,7 @@
     },
     {
       "index": 27,
-      "message": "人工客服",
+      "message": "今天我购买了这个套餐 那个挂件现在拆开看到有瑕疵",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -262,16 +262,16 @@
     },
     {
       "index": 28,
-      "message": "今天我下单的kitty茶碗公仔 收到了发现公仔头上蝴蝶结上没有樱花🌸",
+      "message": "他这个挂绳都是瑕疵的",
       "expected": "general_knowledge",
-      "predicted": "ordering",
+      "predicted": "general_knowledge",
       "label": "线上活动",
       "sublabel": "联名活动",
       "status": "TN"
     },
     {
       "index": 29,
-      "message": "这个芭乐是松的吗",
+      "message": "人工客服",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -298,10 +298,10 @@
     },
     {
       "index": 32,
-      "message": "挂件送错款式了",
+      "message": "今天下午购买的联名",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
-      "label": "线上活动",
+      "label": "线下活动",
       "sublabel": "联名活动",
       "status": "TN"
     },
@@ -309,10 +309,10 @@
       "index": 33,
       "message": "昨天点了三杯饮料，晚上开始上吐下泻，家里一共五个人，只有喝了这杯饮料的人有症状。需要给我一个说法",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "身体不适",
-      "status": "FN"
+      "status": "TP"
     },
     {
       "index": 34,
@@ -336,10 +336,10 @@
       "index": 36,
       "message": "喝完拉肚",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "身体不适",
-      "status": "FN"
+      "status": "TP"
     },
     {
       "index": 37,
@@ -354,14 +354,14 @@
       "index": 38,
       "message": "这底下是什么黑的",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "外源性异物",
-      "status": "FN"
+      "status": "TP"
     },
     {
       "index": 39,
-      "message": "您反馈的问题我们非常重视，阿喜马上反馈门店负责人排查并尽快联系您。",
+      "message": "我们对于这个情况非常非常重视，会由门店负责人亲自联系您沟通解决。沟通后有任何问题您也可以再次联系我们帮您反馈",
       "expected": "food_safety",
       "predicted": "general_knowledge",
       "label": "食安问题",
@@ -379,7 +379,7 @@
     },
     {
       "index": 41,
-      "message": "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。",
+      "message": "毛绒挂件还会补货吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -388,12 +388,12 @@
     },
     {
       "index": 42,
-      "message": "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。",
+      "message": "这个周边hello Kitty裙子是脏的",
       "expected": "general_knowledge",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "线上活动",
       "sublabel": "联名活动",
-      "status": "TN"
+      "status": "FP"
     },
     {
       "index": 43,
@@ -406,7 +406,7 @@
     },
     {
       "index": 44,
-      "message": "联名会补货吗",
+      "message": "我的有瑕疵",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -424,7 +424,7 @@
     },
     {
       "index": 46,
-      "message": "可以给两个联名袋子吗",
+      "message": "今天买的联名款，纸袋是普通款",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -433,7 +433,7 @@
     },
     {
       "index": 47,
-      "message": "非常理解您的心情，很抱歉没有给您满意的体验，向您致以我们真挚的歉意",
+      "message": "芭乐那个毛绒套装明天会补货吗？几点补货呢",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -442,7 +442,7 @@
     },
     {
       "index": 48,
-      "message": "第2弹还有联名的包材吗",
+      "message": "活动什么时候结束",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -451,16 +451,16 @@
     },
     {
       "index": 49,
-      "message": "这个周边hello Kitty裙子是脏的",
+      "message": "你好想问一下现在在广东韶关那边门店的Hello Kitty会补货吗",
       "expected": "general_knowledge",
-      "predicted": "food_safety",
+      "predicted": "general_knowledge",
       "label": "线上活动",
       "sublabel": "联名活动",
-      "status": "FP"
+      "status": "TN"
     },
     {
       "index": 50,
-      "message": "毛绒挂件还会补货吗",
+      "message": "磁铁吸不上 怎么调整都不行",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -469,7 +469,7 @@
     },
     {
       "index": 51,
-      "message": "辛苦您详细描述一下遇到的问题，阿喜会尽快核实，感谢您的理解和反馈",
+      "message": "没送联名周边给我",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -478,7 +478,7 @@
     },
     {
       "index": 52,
-      "message": "向您致以我们真挚的歉意，非常抱歉",
+      "message": "美团的",
       "expected": "food_safety",
       "predicted": "general_knowledge",
       "label": "食安问题",
@@ -487,7 +487,7 @@
     },
     {
       "index": 53,
-      "message": "磁铁吸不上 怎么调整都不行",
+      "message": "您好，请问是联名的挂件玩具是吗？",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -514,12 +514,12 @@
     },
     {
       "index": 56,
-      "message": "向您致以我们真挚的歉意，非常抱歉",
+      "message": "飞虫",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "外源性异物",
-      "status": "FN"
+      "status": "TP"
     },
     {
       "index": 57,
@@ -532,7 +532,7 @@
     },
     {
       "index": 58,
-      "message": "没有周边",
+      "message": "可以给两个联名袋子吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -559,7 +559,7 @@
     },
     {
       "index": 61,
-      "message": "你好",
+      "message": "没有周边",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -577,7 +577,7 @@
     },
     {
       "index": 63,
-      "message": "你好",
+      "message": "联名会补货吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
       "label": "线上活动",
@@ -595,24 +595,15 @@
     },
     {
       "index": 65,
-      "message": "你好想问一下现在在广东韶关那边门店的Hello Kitty会补货吗",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
+      "message": "那个我刚点了一杯多肉葡萄，喝完五分钟不到就肚子痛了。？",
+      "expected": "food_safety",
+      "predicted": "food_safety",
+      "label": "食安问题",
+      "sublabel": "身体不适",
+      "status": "TP"
     },
     {
       "index": 66,
-      "message": "那个我刚点了一杯多肉葡萄，喝完五分钟不到就肚子痛了。？",
-      "expected": "food_safety",
-      "predicted": "ordering",
-      "label": "食安问题",
-      "sublabel": "身体不适",
-      "status": "FN"
-    },
-    {
-      "index": 67,
       "message": "联名的hellokitty茶杯不正，有质量问题",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -621,7 +612,7 @@
       "status": "TN"
     },
     {
-      "index": 68,
+      "index": 67,
       "message": "都是柠檬籽",
       "expected": "food_safety",
       "predicted": "food_safety",
@@ -630,7 +621,7 @@
       "status": "TP"
     },
     {
-      "index": 69,
+      "index": 68,
       "message": "你们这是什么 一拿出来就看到",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -639,133 +630,16 @@
       "status": "FN"
     },
     {
+      "index": 69,
+      "message": "好的谢谢",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
       "index": 70,
-      "message": "不好意思，让您久等了。阿喜正火速赶来，请您再稍作等候。",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 71,
-      "message": "活动什么时候结束",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 72,
-      "message": "这个我买的是刺绣套餐 但是送来没有刺绣",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 73,
-      "message": "怎么会有柠檬皮啊？",
-      "expected": "food_safety",
-      "predicted": "general_knowledge",
-      "label": "食安问题",
-      "sublabel": "内源性异物",
-      "status": "FN"
-    },
-    {
-      "index": 74,
-      "message": "我的有瑕疵",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 75,
-      "message": "芒果核芒果皮",
-      "expected": "food_safety",
-      "predicted": "food_safety",
-      "label": "食安问题",
-      "sublabel": "内源性异物",
-      "status": "TP"
-    },
-    {
-      "index": 76,
-      "message": "真的非常抱歉没有给您满意体验",
-      "expected": "food_safety",
-      "predicted": "general_knowledge",
-      "label": "食安问题",
-      "sublabel": "外源性异物",
-      "status": "FN"
-    },
-    {
-      "index": 77,
-      "message": "人工",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 78,
-      "message": "你好，这个回弹不了",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 79,
-      "message": "喝出茶叶渣了",
-      "expected": "food_safety",
-      "predicted": "general_knowledge",
-      "label": "食安问题",
-      "sublabel": "内源性异物",
-      "status": "FN"
-    },
-    {
-      "index": 80,
-      "message": "人工",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线下活动",
-      "sublabel": "结婚活动",
-      "status": "TN"
-    },
-    {
-      "index": 81,
-      "message": "我昨天下午点的烤黑糖波波牛乳茶喝起来酸酸的",
-      "expected": "food_safety",
-      "predicted": "ordering",
-      "label": "食安问题",
-      "sublabel": "饮品异味",
-      "status": "FN"
-    },
-    {
-      "index": 82,
-      "message": "HelloKitty挂件还会补货吗",
-      "expected": "general_knowledge",
-      "predicted": "general_knowledge",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 83,
-      "message": "11号上的口金包可以从喜茶购外卖送到家吗？不想自提",
-      "expected": "general_knowledge",
-      "predicted": "ordering",
-      "label": "线上活动",
-      "sublabel": "联名活动",
-      "status": "TN"
-    },
-    {
-      "index": 84,
       "message": "hello Kitty挂件还补吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -774,8 +648,71 @@
       "status": "TN"
     },
     {
-      "index": 85,
-      "message": "喝出皮了[不说]",
+      "index": 71,
+      "message": "这个我买的是刺绣套餐 但是送来没有刺绣",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 72,
+      "message": "怎么会有柠檬皮啊？",
+      "expected": "food_safety",
+      "predicted": "food_safety",
+      "label": "食安问题",
+      "sublabel": "内源性异物",
+      "status": "TP"
+    },
+    {
+      "index": 73,
+      "message": "还要多久",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 74,
+      "message": "芒果核芒果皮",
+      "expected": "food_safety",
+      "predicted": "food_safety",
+      "label": "食安问题",
+      "sublabel": "内源性异物",
+      "status": "TP"
+    },
+    {
+      "index": 75,
+      "message": "剪开的包装都放进奶茶里面吗",
+      "expected": "food_safety",
+      "predicted": "general_knowledge",
+      "label": "食安问题",
+      "sublabel": "外源性异物",
+      "status": "FN"
+    },
+    {
+      "index": 76,
+      "message": "人工",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 77,
+      "message": "你好",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 78,
+      "message": "喝出茶叶渣了",
       "expected": "food_safety",
       "predicted": "general_knowledge",
       "label": "食安问题",
@@ -783,7 +720,61 @@
       "status": "FN"
     },
     {
-      "index": 86,
+      "index": 79,
+      "message": "人工",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线下活动",
+      "sublabel": "结婚活动",
+      "status": "TN"
+    },
+    {
+      "index": 80,
+      "message": "我昨天下午点的烤黑糖波波牛乳茶喝起来酸酸的",
+      "expected": "food_safety",
+      "predicted": "food_safety",
+      "label": "食安问题",
+      "sublabel": "饮品异味",
+      "status": "TP"
+    },
+    {
+      "index": 81,
+      "message": "HelloKitty挂件还会补货吗",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 82,
+      "message": "联名售罄后明天会不会补",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 83,
+      "message": "挂件送错款式了",
+      "expected": "general_knowledge",
+      "predicted": "general_knowledge",
+      "label": "线上活动",
+      "sublabel": "联名活动",
+      "status": "TN"
+    },
+    {
+      "index": 84,
+      "message": "喝出皮了[不说]",
+      "expected": "food_safety",
+      "predicted": "food_safety",
+      "label": "食安问题",
+      "sublabel": "内源性异物",
+      "status": "TP"
+    },
+    {
+      "index": 85,
       "message": "人工客服",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -792,16 +783,16 @@
       "status": "FN"
     },
     {
-      "index": 87,
+      "index": 86,
       "message": "我刚点了杯喜茶外卖在美团，结果灵感小袋的包装和吸管的包装一股炸鸡店的地沟油味。。想问下是正常的吗，给我的解释是附近有炸鸡店",
       "expected": "food_safety",
-      "predicted": "general_knowledge",
+      "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "饮品异味",
-      "status": "FN"
+      "status": "TP"
     },
     {
-      "index": 88,
+      "index": 87,
       "message": "挂件明天还会补货吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -810,7 +801,7 @@
       "status": "TN"
     },
     {
-      "index": 89,
+      "index": 88,
       "message": "我的订单选择的是芭乐款 送来的是盆栽款 可以更换或者退么",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -819,7 +810,7 @@
       "status": "TN"
     },
     {
-      "index": 90,
+      "index": 89,
       "message": "我定的是玩偶 送给我的是冰箱贴",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -828,7 +819,7 @@
       "status": "TN"
     },
     {
-      "index": 91,
+      "index": 90,
       "message": "人工客服",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -837,7 +828,7 @@
       "status": "FN"
     },
     {
-      "index": 92,
+      "index": 91,
       "message": "联名玩偶有瑕疵",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -846,7 +837,7 @@
       "status": "TN"
     },
     {
-      "index": 93,
+      "index": 92,
       "message": "有一根头发",
       "expected": "food_safety",
       "predicted": "food_safety",
@@ -855,7 +846,7 @@
       "status": "TP"
     },
     {
-      "index": 94,
+      "index": 93,
       "message": "产品和服务问题",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -864,7 +855,7 @@
       "status": "FN"
     },
     {
-      "index": 95,
+      "index": 94,
       "message": "人工",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -873,7 +864,7 @@
       "status": "FN"
     },
     {
-      "index": 96,
+      "index": 95,
       "message": "是不是没加弹弹冻啊？",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -882,7 +873,7 @@
       "status": "FN"
     },
     {
-      "index": 97,
+      "index": 96,
       "message": "现在挂件还有吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -891,7 +882,7 @@
       "status": "TN"
     },
     {
-      "index": 98,
+      "index": 97,
       "message": "我可以先买上帮我留着吗",
       "expected": "general_knowledge",
       "predicted": "general_knowledge",
@@ -900,7 +891,7 @@
       "status": "TN"
     },
     {
-      "index": 99,
+      "index": 98,
       "message": "人工",
       "expected": "food_safety",
       "predicted": "general_knowledge",
@@ -909,12 +900,21 @@
       "status": "FN"
     },
     {
-      "index": 100,
+      "index": 99,
       "message": "喝到芒果皮……",
       "expected": "food_safety",
       "predicted": "food_safety",
       "label": "食安问题",
       "sublabel": "内源性异物",
+      "status": "TP"
+    },
+    {
+      "index": 100,
+      "message": "你好我昨天喝完以后和朋友一直腹泻",
+      "expected": "food_safety",
+      "predicted": "food_safety",
+      "label": "食安问题",
+      "sublabel": "身体不适",
       "status": "TP"
     }
   ]
