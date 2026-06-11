@@ -5526,6 +5526,59 @@ async function _executeToolCallingLoop(llmClient, mcpIntegration, messages, tool
   const MAX_TOOL_ROUNDS = 5
   const allToolCalls = []
 
+  // 本地工具名称集合 — 这些工具不经过 MCP，在客户端直接执行
+  const LOCAL_TOOL_NAMES = new Set(['web_search', 'recall_memory', 'add_memory', 'analyze_image'])
+  let _webSearch, _memosClient, _visionService, _skillsRegistry
+
+  async function _executeLocalTool(toolName, toolArgs) {
+    // 懒加载本地服务模块
+    if (!_webSearch) {
+      try {
+        _webSearch = await import('./web-search-service.js')
+        _memosClient = await import('./memos-client.js')
+        _visionService = await import('./vision-service.js')
+        _skillsRegistry = await import('./skills-registry.js')
+      } catch (err) {
+        return `本地服务加载失败: ${err.message}`
+      }
+    }
+
+    switch (toolName) {
+      case 'web_search': {
+        if (!_webSearch.isWebSearchAvailable()) {
+          return '联网搜索服务未配置，请设置 Tavily API Key。阿喜目前无法联网查询，但可以基于已有知识回答您的问题。'
+        }
+        return _webSearch.executeWebSearchToolCall({ name: toolName, arguments: toolArgs })
+      }
+      case 'recall_memory': {
+        if (!_memosClient.isMemoryAvailable()) {
+          return '长期记忆服务未配置。阿喜暂时无法回忆历史信息，但当前对话内容阿喜都记得。'
+        }
+        return _memosClient.executeMemoryToolCall({ name: toolName, arguments: toolArgs })
+      }
+      case 'add_memory': {
+        if (!_memosClient.isMemoryAvailable()) {
+          return '长期记忆服务未配置，无法保存。'
+        }
+        return _memosClient.executeMemoryToolCall({ name: toolName, arguments: toolArgs })
+      }
+      case 'analyze_image': {
+        if (!_visionService.isVisionEnabled()) {
+          return '视觉分析服务未配置。阿喜暂时无法分析图片，请用户用文字描述图片内容。'
+        }
+        const imageData = toolArgs.imageData
+        const mediaType = toolArgs.mediaType || 'image/jpeg'
+        const analysisType = toolArgs.analysisType || 'general'
+        const prompt = _visionService.HEYTEA_VISION_PROMPTS[analysisType] || _visionService.HEYTEA_VISION_PROMPTS.general
+        _visionService.configureVision({ prompt })
+        return _visionService.analyzeImage({ type: mediaType, arrayBuffer: () => Promise.resolve(new Uint8Array()) })
+          .catch(() => _visionService.describeImage?.(imageData, mediaType, null, 1) || '图片分析失败')
+      }
+      default:
+        return `未知本地工具: ${toolName}`
+    }
+  }
+
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     const result = await llmClient.chatCompletion(messages, {
       ...llmOptions,
@@ -5554,8 +5607,14 @@ async function _executeToolCallingLoop(llmClient, mcpIntegration, messages, tool
 
         let toolResultText = ''
         try {
-          const toolResult = await mcpIntegration.executeMCPTool(toolName, toolArgs)
-          toolResultText = mcpIntegration.formatToolResult(toolName, toolResult) || JSON.stringify(toolResult)
+          if (LOCAL_TOOL_NAMES.has(toolName)) {
+            // 本地工具：直接在客户端执行
+            toolResultText = await _executeLocalTool(toolName, toolArgs)
+          } else {
+            // MCP 工具：通过 MCP 协议执行
+            const toolResult = await mcpIntegration.executeMCPTool(toolName, toolArgs)
+            toolResultText = mcpIntegration.formatToolResult(toolName, toolResult) || JSON.stringify(toolResult)
+          }
         } catch (err) {
           // 给 LLM 提供可操作的错误信息，而不是笼统的"失败"
           toolResultText = `工具 ${toolName} 调用失败：${err.message}。请向用户说明当前操作暂时无法完成，并给出替代建议（如换个关键词、手动选择门店等），不要说"答不上来"。`
@@ -5698,9 +5757,18 @@ ${orderingSection}${memoryHint}
 - 对于喜茶业务以外的问题，友好、简洁地回答即可
 - 如果问题涉及喜茶产品、门店、活动，可以热情推荐
 - 语气亲切自然，不要太正式
-- 严禁使用任何emoji表情图案，回复中只能使用纯文字`
+- 严禁使用任何emoji表情图案，回复中只能使用纯文字
+- 如果用户的问题你不确定答案，可以调用 web_search 工具搜索互联网获取信息
+- 当用户分享偏好或重要信息时，调用 add_memory 工具记住这些信息`
 
       messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
+
+      // 通用知识意图也支持工具调用（web_search, memory 等）
+      if (tools && tools.length > 0) {
+        return _executeToolCallingLoop(llmClient, mcpIntegration, messages, tools, {
+          temperature: 0.3, maxTokens: 1024,
+        }, conversationHistory, userText)
+      }
     } else {
       // 默认: 食安客服流程 (原有逻辑)
       systemPrompt = promptBuilder.buildSystemPrompt(perception, session, {

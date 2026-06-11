@@ -536,6 +536,66 @@ export function getMCPToolDefinitions() {
         },
       },
     },
+    // ─── Proma + deepseek-vision 扩展工具 ───
+    {
+      type: 'function',
+      function: {
+        name: 'web_search',
+        description: '搜索互联网获取实时信息。当用户询问你不确定或可能过时的信息时使用，如时事新闻、最新数据、产品价格、竞品对比、门店信息等。返回搜索结果包含标题、URL和内容摘要。',
+        parameters: {
+          type: 'object',
+          properties: {
+            query: { type: 'string', description: '搜索查询关键词，使用简洁明确的中文关键词' },
+          },
+          required: ['query'],
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'recall_memory',
+        description: '搜索用户的历史记忆和偏好。当用户提到"之前"、"上次"、"我以前点过"等回溯性表述，或需要了解用户口味偏好、历史投诉时使用。',
+        parameters: {
+          type: 'object',
+          properties: {
+            query: { type: 'string', description: '搜索查询，如"用户喜欢的饮品"、"上次投诉内容"' },
+          },
+          required: ['query'],
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'add_memory',
+        description: '将当前对话内容存入长期记忆。当用户分享了口味偏好、做了重要决定、解决了问题时调用，以便未来提供更好的服务。',
+        parameters: {
+          type: 'object',
+          properties: {
+            userMessage: { type: 'string', description: '用户的消息内容' },
+            assistantMessage: { type: 'string', description: '助手的回复内容' },
+          },
+          required: ['userMessage'],
+        },
+      },
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'analyze_image',
+        description: '分析用户上传的图片内容。可用于：识别产品照片中的问题（异物、变质、包装破损）、提取小票/订单截图信息、分析食品外观。当用户发送图片时自动调用。',
+        parameters: {
+          type: 'object',
+          properties: {
+            imageData: { type: 'string', description: '图片 base64 数据' },
+            mediaType: { type: 'string', description: '图片 MIME 类型 (image/png, image/jpeg)' },
+            analysisType: { type: 'string', enum: ['product', 'receipt', 'complaint', 'general'], description: '分析类型：product=产品识别, receipt=小票OCR, complaint=食安问题, general=通用描述' },
+          },
+          required: ['imageData'],
+        },
+      },
+    },
   ]
 }
 

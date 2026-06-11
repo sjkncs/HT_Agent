@@ -25,6 +25,10 @@ import OrderingPanel from '../order/OrderingPanel.jsx'
 import { getWorkbenchConversations, getCategoryStats, getMetadata } from '../../lib/case-library.js'
 import { detectOrderIntent, getToolDefinitionsForLLM } from '../../lib/mcp-prompt-integration.js'
 import { getOrCreateMemory, processAndUpdateMemory } from '../../lib/conversation-memory.js'
+import MarkdownRenderer from './MarkdownRenderer.jsx'
+import { configureVision, isVisionEnabled, processImagesInMessages, analyzeImage } from '../../lib/vision-service.js'
+import { configureSearch, isWebSearchAvailable } from '../../lib/web-search-service.js'
+import { configureMemory, isMemoryAvailable } from '../../lib/memos-client.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -1086,17 +1090,19 @@ function MessageBubble({ message, isStreaming, ...qoderProps }) {
      data-qoder-id="qel-message-bubble-a1bb5c90" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-message-bubble-a1bb5c90&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;message-bubble&quot;,&quot;loc&quot;:{&quot;line&quot;:1077,&quot;column&quot;:5}}">
       <div className={cn('max-w-[85%] flex flex-col', isUser ? 'items-end' : 'items-start')} data-qoder-id="qel-div-280c4532" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-280c4532&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1084,&quot;column&quot;:7}}">
         <div className={cn(isUser ? 'bubble-user' : 'bubble-ai', 'text-sm leading-relaxed')} data-qoder-id="qel-div-270c439f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-270c439f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1085,&quot;column&quot;:9}}">
-          {isStreaming ? (
+          {isUser ? (
+            <div style={{ whiteSpace: 'pre-wrap' }}>{message.content}</div>
+          ) : isStreaming ? (
             <>
-              {renderContent(message.content)}
+              <MarkdownRenderer content={message.content} />
               <span
                 className="ml-0.5 inline-block h-4 w-0.5 animate-pulse-soft"
                 style={{ background: 'var(--cursor-orange)' }}
                data-qoder-id="qel-ml-0-5-a2ba8dbe" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-ml-0-5-a2ba8dbe&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;ml-0-5&quot;,&quot;loc&quot;:{&quot;line&quot;:1089,&quot;column&quot;:15}}"/>
             </>
           ) : (
-            <div data-qoder-id="qel-text-sm-a381efb4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-text-sm-a381efb4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;text-sm&quot;,&quot;loc&quot;:{&quot;line&quot;:1095,&quot;column&quot;:13}}">
-              {renderContent(message.content)}
+            <div>
+              <MarkdownRenderer content={message.content} />
             </div>
           )}
         </div>
@@ -3376,9 +3382,20 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     // ══════════════════════════════════════════════════════════
     if (detectedIntent === 'general_knowledge' || detectedIntent === 'ordering') {
       let intentTools = null
-      if (detectedIntent === 'ordering') {
-        try { intentTools = getToolDefinitionsForLLM() } catch { intentTools = null }
-      }
+      try {
+        // 点单意图：完整 MCP 工具 + 扩展工具（搜索/记忆/视觉/技能）
+        // 通用知识意图：只提供扩展工具（搜索/记忆），让阿喜能联网回答和记住用户
+        const allTools = getToolDefinitionsForLLM()
+        if (detectedIntent === 'ordering') {
+          intentTools = allTools
+        } else {
+          // 通用知识：只注入搜索和记忆工具（不含点单工具）
+          intentTools = allTools.filter(t =>
+            ['web_search', 'recall_memory', 'add_memory'].includes(t.function?.name)
+          )
+          if (intentTools.length === 0) intentTools = null
+        }
+      } catch { intentTools = null }
 
       try {
         const llmResult = await generateLLMEnhancedReply({
