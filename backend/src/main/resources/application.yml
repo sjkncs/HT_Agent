@@ -1,0 +1,94 @@
+# ============================================================
+# 喜茶智能客服 Agent — 后端配置
+# ============================================================
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: heytea-agent
+
+  # ── MySQL ──
+  datasource:
+    url: jdbc:mysql://localhost:3306/heytea_agent?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+
+  # ── Redis ──
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 16
+          max-idle: 8
+
+  # ── Jackson ──
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+
+  # ── SQL Init ──
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      continue-on-error: true
+
+# ── MyBatis-Plus ──
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.heytea.agent.entity
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# ── JWT ──
+jwt:
+  secret: ${JWT_SECRET:heytea-agent-secret-key-change-in-production-2024}
+  expiration: 86400000  # 24 hours
+
+# ── LLM — DashScope ──
+llm:
+  provider: dashscope
+  api-key: ${DASHSCOPE_API_KEY:sk-ae08dbba7ec94b9dbdbac405c035b057}
+  model: qwen-plus
+  max-tokens: 2048
+  temperature: 0.7
+  base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+
+# ── MemOS Cloud ──
+memos:
+  enabled: true
+  base-url: https://memos.memtensor.cn/api/openmem/v1
+  api-key: ${MEMOS_API_KEY:mpg-B8vt02G3gwlMsZ6sJ4u8yTJalxdHD6os9+Ep5dLP}
+  user-id: heytea-user
+
+# ── Tavily Web Search ──
+tavily:
+  api-key: ${TAVILY_API_KEY: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}
+  base-url: https://api.tavily.com
+
+# ── Logging ──
+logging:
+  level:
+    com.heytea.agent: DEBUG
+    org.springframework.security: INFO
