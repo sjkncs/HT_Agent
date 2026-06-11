@@ -29,6 +29,7 @@ import { configureVision, isVisionEnabled, processImagesInMessages, analyzeImage
 import { configureSearch, isWebSearchAvailable } from '../../lib/web-search-service.js'
 import { configureMemory, isMemoryAvailable, addMemory, searchMemory, formatSearchResult } from '../../lib/memos-client.js'
 import { saveAndSync, buildConversationRecord, getConversation } from '../../lib/conversation-store.js'
+import * as apiClient from '../../lib/api-client.js'
 
 /* ─── Typing Indicator ─── */
 function TypingDots() {
@@ -3299,8 +3300,17 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
   const streamAbortRef = useRef(null)
   const isSendingRef = useRef(false) // concurrent-send guard
   const _episodicMemoryRef = useRef(null) // Agent 情景记忆持久引用
+  const backendConvIdRef = useRef(null) // Backend conversation ID for API continuity
   const [showTestRunner, setShowTestRunner] = useState(false)
   const [showOrderPanel, setShowOrderPanel] = useState(false)
+
+  // ── Backend auto-login ──
+  useEffect(() => {
+    apiClient.autoLogin().then(user => {
+      if (user) console.log('[ApiClient] Auto-login success:', user.username)
+      else console.warn('[ApiClient] Auto-login failed, will use client-side LLM')
+    })
+  }, [])
 
   // Load conversation if navigating to a specific one
   useEffect(() => {
@@ -3318,6 +3328,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
       setMessages([])
       setCurrentConversation(null)
       setWorkflowTrace(null)
+      backendConvIdRef.current = null
     }
   }, [id])
 
@@ -3554,6 +3565,36 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
     }
 
     setMessages((prev) => [...prev, userMessage])
+
+    // ── Backend API 优先路径 ──
+    // 如果后端可用，通过后端获取 AI 回复（后端处理意图检测 + LLM 调用）
+    if (apiClient.isAuthenticated()) {
+      try {
+        const backendResult = await apiClient.sendChat(text, backendConvIdRef.current)
+        if (backendResult && backendResult.content) {
+          backendConvIdRef.current = backendResult.conversationId
+          setTimeout(() => simulateStream(backendResult.content, null, 'backend'), 600)
+          // 异步持久化到 IndexedDB
+          try {
+            const convRecord = buildConversationRecord(
+              currentConversation?.id || backendResult.conversationId,
+              [...currentMessages, userMessage, {
+                id: 'm-' + Date.now(),
+                role: 'assistant',
+                content: backendResult.content,
+                timestamp: backendResult.createdAt,
+                llmSource: 'backend',
+              }],
+              { sessionId: backendResult.conversationId }
+            )
+            saveAndSync(convRecord).catch(() => {})
+          } catch {}
+          return
+        }
+      } catch (e) {
+        console.warn('[Backend] Chat API failed, falling back to client-side LLM:', e.message)
+      }
+    }
 
     // Snapshot current messages for this send cycle
     const currentMessages = messages

@@ -31,8 +31,8 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/api/auth/**",
-                    "/api/chat/stream",
+                    "/auth/**",
+                    "/chat/stream",
                     "/swagger-ui/**",
                     "/v3/api-docs/**"
                 ).permitAll()
