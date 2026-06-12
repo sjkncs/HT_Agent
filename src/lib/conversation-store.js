@@ -399,6 +399,15 @@ export function buildConversationRecord(sessionId, messages, metadata = {}) {
       role: m.role,
       content: m.content,
       timestamp: m.timestamp || new Date().toISOString(),
+      // Preserve classification and rich-UI metadata for restored conversations
+      ...(m.intent != null && { intent: m.intent }),
+      ...(m.subScenario != null && { subScenario: m.subScenario }),
+      ...(m.decisionFrame != null && { decisionFrame: m.decisionFrame }),
+      ...(m.emotion != null && { emotion: m.emotion }),
+      ...(m.llmSource != null && { llmSource: m.llmSource }),
+      ...(m.toolCallsMade != null && { toolCallsMade: m.toolCallsMade }),
+      ...(m.orderResult != null && { orderResult: m.orderResult }),
+      ...(m.triggersData != null && { triggersData: m.triggersData }),
     })),
   }
 }

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Plus, Search, MessageSquare, Clock, AlertTriangle, Users,
   Bug, Leaf, HeartPulse, AlertCircle, Package, CupSoda, Flame, X,
-  Truck, Zap, Sparkles, Headphones
+  Truck, Zap, Sparkles, Headphones, ShieldAlert, PackageCheck
 } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
@@ -50,7 +50,7 @@ const CATEGORY_ICON_MAP = {
   '品质问题': AlertCircle, 'OEM产品': Package, '非食安问题': CupSoda,
   '情绪激动': Flame,
   '服务投诉': Headphones, '配送问题': Truck, '效率问题': Zap,
-  '卫生问题': Sparkles,
+  '卫生问题': Sparkles, '食安问题': ShieldAlert, '包装问题': PackageCheck,
 }
 const CATEGORY_FILTERS = [
   { key: '', label: '全部' },
@@ -65,6 +65,8 @@ const CATEGORY_FILTERS = [
   { key: '配送问题', label: '配送问题' },
   { key: '效率问题', label: '效率问题' },
   { key: '卫生问题', label: '卫生问题' },
+  { key: '食安问题', label: '食安问题', matchLabels: ['general_food_safety'] },
+  { key: '包装问题', label: '包装问题' },
 ]
 
 // subScenario 英文键 → 中文分类标签
@@ -534,7 +536,7 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                   <span className="rounded text-[8px] px-1 py-px" style={{
                                     background: 'var(--cursor-orange, #f54e00)' + '15',
                                     color: 'var(--cursor-orange, #f54e00)',
-                                  }}>
+                                  }} data-qoder-id="qel-rounded-23a6a9b3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-23a6a9b3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;rounded&quot;,&quot;loc&quot;:{&quot;line&quot;:534,&quot;column&quot;:35}}">
                                     {SUB_SCENARIO_TO_LABEL[conv.subScenario]}
                                   </span>
                                 )}

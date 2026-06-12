@@ -1307,19 +1307,19 @@ function MessageBubble({ message, isStreaming, onSend, ...qoderProps }) {
 
         {/* Sub-scenario badge from backend classification */}
         {!isUser && message.subScenario && SUB_SCENARIO_LABELS[message.subScenario] && (
-          <div className="mt-1.5 flex items-center gap-1.5">
+          <div className="mt-1.5 flex items-center gap-1.5" data-qoder-id="qel-mt-1-5-f6255cf3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-1-5-f6255cf3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;mt-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:1310,&quot;column&quot;:11}}">
             <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium" style={{
               background: (SUB_SCENARIO_COLORS[message.subScenario] || '#6b7280') + '18',
               color: SUB_SCENARIO_COLORS[message.subScenario] || '#6b7280',
               border: `1px solid ${(SUB_SCENARIO_COLORS[message.subScenario] || '#6b7280')}30`,
-            }}>
+            }} data-qoder-id="qel-inline-flex-6eae7673" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-inline-flex-6eae7673&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;inline-flex&quot;,&quot;loc&quot;:{&quot;line&quot;:1311,&quot;column&quot;:13}}">
               {SUB_SCENARIO_LABELS[message.subScenario]}
             </span>
             {message.intent && (
               <span className="inline-flex items-center rounded-full px-1.5 py-0.5 text-[9px]" style={{
                 background: 'var(--cursor-surface-300)',
                 color: 'var(--cursor-border-55)',
-              }}>
+              }} data-qoder-id="qel-inline-flex-8d54dd2e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-inline-flex-8d54dd2e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;inline-flex&quot;,&quot;loc&quot;:{&quot;line&quot;:1319,&quot;column&quot;:15}}">
                 {message.intent === 'food_safety' ? '食安' : message.intent === 'ordering' ? '点单' : '通用'}
               </span>
             )}
@@ -3664,7 +3664,9 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
               }],
               { sessionId: backendResult.conversationId, intent: backendMeta.intent, subScenario: backendMeta.subScenario }
             )
-            saveAndSync(convRecord).catch(() => {})
+            saveAndSync(convRecord).then(() => {
+              window.dispatchEvent(new Event('conversation-updated'))
+            }).catch(() => {})
           } catch {}
           return
         }
