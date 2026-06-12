@@ -68,8 +68,8 @@ public class LLMServiceImpl implements LLMService {
                 "(有个.{0,2}东西|有个.{0,2}啥|有个.{0,2}什么|里面有.{0,2}东西|里有这个|有这个|里有.{0,2}个)",
                 "(双眼皮贴|创可贴|指甲|耳环|戒指|胶带|绳子|橡皮)",
                 // 内源性异物
-                "(果核|籽|茶渣|果皮|果肉|柠檬皮|柠檬籽|芒果核|芒果皮)",
-                "(有核|有籽|有.{0,3}皮|去皮|太.{0,2}皮|核.*大|籽.*多)",
+                "(果核|籽|茶渣|果皮|果肉|柠檬皮|柠檬籽|芒果核|芒果皮|葡萄皮|百香果籽|橙皮)",
+                "(有核|有籽|有.{0,3}皮|去皮|太.{0,3}皮|皮.*太.{0,3}多|核.*大|籽.*多)",
                 "(纤维|果肉.{0,2}块|水果纤维|茶叶.{0,2}渣|有茶叶|茶叶.*多|茶渣)",
                 "(渣子|渣渣|全是渣|都是渣|有渣)",
                 // 身体不适 (大幅扩展)
@@ -78,9 +78,10 @@ public class LLMServiceImpl implements LLMService {
                 "(皮疹|红疹|瘙痒|胃痛|胃疼|肠胃|食物中毒|疯狂拉|一直拉|不停拉)",
                 "(拉.*肚子|肚子.*拉|肚子.*不舒服|肚子.*疼|肚子.*痛)",
                 "(身体.*不适|全身.*痒|起疹|嘴.*肿|嘴.*麻|喉咙.*不舒服)",
-                // 变质/异味 (扩展酸味/变味描述)
-                "(变质|发霉|过期|馊|酸了|酸酸的|异味|怪味|味道不对|一股味道)",
-                "(有股|变酸|变味|发酸|发臭|腐烂|腐坏|地沟油|品质问题)",
+                // 变质/异味 (扩展酸味/变味/苦味/味淡描述)
+                "(变质|发霉|过期|馊|酸了|酸酸的|异味|怪味|味道不对|一股味道|味道.{0,3}奇怪)",
+                "(有一.{0,2}股|有股|变酸|变味|发酸|发臭|腐烂|腐坏|地沟油|品质问题|消毒水味|化学味)",
+                "(发苦|是苦的|苦味|涩味|发涩|味道淡|没味道|变淡|味道变了|味道.{0,2}不对)",
                 "(保质期|临期|有效期|生产日期|过了.*期)",
                 "(是酸的|闻着.*酸|闻着.{0,5}酸|不太新鲜|不新鲜|像是坏|好像.*坏|好像.*变质)",
                 "(牛奶.*不新鲜|奶.*酸|奶.*过期)",
@@ -88,9 +89,9 @@ public class LLMServiceImpl implements LLMService {
                 "(退款|赔偿|补偿|投诉|曝光|差评|给我一个说法|举报|工商|消协|12315)",
                 "(食品问题|食品安全问题|怎么处理|怎么解决|给个说法|给个交代)",
                 // 包装/卫生
-                "(包装破|漏杯|撒了|封口不严|食安|食品安全|卫生问题|不干净|不卫生)",
-                "(杯盖.{0,3}(裂|破|坏|掉|掉进|掉到)|吸管.{0,5}(脏|破|坏|黑|变色|异物))",
-                "(杯底.*有个|杯底.*有|杯盖.*掉|杯子里.*有|杯底.*盖|杯底.*东西)",
+                "(包装破|漏杯|封口不严|食安|食品安全|卫生问题|不干净|不卫生)",
+                "(杯盖.{0,3}(掉进|掉到|掉入)|吸管.{0,5}(脏|黑|变色|异物))",
+                "(杯底.*有个|杯盖.*掉|杯子里.*有|杯底.*东西)",
                 // 模糊但有食安语境的表述
                 "(这是啥|这个是什么|这是什么呀|啥东西|什么情况|啥情况)",
                 "(正常吗|正常的吗|这个正常|是不是正常|这样正常)",
@@ -226,12 +227,12 @@ public class LLMServiceImpl implements LLMService {
         }
         // 内源性异物 → medium
         if (matchAny(msg, compilePatterns(
-                "(果核|籽|茶渣|果皮|果肉|柠檬皮|柠檬籽|芒果核|芒果皮|葡萄皮|纤维|有.{0,3}皮|去皮|太.{0,2}皮|有茶叶|茶渣|有渣|全是渣|都是渣|有渣|有核|有籽)"))) {
+                "(果核|籽|茶渣|果皮|果肉|柠檬皮|柠檬籽|芒果核|芒果皮|葡萄皮|百香果籽|橙皮|纤维|有.{0,3}皮|去皮|太.{0,3}皮|皮.*太.{0,3}多|有茶叶|茶渣|有渣|全是渣|都是渣|有渣|有核|有籽)"))) {
             return "foreign_object_internal";
         }
         // 异味/口感异常 → medium
         if (matchAny(msg, compilePatterns(
-                "(异味|怪味|味道不对|一股味道|有股|酸酸的|酸了|恶心|发苦|消毒水味|味道不佳|味淡|板蓝根味|味)"))) {
+                "(异味|怪味|味道不对|味道也不对|一股味道|有股|酸酸的|酸了|恶心|发苦|是苦的|苦味|涩味|发涩|消毒水味|味道不佳|味淡|味道淡|没味道|变淡|味道变了|板蓝根味|味道.{0,3}奇怪|味道.{0,2}不对)"))) {
             return "taste_issue";
         }
         return "general_food_safety";
@@ -591,6 +592,14 @@ public class LLMServiceImpl implements LLMService {
     //  CLASSIFY INTENT — 两阶段分类：关键词(regex) + LLM(11大类)
     // ══════════════════════════════════════════════════════════════
 
+    // ── Store-environment context patterns (hygiene-only, not food safety) ──
+    private static final Pattern[] ENVIRONMENT_CONTEXT_PATTERNS;
+    static {
+        ENVIRONMENT_CONTEXT_PATTERNS = compilePatterns(
+                "(门店|店里|店内|操作台|大堂|大厅|吧台|柜台|店里头)"
+        );
+    }
+
     @Override
     public String classifyIntent(String userMessage) {
         if (userMessage == null || userMessage.isBlank()) {
@@ -598,9 +607,16 @@ public class LLMServiceImpl implements LLMService {
         }
         String msg = userMessage.toLowerCase();
 
+        // ── Pre-check: Store-environment hygiene → NOT food_safety ──
+        // Messages describing store hygiene (flies/pests/dirtiness IN the store)
+        // should go to general_knowledge/hygiene, not food_safety
+        boolean isEnvironmentOnly = matchAny(msg, ENVIRONMENT_CONTEXT_PATTERNS)
+                && matchAny(msg, HYGIENE_PATTERNS)
+                && !matchAny(msg, compilePatterns("(喝出|吃出|吸出|喝了|吃了|我的.*茶|我的.*饮|杯子里|饮品里)"));
+
         // ── Phase 1: 正则快速通道（毫秒级，来自关键词.xlsx 113条规则）──
-        // 食安最高优先级
-        if (matchAny(msg, FOOD_SAFETY_PATTERNS)) {
+        // 食安最高优先级 (skip if environment-only hygiene)
+        if (!isEnvironmentOnly && matchAny(msg, FOOD_SAFETY_PATTERNS)) {
             String matched = findMatch(msg, FOOD_SAFETY_PATTERNS);
             log.info("Keyword fast-path: food_safety (matched: {})", matched);
             return "food_safety";
@@ -617,10 +633,19 @@ public class LLMServiceImpl implements LLMService {
             String classificationPrompt = """
                     你是喜茶客服意图分类器。请根据用户消息判断其意图类别。
                     
-                    【分类体系 — 11大类】
-                    1. food_safety（食品安全）— 最高优先级
-                       异物/变质/过敏/身体不适/退款赔偿/品质投诉/不干净/过期
-                       信号：异物/头发/虫子/拉肚子/过敏/变质/退款/投诉/不干净
+                    【分类体系 — 3大类】
+                    1. food_safety（食品安全）— 仅当消息包含以下健康/安全信号时才归入此类：
+                       异物(头发/虫/塑料/金属/不明物体)、变质/发霉/过期、身体不适(拉肚子/呕吐/过敏/发烧)、
+                       异味(消毒水味/化学味/发苦/发涩/发酸等异常味道，可能表示原料问题)、
+                       退款/赔偿/投诉食品安全、卫生安全(食安/食品安全)
+                       ⚠ 关键边界规则：
+                       - 异常味道(发苦/发涩/消毒水味/化学味/怪味/味道变了) → food_safety
+                       - 主观口味偏好(太甜/太淡/不够甜/水一样) → general_knowledge(产品品质)
+                       - 口感不好/味道淡/太甜/太苦(主观评价) → general_knowledge(产品品质)
+                       - 外卖撒漏/配送超时/送错 → general_knowledge(外卖问题)
+                       - 杯盖破/吸管断/袋子坏/杯底裂 → general_knowledge(包装问题)
+                       - 门店脏/门店有苍蝇飞虫/员工没戴口罩 → general_knowledge(卫生问题)
+                       - 态度差/不理人 → general_knowledge(服务投诉)
                     
                     2. ordering（点单）
                        点饮品/查看菜单/推荐/修改查询订单/价格规格
@@ -630,10 +655,10 @@ public class LLMServiceImpl implements LLMService {
                        以下全部归入此类，由系统内部细分：
                        - 服务投诉（态度差/不理人/敷衍）
                        - 外卖问题（撒漏/超时/送错/没收到）
-                       - 产品品质（口感不好/温度不对/甜度/份量少/做错了）
+                       - 产品品质（口感不好/温度不对/甜度/份量少/做错了/味道淡/太苦/太淡等主观评价）
                        - 制作效率（等太久/叫号问题/超时）
-                       - 包装问题（杯子破/吸管断/袋子坏）
-                       - 卫生问题（门店脏/员工没戴口罩/飞虫）
+                       - 包装问题（杯子破/吸管断/袋子坏/杯盖裂/杯底裂）
+                       - 卫生问题（门店脏/员工没戴口罩/操作台脏/门店有飞虫苍蝇）
                        - 门店管理（排队/线上关闭/售罄/座位）
                        - 一般咨询（门店/会员/优惠/活动/品牌）
                        信号：门店/在哪/几点/会员/积分/优惠/活动/新品/等了/态度/外卖

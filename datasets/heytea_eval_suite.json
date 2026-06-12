@@ -1,0 +1,712 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-06-12T21:04:30.478910",
+  "description": "喜茶 AI 客服 Agent 自动化评测套件",
+  "taxonomy": {
+    "food_safety": {
+      "label": "食品安全",
+      "sub_scenarios": [
+        "body_discomfort",
+        "spoilage",
+        "foreign_object_external",
+        "foreign_object_internal",
+        "taste_issue",
+        "general_food_safety"
+      ],
+      "priority": 1
+    },
+    "ordering": {
+      "label": "点单/购买",
+      "sub_scenarios": [
+        "recommendation",
+        "place_order",
+        "store_info",
+        "browse_menu"
+      ],
+      "priority": 2
+    },
+    "general_knowledge": {
+      "label": "通用/其他",
+      "sub_scenarios": [
+        "service_complaint",
+        "delivery_issue",
+        "product_quality",
+        "efficiency",
+        "packaging",
+        "hygiene"
+      ],
+      "priority": 3
+    }
+  },
+  "metrics": [
+    {
+      "name": "intent_accuracy",
+      "type": "classification",
+      "description": "意图分类准确率"
+    },
+    {
+      "name": "intent_precision",
+      "type": "classification",
+      "description": "意图分类精确率"
+    },
+    {
+      "name": "intent_recall",
+      "type": "classification",
+      "description": "意图分类召回率"
+    },
+    {
+      "name": "intent_f1",
+      "type": "classification",
+      "description": "意图分类 F1"
+    },
+    {
+      "name": "sub_scenario_accuracy",
+      "type": "classification",
+      "description": "子场景分类准确率"
+    },
+    {
+      "name": "response_quality",
+      "type": "llm_judge",
+      "description": "回复质量 (LLM-as-Judge)"
+    },
+    {
+      "name": "response_relevance",
+      "type": "llm_judge",
+      "description": "回复相关性"
+    },
+    {
+      "name": "response_safety",
+      "type": "rule",
+      "description": "回复安全检查"
+    },
+    {
+      "name": "latency_p50",
+      "type": "performance",
+      "description": "P50 响应延迟"
+    },
+    {
+      "name": "latency_p95",
+      "type": "performance",
+      "description": "P95 响应延迟"
+    }
+  ],
+  "eval_dimensions": [
+    "意图识别准确性 (intent classification)",
+    "子场景分类精度 (sub-scenario classification)",
+    "回复内容质量 (LLM 生成质量, 参考 RLHF 偏好对齐)",
+    "回复相关性 (是否针对用户问题)",
+    "安全性检查 (是否有有害/不当内容)",
+    "响应延迟 (端到端 API 延迟)",
+    "鲁棒性 (边界用例/对抗样本处理)"
+  ],
+  "test_cases": [
+    {
+      "id": "eval_0001",
+      "message": "喝完这个之后肚子一直不舒服",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "body_discomfort",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0002",
+      "message": "我孩子喝了你们奶茶后上吐下泻",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "body_discomfort",
+      "expected_risk_level": "critical"
+    },
+    {
+      "id": "eval_0003",
+      "message": "感觉有点过敏，身上起了好多疹子",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "body_discomfort",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0004",
+      "message": "拉肚子拉了一天了，昨晚喝的芝芝莓莓",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "body_discomfort",
+      "expected_risk_level": "critical"
+    },
+    {
+      "id": "eval_0005",
+      "message": "喝完发烧了，是不是食材有问题",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "body_discomfort",
+      "expected_risk_level": "critical"
+    },
+    {
+      "id": "eval_0006",
+      "message": "这杯奶茶闻起来有一股馊味",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "spoilage",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0007",
+      "message": "买回来发现已经过了保质期",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "spoilage",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0008",
+      "message": "牛奶看起来不太新鲜，有点结块",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "spoilage",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0009",
+      "message": "酸奶是不是变质了，喝着酸酸的",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "spoilage",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0010",
+      "message": "这个发霉了吧，上面有绿点",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "spoilage",
+      "expected_risk_level": "critical"
+    },
+    {
+      "id": "eval_0011",
+      "message": "杯子里面有一根头发",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0012",
+      "message": "吸管吸出来一个苍蝇",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0013",
+      "message": "喝到一半发现有塑料碎片",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "critical"
+    },
+    {
+      "id": "eval_0014",
+      "message": "封口贴掉进杯子里了",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0015",
+      "message": "里面有个不明物体，黑色的",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0016",
+      "message": "有个创可贴在袋子底部",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0017",
+      "message": "杯盖掉进饮料里了",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_external",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0018",
+      "message": "茶里面有好多茶渣",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_internal",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0019",
+      "message": "怎么有芒果皮在里面",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_internal",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0020",
+      "message": "吸出来好多果肉纤维",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_internal",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0021",
+      "message": "葡萄皮太多了吧",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_internal",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0022",
+      "message": "有柠檬籽，正常吗",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "foreign_object_internal",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0023",
+      "message": "这个味道好奇怪，和上次不一样",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "taste_issue",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0024",
+      "message": "喝起来有一股消毒水的味道",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "taste_issue",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0025",
+      "message": "珍珠是苦的，奶茶味道也不对",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "taste_issue",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0026",
+      "message": "怎么感觉味道变淡了很多",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "taste_issue",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0027",
+      "message": "这杯怎么是酸的，我点的是正常甜",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "taste_issue",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0028",
+      "message": "我想投诉食品安全问题",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "general_food_safety",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0029",
+      "message": "你们的食品安全怎么保障",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "general_food_safety",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0030",
+      "message": "出现食品问题怎么处理",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "general_food_safety",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0031",
+      "message": "我要退款，东西有问题",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "general_food_safety",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0032",
+      "message": "这个正常吗，里面有白色沉淀",
+      "expected_intent": "food_safety",
+      "expected_sub_scenario": "general_food_safety",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0033",
+      "message": "有什么好喝的推荐吗",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "recommendation",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0034",
+      "message": "第一次来，推荐什么新品",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "recommendation",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0035",
+      "message": "想喝清爽一点的，有推荐吗",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "recommendation",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0036",
+      "message": "你们最热门的饮品是哪款",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "recommendation",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0037",
+      "message": "夏天喝什么比较解暑",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "recommendation",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0038",
+      "message": "我要一杯多肉葡萄，少冰",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "place_order",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0039",
+      "message": "帮我下单两杯芝芝莓莓",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "place_order",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0040",
+      "message": "来一杯烤黑糖波波牛乳茶，热的",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "place_order",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0041",
+      "message": "我想点外卖，三杯饮品",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "place_order",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0042",
+      "message": "最近的门店在哪里",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "store_info",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0043",
+      "message": "天河城店几点关门",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "store_info",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0044",
+      "message": "北京有哪些门店",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "store_info",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0045",
+      "message": "你们门店有停车位吗",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "store_info",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0046",
+      "message": "看看菜单",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "browse_menu",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0047",
+      "message": "多肉葡萄多少钱一杯",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "browse_menu",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0048",
+      "message": "你们有哪些水果茶",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "browse_menu",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0049",
+      "message": "有没有不含咖啡因的饮品",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "browse_menu",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0050",
+      "message": "店员态度太差了，爱理不理的",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "service_complaint",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0051",
+      "message": "你们的服务真的让人失望",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "service_complaint",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0052",
+      "message": "店员对我翻白眼",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "service_complaint",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0053",
+      "message": "排队等了很久没人理",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "service_complaint",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0054",
+      "message": "店员不耐烦，甩脸色",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "service_complaint",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0055",
+      "message": "外卖撒了一大半",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "delivery_issue",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0056",
+      "message": "等了一个小时还没送到",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "delivery_issue",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0057",
+      "message": "送错地址了，不是我的",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "delivery_issue",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0058",
+      "message": "骑手提前点送达了，东西还没到",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "delivery_issue",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0059",
+      "message": "少送了一杯，订单是三杯",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "delivery_issue",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0060",
+      "message": "这个太甜了，我点的少糖",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "product_quality",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0061",
+      "message": "冰也太多了吧，都快化了",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "product_quality",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0062",
+      "message": "做错了，我点的是多肉葡萄不是莓莓",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "product_quality",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0063",
+      "message": "波波好硬，跟平时不一样",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "product_quality",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0064",
+      "message": "份量明显少了，才半杯",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "product_quality",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0065",
+      "message": "等了40分钟还没做好",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "efficiency",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0066",
+      "message": "叫号叫了半天没人应",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "efficiency",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0067",
+      "message": "前面才3个人，等了半小时",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "efficiency",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0068",
+      "message": "出杯速度太慢了吧",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "efficiency",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0069",
+      "message": "杯盖裂了，一直在漏",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "packaging",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0070",
+      "message": "吸管断了，没法喝",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "packaging",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0071",
+      "message": "包装袋破了，饮料洒了一地",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "packaging",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0072",
+      "message": "杯底有裂缝",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "packaging",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0073",
+      "message": "门店地上好脏，到处是纸",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "hygiene",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0074",
+      "message": "员工没戴口罩也没戴手套",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "hygiene",
+      "expected_risk_level": "medium"
+    },
+    {
+      "id": "eval_0075",
+      "message": "操作台上看起来很脏",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "hygiene",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0076",
+      "message": "门店里有好多苍蝇在飞",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "hygiene",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0077",
+      "message": "你好",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0078",
+      "message": "人工客服",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0079",
+      "message": "转人工",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0080",
+      "message": "我要投诉",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": "service_complaint",
+      "expected_risk_level": "high"
+    },
+    {
+      "id": "eval_0081",
+      "message": "谢谢",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0082",
+      "message": "你们几点开门",
+      "expected_intent": "ordering",
+      "expected_sub_scenario": "store_info",
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0083",
+      "message": "能开发票吗",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0084",
+      "message": "加盟条件是什么",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0085",
+      "message": "周边产品在哪里买",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    },
+    {
+      "id": "eval_0086",
+      "message": "会员积分怎么用",
+      "expected_intent": "general_knowledge",
+      "expected_sub_scenario": null,
+      "expected_risk_level": "low"
+    }
+  ],
+  "pass_criteria": {
+    "intent_accuracy_min": 0.8,
+    "sub_scenario_accuracy_min": 0.7,
+    "response_quality_min": 0.7,
+    "latency_p95_max_ms": 10000
+  }
+}

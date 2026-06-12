@@ -1,0 +1,130 @@
+{
+  "timestamp": "2026-06-12T21:14:48.761398",
+  "total_cases": 86,
+  "intent": {
+    "accuracy": 0.8721,
+    "precision": 0.8182,
+    "recall": 0.8438,
+    "f1": 0.8308,
+    "specificity": 0.8889,
+    "by_intent": {
+      "food_safety": {
+        "accuracy": 0.8438,
+        "total": 32,
+        "correct": 27
+      },
+      "ordering": {
+        "accuracy": 1.0,
+        "total": 18,
+        "correct": 18
+      },
+      "general_knowledge": {
+        "accuracy": 0.8333,
+        "total": 36,
+        "correct": 30
+      }
+    }
+  },
+  "sub_scenario": {
+    "accuracy": 0.6026,
+    "total": 78,
+    "correct": 47,
+    "by_sub_scenario": {
+      "body_discomfort": {
+        "accuracy": 1.0,
+        "total": 5,
+        "correct": 5
+      },
+      "spoilage": {
+        "accuracy": 1.0,
+        "total": 5,
+        "correct": 5
+      },
+      "foreign_object_external": {
+        "accuracy": 0.8571,
+        "total": 7,
+        "correct": 6
+      },
+      "foreign_object_internal": {
+        "accuracy": 0.6,
+        "total": 5,
+        "correct": 3
+      },
+      "taste_issue": {
+        "accuracy": 0.0,
+        "total": 5,
+        "correct": 0
+      },
+      "general_food_safety": {
+        "accuracy": 1.0,
+        "total": 5,
+        "correct": 5
+      },
+      "recommendation": {
+        "accuracy": 0.6,
+        "total": 5,
+        "correct": 3
+      },
+      "place_order": {
+        "accuracy": 0.75,
+        "total": 4,
+        "correct": 3
+      },
+      "store_info": {
+        "accuracy": 0.0,
+        "total": 5,
+        "correct": 0
+      },
+      "browse_menu": {
+        "accuracy": 1.0,
+        "total": 4,
+        "correct": 4
+      },
+      "service_complaint": {
+        "accuracy": 0.5,
+        "total": 6,
+        "correct": 3
+      },
+      "delivery_issue": {
+        "accuracy": 0.6,
+        "total": 5,
+        "correct": 3
+      },
+      "product_quality": {
+        "accuracy": 0.8,
+        "total": 5,
+        "correct": 4
+      },
+      "efficiency": {
+        "accuracy": 0.25,
+        "total": 4,
+        "correct": 1
+      },
+      "packaging": {
+        "accuracy": 0.25,
+        "total": 4,
+        "correct": 1
+      },
+      "hygiene": {
+        "accuracy": 0.25,
+        "total": 4,
+        "correct": 1
+      }
+    }
+  },
+  "safety": {
+    "pass_rate": 1.0
+  },
+  "performance": {
+    "avg_ms": 6131,
+    "p50_ms": 5568,
+    "p95_ms": 15496
+  },
+  "pass_criteria": {
+    "intent_accuracy_min": 0.8,
+    "sub_scenario_accuracy_min": 0.7,
+    "response_quality_min": 0.7,
+    "latency_p95_max_ms": 10000
+  },
+  "overall_pass": false
+}

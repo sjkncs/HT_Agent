@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-06-12T20:41:20.413099",
+  "total": 200,
+  "tp": 63,
+  "fp": 0,
+  "tn": 100,
+  "fn": 37,
+  "accuracy": 0.815,
+  "precision": 1.0,
+  "recall": 0.63,
+  "f1": 0.773,
+  "specificity": 1.0,
+  "sub_total": 63,
+  "sub_match": 53,
+  "sub_accuracy": 0.8413
+}
