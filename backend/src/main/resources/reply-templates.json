@@ -1,0 +1,285 @@
+{
+  "_meta": {
+    "source": "顾客评论回复规则及参考话术指引.xlsx + 关键词.xlsx + AI评测教训",
+    "version": "1.0",
+    "total_templates": 103,
+    "principle": "回复必须针对具体问题，通用模板得分'较差'。提及产品名+投诉类型+解决方案。"
+  },
+  "reply_rules": {
+    "platform_rules": [
+      "回复审核时间0-24小时，合规回复10分钟内展示",
+      "回复中禁止包含：电话号码、不文明用语、广告促销内容",
+      "禁止诱导好评或赠送回购礼品",
+      "3星及以下必须回复，回复要灵活不可照搬",
+      "12小时内完成回复",
+      "称呼只用'您好'，禁止使用'亲'/'亲爱的'/'宝'"
+    ],
+    "quality_criteria": {
+      "good": "回复完全针对顾客的具体问题，有具体解决方案",
+      "fairly_good": "有致歉+长度足够，但缺少针对性解决方案",
+      "fairly_poor": "有致歉但是通用模板，没有针对具体问题",
+      "poor": "回复过短(<30字)或语气不当或完全偏离问题"
+    },
+    "tone_rules": [
+      "禁止使用反问句",
+      "禁止使用问号（除非主动询问信息）",
+      "禁止使用感叹号（除非特殊节日问候）",
+      "禁止使用负面词汇或贬低顾客",
+      "正面评价→感谢，负面评价→致歉，混合评价→感谢+致歉"
+    ]
+  },
+  "food_safety_templates": {
+    "foreign_object_external": {
+      "label": "外源性异物（塑料/金属/头发/虫/玻璃等）",
+      "severity": "high",
+      "compensation": "L3-L4",
+      "first_sentence_pattern": "非常抱歉给您带来了这样不愉快的体验",
+      "info_collect": ["订单号或购买小票", "异物照片", "门店名称", "联系电话"],
+      "action": "24小时内专人跟进，72小时初步调查结果",
+      "key_phrases": [
+        "对于您反馈的异物问题我们非常重视",
+        "会立即联系门店进行排查",
+        "请您保留好异物和饮品作为凭证"
+      ]
+    },
+    "foreign_object_internal": {
+      "label": "内源性异物（果核/茶渣/果皮/柠檬籽等）",
+      "severity": "medium",
+      "compensation": "L1-L2",
+      "first_sentence_pattern": "非常抱歉给您带来了不好的体验",
+      "info_collect": ["产品名称", "门店名称"],
+      "action": "反馈门店加强制作标准",
+      "key_phrases": [
+        "这类情况可能是制作过程中未能完全过滤",
+        "已记录并反馈给门店加强品控",
+        "诚邀您联系门店为您重新制作一杯"
+      ]
+    },
+    "body_discomfort": {
+      "label": "身体不适（腹泻/呕吐/过敏等）",
+      "severity": "critical",
+      "compensation": "L4-L5（自动升级1-2级）",
+      "first_sentence_pattern": "非常关心您的身体状况，首先向您致以最诚挚的歉意",
+      "info_collect": ["症状描述", "就医记录", "订单信息", "门店", "联系电话"],
+      "action": "紧急上报，2小时内响应",
+      "key_phrases": [
+        "如您感到身体不适，建议尽快就医并保留好就医凭证",
+        "相关医疗费用我们会负责处理",
+        "已紧急上报至品控部门"
+      ]
+    },
+    "spoilage": {
+      "label": "变质/过期/发霉",
+      "severity": "critical",
+      "compensation": "L4-L5",
+      "first_sentence_pattern": "非常抱歉，这是我们的严重失误",
+      "info_collect": ["产品照片", "购买时间", "门店", "是否已饮用"],
+      "action": "紧急排查同批次产品",
+      "key_phrases": [
+        "食品安全是我们最重视的底线",
+        "已立即通知门店排查同批次原料",
+        "会尽快联系您进行妥善处理"
+      ]
+    },
+    "taste_issue": {
+      "label": "异味/口感异常",
+      "severity": "medium",
+      "compensation": "L2-L3",
+      "first_sentence_pattern": "非常抱歉饮品口感没有达到您的预期",
+      "info_collect": ["具体味道描述", "产品名称", "门店"],
+      "action": "反馈门店调整配方",
+      "key_phrases": [
+        "您描述的味道问题已详细记录",
+        "会反馈给门店品控团队核查",
+        "诚邀您联系门店为您重新制作"
+      ]
+    }
+  },
+  "service_templates": {
+    "service_attitude": {
+      "label": "服务态度问题",
+      "first_sentence_pattern": "非常抱歉给您带来了不愉快的服务体验",
+      "key_phrases": [
+        "我们对服务品质有严格要求",
+        "已将您的反馈转达给门店负责人",
+        "会加强员工培训，避免类似情况再次发生",
+        "诚邀您联系我们以便进一步跟进"
+      ]
+    },
+    "wrong_order": {
+      "label": "出品错误",
+      "first_sentence_pattern": "非常抱歉您的饮品出现了制作错误",
+      "key_phrases": [
+        "这是我们的制作疏忽",
+        "已反馈门店加强出品核对流程",
+        "诚邀您联系门店为您重新制作"
+      ]
+    },
+    "insufficient_portion": {
+      "label": "份量不足",
+      "first_sentence_pattern": "非常抱歉饮品份量没有达到您的预期",
+      "key_phrases": [
+        "不同饮品有标准配方克重",
+        "已反馈门店核查该品出品标准",
+        "如确实存在不足会为您补做或补偿"
+      ]
+    }
+  },
+  "delivery_templates": {
+    "spillage": {
+      "label": "撒漏/破损",
+      "first_sentence_pattern": "非常抱歉外卖配送过程中出现了撒漏",
+      "key_phrases": [
+        "已反馈配送团队加强包装防护",
+        "可申请退款或重新配送"
+      ]
+    },
+    "delivery_delay": {
+      "label": "配送超时",
+      "first_sentence_pattern": "非常抱歉让您久等了",
+      "key_phrases": [
+        "已反馈配送团队优化调度",
+        "高峰期配送可能会有延迟"
+      ]
+    },
+    "wrong_delivery": {
+      "label": "送错/漏送",
+      "first_sentence_pattern": "非常抱歉外卖出现了错漏",
+      "key_phrases": [
+        "可申请退款或补送",
+        "已反馈配送站点核查"
+      ]
+    }
+  },
+  "product_templates": {
+    "taste_preference": {
+      "label": "口感/口味不满意",
+      "first_sentence_pattern": "感谢您的反馈，很抱歉这款饮品没有合您的口味",
+      "key_phrases": [
+        "每位顾客的口味偏好不同",
+        "可以尝试调整甜度或冰量",
+        "也可以试试我们其他系列的饮品"
+      ]
+    },
+    "temperature": {
+      "label": "温度问题",
+      "first_sentence_pattern": "非常抱歉饮品温度没有达到您的预期",
+      "key_phrases": [
+        "不同饮品有标准出品温度",
+        "下次可以尝试调整冰量选项"
+      ]
+    },
+    "ice_melting": {
+      "label": "融化/分层（芝士/冰淇淋/奶油）",
+      "first_sentence_pattern": "关于您提到的饮品分层/融化情况",
+      "key_phrases": [
+        "芝士/奶油类饮品会随时间自然下沉",
+        "建议拿到后尽快饮用或搅拌均匀",
+        "外卖配送时间较长时更容易出现此情况"
+      ]
+    }
+  },
+  "efficiency_templates": {
+    "long_wait": {
+      "label": "等候时间长",
+      "first_sentence_pattern": "非常抱歉让您久等了",
+      "key_phrases": [
+        "高峰期订单集中可能导致等候时间延长",
+        "已通过小程序查看排队情况",
+        "会反馈门店优化出杯效率"
+      ]
+    },
+    "queue_issue": {
+      "label": "叫号/排队问题",
+      "first_sentence_pattern": "非常抱歉给您带来了等候方面的困扰",
+      "key_phrases": [
+        "已反馈门店加强叫号管理",
+        "可以通过小程序实时查看制作进度"
+      ]
+    }
+  },
+  "packaging_templates": {
+    "cup_issue": {
+      "label": "杯子/杯盖问题",
+      "first_sentence_pattern": "非常抱歉杯具给您带来了不便",
+      "key_phrases": [
+        "已反馈品控部门核查",
+        "不同饮品使用不同杯型设计"
+      ]
+    },
+    "straw_issue": {
+      "label": "吸管问题",
+      "first_sentence_pattern": "非常抱歉吸管给您带来了不好的体验",
+      "key_phrases": [
+        "已记录反馈给供应链",
+        "目前使用环保可降解吸管"
+      ]
+    }
+  },
+  "hygiene_templates": {
+    "store_hygiene": {
+      "label": "门店卫生问题",
+      "first_sentence_pattern": "非常抱歉门店卫生没有达到您的期望",
+      "key_phrases": [
+        "已反馈门店立即整改",
+        "我们有严格的卫生标准和巡检制度"
+      ]
+    },
+    "staff_hygiene": {
+      "label": "员工卫生问题",
+      "first_sentence_pattern": "非常抱歉您在门店体验中感受到了卫生方面的不足",
+      "key_phrases": [
+        "已反馈门店负责人加强员工卫生管理",
+        "所有员工必须按规范佩戴口罩和手套"
+      ]
+    }
+  },
+  "oem_templates": {
+    "oem_quality": {
+      "label": "OEM产品品质问题（蛋糕/冰棒/糯米糍等）",
+      "first_sentence_pattern": "非常抱歉OEM产品没有达到您的期望",
+      "key_phrases": [
+        "OEM产品由合作工厂生产",
+        "已反馈供应商核查品质",
+        "如存在品质问题可申请退款"
+      ]
+    },
+    "oem_expiry": {
+      "label": "OEM产品临期/过期",
+      "first_sentence_pattern": "非常抱歉，OEM产品有效期问题我们高度重视",
+      "key_phrases": [
+        "已紧急排查门店库存",
+        "临期产品有下架标准",
+        "会为您妥善处理"
+      ]
+    }
+  },
+  "positive_review_templates": {
+    "praise_reply": {
+      "label": "好评回复",
+      "first_sentence_pattern": "非常感谢您的认可和支持",
+      "key_phrases": [
+        "您的满意是我们最大的动力",
+        "期待您的下次光临",
+        "欢迎尝试我们更多系列饮品"
+      ]
+    }
+  },
+  "contact_patterns": [
+    "诚邀您抽空电话联系门店，门店电话可在小程序门店详情中查看",
+    "您也可以通过喜茶小程序的在线客服联系我们",
+    "如有更多问题，欢迎随时联系我们"
+  ],
+  "opening_patterns": {
+    "apology": [
+      "非常抱歉给您带来了不好的体验",
+      "很抱歉这次没能让您满意",
+      "给您带来不便我们深表歉意"
+    ],
+    "thanks": [
+      "非常感谢您的反馈",
+      "感谢您对我们的关注和宝贵意见",
+      "感谢您选择喜茶"
+    ]
+  }
+}
