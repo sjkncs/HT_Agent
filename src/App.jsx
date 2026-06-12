@@ -2,7 +2,8 @@ import { useState, useEffect, useRef, useCallback, createContext, useContext, Co
 import { HashRouter, Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom'
 import {
   MessageSquare, LayoutDashboard, BookOpen, Menu, X, Moon, Sun,
-  Shield, User, Headphones, GitBranch, Users, Settings, AlertCircle
+  Shield, User, Headphones, GitBranch, Users, Settings, AlertCircle,
+  Target
 } from 'lucide-react'
 import ChatInterface from './components/chat/ChatInterface.jsx'
 import Sidebar from './components/chat/Sidebar.jsx'
@@ -12,6 +13,7 @@ import WorkflowView from './components/workflow/WorkflowView.jsx'
 import QiyuSessionPanel from './components/chat/QiyuSessionPanel.jsx'
 import LLMConfigPanel from './components/settings/LLMConfigPanel.jsx'
 import ServiceConfigPanel from './components/settings/ServiceConfigPanel.jsx'
+import OptimizationSelector from './components/OptimizationSelector.jsx'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from './lib/utils.js'
 import { restoreLLMConfig } from './lib/llm-client.js'
@@ -116,6 +118,7 @@ function NavBar({ role, onToggleRole, sidebarOpen, onToggleSidebar, ...qoderProp
       { path: '/dashboard', label: '运营看板', icon: LayoutDashboard, match: (p) => p === '/dashboard' },
       { path: '/workflow', label: '工作流', icon: GitBranch, match: (p) => p === '/workflow' },
       { path: '/knowledge', label: '知识库', icon: BookOpen, match: (p) => p === '/knowledge' },
+      { path: '/optimize', label: '优化方向', icon: Target, match: (p) => p === '/optimize' },
       { path: '/settings', label: '模型设置', icon: Settings, match: (p) => p === '/settings' || p.startsWith('/settings/') },
     ] : []),
   ]
@@ -203,7 +206,7 @@ function NavBar({ role, onToggleRole, sidebarOpen, onToggleSidebar, ...qoderProp
 }
 
 /* ─── Constants ─── */
-const STAFF_ROUTES = ['/qiyu', '/dashboard', '/workflow', '/knowledge', '/settings']
+const STAFF_ROUTES = ['/qiyu', '/dashboard', '/workflow', '/knowledge', '/optimize', '/settings']
 
 /* ─── Layout ─── */
 function AppLayout(qoderProps) {
@@ -272,6 +275,7 @@ function AppLayout(qoderProps) {
                 <Route path="/dashboard" element={<DashboardView />}  data-qoder-id="qel-route-c862697f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c862697f&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:177,&quot;column&quot;:13}}"/>
                 <Route path="/workflow" element={<WorkflowView />}  data-qoder-id="qel-route-c76267ec" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c76267ec&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:178,&quot;column&quot;:13}}"/>
                 <Route path="/knowledge" element={<KnowledgeBase />}  data-qoder-id="qel-route-c6626659" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-c6626659&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:179,&quot;column&quot;:13}}"/>
+                <Route path="/optimize" element={<OptimizationSelector />} />
                 <Route path="/settings" element={<LLMConfigPanel />}  data-qoder-id="qel-route-575afbd7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-575afbd7&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:265,&quot;column&quot;:17}}"/>
                 <Route path="/settings/services" element={<ServiceConfigPanel />}  data-qoder-id="qel-route-545af71e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-route-545af71e&quot;,&quot;filePath&quot;:&quot;react-vite/src/App.jsx&quot;,&quot;componentName&quot;:&quot;AppLayout&quot;,&quot;elementRole&quot;:&quot;route&quot;,&quot;loc&quot;:{&quot;line&quot;:276,&quot;column&quot;:17}}"/>
               </>
