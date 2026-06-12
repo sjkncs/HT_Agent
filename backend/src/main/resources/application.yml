@@ -73,14 +73,14 @@ jwt:
   secret: ${JWT_SECRET:heytea-agent-secret-key-change-in-production-2024}
   expiration: 86400000  # 24 hours
 
-# ── LLM — DashScope ──
+# ── LLM — xixixixi Gateway (Qwen3.7-MAX) ──
 llm:
   provider: dashscope
-  api-key: ${DASHSCOPE_API_KEY:sk-ae08dbba7ec94b9dbdbac405c035b057}
-  model: qwen-plus
+  api-key: sk-o7BuqZPyiYSm7CD2L5arfVdFvdM4JR5foObVnWWmOIoFgsVv
+  model: Qwen3.7-MAX
   max-tokens: 2048
   temperature: 0.7
-  base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  base-url: https://api.xixixixi.cloud/v1
 
 # ── MemOS Cloud ──
 memos:
