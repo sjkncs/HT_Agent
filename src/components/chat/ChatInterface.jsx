@@ -1034,86 +1034,314 @@ function SessionHeaderBar({ conversation }) {
   )
 }
 
-/* ─── Ordering Quick Replies ─── */
+/* ─── Ordering Quick Replies — Step-by-step Selection Card ─── */
+
+// Step definitions for the ordering flow
+const ORDER_STEPS = {
+  ice: {
+    title: '冰量',
+    type: '单选',
+    question: '请选择饮品的冰量偏好：',
+    options: [
+      { id: 'normal_ice', label: '正常冰', desc: '标准冰量，清爽冰凉' },
+      { id: 'less_ice', label: '少冰', desc: '冰量减半，口感更浓' },
+      { id: 'no_ice', label: '去冰', desc: '完全去冰，常温口感' },
+      { id: 'warm', label: '温热', desc: '加热制作，适合冬天' },
+    ],
+    recommended: 'less_ice',
+    sendText: (v) => v.replace('_', '') === 'normalice' ? '正常冰' : v === 'less_ice' ? '少冰' : v === 'no_ice' ? '去冰' : '温热',
+  },
+  sugar: {
+    title: '糖度',
+    type: '单选',
+    question: '请选择甜度偏好：',
+    options: [
+      { id: 'normal_sugar', label: '正常糖', desc: '标准甜度' },
+      { id: 'seven_sugar', label: '七分糖', desc: '微甜，大多数人喜欢' },
+      { id: 'five_sugar', label: '五分糖', desc: '适中甜度' },
+      { id: 'three_sugar', label: '三分糖', desc: '清淡微甜' },
+      { id: 'no_sugar', label: '不另外加糖', desc: '原味，无额外糖' },
+    ],
+    recommended: 'seven_sugar',
+    sendText: (v) => v === 'normal_sugar' ? '正常糖' : v === 'seven_sugar' ? '七分糖' : v === 'five_sugar' ? '五分糖' : v === 'three_sugar' ? '三分糖' : '不另外加糖',
+  },
+  confirm_order: {
+    title: '确认订单',
+    type: '单选',
+    question: '确认以上订单信息，是否提交？',
+    options: [
+      { id: 'confirm', label: '确认下单', desc: '提交订单并开始制作' },
+      { id: 'cancel', label: '取消', desc: '取消本次订单' },
+    ],
+    sendText: (v) => v === 'confirm' ? '确认下单' : '取消订单',
+  },
+  payment: {
+    title: '支付状态',
+    type: '单选',
+    question: '请确认支付结果：',
+    options: [
+      { id: 'paid', label: '已支付', desc: '支付成功完成' },
+      { id: 'failed', label: '支付失败', desc: '遇到问题，需要重试' },
+    ],
+    sendText: (v) => v === 'paid' ? '已支付' : '支付失败',
+  },
+  pickup: {
+    title: '取餐方式',
+    type: '单选',
+    question: '请选择您希望的取餐方式：',
+    options: [
+      { id: 'self_pickup', label: '到店自提', desc: '到店取餐，无需等待配送' },
+      { id: 'delivery', label: '外卖配送', desc: '骑手配送至指定地址' },
+    ],
+    sendText: (v) => v === 'self_pickup' ? '到店自提' : '外卖配送',
+  },
+  store: {
+    title: '门店选择',
+    type: '单选',
+    question: '',
+    options: [],
+    sendText: (v) => v,
+  },
+}
+
+function detectStepType(text) {
+  if (/冰量|冰度|去冰|少冰|正常冰/.test(text)) return 'ice'
+  if (/糖度|甜度|几分糖/.test(text)) return 'sugar'
+  if (/确认.*订单|确认.*下单|是否.*确认|确认下单/.test(text)) return 'confirm_order'
+  if (/支付完成|已支付|付款|扫码支付/.test(text) && !/告诉阿喜/.test(text.slice(-30))) return 'payment'
+  if (/自提|配送|取餐方式|到店/.test(text) && /选择|请问|需要/.test(text)) return 'pickup'
+  const hasStoreList = /(?:以下|推荐|附近|这些).*?(?:门店|店铺|店)/s.test(text)
+  const hasNumberedItems = /^\s*\d+[.、)\s]\s*.{2,30}$/m.test(text)
+  if (hasStoreList && hasNumberedItems) return 'store'
+  return null
+}
+
+function parseStoreOptions(text) {
+  const matches = text.match(/^\s*(\d+)[.、)\s]\s*(.{2,30})$/gm)
+  if (!matches) return []
+  return matches.slice(0, 6).map(m => {
+    const parsed = m.match(/^\s*(\d+)[.、)\s]\s*(.{2,30})$/)
+    return parsed ? { id: parsed[1], label: parsed[2].trim().slice(0, 20), desc: `回复 ${parsed[1]} 选择此门店` } : null
+  }).filter(Boolean)
+}
+
+function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, currentStep }) {
+  const [selected, setSelected] = useState(null)
+  const [collapsed, setCollapsed] = useState(false)
+
+  const options = stepConfig.title === '门店选择' ? (dynamicOptions || []) : stepConfig.options
+  const question = stepConfig.title === '门店选择'
+    ? '请选择您想下单的门店：'
+    : stepConfig.question
+
+  function handleContinue() {
+    if (selected && onSend) {
+      const sendVal = stepConfig.sendText(selected)
+      onSend(sendVal)
+    }
+  }
+
+  function handleRecommend() {
+    if (stepConfig.recommended) {
+      setSelected(stepConfig.recommended)
+    } else if (options.length > 0) {
+      setSelected(options[0].id)
+    }
+  }
+
+  function handleSkip() {
+    if (onSend) onSend('跳过')
+  }
+
+  return (
+    <div style={{
+      marginTop: 10,
+      borderRadius: 12,
+      border: '1px solid var(--cursor-border-10, #e5e5e5)',
+      background: 'var(--cursor-surface-100, #fafaf9)',
+      overflow: 'hidden',
+      maxWidth: 420,
+    }}>
+      {/* Header */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '10px 14px',
+        background: 'var(--cursor-surface-300, #f5f5f4)',
+        borderBottom: '1px solid var(--cursor-border-10, #e5e5e5)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--cursor-ink, #1a1a1a)' }}>
+            {stepConfig.title}
+          </span>
+          <span style={{
+            fontSize: 10, padding: '1px 7px', borderRadius: 4,
+            background: 'var(--cursor-orange, #f54e00)', color: '#fff', fontWeight: 600,
+          }}>
+            {stepConfig.type}
+          </span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {totalSteps > 1 && (
+            <span style={{ fontSize: 11, color: 'var(--cursor-border-55, #94a3b8)', fontWeight: 500 }}>
+              {currentStep} / {totalSteps}
+            </span>
+          )}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: 2,
+              color: 'var(--cursor-border-55, #94a3b8)', fontSize: 11, fontWeight: 500,
+            }}
+          >
+            {collapsed ? '展开' : '折叠'}
+          </button>
+        </div>
+      </div>
+
+      {!collapsed && (
+        <>
+          {/* Question */}
+          <div style={{ padding: '10px 14px 4px', fontSize: 13, color: 'var(--cursor-ink, #1a1a1a)', fontWeight: 500 }}>
+            {question}
+          </div>
+
+          {/* Options */}
+          <div style={{ padding: '4px 14px 10px' }}>
+            {options.map((opt, i) => {
+              const isSelected = selected === opt.id
+              return (
+                <div
+                  key={opt.id}
+                  onClick={() => setSelected(opt.id)}
+                  style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 10,
+                    padding: '10px 12px',
+                    marginBottom: 6,
+                    borderRadius: 8,
+                    border: isSelected ? '1.5px solid var(--cursor-orange, #f54e00)' : '1px solid var(--cursor-border-10, #e5e5e5)',
+                    background: isSelected ? 'rgba(245, 78, 0, 0.04)' : 'var(--cursor-surface-100, #fafaf9)',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  {/* Radio indicator */}
+                  <div style={{
+                    width: 20, height: 20, borderRadius: '50%', flexShrink: 0, marginTop: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    border: isSelected ? '2px solid var(--cursor-orange, #f54e00)' : '2px solid var(--cursor-border-10, #d4d4d4)',
+                    background: isSelected ? 'var(--cursor-orange, #f54e00)' : 'transparent',
+                    transition: 'all 0.15s ease',
+                  }}>
+                    {isSelected && <span style={{ color: '#fff', fontSize: 11, fontWeight: 700 }}>{i + 1}</span>}
+                    {!isSelected && <span style={{ color: 'var(--cursor-border-55, #94a3b8)', fontSize: 11, fontWeight: 600 }}>{i + 1}</span>}
+                  </div>
+                  {/* Content */}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-ink, #1a1a1a)' }}>
+                      {opt.label}
+                    </div>
+                    {opt.desc && (
+                      <div style={{ fontSize: 11, color: 'var(--cursor-border-55, #94a3b8)', marginTop: 2, lineHeight: 1.4 }}>
+                        {opt.desc}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Bottom bar */}
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '8px 14px',
+            borderTop: '1px solid var(--cursor-border-10, #e5e5e5)',
+            background: 'var(--cursor-surface-300, #f5f5f4)',
+          }}>
+            {/* Recommend button */}
+            <button
+              onClick={handleRecommend}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 4,
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: 'var(--cursor-orange, #f54e00)', fontSize: 12, fontWeight: 500,
+                padding: '4px 0',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              推荐
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <button
+                onClick={handleSkip}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  color: 'var(--cursor-border-55, #94a3b8)', fontSize: 12, fontWeight: 500,
+                  padding: '6px 12px',
+                }}
+              >
+                跳过
+              </button>
+              <button
+                onClick={handleContinue}
+                disabled={!selected}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 4,
+                  padding: '6px 16px',
+                  borderRadius: 6,
+                  border: 'none',
+                  background: selected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-border-10, #e5e5e5)',
+                  color: selected ? '#fff' : 'var(--cursor-border-55, #94a3b8)',
+                  fontSize: 12, fontWeight: 600,
+                  cursor: selected ? 'pointer' : 'default',
+                  transition: 'all 0.2s',
+                }}
+              >
+                继续
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
 function OrderingQuickReplies({ text, onSend, isStreaming }) {
   if (isStreaming || !text || !onSend) return null
 
-  const replies = []
+  const stepType = detectStepType(text)
+  if (!stepType) return null
 
-  // 门店选择：检测编号列表 "1. xxx\n2. xxx" 或 "1、xxx\n2、xxx"
-  const storeListMatch = text.match(/(?:以下|推荐|附近|这些).*?(?:门店|店铺|店)/s)
-  const numberedItems = text.match(/^\s*(\d+)[.、)\s]\s*(.{2,30})$/gm)
-  if (storeListMatch && numberedItems && numberedItems.length >= 2) {
-    numberedItems.slice(0, 5).forEach(item => {
-      const m = item.match(/^\s*(\d+)[.、)\s]\s*(.{2,30})$/)
-      if (m) replies.push({ label: m[2].trim().slice(0, 15), text: m[1] })
-    })
-  }
+  const stepConfig = ORDER_STEPS[stepType]
+  if (!stepConfig) return null
 
-  // 糖度选择
-  if (/糖度|甜度|几分糖/.test(text)) {
-    ['正常糖', '七分糖', '五分糖', '三分糖', '不另外加糖'].forEach(s => {
-      if (text.includes(s) || /糖/.test(text)) replies.push({ label: s, text: s })
-    })
-  }
+  // Parse dynamic options for store selection
+  const dynamicOptions = stepType === 'store' ? parseStoreOptions(text) : null
+  if (stepType === 'store' && (!dynamicOptions || dynamicOptions.length < 2)) return null
 
-  // 冰量选择
-  if (/冰量|冰度|去冰|少冰|正常冰/.test(text)) {
-    ['正常冰', '少冰', '去冰', '温热'].forEach(s => {
-      if (text.includes(s) || /冰/.test(text)) replies.push({ label: s, text: s })
-    })
-  }
-
-  // 订单确认
-  if (/确认.*订单|确认.*下单|是否.*确认|确认下单/.test(text)) {
-    replies.push({ label: '✅ 确认下单', text: '确认下单' })
-    replies.push({ label: '❌ 取消', text: '取消订单' })
-  }
-
-  // 支付状态
-  if (/支付完成|已支付|付款|扫码支付/.test(text) && !/告诉阿喜/.test(text.slice(-30))) {
-    replies.push({ label: '✅ 已支付', text: '已支付' })
-    replies.push({ label: '❌ 支付失败', text: '支付失败' })
-  }
-
-  // 取餐方式
-  if (/自提|配送|取餐方式|到店/.test(text) && /选择|请问|需要/.test(text)) {
-    replies.push({ label: '🏪 到店自提', text: '到店自提' })
-    replies.push({ label: '🛵 外卖配送', text: '外卖配送' })
-  }
-
-  if (replies.length === 0) return null
+  // Calculate total steps
+  const stepSequence = []
+  if (/糖度|甜度|几分糖/.test(text) || stepType === 'sugar') stepSequence.push('sugar')
+  if (/冰量|冰度/.test(text) || stepType === 'ice') stepSequence.push('ice')
+  if (/确认.*订单/.test(text) || stepType === 'confirm_order') stepSequence.push('confirm_order')
+  const totalSteps = Math.max(stepSequence.length, 1)
+  const currentStep = stepSequence.indexOf(stepType) + 1 || 1
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }} data-qoder-id="qel-div-97c5c5c7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-97c5c5c7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;OrderingQuickReplies&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1087,&quot;column&quot;:5}}">
-      {replies.map((r, i) => (
-        <button
-          key={i}
-          onClick={() => onSend(r.text)}
-          style={{
-            padding: '5px 12px',
-            borderRadius: '16px',
-            border: '1px solid var(--cursor-orange, #f54e00)',
-            background: 'transparent',
-            color: 'var(--cursor-orange, #f54e00)',
-            fontSize: '12px',
-            cursor: 'pointer',
-            transition: 'all 0.2s',
-            whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = 'var(--cursor-orange, #f54e00)'
-            e.currentTarget.style.color = '#fff'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = 'transparent'
-            e.currentTarget.style.color = 'var(--cursor-orange, #f54e00)'
-          }}
-         data-qoder-id="qel-button-98513860" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-98513860&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;OrderingQuickReplies&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1089,&quot;column&quot;:9}}">
-          {r.label}
-        </button>
-      ))}
-    </div>
+    <SelectionCard
+      stepConfig={stepConfig}
+      dynamicOptions={dynamicOptions}
+      onSend={onSend}
+      totalSteps={totalSteps}
+      currentStep={currentStep}
+    />
   )
 }
 
