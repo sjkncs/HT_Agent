@@ -87,8 +87,8 @@ public class LLMServiceImpl implements LLMService {
 
         // ── Service Complaints: from 关键词.xlsx 服务问题 ──
         SERVICE_COMPLAINT_PATTERNS = compilePatterns(
-                "(服务态度|态度差|态度不好|爱理不理|冷漠|不耐烦|甩脸|凶|骂人)",
-                "(翻白眼|不理|忽视|敷衍|推卸|踢皮球|不负责)",
+                "(服务态度|态度.{0,2}(差|不好|很差|恶劣|差劲)|爱理不理|冷漠|不耐烦|甩脸|凶|骂人)",
+                "(翻白眼|不理人|忽视|敷衍|推卸|踢皮球|不负责)",
                 "(没礼貌|不热情|恶语|甩话|黑脸|不搭理)",
                 "(餐具|保温袋|没给|漏给|忘记给)",
                 "(会员|积分|优惠券|兑换|核销|用不了|过期)",
@@ -459,11 +459,11 @@ public class LLMServiceImpl implements LLMService {
     public ChatResponse chat(String conversationId, String userMessage, String intent, List<Message> history) {
         long startTime = System.currentTimeMillis();
 
-        try {
-            // Detect sub-scenario for dynamic prompt assembly
-            String subScenario = detectSubScenario(userMessage, intent);
-            log.info("Sub-scenario detected: {} for intent: {}", subScenario, intent);
+        // Detect sub-scenario BEFORE try block so fallback can access it
+        String subScenario = detectSubScenario(userMessage, intent);
+        log.info("Sub-scenario detected: {} for intent: {}", subScenario, intent);
 
+        try {
             // Build dynamic system prompt
             String systemPrompt = buildSystemPrompt(intent, subScenario, userMessage);
 
@@ -552,7 +552,7 @@ public class LLMServiceImpl implements LLMService {
         } catch (Exception e) {
             long latencyMs = System.currentTimeMillis() - startTime;
             log.error("LLM call failed for conversation {}: {}", conversationId, e.getMessage(), e);
-            return buildFallbackResponse(conversationId, latencyMs);
+            return buildFallbackResponse(conversationId, latencyMs, intent, subScenario);
         }
     }
 
@@ -669,14 +669,19 @@ public class LLMServiceImpl implements LLMService {
     //  FALLBACK
     // ══════════════════════════════════════════════════════════════
 
-    private ChatResponse buildFallbackResponse(String conversationId, long latencyMs) {
+    private ChatResponse buildFallbackResponse(String conversationId, long latencyMs, String intent, String subScenario) {
+        Map<String, Object> meta = new LinkedHashMap<>();
+        meta.put("error", "LLM call failed");
+        meta.put("fallback", true);
+        meta.put("intent", intent);
+        meta.put("subScenario", subScenario);
         return ChatResponse.builder()
                 .conversationId(conversationId)
                 .messageId(UUID.randomUUID().toString())
                 .content("抱歉，系统暂时无法响应，请稍后再试或转接人工客服。您也可以拨打门店电话或通过喜茶小程序在线客服联系我们。")
-                .intent("unknown")
+                .intent(intent)
                 .role("assistant")
-                .metadata(Map.of("error", "LLM call failed", "fallback", true))
+                .metadata(meta)
                 .latencyMs(latencyMs)
                 .createdAt(LocalDateTime.now())
                 .build();
