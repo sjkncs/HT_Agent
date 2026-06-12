@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Plus, Search, MessageSquare, Clock, AlertTriangle, Users,
-  Bug, Leaf, HeartPulse, AlertCircle, Package, CupSoda, Flame, X
+  Bug, Leaf, HeartPulse, AlertCircle, Package, CupSoda, Flame, X,
+  Truck, Zap, Sparkles, Headphones
 } from 'lucide-react'
 import { Button } from '@/components/ui/button.jsx'
 import { cn } from '../../lib/utils.js'
@@ -48,19 +49,35 @@ const CATEGORY_ICON_MAP = {
   '外源性异物': Bug, '内源性异物': Leaf, '身体不适': HeartPulse,
   '品质问题': AlertCircle, 'OEM产品': Package, '非食安问题': CupSoda,
   '情绪激动': Flame,
+  '服务投诉': Headphones, '配送问题': Truck, '效率问题': Zap,
+  '卫生问题': Sparkles,
 }
 const CATEGORY_FILTERS = [
   { key: '', label: '全部' },
   { key: '外源性异物', label: '外源性异物' },
   { key: '内源性异物', label: '内源性异物' },
   { key: '身体不适', label: '身体不适' },
-  { key: '品质问题', label: '品质问题', matchLabels: ['饮品异味', '原料变质', '原料未熟', '产品有效期'] },
+  { key: '品质问题', label: '品质问题', matchLabels: ['饮品异味', '原料变质', '原料未熟', '产品有效期', '变质/过期', '口味异常'] },
   { key: 'OEM产品', label: 'OEM产品', matchLabels: ['OEM'] },
   { key: '非食安问题', label: '非食安' },
   { key: '情绪激动', label: '情绪激动' },
+  { key: '服务投诉', label: '服务投诉' },
+  { key: '配送问题', label: '配送问题' },
+  { key: '效率问题', label: '效率问题' },
+  { key: '卫生问题', label: '卫生问题' },
 ]
 
-// 智能标签匹配：支持层级路径 + 分类字段 + 自定义匹配集
+// subScenario 英文键 → 中文分类标签
+const SUB_SCENARIO_TO_LABEL = {
+  body_discomfort: '身体不适', spoilage: '品质问题',
+  foreign_object_external: '外源性异物', foreign_object_internal: '内源性异物',
+  taste_issue: '品质问题', general_food_safety: '食安问题',
+  service_complaint: '服务投诉', delivery_issue: '配送问题',
+  product_quality: '品质问题', efficiency: '效率问题',
+  packaging: '包装问题', hygiene: '卫生问题',
+}
+
+// 智能标签匹配：支持层级路径 + 分类字段 + 自定义匹配集 + subScenario
 function matchConversation(conv, categoryKey, riskKey) {
   if (riskKey && conv.riskLevel !== riskKey) return false
   if (!categoryKey) return true
@@ -69,19 +86,23 @@ function matchConversation(conv, categoryKey, riskKey) {
   const label = conv.label || ''
   const classification = conv.classification?.consult_type || ''
   const matchSet = [categoryKey, ...(cat.matchLabels || [])]
-  return matchSet.some(m =>
+  if (matchSet.some(m =>
     label.startsWith(m) || label.includes('/' + m) ||
     label.includes(m) || classification.includes(m)
-  )
+  )) return true
+  // subScenario 匹配
+  const subLabel = SUB_SCENARIO_TO_LABEL[conv.subScenario] || ''
+  return matchSet.includes(subLabel)
 }
 
-// 全字段多维搜索：标题、消息、标签、门店、产品、订单号、手机号、处理人
+// 全字段多维搜索：标题、消息、标签、门店、产品、订单号、手机号、处理人、子场景
 function searchConversation(conv, query) {
   if (!query) return true
   const q = query.toLowerCase()
+  const subLabel = SUB_SCENARIO_TO_LABEL[conv.subScenario] || conv.subScenario || ''
   const fields = [
     conv.title, conv.lastMessage, conv.label,
-    conv.handler, conv.session_state,
+    conv.handler, conv.session_state, subLabel,
     conv.classification?.consult_type,
   ].filter(Boolean).join(' ')
   if (fields.toLowerCase().includes(q)) return true
@@ -507,6 +528,14 @@ export default function Sidebar({ open, onClose, role = 'staff' }) {
                                     color: 'var(--cursor-border-55)',
                                   }} data-qoder-id="qel-rounded-22a6a820" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-rounded-22a6a820&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/Sidebar.jsx&quot;,&quot;componentName&quot;:&quot;Sidebar&quot;,&quot;elementRole&quot;:&quot;rounded&quot;,&quot;loc&quot;:{&quot;line&quot;:465,&quot;column&quot;:35}}">
                                     {conv.label.split('/').pop()}
+                                  </span>
+                                )}
+                                {conv.subScenario && SUB_SCENARIO_TO_LABEL[conv.subScenario] && (
+                                  <span className="rounded text-[8px] px-1 py-px" style={{
+                                    background: 'var(--cursor-orange, #f54e00)' + '15',
+                                    color: 'var(--cursor-orange, #f54e00)',
+                                  }}>
+                                    {SUB_SCENARIO_TO_LABEL[conv.subScenario]}
                                   </span>
                                 )}
                                 {conv.turn_count && (

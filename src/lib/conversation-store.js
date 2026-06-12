@@ -375,6 +375,11 @@ export function buildConversationRecord(sessionId, messages, metadata = {}) {
     ? lastMsg.content.slice(0, 60) + (lastMsg.content.length > 60 ? '...' : '')
     : ''
 
+  // 从最后一条 assistant 消息中提取 intent/subScenario（如果 metadata 未提供）
+  const lastAssistant = [...assistantMessages].reverse()[0]
+  const intent = metadata.intent || lastAssistant?.intent || ''
+  const subScenario = metadata.subScenario || lastAssistant?.subScenario || ''
+
   return {
     id: sessionId,
     title,
@@ -383,7 +388,8 @@ export function buildConversationRecord(sessionId, messages, metadata = {}) {
     label: metadata.label || metadata.classification?.consult_type || '',
     riskLevel: metadata.riskLevel || metadata.classification?.risk_level || 'low',
     session_state: metadata.session_state || 'active',
-    intent: metadata.intent || '',
+    intent,
+    subScenario,
     handler: metadata.handler || 'AI',
     turn_count: userMessages.length,
     classification: metadata.classification || null,

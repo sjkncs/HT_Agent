@@ -1224,6 +1224,28 @@ function RichCardRenderer({ toolCalls }) {
   )
 }
 
+/* ─── Sub-scenario label & color mapping ─── */
+const SUB_SCENARIO_LABELS = {
+  body_discomfort: '身体不适', spoilage: '变质/过期',
+  foreign_object_external: '外源性异物', foreign_object_internal: '内源性异物',
+  taste_issue: '口味异常', general_food_safety: '食安问题',
+  service_complaint: '服务投诉', delivery_issue: '配送问题',
+  product_quality: '产品品质', efficiency: '效率问题',
+  packaging: '包装问题', hygiene: '卫生问题',
+  recommendation: '产品推荐', place_order: '下单点单',
+  store_info: '门店信息', browse_menu: '浏览菜单',
+}
+const SUB_SCENARIO_COLORS = {
+  body_discomfort: '#cf2d56', spoilage: '#cf2d56',
+  foreign_object_external: '#e05520', foreign_object_internal: '#e05520',
+  taste_issue: '#c08532', general_food_safety: '#c08532',
+  service_complaint: '#7c3aed', delivery_issue: '#2563eb',
+  product_quality: '#c08532', efficiency: '#6b7280',
+  packaging: '#6b7280', hygiene: '#059669',
+  recommendation: '#1f8a65', place_order: '#1f8a65',
+  store_info: '#1f8a65', browse_menu: '#1f8a65',
+}
+
 /* ─── Message Bubble ─── */
 function MessageBubble({ message, isStreaming, onSend, ...qoderProps }) {
   const [copied, setCopied] = useState(false)
@@ -1280,6 +1302,27 @@ function MessageBubble({ message, isStreaming, onSend, ...qoderProps }) {
         {!isUser && message.decisionFrame?.emotion && (
           <div className="mt-1.5" data-qoder-id="qel-mt-1-5-813e3caa" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-mt-1-5-813e3caa&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;mt-1-5&quot;,&quot;loc&quot;:{&quot;line&quot;:1103,&quot;column&quot;:11}}">
             <EmotionBadge emotion={{ emotion_level: message.decisionFrame.emotion, is_urgent: message.decisionFrame.emotion === 'urgent' }}  data-qoder-id="qel-emotionbadge-4bee836a" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-emotionbadge-4bee836a&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;MessageBubble&quot;,&quot;elementRole&quot;:&quot;emotionbadge&quot;,&quot;loc&quot;:{&quot;line&quot;:1104,&quot;column&quot;:13}}"/>
+          </div>
+        )}
+
+        {/* Sub-scenario badge from backend classification */}
+        {!isUser && message.subScenario && SUB_SCENARIO_LABELS[message.subScenario] && (
+          <div className="mt-1.5 flex items-center gap-1.5">
+            <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium" style={{
+              background: (SUB_SCENARIO_COLORS[message.subScenario] || '#6b7280') + '18',
+              color: SUB_SCENARIO_COLORS[message.subScenario] || '#6b7280',
+              border: `1px solid ${(SUB_SCENARIO_COLORS[message.subScenario] || '#6b7280')}30`,
+            }}>
+              {SUB_SCENARIO_LABELS[message.subScenario]}
+            </span>
+            {message.intent && (
+              <span className="inline-flex items-center rounded-full px-1.5 py-0.5 text-[9px]" style={{
+                background: 'var(--cursor-surface-300)',
+                color: 'var(--cursor-border-55)',
+              }}>
+                {message.intent === 'food_safety' ? '食安' : message.intent === 'ordering' ? '点单' : '通用'}
+              </span>
+            )}
           </div>
         )}
 
@@ -3376,7 +3419,7 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
   }, [id])
 
   // Streaming response with Agent Engine integration
-  const simulateStream = useCallback(async (responseText, engineResult, llmSource = 'template', triggersData = null) => {
+  const simulateStream = useCallback(async (responseText, engineResult, llmSource = 'template', triggersData = null, backendMeta = null) => {
     setIsStreaming(true)
     streamAbortRef.current = false
 
@@ -3386,6 +3429,8 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
       content: '',
       timestamp: new Date().toISOString(),
       llmSource,
+      intent: backendMeta?.intent || null,
+      subScenario: backendMeta?.subScenario || null,
       decisionFrame: engineResult?.decision_frame ? {
         top_label: engineResult.decision_frame.top_label,
         top_label_confidence: engineResult.decision_frame.top_label_confidence,
@@ -3599,7 +3644,11 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
         const backendResult = await apiClient.sendChat(text, backendConvIdRef.current, context)
         if (backendResult && backendResult.content) {
           backendConvIdRef.current = backendResult.conversationId
-          setTimeout(() => simulateStream(backendResult.content, null, 'backend'), 600)
+          const backendMeta = {
+            intent: backendResult.intent || backendResult.metadata?.intent || null,
+            subScenario: backendResult.metadata?.subScenario || null,
+          }
+          setTimeout(() => simulateStream(backendResult.content, null, 'backend', null, backendMeta), 600)
           // 异步持久化到 IndexedDB
           try {
             const convRecord = buildConversationRecord(
@@ -3610,8 +3659,10 @@ export default function ChatInterface({ role = 'consumer', ...qoderProps }) {
                 content: backendResult.content,
                 timestamp: backendResult.createdAt,
                 llmSource: 'backend',
+                intent: backendMeta.intent,
+                subScenario: backendMeta.subScenario,
               }],
-              { sessionId: backendResult.conversationId }
+              { sessionId: backendResult.conversationId, intent: backendMeta.intent, subScenario: backendMeta.subScenario }
             )
             saveAndSync(convRecord).catch(() => {})
           } catch {}
