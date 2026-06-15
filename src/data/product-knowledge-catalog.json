@@ -1,0 +1,2585 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "updatedAt": "2026-06-15",
+    "totalProducts": 94,
+    "categories": [
+      "茶特调/茗茶",
+      "植物茶/鲜果茶",
+      "苦巧/抹茶/波波茶",
+      "灵感茶点",
+      "咖啡/经典/小料"
+    ]
+  },
+  "products": {
+    "多肉葡萄": {
+      "productId": 2001,
+      "skuCode": "HT-2001",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "葡萄搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "葡萄"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约29g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "清爽芭乐提(红芭乐)": {
+      "productId": 2002,
+      "skuCode": "HT-2002",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "清爽芭乐提": {
+      "productId": 2003,
+      "skuCode": "HT-2003",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "清爽芭乐葡(红芭乐)": {
+      "productId": 2004,
+      "skuCode": "HT-2004",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "清爽芭乐葡": {
+      "productId": 2005,
+      "skuCode": "HT-2005",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芒芒甘露": {
+      "productId": 2006,
+      "skuCode": "HT-2006",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 31
+      },
+      "description": {
+        "short": "芒果搭配茶底与特色小料"
+      },
+      "ingredients": {
+        "main": [
+          "芒果"
+        ]
+      },
+      "allergens": [
+        "芒果"
+      ],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约260kcal",
+        "sugar": "约31g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "超多肉芒芒甘露": {
+      "productId": 2007,
+      "skuCode": "HT-2007",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "芒果搭配茶底与特色小料"
+      },
+      "ingredients": {
+        "main": [
+          "芒果"
+        ]
+      },
+      "allergens": [
+        "芒果"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约260kcal",
+        "sugar": "约29g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "多肉芒芒": {
+      "productId": 2008,
+      "skuCode": "HT-2008",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芒果搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芒果"
+        ]
+      },
+      "allergens": [
+        "芒果"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "椰椰芒芒": {
+      "productId": 2009,
+      "skuCode": "HT-2009",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芒果+椰子搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芒果",
+          "椰子"
+        ]
+      },
+      "allergens": [
+        "芒果",
+        "椰子"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "多肉桃李": {
+      "productId": 2010,
+      "skuCode": "HT-2010",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "桃李搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "桃李"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约29g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "爆汁杨梅": {
+      "productId": 2011,
+      "skuCode": "HT-2011",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "杨梅搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "杨梅"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "轻芝杨梅": {
+      "productId": 2012,
+      "skuCode": "HT-2012",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "杨梅搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "杨梅"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约320kcal",
+        "sugar": "约29g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "满杯红柚": {
+      "productId": 2013,
+      "skuCode": "HT-2013",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "红柚搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "红柚"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约29g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "多肉青提": {
+      "productId": 2014,
+      "skuCode": "HT-2014",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "青提搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "青提"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "喜柿多多": {
+      "productId": 2015,
+      "skuCode": "HT-2015",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "柿子搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "柿子"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "网纹瓜瓜冰浆": {
+      "productId": 2016,
+      "skuCode": "HT-2016",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "哈密瓜搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "哈密瓜"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "奇香黄皮桃": {
+      "productId": 2017,
+      "skuCode": "HT-2017",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "黄皮桃搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "黄皮桃"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "木姜子滇木瓜": {
+      "productId": 2018,
+      "skuCode": "HT-2018",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "木瓜搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "木瓜"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "奇兰苹果杏": {
+      "productId": 2019,
+      "skuCode": "HT-2019",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "苹果杏搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "苹果杏"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "奇兰苹果杏特调": {
+      "productId": 2020,
+      "skuCode": "HT-2020",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "苹果杏搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "苹果杏"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "奇兰粉芭乐": {
+      "productId": 2021,
+      "skuCode": "HT-2021",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "奇兰红颜莓莓": {
+      "productId": 2022,
+      "skuCode": "HT-2022",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "草莓搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "草莓"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "奇兰芭乐莲雾": {
+      "productId": 2023,
+      "skuCode": "HT-2023",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐+莲雾搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐",
+          "莲雾"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "雪毫茉王芭乐": {
+      "productId": 2024,
+      "skuCode": "HT-2024",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "南姜甘草芭乐瓶": {
+      "productId": 2025,
+      "skuCode": "HT-2025",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "芭乐搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "芭乐"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "青提柠打茶": {
+      "productId": 2026,
+      "skuCode": "HT-2026",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "青提搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "青提"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "椰山龙眼冰": {
+      "productId": 2027,
+      "skuCode": "HT-2027",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "龙眼搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "龙眼"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约27g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芒椰糯米饭": {
+      "productId": 2028,
+      "skuCode": "HT-2028",
+      "category": "灵感茶点",
+      "pricing": {
+        "base": 29,
+        "sizes": {
+          "冷500ml": 29
+        }
+      },
+      "description": {
+        "short": "端午限定回归·0咖啡因",
+        "long": "端午限定，超高人气「芒椰糯米饭」回归。每日现切当季云南鲜芒，现蒸椰香泰国籼糯米，搭配现打芒果冰沙，一杯可以喝的「糯米饭」，香糯爽口。0咖啡因。",
+        "servingStyle": "冰沙"
+      },
+      "ingredients": {
+        "main": [
+          "当季云南鲜芒",
+          "椰香泰国籼糯米",
+          "芒果冰沙"
+        ],
+        "layers": [
+          {
+            "name": "现制芒果果肉",
+            "position": "中层"
+          },
+          {
+            "name": "现制椰香糯米饭",
+            "position": "上层"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "底层"
+          },
+          {
+            "name": "芒椰沙冰",
+            "position": "顶层"
+          }
+        ]
+      },
+      "allergens": [
+        "椰子",
+        "乳制品"
+      ],
+      "tags": {
+        "seasonal": "端午限定",
+        "status": "回归",
+        "caffeine": "0咖啡因",
+        "tea": "不含茶"
+      },
+      "nutrition": {
+        "calories": "约260kcal",
+        "sugar": "约28g",
+        "caffeine": "0mg"
+      },
+      "customizationType": "mango_special",
+      "dataCompleteness": "detailed",
+      "customization": {
+        "sweetener": [
+          {
+            "name": "纯料真冰糖",
+            "price": 0,
+            "recommended": true
+          },
+          {
+            "name": "真0卡糖(免费)",
+            "price": 0
+          },
+          {
+            "name": "低GI [L-阿拉伯糖]",
+            "price": 2
+          }
+        ],
+        "ice": [
+          {
+            "name": "推荐",
+            "recommended": true
+          },
+          {
+            "name": "少冰"
+          },
+          {
+            "name": "少少冰"
+          }
+        ],
+        "topping": [
+          {
+            "name": "加倍芒果果肉",
+            "price": 2
+          }
+        ],
+        "prepMethod": [
+          {
+            "name": "标准(含粽叶)",
+            "recommended": true
+          },
+          {
+            "name": "去粽叶"
+          }
+        ],
+        "ecoStraw": [
+          {
+            "name": "可降解吸管",
+            "recommended": true
+          },
+          {
+            "name": "不使用吸管"
+          }
+        ]
+      },
+      "tips": "粽叶仅作装饰用途，不可直接食用。",
+      "relatedProducts": [
+        "多肉葡萄",
+        "满杯红柚"
+      ],
+      "faq": [
+        {
+          "q": "芒椰糯米饭有茶吗？",
+          "a": "芒椰糯米饭不含茶，0咖啡因，适合对咖啡因敏感的朋友。"
+        },
+        {
+          "q": "芒椰糯米饭里的粽叶能吃吗？",
+          "a": "粽叶仅作装饰用途，不可直接食用哦。"
+        },
+        {
+          "q": "芒椰糯米饭多少卡路里？",
+          "a": "约260kcal，糖分约28g。"
+        }
+      ]
+    },
+    "酷黑莓桑": {
+      "productId": 2029,
+      "skuCode": "HT-2029",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "桑葚搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "桑葚"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约29g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "轻芝多肉葡萄": {
+      "productId": 2030,
+      "skuCode": "HT-2030",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 31
+      },
+      "description": {
+        "short": "葡萄搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "葡萄"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约320kcal",
+        "sugar": "约31g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芝芝多肉葡萄": {
+      "productId": 2031,
+      "skuCode": "HT-2031",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 31
+      },
+      "description": {
+        "short": "葡萄搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "葡萄"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约320kcal",
+        "sugar": "约31g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芝芝抹茶": {
+      "productId": 2032,
+      "skuCode": "HT-2032",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 31
+      },
+      "description": {
+        "short": "抹茶搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约220kcal",
+        "sugar": "约31g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芝芝绿妍茶后": {
+      "productId": 2033,
+      "skuCode": "HT-2033",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 33
+      },
+      "description": {
+        "short": "绿茶搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "绿茶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约220kcal",
+        "sugar": "约33g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芝士咸酪藏茶": {
+      "productId": 2034,
+      "skuCode": "HT-2034",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 31
+      },
+      "description": {
+        "short": "藏茶搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "藏茶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约220kcal",
+        "sugar": "约31g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "烤黑糖波波牛乳茶": {
+      "productId": 2035,
+      "skuCode": "HT-2035",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "黑糖波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "烤黑糖波波牛乳": {
+      "productId": 2036,
+      "skuCode": "HT-2036",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "黑糖波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约27g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "黑糖波波牛乳茶": {
+      "productId": 2037,
+      "skuCode": "HT-2037",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "黑糖波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "黑糖波波真牛乳": {
+      "productId": 2038,
+      "skuCode": "HT-2038",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "黑糖波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "水牛乳双拼波波": {
+      "productId": 2039,
+      "skuCode": "HT-2039",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "水牛乳双拼抹茶": {
+      "productId": 2040,
+      "skuCode": "HT-2040",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "嫣红牛乳茶": {
+      "productId": 2041,
+      "skuCode": "HT-2041",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "红茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "碎银子牛乳茶": {
+      "productId": 2042,
+      "skuCode": "HT-2042",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "芋圆牛乳茶": {
+      "productId": 2043,
+      "skuCode": "HT-2043",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "芋圆"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "雪域·牦牛乳恰安莫": {
+      "productId": 2044,
+      "skuCode": "HT-2044",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "牦牛乳"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "爆芋泥波波牛乳茶": {
+      "productId": 2045,
+      "skuCode": "HT-2045",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "芋泥",
+          "波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "爆芋泥波波牛乳": {
+      "productId": 2046,
+      "skuCode": "HT-2046",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "芋泥",
+          "波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "布蕾奶茶波波冰": {
+      "productId": 2047,
+      "skuCode": "HT-2047",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "布蕾",
+          "波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "酱香白脱碎银子": {
+      "productId": 2048,
+      "skuCode": "HT-2048",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "牛肝菌碎银子特调": {
+      "productId": 2049,
+      "skuCode": "HT-2049",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "经典牛乳茶"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约25g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "去火*纤体瓶": {
+      "productId": 2050,
+      "skuCode": "HT-2050",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 26
+      },
+      "description": {
+        "short": "去火搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "去火"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约26g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "羽衣纤体瓶": {
+      "productId": 2051,
+      "skuCode": "HT-2051",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 26
+      },
+      "description": {
+        "short": "羽衣甘蓝搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "羽衣甘蓝"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约26g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "去油纤体瓶": {
+      "productId": 2052,
+      "skuCode": "HT-2052",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 24
+      },
+      "description": {
+        "short": "去油搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "去油"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约24g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "马黛活力纤体冰": {
+      "productId": 2053,
+      "skuCode": "HT-2053",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 26
+      },
+      "description": {
+        "short": "马黛搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "马黛"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约26g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "能量纤体瓶": {
+      "productId": 2054,
+      "skuCode": "HT-2054",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 24
+      },
+      "description": {
+        "short": "能量搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "能量"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约24g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "苦瓜纤体轻柠茶": {
+      "productId": 2055,
+      "skuCode": "HT-2055",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 24
+      },
+      "description": {
+        "short": "苦瓜搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "苦瓜"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约24g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "减脂小奶茉": {
+      "productId": 2056,
+      "skuCode": "HT-2056",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 16
+      },
+      "description": {
+        "short": "经典轻饮"
+      },
+      "ingredients": {
+        "main": [
+          "茉莉"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约16g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "三倍厚抹": {
+      "productId": 2057,
+      "skuCode": "HT-2057",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "咸酪厚抹": {
+      "productId": 2058,
+      "skuCode": "HT-2058",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 24
+      },
+      "description": {
+        "short": "抹茶+咸酪搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶",
+          "咸酪"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约220kcal",
+        "sugar": "约24g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "抹茶波波冰": {
+      "productId": 2059,
+      "skuCode": "HT-2059",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 24
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶",
+          "波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约24g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "烤布蕾抹茶冰": {
+      "productId": 2060,
+      "skuCode": "HT-2060",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 24
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶",
+          "布蕾"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约24g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "茶坊苦抹·浓": {
+      "productId": 2061,
+      "skuCode": "HT-2061",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "茶坊苦抹·清": {
+      "productId": 2062,
+      "skuCode": "HT-2062",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "开心厚抹": {
+      "productId": 2063,
+      "skuCode": "HT-2063",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "抹云小奶茉": {
+      "productId": 2064,
+      "skuCode": "HT-2064",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "经典抹茶"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶",
+          "茉莉"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约22g",
+        "caffeine": "约35mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "小奶茉(超大杯)": {
+      "productId": 2065,
+      "skuCode": "HT-2065",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 19
+      },
+      "description": {
+        "short": "经典茶饮"
+      },
+      "ingredients": {
+        "main": [
+          "茉莉"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约19g",
+        "caffeine": "约50mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "小奶茉": {
+      "productId": 2066,
+      "skuCode": "HT-2066",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 16
+      },
+      "description": {
+        "short": "经典茶饮"
+      },
+      "ingredients": {
+        "main": [
+          "茉莉"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约16g",
+        "caffeine": "约50mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "开心小奶茉": {
+      "productId": 2067,
+      "skuCode": "HT-2067",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 16
+      },
+      "description": {
+        "short": "经典茶饮"
+      },
+      "ingredients": {
+        "main": [
+          "茉莉"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约16g",
+        "caffeine": "约50mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "纯绿妍茶后": {
+      "productId": 2068,
+      "skuCode": "HT-2068",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 12
+      },
+      "description": {
+        "short": "经典纯茶"
+      },
+      "ingredients": {
+        "main": [
+          "绿茶"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约12g",
+        "caffeine": "约50mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "绿妍轻柠茶(超大杯)": {
+      "productId": 2069,
+      "skuCode": "HT-2069",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 21
+      },
+      "description": {
+        "short": "绿茶+柠檬搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "绿茶",
+          "柠檬"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约21g",
+        "caffeine": "约50mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "鸭喜香轻柠茶(超大杯)": {
+      "productId": 2070,
+      "skuCode": "HT-2070",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 21
+      },
+      "description": {
+        "short": "鸭屎香+柠檬搭配清新茶底"
+      },
+      "ingredients": {
+        "main": [
+          "鸭屎香",
+          "柠檬"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约21g",
+        "caffeine": "约50mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "碎银子糯糯": {
+      "productId": 2071,
+      "skuCode": "HT-2071",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "经典糯糯"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子",
+          "糯米"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约27g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "咸酪碎银子": {
+      "productId": 2072,
+      "skuCode": "HT-2072",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "经典糯糯"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约27g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "碎银子黑糖波波": {
+      "productId": 2073,
+      "skuCode": "HT-2073",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "经典糯糯"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子",
+          "波波"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约27g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "英红·芝士糯糯": {
+      "productId": 2074,
+      "skuCode": "HT-2074",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "英红+糯米搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "英红",
+          "糯米"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约280kcal",
+        "sugar": "约29g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "龙井·芝士糯糯": {
+      "productId": 2075,
+      "skuCode": "HT-2075",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 29
+      },
+      "description": {
+        "short": "龙井+糯米搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "龙井",
+          "糯米"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约280kcal",
+        "sugar": "约29g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "英红糯糯": {
+      "productId": 2076,
+      "skuCode": "HT-2076",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 27
+      },
+      "description": {
+        "short": "经典糯糯"
+      },
+      "ingredients": {
+        "main": [
+          "英红",
+          "糯米"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约27g",
+        "caffeine": "约40mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "苦巧·咸酪碎银子": {
+      "productId": 2077,
+      "skuCode": "HT-2077",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典巧克力"
+      },
+      "ingredients": {
+        "main": [
+          "巧克力",
+          "碎银子"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "苦巧·咸酪(不含茶)": {
+      "productId": 2078,
+      "skuCode": "HT-2078",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 26
+      },
+      "description": {
+        "short": "经典巧克力"
+      },
+      "ingredients": {
+        "main": [
+          "巧克力"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约26g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "苦巧·咸酪": {
+      "productId": 2079,
+      "skuCode": "HT-2079",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 26
+      },
+      "description": {
+        "short": "经典巧克力"
+      },
+      "ingredients": {
+        "main": [
+          "巧克力"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约26g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "提拉米苏·浓巧": {
+      "productId": 2080,
+      "skuCode": "HT-2080",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典巧克力"
+      },
+      "ingredients": {
+        "main": [
+          "提拉米苏",
+          "巧克力"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "提拉米苏·英红": {
+      "productId": 2081,
+      "skuCode": "HT-2081",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典巧克力"
+      },
+      "ingredients": {
+        "main": [
+          "提拉米苏",
+          "英红"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "空气马斯卡彭·英红": {
+      "productId": 2082,
+      "skuCode": "HT-2082",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典巧克力"
+      },
+      "ingredients": {
+        "main": [
+          "马斯卡彭"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "烤布蕾油切乌龙冰": {
+      "productId": 2083,
+      "skuCode": "HT-2083",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典冰饮"
+      },
+      "ingredients": {
+        "main": [
+          "布蕾",
+          "乌龙"
+        ]
+      },
+      "allergens": [],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "咸酪泰奶冰": {
+      "productId": 2084,
+      "skuCode": "HT-2084",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "泰奶搭配浓郁芝士奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "泰奶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约220kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "流心奶黄波波冰": {
+      "productId": 2085,
+      "skuCode": "HT-2085",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典冰饮"
+      },
+      "ingredients": {
+        "main": [
+          "奶黄",
+          "波波"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约160kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "牦牛乳酥油茶": {
+      "productId": 2086,
+      "skuCode": "HT-2086",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "经典特调"
+      },
+      "ingredients": {
+        "main": [
+          "牦牛乳",
+          "酥油"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约100kcal",
+        "sugar": "约28g",
+        "caffeine": "约0mg"
+      },
+      "customizationType": "standard",
+      "dataCompleteness": "basic"
+    },
+    "热三倍厚抹": {
+      "productId": 2087,
+      "skuCode": "HT-2087",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 19
+      },
+      "description": {
+        "short": "音抹云顶+千目抹茶+手打浓抹榛糖+3.8牛乳，浓郁三重奏"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶",
+          "牛乳"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "咖啡因红灯"
+      },
+      "nutrition": {
+        "calories": "约280kcal",
+        "sugar": "约22g",
+        "caffeine": "红灯"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热小奶茉": {
+      "productId": 2088,
+      "skuCode": "HT-2088",
+      "category": "咖啡/经典/小料",
+      "pricing": {
+        "base": 13
+      },
+      "description": {
+        "short": "无香精绿妍茶汤+源牧3.8牛乳，馥郁白茉香"
+      },
+      "ingredients": {
+        "main": [
+          "茉莉",
+          "牛乳"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "咖啡因黄灯"
+      },
+      "nutrition": {
+        "calories": "约180kcal",
+        "sugar": "约15g",
+        "caffeine": "黄灯"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热芝芝抹茶": {
+      "productId": 2089,
+      "skuCode": "HT-2089",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "千目抹茶+无奶精芝芝云顶，喜茶经典复刻，口感细腻，抹茶醇厚"
+      },
+      "ingredients": {
+        "main": [
+          "抹茶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "咖啡因黄灯"
+      },
+      "nutrition": {
+        "calories": "约260kcal",
+        "sugar": "约18g",
+        "caffeine": "黄灯"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热烤黑糖波波牛乳": {
+      "productId": 2090,
+      "skuCode": "HT-2090",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 19
+      },
+      "description": {
+        "short": "冷萃真牛乳+慢熬黑糖波波，2012年青创，口感浓郁香甜"
+      },
+      "ingredients": {
+        "main": [
+          "牛乳",
+          "黑糖",
+          "波波"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "status": "首创"
+      },
+      "nutrition": {
+        "calories": "约300kcal",
+        "sugar": "约25g",
+        "caffeine": "0mg"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热苦巧·咸酪碎银子": {
+      "productId": 2091,
+      "skuCode": "HT-2091",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "98%高浓度真可可+碎银子茶汤+特调咸奶，源于喜茶茶坊"
+      },
+      "ingredients": {
+        "main": [
+          "可可",
+          "碎银子"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约250kcal",
+        "sugar": "约20g",
+        "caffeine": "灯"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热苦巧·咸酪(不含茶)": {
+      "productId": 2092,
+      "skuCode": "HT-2092",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 25
+      },
+      "description": {
+        "short": "98%高浓度真可可+特调咸奶，源于喜茶茶坊"
+      },
+      "ingredients": {
+        "main": [
+          "可可"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约240kcal",
+        "sugar": "约18g",
+        "caffeine": "灯"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热咸醋碎银子": {
+      "productId": 2093,
+      "skuCode": "HT-2093",
+      "category": "茶特调/茗茶",
+      "pricing": {
+        "base": 22
+      },
+      "description": {
+        "short": "咸醋芝士+糖香碎银子茶汤，一杯「咸口」的碎银子，喝前请摇匀"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约200kcal",
+        "sugar": "约16g",
+        "caffeine": "约30mg"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    },
+    "热烤黑糖波波牛乳茶": {
+      "productId": 2094,
+      "skuCode": "HT-2094",
+      "category": "苦巧/抹茶/波波茶",
+      "pricing": {
+        "base": 19
+      },
+      "description": {
+        "short": "65分钟慢熬黑糖波波+3.8牛乳+无香精喝红茶底，口感浓郁"
+      },
+      "ingredients": {
+        "main": [
+          "牛乳",
+          "黑糖",
+          "波波",
+          "红茶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {},
+      "nutrition": {
+        "calories": "约320kcal",
+        "sugar": "约28g",
+        "caffeine": "约25mg"
+      },
+      "customizationType": "hot_drink",
+      "dataCompleteness": "basic"
+    }
+  }
+}

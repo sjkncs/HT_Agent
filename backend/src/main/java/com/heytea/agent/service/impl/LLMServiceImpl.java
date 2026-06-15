@@ -48,6 +48,9 @@ public class LLMServiceImpl implements LLMService {
     // ── Reply templates loaded from JSON ──
     private Map<String, Object> replyTemplates;
 
+    // ── Product knowledge catalog loaded from JSON ──
+    private Map<String, Map<String, Object>> productCatalog;  // productName → product data
+
     // ── Precompiled regex patterns for keyword matching ──
     private static final Pattern[] FOOD_SAFETY_PATTERNS;
     private static final Pattern[] SERVICE_COMPLAINT_PATTERNS;
@@ -289,7 +292,7 @@ public class LLMServiceImpl implements LLMService {
         // ── 2. Intent-specific core prompt ──
         switch (intent) {
             case "food_safety" -> buildFoodSafetyPrompt(sb, subScenario, userMessage);
-            case "ordering" -> buildOrderingPrompt(sb, subScenario);
+            case "ordering" -> buildOrderingPrompt(sb, subScenario, userMessage);
             default -> buildGeneralPrompt(sb, subScenario, userMessage);
         }
 
@@ -366,7 +369,7 @@ public class LLMServiceImpl implements LLMService {
         sb.append("- 也可以：\"通过喜茶小程序的在线客服联系我们\"\n");
     }
 
-    private void buildOrderingPrompt(StringBuilder sb, String subScenario) {
+    private void buildOrderingPrompt(StringBuilder sb, String subScenario, String userMessage) {
         sb.append("你的核心职责是帮助用户完成点单流程。\n\n");
 
         sb.append("【能力范围】\n");
@@ -391,27 +394,142 @@ public class LLMServiceImpl implements LLMService {
         sb.append("- 做法选项：如「标准(含粽叶)/去粽叶」\n");
         sb.append("- 绿色喜茶：「可降解吸管/不使用吸管」\n\n");
 
-        sb.append("【时令上新】\n");
-        sb.append("- 芒椰糯米饭 ¥29 — 端午限定回归·云南鲜芒+椰香泰国籼糯米+芒果冰沙，0咖啡因\n\n");
-
-        sb.append("【热饮推荐】\n");
-        sb.append("- 热三倍厚抹 ¥19 — 千目抹茶+3.8牛乳，浓郁三重奏\n");
-        sb.append("- 热小奶茉 ¥13 — 绿妍茶汤+源牧3.8牛乳，馥郁茉莉香\n");
-        sb.append("- 热芝芝抹茶 ¥25 — 千目抹茶+芝芝云顶，经典复刻\n");
-        sb.append("- 热烤黑糖波波牛乳 ¥19 — 首创·慢熬黑糖波波+真牛乳，0咖啡因\n");
-        sb.append("- 热苦巧·咸酪碎银子 ¥25 — 98%真可可+碎银子茶汤\n\n");
-
-        sb.append("【热门饮品推荐】\n");
-        sb.append("- 多肉葡萄 ¥29 — 经典必点，葡萄搭配清新茶底\n");
-        sb.append("- 芝芝多肉葡萄 ¥31 — 葡萄搭配浓郁芝士奶盖\n");
-        sb.append("- 满杯红柚 ¥29 — 红柚搭配清新茶底\n");
-        sb.append("- 小奶茉 ¥16 — 轻盈茉莉花茶\n\n");
+        // ── Dynamic product section: search catalog by user message keywords ──
+        appendRelevantProducts(sb, userMessage);
 
         sb.append("【回复规范】\n");
         sb.append("- 主动推荐2-3款当季热门饮品\n");
         sb.append("- 用户确认饮品后主动询问定制偏好（糖度/加料/杯型）\n");
         sb.append("- 点单完成后汇总确认订单信息\n");
         sb.append("- 用友好、活泼的语气回复，保持喜茶品牌调性\n");
+    }
+
+    /**
+     * Search the product catalog and append relevant products to the prompt.
+     * Uses keyword matching against product names, categories, tags, and descriptions.
+     */
+    @SuppressWarnings("unchecked")
+    private void appendRelevantProducts(StringBuilder sb, String userMessage) {
+        if (productCatalog == null || productCatalog.isEmpty()) {
+            // Fallback to hard-coded popular products
+            appendFallbackProducts(sb);
+            return;
+        }
+
+        String msg = userMessage != null ? userMessage.toLowerCase() : "";
+
+        // Collect scored products
+        List<Map.Entry<String, Integer>> scored = new ArrayList<>();
+
+        for (var entry : productCatalog.entrySet()) {
+            String name = entry.getKey();
+            Map<String, Object> product = entry.getValue();
+            int score = 0;
+
+            // Name match (highest weight)
+            if (msg.contains(name.toLowerCase()) || name.toLowerCase().contains(msg.replaceAll("[？?！!。，,]", "").trim())) {
+                score += 10;
+            }
+
+            // Category match
+            Object category = product.get("category");
+            if (category instanceof String cat && msg.contains(cat.toLowerCase())) {
+                score += 5;
+            }
+
+            // Tag matching
+            Object tagsObj = product.get("tags");
+            if (tagsObj instanceof Map<?, ?> tagsMap) {
+                for (var tagEntry : tagsMap.entrySet()) {
+                    Object val = tagEntry.getValue();
+                    if (val instanceof String tagStr && !tagStr.isBlank() && msg.contains(tagStr.toLowerCase())) {
+                        score += 3;
+                    }
+                }
+            }
+
+            // Description short match
+            Object descObj = product.get("description");
+            if (descObj instanceof Map<?, ?> descMap) {
+                Object shortDesc = descMap.get("short");
+                if (shortDesc instanceof String sd && !sd.isBlank()) {
+                    for (String word : sd.split("[·，,、/\\s]+")) {
+                        if (word.length() >= 2 && msg.contains(word.toLowerCase())) {
+                            score += 2;
+                        }
+                    }
+                }
+            }
+
+            // Boost for seasonal/new products when user asks about new/seasonal
+            if ((msg.contains("新品") || msg.contains("新品") || msg.contains("限定")) && tagsObj instanceof Map<?, ?> t) {
+                if (t.containsKey("seasonal")) score += 4;
+            }
+            if ((msg.contains("热") || msg.contains("热饮")) && name.startsWith("热")) {
+                score += 5;
+            }
+            if ((msg.contains("推荐") || msg.contains("热门") || msg.contains("好喝")) && product.get("tags") instanceof Map<?, ?> t2) {
+                // no specific boost, just include in results
+            }
+
+            if (score > 0) {
+                scored.add(Map.entry(name, score));
+            }
+        }
+
+        // Sort by score descending, take top 8
+        scored.sort((a, b) -> b.getValue() - a.getValue());
+        List<Map.Entry<String, Integer>> relevant = scored.subList(0, Math.min(8, scored.size()));
+
+        if (relevant.isEmpty()) {
+            appendFallbackProducts(sb);
+            return;
+        }
+
+        // Group by category for organized output
+        Map<String, List<String>> byCategory = new LinkedHashMap<>();
+        for (var entry : relevant) {
+            String name = entry.getKey();
+            Map<String, Object> product = productCatalog.get(name);
+            String cat = product.get("category") instanceof String c ? c : "其他";
+            byCategory.computeIfAbsent(cat, k -> new ArrayList<>());
+
+            // Format product line
+            Object pricing = product.get("pricing");
+            int price = 0;
+            if (pricing instanceof Map<?, ?> pm && pm.get("base") instanceof Number n) {
+                price = n.intValue();
+            }
+            Object descObj = product.get("description");
+            String shortDesc = "";
+            if (descObj instanceof Map<?, ?> dm && dm.get("short") instanceof String sd) {
+                shortDesc = sd;
+            }
+            byCategory.get(cat).add("- " + name + " ¥" + price + " — " + shortDesc);
+        }
+
+        sb.append("【相关产品推荐】\n");
+        for (var entry : byCategory.entrySet()) {
+            for (String line : entry.getValue()) {
+                sb.append(line).append("\n");
+            }
+        }
+        sb.append("\n");
+    }
+
+    /**
+     * Fallback: hard-coded popular products when catalog is unavailable or no match found.
+     */
+    private void appendFallbackProducts(StringBuilder sb) {
+        sb.append("【热门饮品推荐】\n");
+        sb.append("- 多肉葡萄 ¥29 — 经典必点，葡萄搭配清新茶底\n");
+        sb.append("- 芝芝多肉葡萄 ¥31 — 葡萄搭配浓郁芝士奶盖\n");
+        sb.append("- 烤黑糖波波牛乳茶 ¥25 — 经典黑糖珍珠奶茶\n");
+        sb.append("- 满杯红柚 ¥29 — 红柚搭配清新茶底\n");
+        sb.append("- 小奶茉 ¥16 — 轻盈茉莉花茶\n");
+        sb.append("- 芒椰糯米饭 ¥29 — 端午限定回归·0咖啡因\n");
+        sb.append("- 热三倍厚抹 ¥19 — 千目抹茶+3.8牛乳，浓郁三重奏\n");
+        sb.append("- 热烤黑糖波波牛乳 ¥19 — 首创·0咖啡因\n\n");
     }
 
     private void buildGeneralPrompt(StringBuilder sb, String subScenario, String userMessage) {
@@ -517,6 +635,19 @@ public class LLMServiceImpl implements LLMService {
         } catch (Exception e) {
             log.warn("Failed to load reply-templates.json: {}", e.getMessage());
             replyTemplates = Map.of();
+        }
+
+        // Load product knowledge catalog
+        try {
+            ClassPathResource resource = new ClassPathResource("data/product-knowledge-catalog.json");
+            InputStream is = resource.getInputStream();
+            String json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            Map<String, Object> raw = objectMapper.readValue(json, new TypeReference<>() {});
+            productCatalog = (Map<String, Map<String, Object>>) raw.get("products");
+            log.info("Product catalog loaded: {} products", productCatalog.size());
+        } catch (Exception e) {
+            log.warn("Failed to load product-knowledge-catalog.json: {}", e.getMessage());
+            productCatalog = Map.of();
         }
     }
 

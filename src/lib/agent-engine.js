@@ -5700,11 +5700,12 @@ export async function generateLLMEnhancedReply(params) {
   } = params
 
   // 动态导入 (避免循环依赖 + 按需加载)
-  let llmClient, promptBuilder, mcpIntegration
+  let llmClient, promptBuilder, mcpIntegration, productRetrieval
   try {
     llmClient = await import('./llm-client.js')
     promptBuilder = await import('./prompt-builder.js')
     mcpIntegration = await import('./mcp-prompt-integration.js')
+    productRetrieval = await import('./product-retrieval-service.js')
   } catch (err) {
     return {
       reply: null,
@@ -5722,6 +5723,18 @@ export async function generateLLMEnhancedReply(params) {
     }
   }
 
+  // ── Phase 1.5: 产品知识检索 — 在构建 prompt 前获取相关产品上下文 ──
+  let productContextBlock = ''
+  try {
+    const retrievalResult = productRetrieval.ProductRetrievalService.retrieve(userText)
+    if (retrievalResult?.formatted) {
+      productContextBlock = retrievalResult.formatted
+    }
+  } catch (err) {
+    // 产品检索失败不影响主流程
+    console.warn('[ProductRetrieval] retrieval failed:', err.message)
+  }
+
   try {
     // ── 根据意图构建不同的系统提示 ──
     let systemPrompt, messages
@@ -5730,9 +5743,10 @@ export async function generateLLMEnhancedReply(params) {
       // 点单意图: 能力感知型 Agent — 使用带能力边界声明的点单提示词 + MCP工具定义
       const orderingSection = mcpIntegration.getOrderingPromptSection()
       const memoryHint = memoryContext ? `\n\n## 对话记忆\n${memoryContext}` : ''
+      const productHint = productContextBlock ? `\n\n## 产品知识（基于用户提问检索）\n${productContextBlock}` : ''
       systemPrompt = `你是阿喜，喜茶智能客服助手，专注于帮用户完成自助点单。
 
-${orderingSection}${memoryHint}
+${orderingSection}${memoryHint}${productHint}
 
 ## 沟通规范
 - 自称"阿喜"，称呼顾客"您"
@@ -5753,7 +5767,8 @@ ${orderingSection}${memoryHint}
     } else if (intent === 'general_knowledge') {
       // 通用知识意图: 轻量提示词，不走食安流程
       const memoryHint = memoryContext ? `\n对话记忆：${memoryContext}` : ''
-      systemPrompt = `你是阿喜，喜茶智能客服助手。${memoryHint}
+      const productHint = productContextBlock ? `\n\n产品知识（基于用户提问检索）：\n${productContextBlock}` : ''
+      systemPrompt = `你是阿喜，喜茶智能客服助手。${memoryHint}${productHint}
 - 自称"阿喜"，称呼顾客"您"
 - 对于喜茶业务以外的问题，友好、简洁地回答即可
 - 如果问题涉及喜茶产品、门店、活动，可以热情推荐
@@ -5779,6 +5794,10 @@ ${orderingSection}${memoryHint}
         includeWorkflow: true,
         memoryContext,
       })
+      // 食安流程也注入产品知识（用户提到具体产品时可参考准确信息）
+      if (productContextBlock) {
+        systemPrompt += `\n\n【产品知识（基于用户提问检索）】\n${productContextBlock}`
+      }
       messages = promptBuilder.buildMessages(systemPrompt, conversationHistory, userText)
     }
 

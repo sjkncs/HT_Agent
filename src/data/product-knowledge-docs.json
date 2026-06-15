@@ -1,0 +1,610 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedAt": "2026-06-15T12:39:11.953Z",
+    "totalDocuments": 35
+  },
+  "documents": [
+    {
+      "id": "allergen-HT-2006",
+      "type": "allergen_info",
+      "product": "芒芒甘露",
+      "category": "植物茶/鲜果茶",
+      "text": "芒芒甘露含有过敏原: 芒果。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "芒果"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2007",
+      "type": "allergen_info",
+      "product": "超多肉芒芒甘露",
+      "category": "植物茶/鲜果茶",
+      "text": "超多肉芒芒甘露含有过敏原: 芒果。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "芒果"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2008",
+      "type": "allergen_info",
+      "product": "多肉芒芒",
+      "category": "植物茶/鲜果茶",
+      "text": "多肉芒芒含有过敏原: 芒果。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "芒果"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2009",
+      "type": "allergen_info",
+      "product": "椰椰芒芒",
+      "category": "植物茶/鲜果茶",
+      "text": "椰椰芒芒含有过敏原: 芒果、椰子。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "芒果",
+          "椰子"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2012",
+      "type": "allergen_info",
+      "product": "轻芝杨梅",
+      "category": "植物茶/鲜果茶",
+      "text": "轻芝杨梅含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "story-HT-2028",
+      "type": "product_story",
+      "product": "芒椰糯米饭",
+      "category": "灵感茶点",
+      "text": "端午限定，超高人气「芒椰糯米饭」回归。每日现切当季云南鲜芒，现蒸椰香泰国籼糯米，搭配现打芒果冰沙，一杯可以喝的「糯米饭」，香糯爽口。0咖啡因。",
+      "metadata": {
+        "tags": [
+          "端午限定",
+          "回归",
+          "0咖啡因",
+          "不含茶"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2028",
+      "type": "allergen_info",
+      "product": "芒椰糯米饭",
+      "category": "灵感茶点",
+      "text": "芒椰糯米饭含有过敏原: 椰子、乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "椰子",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2028",
+      "type": "dietary_info",
+      "product": "芒椰糯米饭",
+      "category": "灵感茶点",
+      "text": "芒椰糯米饭咖啡因等级: 0咖啡因 (0mg)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "0咖啡因"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2030",
+      "type": "allergen_info",
+      "product": "轻芝多肉葡萄",
+      "category": "植物茶/鲜果茶",
+      "text": "轻芝多肉葡萄含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2031",
+      "type": "allergen_info",
+      "product": "芝芝多肉葡萄",
+      "category": "植物茶/鲜果茶",
+      "text": "芝芝多肉葡萄含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2032",
+      "type": "allergen_info",
+      "product": "芝芝抹茶",
+      "category": "茶特调/茗茶",
+      "text": "芝芝抹茶含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2033",
+      "type": "allergen_info",
+      "product": "芝芝绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "芝芝绿妍茶后含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2034",
+      "type": "allergen_info",
+      "product": "芝士咸酪藏茶",
+      "category": "茶特调/茗茶",
+      "text": "芝士咸酪藏茶含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2044",
+      "type": "allergen_info",
+      "product": "雪域·牦牛乳恰安莫",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "雪域·牦牛乳恰安莫含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2058",
+      "type": "allergen_info",
+      "product": "咸酪厚抹",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "咸酪厚抹含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2074",
+      "type": "allergen_info",
+      "product": "英红·芝士糯糯",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "英红·芝士糯糯含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2075",
+      "type": "allergen_info",
+      "product": "龙井·芝士糯糯",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "龙井·芝士糯糯含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2084",
+      "type": "allergen_info",
+      "product": "咸酪泰奶冰",
+      "category": "茶特调/茗茶",
+      "text": "咸酪泰奶冰含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2085",
+      "type": "allergen_info",
+      "product": "流心奶黄波波冰",
+      "category": "茶特调/茗茶",
+      "text": "流心奶黄波波冰含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2086",
+      "type": "allergen_info",
+      "product": "牦牛乳酥油茶",
+      "category": "茶特调/茗茶",
+      "text": "牦牛乳酥油茶含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2087",
+      "type": "allergen_info",
+      "product": "热三倍厚抹",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热三倍厚抹含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2087",
+      "type": "dietary_info",
+      "product": "热三倍厚抹",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热三倍厚抹咖啡因等级: 咖啡因红灯 (红灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因红灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2088",
+      "type": "allergen_info",
+      "product": "热小奶茉",
+      "category": "咖啡/经典/小料",
+      "text": "热小奶茉含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2088",
+      "type": "dietary_info",
+      "product": "热小奶茉",
+      "category": "咖啡/经典/小料",
+      "text": "热小奶茉咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2089",
+      "type": "allergen_info",
+      "product": "热芝芝抹茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热芝芝抹茶含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2089",
+      "type": "dietary_info",
+      "product": "热芝芝抹茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热芝芝抹茶咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2090",
+      "type": "allergen_info",
+      "product": "热烤黑糖波波牛乳",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热烤黑糖波波牛乳含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2090",
+      "type": "dietary_info",
+      "product": "热烤黑糖波波牛乳",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热烤黑糖波波牛乳咖啡因等级: 0咖啡因 (0mg)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "0咖啡因"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2091",
+      "type": "allergen_info",
+      "product": "热苦巧·咸酪碎银子",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热苦巧·咸酪碎银子含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2092",
+      "type": "allergen_info",
+      "product": "热苦巧·咸酪(不含茶)",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热苦巧·咸酪(不含茶)含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2093",
+      "type": "allergen_info",
+      "product": "热咸醋碎银子",
+      "category": "茶特调/茗茶",
+      "text": "热咸醋碎银子含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2094",
+      "type": "allergen_info",
+      "product": "热烤黑糖波波牛乳茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "热烤黑糖波波牛乳茶含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "recommend-caffeine-free",
+      "type": "recommendation",
+      "category": "跨分类",
+      "text": "不含咖啡因的饮品推荐：芒椰糯米饭（0咖啡因）、热烤黑糖波波牛乳（0咖啡因）。适合对咖啡因敏感或晚间饮用的顾客。",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "推荐",
+          "0咖啡因"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "dietary_query"
+        ]
+      }
+    },
+    {
+      "id": "recommend-hot-drinks",
+      "type": "seasonal_recommend",
+      "category": "热饮推荐",
+      "text": "热饮推荐系列：热三倍厚抹¥19浓郁三重奏、热小奶茉¥13馥郁茉莉、热芝芝抹茶¥25经典复刻、热烤黑糖波波牛乳¥19首创0咖啡因、热苦巧·咸酪碎银子¥25、热咸醋碎银子¥22。",
+      "metadata": {
+        "tags": [
+          "热饮",
+          "推荐",
+          "温暖"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "seasonal"
+        ]
+      }
+    },
+    {
+      "id": "recommend-fruit-tea",
+      "type": "seasonal_recommend",
+      "category": "鲜果茶推荐",
+      "text": "夏日鲜果茶推荐：多肉葡萄¥29经典必点、满杯红柚¥29清爽解渴、超级杯绿妍¥29超大杯畅享、满杯百香果¥28酸甜可口。",
+      "metadata": {
+        "tags": [
+          "鲜果茶",
+          "夏天",
+          "推荐",
+          "清爽"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "seasonal"
+        ]
+      }
+    }
+  ]
+}
