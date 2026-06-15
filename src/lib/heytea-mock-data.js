@@ -211,12 +211,102 @@ const HOT_ICE_ATTR = {
   ],
 }
 
+// 芒椰糯米饭 — 专属甜度（真冰糖/0卡糖/低GI）
+const SWEETENER_MANGO_ATTR = {
+  attributeId: 10,
+  attributeName: '甜度',
+  multiSelect: false,
+  productSubAttrs: [
+    { attributeId: 1001, attributeName: '纯料真冰糖', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1002, attributeName: '真0卡糖(免费)', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1003, attributeName: '低GI [L-阿拉伯糖]', selected: null, price: 2, canSelected: 1 },
+  ],
+}
+
+// 芒椰糯米饭 — 冰沙冰量
+const ICE_SMOOTHIE_ATTR = {
+  attributeId: 11,
+  attributeName: '冰量',
+  multiSelect: false,
+  productSubAttrs: [
+    { attributeId: 1101, attributeName: '推荐', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1102, attributeName: '少冰', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1103, attributeName: '少少冰', selected: null, price: 0, canSelected: 1 },
+  ],
+}
+
+// 热饮 — 专属甜度（少甜推荐系列）
+const HOT_SWEETNESS_ATTR = {
+  attributeId: 12,
+  attributeName: '甜度',
+  multiSelect: false,
+  productSubAttrs: [
+    { attributeId: 1201, attributeName: '少甜(推荐)', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1202, attributeName: '少少甜', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1203, attributeName: '少少少甜', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1204, attributeName: '不另外加糖(不推荐)', selected: null, price: 0, canSelected: 1 },
+  ],
+}
+
+// 芒椰糯米饭 — 芒果加料
+const MANGO_TOPPING_ATTR = {
+  attributeId: 13,
+  attributeName: '加料',
+  multiSelect: true,
+  productSubAttrs: [
+    { attributeId: 1301, attributeName: '加倍芒果果肉', selected: null, price: 2, canSelected: 1 },
+  ],
+}
+
+// 芒椰糯米饭 — 做法（粽叶）
+const PREP_METHOD_ATTR = {
+  attributeId: 14,
+  attributeName: '做法',
+  multiSelect: false,
+  productSubAttrs: [
+    { attributeId: 1401, attributeName: '标准(含粽叶)', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1402, attributeName: '去粽叶', selected: null, price: 0, canSelected: 1 },
+  ],
+}
+
+// 绿色喜茶 — 环保吸管
+const ECO_STRAW_ATTR = {
+  attributeId: 15,
+  attributeName: '绿色喜茶',
+  multiSelect: false,
+  productSubAttrs: [
+    { attributeId: 1501, attributeName: '可降解吸管', selected: null, price: 0, canSelected: 1 },
+    { attributeId: 1502, attributeName: '不使用吸管', selected: null, price: 0, canSelected: 1 },
+  ],
+}
+
 function buildAttrs(isHotDrink = false) {
   return [
     { ...SUGAR_ATTR, productSubAttrs: SUGAR_ATTR.productSubAttrs.map(a => ({ ...a })) },
     { ...(isHotDrink ? HOT_ICE_ATTR : ICE_ATTR), productSubAttrs: (isHotDrink ? HOT_ICE_ATTR : ICE_ATTR).productSubAttrs.map(a => ({ ...a })) },
     { ...TOPPING_ATTR, productSubAttrs: TOPPING_ATTR.productSubAttrs.map(a => ({ ...a })) },
     { ...CUP_ATTR, productSubAttrs: CUP_ATTR.productSubAttrs.map(a => ({ ...a })) },
+  ]
+}
+
+// 芒椰糯米饭 — 5维产品专属定制
+function buildMangoAttrs() {
+  const clone = (attr) => ({ ...attr, productSubAttrs: attr.productSubAttrs.map(a => ({ ...a })) })
+  return [
+    clone(SWEETENER_MANGO_ATTR),
+    clone(ICE_SMOOTHIE_ATTR),
+    clone(MANGO_TOPPING_ATTR),
+    clone(PREP_METHOD_ATTR),
+    clone(ECO_STRAW_ATTR),
+  ]
+}
+
+// 热饮推荐系列 — 热饮甜度 + 热饮冰量
+function buildHotDrinkAttrs() {
+  const clone = (attr) => ({ ...attr, productSubAttrs: attr.productSubAttrs.map(a => ({ ...a })) })
+  return [
+    clone(HOT_SWEETNESS_ATTR),
+    clone(HOT_ICE_ATTR),
   ]
 }
 
@@ -469,11 +559,11 @@ const PRODUCTS = [
   {
     productId: 2028, productName: '芒椰糯米饭', skuCode: 'HT-2028',
     pictureUrl: '', category: '灵感茶点',
-    description: '芒果+椰子+糯米搭配茶底与特色小料',
+    description: '端午限定回归·每日现切当季云南鲜芒，现蒸椰香泰国籼糯米，搭配现打芒果冰沙，0咖啡因',
     ingredients: ["芒果", "椰子", "糯米"],
-    allergens: ["芒果", "椰子"],
-    nutritionInfo: { calories: '约260kcal', sugar: '约28g', caffeine: '约25mg' },
-    productAttrs: buildAttrs(), tags: [], initialPrice: 28, estimatePrice: 28,
+    allergens: ["芒果", "椰子", "乳制品"],
+    nutritionInfo: { calories: '约260kcal', sugar: '约28g', caffeine: '0mg' },
+    productAttrs: buildMangoAttrs(), tags: ["回归", "0咖啡因", "不含茶", "热销"], initialPrice: 29, estimatePrice: 29,
   },
   {
     productId: 2029, productName: '酷黑莓桑', skuCode: 'HT-2029',
@@ -996,6 +1086,79 @@ const PRODUCTS = [
     allergens: ["乳制品"],
     nutritionInfo: { calories: '约100kcal', sugar: '约28g', caffeine: '约0mg' },
     productAttrs: buildAttrs(), tags: [], initialPrice: 28, estimatePrice: 28,
+  },
+  // ─── 热饮推荐系列（来源：喜茶小程序热饮专区）───
+  {
+    productId: 2087, productName: '热三倍厚抹', skuCode: 'HT-2087',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
+    description: '音抹云顶+千目抹茶+手打浓抹榛糖+3.8牛乳，浓郁三重奏',
+    ingredients: ["抹茶", "牛乳"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约280kcal', sugar: '约22g', caffeine: '红灯' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶"], initialPrice: 19, estimatePrice: 19,
+  },
+  {
+    productId: 2088, productName: '热小奶茉', skuCode: 'HT-2088',
+    pictureUrl: '', category: '咖啡/经典/小料',
+    description: '无香精绿妍茶汤+源牧3.8牛乳，馥郁白茉香',
+    ingredients: ["茉莉", "牛乳"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约180kcal', sugar: '约15g', caffeine: '黄灯' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶"], initialPrice: 13, estimatePrice: 13,
+  },
+  {
+    productId: 2089, productName: '热芝芝抹茶', skuCode: 'HT-2089',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
+    description: '千目抹茶+无奶精芝芝云顶，喜茶经典复刻，口感细腻，抹茶醇厚',
+    ingredients: ["抹茶"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约260kcal', sugar: '约18g', caffeine: '黄灯' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶"], initialPrice: 25, estimatePrice: 25,
+  },
+  {
+    productId: 2090, productName: '热烤黑糖波波牛乳', skuCode: 'HT-2090',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
+    description: '冷萃真牛乳+慢熬黑糖波波，2012年青创，口感浓郁香甜',
+    ingredients: ["牛乳", "黑糖", "波波"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约300kcal', sugar: '约25g', caffeine: '0mg' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["首创", "热销", "含乳制品", "不含茶"], initialPrice: 19, estimatePrice: 19,
+  },
+  {
+    productId: 2091, productName: '热苦巧·咸酪碎银子', skuCode: 'HT-2091',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
+    description: '98%高浓度真可可+碎银子茶汤+特调咸奶，源于喜茶茶坊',
+    ingredients: ["可可", "碎银子"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约250kcal', sugar: '约20g', caffeine: '灯' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶"], initialPrice: 25, estimatePrice: 25,
+  },
+  {
+    productId: 2092, productName: '热苦巧·咸酪(不含茶)', skuCode: 'HT-2092',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
+    description: '98%高浓度真可可+特调咸奶，源于喜茶茶坊',
+    ingredients: ["可可"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约240kcal', sugar: '约18g', caffeine: '灯' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品"], initialPrice: 25, estimatePrice: 25,
+  },
+  {
+    productId: 2093, productName: '热咸醋碎银子', skuCode: 'HT-2093',
+    pictureUrl: '', category: '茶特调/茗茶',
+    description: '咸醋芝士+糖香碎银子茶汤，一杯「咸口」的碎银子，喝前请摇匀',
+    ingredients: ["碎银子"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约200kcal', sugar: '约16g', caffeine: '约30mg' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶"], initialPrice: 22, estimatePrice: 22,
+  },
+  {
+    productId: 2094, productName: '热烤黑糖波波牛乳茶', skuCode: 'HT-2094',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
+    description: '65分钟慢熬黑糖波波+3.8牛乳+无香精喝红茶底，口感浓郁',
+    ingredients: ["牛乳", "黑糖", "波波", "红茶"],
+    allergens: ["乳制品"],
+    nutritionInfo: { calories: '约320kcal', sugar: '约28g', caffeine: '约25mg' },
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶"], initialPrice: 19, estimatePrice: 19,
   },
 ]
 

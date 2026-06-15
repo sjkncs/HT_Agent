@@ -1302,12 +1302,11 @@ function OrderTracking({ order, onCancel, loading, ...qoderProps }) {
 // ─── 工具函数 ───
 function getProductEmoji(category) {
   const map = {
-    '多肉系列': '🍇',
-    '芝芝系列': '🧀',
-    '果茶系列': '🍋',
-    '纯茶系列': '🍵',
-    '季节限定': '🌸',
-    '小食': '🍰',
+    '植物茶/鲜果茶': '🍇',
+    '茶特调/茗茶': '🍵',
+    '苦巧/抹茶/波波茶': '🧋',
+    '灵感茶点': '🍰',
+    '咖啡/经典/小料': '☕',
   }
   return map[category] || '🧋'
 }

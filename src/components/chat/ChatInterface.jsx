@@ -1119,9 +1119,62 @@ const ORDER_STEPS = {
     options: [],
     sendText: (v) => v,
   },
+  // ─── 产品专属定制步骤（芒椰糯米饭等）───
+  sweetener: {
+    title: '甜度',
+    type: '单选',
+    question: '请选择甜度：',
+    options: [
+      { id: 'rock_sugar', label: '纯料真冰糖', desc: '标准甜度' },
+      { id: 'zero_sugar', label: '真0卡糖(免费)', desc: '0卡路里' },
+      { id: 'low_gi', label: '低GI [L-阿拉伯糖]', desc: '+¥2' },
+    ],
+    recommended: 'rock_sugar',
+    sendText: (v) => v === 'rock_sugar' ? '纯料真冰糖' : v === 'zero_sugar' ? '真0卡糖' : '低GI',
+  },
+  ice: {
+    title: '冰量',
+    type: '单选',
+    question: '请选择冰量：',
+    options: [
+      { id: 'normal', label: '推荐', desc: '标准冰量' },
+      { id: 'less', label: '少冰', desc: '' },
+      { id: 'minimal', label: '少少冰', desc: '' },
+    ],
+    recommended: 'normal',
+    sendText: (v) => v === 'normal' ? '冰量推荐' : v === 'less' ? '少冰' : '少少冰',
+  },
+  prep_method: {
+    title: '做法',
+    type: '单选',
+    question: '请选择做法：',
+    options: [
+      { id: 'standard', label: '标准(含粽叶)', desc: '' },
+      { id: 'no_leaf', label: '去粽叶', desc: '' },
+    ],
+    recommended: 'standard',
+    sendText: (v) => v === 'standard' ? '标准(含粽叶)' : '去粽叶',
+  },
+  eco_straw: {
+    title: '绿色喜茶',
+    type: '单选',
+    question: '请选择吸管偏好：',
+    options: [
+      { id: 'degradable', label: '可降解吸管', desc: '环保之选' },
+      { id: 'no_straw', label: '不使用吸管', desc: '' },
+    ],
+    recommended: 'degradable',
+    sendText: (v) => v === 'degradable' ? '可降解吸管' : '不使用吸管',
+  },
 }
 
 function detectStepType(text) {
+  // 产品专属步骤优先检测（避免与通用 sugar/topping 冲突）
+  if (/真冰糖|0卡糖|低GI|阿拉伯糖/.test(text)) return 'sweetener'
+  if (/粽叶|去粽叶|做法/.test(text)) return 'prep_method'
+  if (/可降解|不使用吸管|绿色喜茶/.test(text)) return 'eco_straw'
+  if (/少少冰|冰沙.*冰量|冰量.*推荐/.test(text)) return 'ice'
+  // 通用步骤
   if (/糖度|甜度|几分糖|全糖|七分糖|五分糖|三分糖|无糖/.test(text) && /选择|请/.test(text)) return 'sugar'
   if (/加料| topping|可选|芝士|椰果|珍珠|芋圆|红薏|芦荟/.test(text) && /多选|选择|加料/.test(text)) return 'topping'
   if (/杯型|杯种|中杯|大杯/.test(text) && /选择|请/.test(text)) return 'cup_size'
@@ -1188,40 +1241,40 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
   const hasSelection = isMulti ? selected.length > 0 : !!selected
 
   return (
-    <div style={{
+    <div style={{ ...({
       marginTop: 10, borderRadius: 12,
       border: '1px solid var(--cursor-border-10, #e5e5e5)',
       background: 'var(--cursor-surface-100, #fafaf9)',
       overflow: 'hidden', maxWidth: 420,
-    }} className={qoderProps?.className} data-qoder-id={qoderProps?.["data-qoder-id"]}>
+    }), ...(qoderProps?.style) }} className={qoderProps?.className} data-qoder-id={qoderProps?.["data-qoder-id"]} data-qoder-source={qoderProps?.["data-qoder-source"]}>
       {/* Header */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '10px 14px',
         background: 'var(--cursor-surface-300, #f5f5f4)',
         borderBottom: '1px solid var(--cursor-border-10, #e5e5e5)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--cursor-ink, #1a1a1a)' }}>
+      }} data-qoder-id="qel-div-cdcf5c8b" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-cdcf5c8b&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1198,&quot;column&quot;:7}}">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} data-qoder-id="qel-div-cecf5e1e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-cecf5e1e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1204,&quot;column&quot;:9}}">
+          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--cursor-ink, #1a1a1a)' }} data-qoder-id="qel-span-edc86a9d" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-edc86a9d&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1205,&quot;column&quot;:11}}">
             {stepConfig.title}
           </span>
           <span style={{
             fontSize: 10, padding: '1px 7px', borderRadius: 4,
             background: isMulti ? '#10b981' : 'var(--cursor-orange, #f54e00)', color: '#fff', fontWeight: 600,
-          }}>
+          }} data-qoder-id="qel-span-e6c85f98" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-e6c85f98&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1208,&quot;column&quot;:11}}">
             {stepConfig.type}
           </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} data-qoder-id="qel-div-d1cf62d7" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-d1cf62d7&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1215,&quot;column&quot;:9}}">
           {totalSteps > 1 && (
-            <span style={{ fontSize: 11, color: 'var(--cursor-border-55, #94a3b8)', fontWeight: 500 }}>
+            <span style={{ fontSize: 11, color: 'var(--cursor-border-55, #94a3b8)', fontWeight: 500 }} data-qoder-id="qel-span-e8c862be" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-e8c862be&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1217,&quot;column&quot;:13}}">
               {currentStep} / {totalSteps}
             </span>
           )}
           <button onClick={() => setCollapsed(!collapsed)} style={{
             background: 'none', border: 'none', cursor: 'pointer', padding: 2,
             color: 'var(--cursor-border-55, #94a3b8)', fontSize: 11, fontWeight: 500,
-          }}>
+          }} data-qoder-id="qel-button-941f2485" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-941f2485&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1221,&quot;column&quot;:11}}">
             {collapsed ? '展开' : '折叠'}
           </button>
         </div>
@@ -1230,12 +1283,12 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
       {!collapsed && (
         <>
           {/* Question */}
-          <div style={{ padding: '10px 14px 4px', fontSize: 13, color: 'var(--cursor-ink, #1a1a1a)', fontWeight: 500 }}>
+          <div style={{ padding: '10px 14px 4px', fontSize: 13, color: 'var(--cursor-ink, #1a1a1a)', fontWeight: 500 }} data-qoder-id="qel-div-c4cf4e60" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-c4cf4e60&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1233,&quot;column&quot;:11}}">
             {question}
           </div>
 
           {/* Options — pill grid for compact display */}
-          <div style={{ padding: '6px 14px 12px', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          <div style={{ padding: '6px 14px 12px', display: 'flex', flexWrap: 'wrap', gap: 8 }} data-qoder-id="qel-div-c5cf4ff3" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-c5cf4ff3&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1238,&quot;column&quot;:11}}">
             {options.map((opt) => {
               const isSelected = isMulti ? selected.includes(opt.id) : selected === opt.id
               return (
@@ -1253,15 +1306,15 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
                     fontSize: 13, fontWeight: isSelected ? 600 : 400,
                     color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-ink, #1a1a1a)',
                   }}
-                >
+                 data-qoder-id="qel-div-c6cd12ef" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-c6cd12ef&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1242,&quot;column&quot;:17}}">
                   {isSelected && (
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cursor-orange, #f54e00)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"/>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cursor-orange, #f54e00)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" data-qoder-id="qel-svg-087be288" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-svg-087be288&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;svg&quot;,&quot;loc&quot;:{&quot;line&quot;:1258,&quot;column&quot;:21}}">
+                      <polyline points="20 6 9 17 4 12" data-qoder-id="qel-polyline-0e208ae1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-polyline-0e208ae1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;polyline&quot;,&quot;loc&quot;:{&quot;line&quot;:1259,&quot;column&quot;:23}}"/>
                     </svg>
                   )}
-                  <span>{opt.label}</span>
+                  <span data-qoder-id="qel-span-55da5776" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-55da5776&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1262,&quot;column&quot;:19}}">{opt.label}</span>
                   {opt.desc && (
-                    <span style={{ fontSize: 11, color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-border-55, #94a3b8)', fontWeight: 500 }}>
+                    <span style={{ fontSize: 11, color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-border-55, #94a3b8)', fontWeight: 500 }} data-qoder-id="qel-span-58da5c2f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-span-58da5c2f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;span&quot;,&quot;loc&quot;:{&quot;line&quot;:1264,&quot;column&quot;:21}}">
                       {opt.desc}
                     </span>
                   )}
@@ -1276,23 +1329,23 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
             padding: '8px 14px',
             borderTop: '1px solid var(--cursor-border-10, #e5e5e5)',
             background: 'var(--cursor-surface-300, #f5f5f4)',
-          }}>
+          }} data-qoder-id="qel-div-c1cd0b10" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-c1cd0b10&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1274,&quot;column&quot;:11}}">
             <button onClick={handleRecommend} style={{
               display: 'flex', alignItems: 'center', gap: 4,
               background: 'none', border: 'none', cursor: 'pointer',
               color: 'var(--cursor-orange, #f54e00)', fontSize: 12, fontWeight: 500, padding: '4px 0',
-            }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            }} data-qoder-id="qel-button-2544d9a1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-2544d9a1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1280,&quot;column&quot;:13}}">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" data-qoder-id="qel-svg-0e7bebfa" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-svg-0e7bebfa&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;svg&quot;,&quot;loc&quot;:{&quot;line&quot;:1285,&quot;column&quot;:15}}">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" data-qoder-id="qel-polygon-5ae2206f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-polygon-5ae2206f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;polygon&quot;,&quot;loc&quot;:{&quot;line&quot;:1286,&quot;column&quot;:17}}"/>
               </svg>
               推荐
             </button>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} data-qoder-id="qel-div-cdcd1df4" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-div-cdcd1df4&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;div&quot;,&quot;loc&quot;:{&quot;line&quot;:1291,&quot;column&quot;:13}}">
               <button onClick={handleSkip} style={{
                 background: 'none', border: 'none', cursor: 'pointer',
                 color: 'var(--cursor-border-55, #94a3b8)', fontSize: 12, fontWeight: 500, padding: '6px 12px',
-              }}>
+              }} data-qoder-id="qel-button-a141cb3e" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a141cb3e&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1292,&quot;column&quot;:15}}">
                 跳过
               </button>
               <button
@@ -1307,10 +1360,10 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
                   cursor: hasSelection ? 'pointer' : 'default',
                   transition: 'all 0.2s',
                 }}
-              >
+               data-qoder-id="qel-button-a241ccd1" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-button-a241ccd1&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;button&quot;,&quot;loc&quot;:{&quot;line&quot;:1298,&quot;column&quot;:15}}">
                 继续
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6"/>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" data-qoder-id="qel-svg-017998ec" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-svg-017998ec&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;svg&quot;,&quot;loc&quot;:{&quot;line&quot;:1312,&quot;column&quot;:17}}">
+                  <polyline points="9 18 15 12 9 6" data-qoder-id="qel-polyline-851d749f" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-polyline-851d749f&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;SelectionCard&quot;,&quot;elementRole&quot;:&quot;polyline&quot;,&quot;loc&quot;:{&quot;line&quot;:1313,&quot;column&quot;:19}}"/>
                 </svg>
               </button>
             </div>
