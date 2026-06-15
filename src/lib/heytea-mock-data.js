@@ -187,7 +187,7 @@ const TOPPING_ATTR = {
     { attributeId: 302, attributeName: '椰果', selected: null, price: 2, canSelected: 1 },
     { attributeId: 303, attributeName: '珍珠', selected: null, price: 2, canSelected: 1 },
     { attributeId: 304, attributeName: '芋圆', selected: null, price: 3, canSelected: 1 },
-    { attributeId: 305, attributeName: '红豆', selected: null, price: 2, canSelected: 1 },
+    { attributeId: 305, attributeName: '红薏', selected: null, price: 2, canSelected: 1 },
     { attributeId: 306, attributeName: '芦荟', selected: null, price: 2, canSelected: 1 },
   ],
 }
@@ -225,7 +225,7 @@ function buildAttrs(isHotDrink = false) {
 const PRODUCTS = [
   {
     productId: 2001, productName: '多肉葡萄', skuCode: 'HT-2001',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '葡萄搭配清新茶底',
     ingredients: ["葡萄"],
     allergens: [],
@@ -234,7 +234,7 @@ const PRODUCTS = [
   },
   {
     productId: 2002, productName: '清爽芭乐提(红芭乐)', skuCode: 'HT-2002',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -243,7 +243,7 @@ const PRODUCTS = [
   },
   {
     productId: 2003, productName: '清爽芭乐提', skuCode: 'HT-2003',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -252,7 +252,7 @@ const PRODUCTS = [
   },
   {
     productId: 2004, productName: '清爽芭乐葡(红芭乐)', skuCode: 'HT-2004',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -261,7 +261,7 @@ const PRODUCTS = [
   },
   {
     productId: 2005, productName: '清爽芭乐葡', skuCode: 'HT-2005',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -270,7 +270,7 @@ const PRODUCTS = [
   },
   {
     productId: 2006, productName: '芒芒甘露', skuCode: 'HT-2006',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芒果搭配茶底与特色小料',
     ingredients: ["芒果"],
     allergens: ["芒果"],
@@ -279,7 +279,7 @@ const PRODUCTS = [
   },
   {
     productId: 2007, productName: '超多肉芒芒甘露', skuCode: 'HT-2007',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芒果搭配茶底与特色小料',
     ingredients: ["芒果"],
     allergens: ["芒果"],
@@ -288,7 +288,7 @@ const PRODUCTS = [
   },
   {
     productId: 2008, productName: '多肉芒芒', skuCode: 'HT-2008',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芒果搭配清新茶底',
     ingredients: ["芒果"],
     allergens: ["芒果"],
@@ -297,7 +297,7 @@ const PRODUCTS = [
   },
   {
     productId: 2009, productName: '椰椰芒芒', skuCode: 'HT-2009',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芒果+椰子搭配清新茶底',
     ingredients: ["芒果", "椰子"],
     allergens: ["芒果", "椰子"],
@@ -306,7 +306,7 @@ const PRODUCTS = [
   },
   {
     productId: 2010, productName: '多肉桃李', skuCode: 'HT-2010',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '桃李搭配清新茶底',
     ingredients: ["桃李"],
     allergens: [],
@@ -315,7 +315,7 @@ const PRODUCTS = [
   },
   {
     productId: 2011, productName: '爆汁杨梅', skuCode: 'HT-2011',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '杨梅搭配清新茶底',
     ingredients: ["杨梅"],
     allergens: [],
@@ -324,7 +324,7 @@ const PRODUCTS = [
   },
   {
     productId: 2012, productName: '轻芝杨梅', skuCode: 'HT-2012',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '杨梅搭配浓郁芝士奶盖',
     ingredients: ["杨梅"],
     allergens: ["乳制品"],
@@ -333,7 +333,7 @@ const PRODUCTS = [
   },
   {
     productId: 2013, productName: '满杯红柚', skuCode: 'HT-2013',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '红柚搭配清新茶底',
     ingredients: ["红柚"],
     allergens: [],
@@ -342,7 +342,7 @@ const PRODUCTS = [
   },
   {
     productId: 2014, productName: '多肉青提', skuCode: 'HT-2014',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '青提搭配清新茶底',
     ingredients: ["青提"],
     allergens: [],
@@ -351,7 +351,7 @@ const PRODUCTS = [
   },
   {
     productId: 2015, productName: '喜柿多多', skuCode: 'HT-2015',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '柿子搭配清新茶底',
     ingredients: ["柿子"],
     allergens: [],
@@ -360,7 +360,7 @@ const PRODUCTS = [
   },
   {
     productId: 2016, productName: '网纹瓜瓜冰浆', skuCode: 'HT-2016',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '哈密瓜搭配清新茶底',
     ingredients: ["哈密瓜"],
     allergens: [],
@@ -369,7 +369,7 @@ const PRODUCTS = [
   },
   {
     productId: 2017, productName: '奇香黄皮桃', skuCode: 'HT-2017',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '黄皮桃搭配清新茶底',
     ingredients: ["黄皮桃"],
     allergens: [],
@@ -378,7 +378,7 @@ const PRODUCTS = [
   },
   {
     productId: 2018, productName: '木姜子滇木瓜', skuCode: 'HT-2018',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '木瓜搭配清新茶底',
     ingredients: ["木瓜"],
     allergens: [],
@@ -387,7 +387,7 @@ const PRODUCTS = [
   },
   {
     productId: 2019, productName: '奇兰苹果杏', skuCode: 'HT-2019',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '苹果杏搭配清新茶底',
     ingredients: ["苹果杏"],
     allergens: [],
@@ -396,7 +396,7 @@ const PRODUCTS = [
   },
   {
     productId: 2020, productName: '奇兰苹果杏特调', skuCode: 'HT-2020',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '苹果杏搭配清新茶底',
     ingredients: ["苹果杏"],
     allergens: [],
@@ -405,7 +405,7 @@ const PRODUCTS = [
   },
   {
     productId: 2021, productName: '奇兰粉芭乐', skuCode: 'HT-2021',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -414,7 +414,7 @@ const PRODUCTS = [
   },
   {
     productId: 2022, productName: '奇兰红颜莓莓', skuCode: 'HT-2022',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '草莓搭配清新茶底',
     ingredients: ["草莓"],
     allergens: [],
@@ -423,7 +423,7 @@ const PRODUCTS = [
   },
   {
     productId: 2023, productName: '奇兰芭乐莲雾', skuCode: 'HT-2023',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐+莲雾搭配清新茶底',
     ingredients: ["芭乐", "莲雾"],
     allergens: [],
@@ -432,7 +432,7 @@ const PRODUCTS = [
   },
   {
     productId: 2024, productName: '雪毫茉王芭乐', skuCode: 'HT-2024',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -441,7 +441,7 @@ const PRODUCTS = [
   },
   {
     productId: 2025, productName: '南姜甘草芭乐瓶', skuCode: 'HT-2025',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '芭乐搭配清新茶底',
     ingredients: ["芭乐"],
     allergens: [],
@@ -450,7 +450,7 @@ const PRODUCTS = [
   },
   {
     productId: 2026, productName: '青提柠打茶', skuCode: 'HT-2026',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '青提搭配清新茶底',
     ingredients: ["青提"],
     allergens: [],
@@ -459,7 +459,7 @@ const PRODUCTS = [
   },
   {
     productId: 2027, productName: '椰山龙眼冰', skuCode: 'HT-2027',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '龙眼搭配清新茶底',
     ingredients: ["龙眼"],
     allergens: [],
@@ -468,7 +468,7 @@ const PRODUCTS = [
   },
   {
     productId: 2028, productName: '芒椰糯米饭', skuCode: 'HT-2028',
-    pictureUrl: '', category: '甜品',
+    pictureUrl: '', category: '灵感茶点',
     description: '芒果+椰子+糯米搭配茶底与特色小料',
     ingredients: ["芒果", "椰子", "糯米"],
     allergens: ["芒果", "椰子"],
@@ -477,7 +477,7 @@ const PRODUCTS = [
   },
   {
     productId: 2029, productName: '酷黑莓桑', skuCode: 'HT-2029',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '桑葚搭配清新茶底',
     ingredients: ["桑葚"],
     allergens: [],
@@ -486,7 +486,7 @@ const PRODUCTS = [
   },
   {
     productId: 2030, productName: '轻芝多肉葡萄', skuCode: 'HT-2030',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '葡萄搭配浓郁芝士奶盖',
     ingredients: ["葡萄"],
     allergens: ["乳制品"],
@@ -495,7 +495,7 @@ const PRODUCTS = [
   },
   {
     productId: 2031, productName: '芝芝多肉葡萄', skuCode: 'HT-2031',
-    pictureUrl: '', category: '水果茶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '葡萄搭配浓郁芝士奶盖',
     ingredients: ["葡萄"],
     allergens: ["乳制品"],
@@ -504,7 +504,7 @@ const PRODUCTS = [
   },
   {
     productId: 2032, productName: '芝芝抹茶', skuCode: 'HT-2032',
-    pictureUrl: '', category: '芝芝系列',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '抹茶搭配浓郁芝士奶盖',
     ingredients: ["抹茶"],
     allergens: ["乳制品"],
@@ -513,7 +513,7 @@ const PRODUCTS = [
   },
   {
     productId: 2033, productName: '芝芝绿妍茶后', skuCode: 'HT-2033',
-    pictureUrl: '', category: '芝芝系列',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '绿茶搭配浓郁芝士奶盖',
     ingredients: ["绿茶"],
     allergens: ["乳制品"],
@@ -522,7 +522,7 @@ const PRODUCTS = [
   },
   {
     productId: 2034, productName: '芝士咸酪藏茶', skuCode: 'HT-2034',
-    pictureUrl: '', category: '芝芝系列',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '藏茶搭配浓郁芝士奶盖',
     ingredients: ["藏茶"],
     allergens: ["乳制品"],
@@ -531,7 +531,7 @@ const PRODUCTS = [
   },
   {
     productId: 2035, productName: '烤黑糖波波牛乳茶', skuCode: 'HT-2035',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["黑糖波波"],
     allergens: [],
@@ -540,7 +540,7 @@ const PRODUCTS = [
   },
   {
     productId: 2036, productName: '烤黑糖波波牛乳', skuCode: 'HT-2036',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["黑糖波波"],
     allergens: [],
@@ -549,7 +549,7 @@ const PRODUCTS = [
   },
   {
     productId: 2037, productName: '黑糖波波牛乳茶', skuCode: 'HT-2037',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["黑糖波波"],
     allergens: [],
@@ -558,7 +558,7 @@ const PRODUCTS = [
   },
   {
     productId: 2038, productName: '黑糖波波真牛乳', skuCode: 'HT-2038',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["黑糖波波"],
     allergens: [],
@@ -567,7 +567,7 @@ const PRODUCTS = [
   },
   {
     productId: 2039, productName: '水牛乳双拼波波', skuCode: 'HT-2039',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["波波"],
     allergens: [],
@@ -576,7 +576,7 @@ const PRODUCTS = [
   },
   {
     productId: 2040, productName: '水牛乳双拼抹茶', skuCode: 'HT-2040',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["抹茶"],
     allergens: [],
@@ -585,7 +585,7 @@ const PRODUCTS = [
   },
   {
     productId: 2041, productName: '嫣红牛乳茶', skuCode: 'HT-2041',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["红茶"],
     allergens: [],
@@ -594,7 +594,7 @@ const PRODUCTS = [
   },
   {
     productId: 2042, productName: '碎银子牛乳茶', skuCode: 'HT-2042',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["碎银子"],
     allergens: [],
@@ -603,7 +603,7 @@ const PRODUCTS = [
   },
   {
     productId: 2043, productName: '芋圆牛乳茶', skuCode: 'HT-2043',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["芋圆"],
     allergens: [],
@@ -612,7 +612,7 @@ const PRODUCTS = [
   },
   {
     productId: 2044, productName: '雪域·牦牛乳恰安莫', skuCode: 'HT-2044',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["牦牛乳"],
     allergens: ["乳制品"],
@@ -621,7 +621,7 @@ const PRODUCTS = [
   },
   {
     productId: 2045, productName: '爆芋泥波波牛乳茶', skuCode: 'HT-2045',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["芋泥", "波波"],
     allergens: [],
@@ -630,7 +630,7 @@ const PRODUCTS = [
   },
   {
     productId: 2046, productName: '爆芋泥波波牛乳', skuCode: 'HT-2046',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["芋泥", "波波"],
     allergens: [],
@@ -639,7 +639,7 @@ const PRODUCTS = [
   },
   {
     productId: 2047, productName: '布蕾奶茶波波冰', skuCode: 'HT-2047',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["布蕾", "波波"],
     allergens: [],
@@ -648,7 +648,7 @@ const PRODUCTS = [
   },
   {
     productId: 2048, productName: '酱香白脱碎银子', skuCode: 'HT-2048',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["碎银子"],
     allergens: [],
@@ -657,7 +657,7 @@ const PRODUCTS = [
   },
   {
     productId: 2049, productName: '牛肝菌碎银子特调', skuCode: 'HT-2049',
-    pictureUrl: '', category: '牛乳茶',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典牛乳茶',
     ingredients: ["碎银子"],
     allergens: [],
@@ -666,7 +666,7 @@ const PRODUCTS = [
   },
   {
     productId: 2050, productName: '去火*纤体瓶', skuCode: 'HT-2050',
-    pictureUrl: '', category: '纤体瓶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '去火搭配清新茶底',
     ingredients: ["去火"],
     allergens: [],
@@ -675,7 +675,7 @@ const PRODUCTS = [
   },
   {
     productId: 2051, productName: '羽衣纤体瓶', skuCode: 'HT-2051',
-    pictureUrl: '', category: '纤体瓶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '羽衣甘蓝搭配清新茶底',
     ingredients: ["羽衣甘蓝"],
     allergens: [],
@@ -684,7 +684,7 @@ const PRODUCTS = [
   },
   {
     productId: 2052, productName: '去油纤体瓶', skuCode: 'HT-2052',
-    pictureUrl: '', category: '纤体瓶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '去油搭配清新茶底',
     ingredients: ["去油"],
     allergens: [],
@@ -693,7 +693,7 @@ const PRODUCTS = [
   },
   {
     productId: 2053, productName: '马黛活力纤体冰', skuCode: 'HT-2053',
-    pictureUrl: '', category: '纤体瓶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '马黛搭配清新茶底',
     ingredients: ["马黛"],
     allergens: [],
@@ -702,7 +702,7 @@ const PRODUCTS = [
   },
   {
     productId: 2054, productName: '能量纤体瓶', skuCode: 'HT-2054',
-    pictureUrl: '', category: '纤体瓶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '能量搭配清新茶底',
     ingredients: ["能量"],
     allergens: [],
@@ -711,7 +711,7 @@ const PRODUCTS = [
   },
   {
     productId: 2055, productName: '苦瓜纤体轻柠茶', skuCode: 'HT-2055',
-    pictureUrl: '', category: '纤体瓶',
+    pictureUrl: '', category: '植物茶/鲜果茶',
     description: '苦瓜搭配清新茶底',
     ingredients: ["苦瓜"],
     allergens: [],
@@ -720,7 +720,7 @@ const PRODUCTS = [
   },
   {
     productId: 2056, productName: '减脂小奶茉', skuCode: 'HT-2056',
-    pictureUrl: '', category: '轻饮',
+    pictureUrl: '', category: '咖啡/经典/小料',
     description: '经典轻饮',
     ingredients: ["茉莉"],
     allergens: [],
@@ -729,7 +729,7 @@ const PRODUCTS = [
   },
   {
     productId: 2057, productName: '三倍厚抹', skuCode: 'HT-2057',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶"],
     allergens: [],
@@ -738,7 +738,7 @@ const PRODUCTS = [
   },
   {
     productId: 2058, productName: '咸酪厚抹', skuCode: 'HT-2058',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '抹茶+咸酪搭配浓郁芝士奶盖',
     ingredients: ["抹茶", "咸酪"],
     allergens: ["乳制品"],
@@ -747,7 +747,7 @@ const PRODUCTS = [
   },
   {
     productId: 2059, productName: '抹茶波波冰', skuCode: 'HT-2059',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶", "波波"],
     allergens: [],
@@ -756,7 +756,7 @@ const PRODUCTS = [
   },
   {
     productId: 2060, productName: '烤布蕾抹茶冰', skuCode: 'HT-2060',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶", "布蕾"],
     allergens: [],
@@ -765,7 +765,7 @@ const PRODUCTS = [
   },
   {
     productId: 2061, productName: '茶坊苦抹·浓', skuCode: 'HT-2061',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶"],
     allergens: [],
@@ -774,7 +774,7 @@ const PRODUCTS = [
   },
   {
     productId: 2062, productName: '茶坊苦抹·清', skuCode: 'HT-2062',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶"],
     allergens: [],
@@ -783,7 +783,7 @@ const PRODUCTS = [
   },
   {
     productId: 2063, productName: '开心厚抹', skuCode: 'HT-2063',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶"],
     allergens: [],
@@ -792,7 +792,7 @@ const PRODUCTS = [
   },
   {
     productId: 2064, productName: '抹云小奶茉', skuCode: 'HT-2064',
-    pictureUrl: '', category: '抹茶系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典抹茶',
     ingredients: ["抹茶", "茉莉"],
     allergens: [],
@@ -801,7 +801,7 @@ const PRODUCTS = [
   },
   {
     productId: 2065, productName: '小奶茉(超大杯)', skuCode: 'HT-2065',
-    pictureUrl: '', category: '茶饮',
+    pictureUrl: '', category: '咖啡/经典/小料',
     description: '经典茶饮',
     ingredients: ["茉莉"],
     allergens: [],
@@ -810,7 +810,7 @@ const PRODUCTS = [
   },
   {
     productId: 2066, productName: '小奶茉', skuCode: 'HT-2066',
-    pictureUrl: '', category: '茶饮',
+    pictureUrl: '', category: '咖啡/经典/小料',
     description: '经典茶饮',
     ingredients: ["茉莉"],
     allergens: [],
@@ -819,7 +819,7 @@ const PRODUCTS = [
   },
   {
     productId: 2067, productName: '开心小奶茉', skuCode: 'HT-2067',
-    pictureUrl: '', category: '茶饮',
+    pictureUrl: '', category: '咖啡/经典/小料',
     description: '经典茶饮',
     ingredients: ["茉莉"],
     allergens: [],
@@ -828,7 +828,7 @@ const PRODUCTS = [
   },
   {
     productId: 2068, productName: '纯绿妍茶后', skuCode: 'HT-2068',
-    pictureUrl: '', category: '纯茶系列',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '经典纯茶',
     ingredients: ["绿茶"],
     allergens: [],
@@ -837,7 +837,7 @@ const PRODUCTS = [
   },
   {
     productId: 2069, productName: '绿妍轻柠茶(超大杯)', skuCode: 'HT-2069',
-    pictureUrl: '', category: '茶饮',
+    pictureUrl: '', category: '咖啡/经典/小料',
     description: '绿茶+柠檬搭配清新茶底',
     ingredients: ["绿茶", "柠檬"],
     allergens: [],
@@ -846,7 +846,7 @@ const PRODUCTS = [
   },
   {
     productId: 2070, productName: '鸭喜香轻柠茶(超大杯)', skuCode: 'HT-2070',
-    pictureUrl: '', category: '茶饮',
+    pictureUrl: '', category: '咖啡/经典/小料',
     description: '鸭屎香+柠檬搭配清新茶底',
     ingredients: ["鸭屎香", "柠檬"],
     allergens: [],
@@ -855,7 +855,7 @@ const PRODUCTS = [
   },
   {
     productId: 2071, productName: '碎银子糯糯', skuCode: 'HT-2071',
-    pictureUrl: '', category: '糯糯系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典糯糯',
     ingredients: ["碎银子", "糯米"],
     allergens: [],
@@ -864,7 +864,7 @@ const PRODUCTS = [
   },
   {
     productId: 2072, productName: '咸酪碎银子', skuCode: 'HT-2072',
-    pictureUrl: '', category: '糯糯系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典糯糯',
     ingredients: ["碎银子"],
     allergens: [],
@@ -873,7 +873,7 @@ const PRODUCTS = [
   },
   {
     productId: 2073, productName: '碎银子黑糖波波', skuCode: 'HT-2073',
-    pictureUrl: '', category: '糯糯系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典糯糯',
     ingredients: ["碎银子", "波波"],
     allergens: [],
@@ -882,7 +882,7 @@ const PRODUCTS = [
   },
   {
     productId: 2074, productName: '英红·芝士糯糯', skuCode: 'HT-2074',
-    pictureUrl: '', category: '糯糯系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '英红+糯米搭配浓郁芝士奶盖',
     ingredients: ["英红", "糯米"],
     allergens: ["乳制品"],
@@ -891,7 +891,7 @@ const PRODUCTS = [
   },
   {
     productId: 2075, productName: '龙井·芝士糯糯', skuCode: 'HT-2075',
-    pictureUrl: '', category: '糯糯系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '龙井+糯米搭配浓郁芝士奶盖',
     ingredients: ["龙井", "糯米"],
     allergens: ["乳制品"],
@@ -900,7 +900,7 @@ const PRODUCTS = [
   },
   {
     productId: 2076, productName: '英红糯糯', skuCode: 'HT-2076',
-    pictureUrl: '', category: '糯糯系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典糯糯',
     ingredients: ["英红", "糯米"],
     allergens: [],
@@ -909,7 +909,7 @@ const PRODUCTS = [
   },
   {
     productId: 2077, productName: '苦巧·咸酪碎银子', skuCode: 'HT-2077',
-    pictureUrl: '', category: '巧克力系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典巧克力',
     ingredients: ["巧克力", "碎银子"],
     allergens: [],
@@ -918,7 +918,7 @@ const PRODUCTS = [
   },
   {
     productId: 2078, productName: '苦巧·咸酪(不含茶)', skuCode: 'HT-2078',
-    pictureUrl: '', category: '巧克力系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典巧克力',
     ingredients: ["巧克力"],
     allergens: [],
@@ -927,7 +927,7 @@ const PRODUCTS = [
   },
   {
     productId: 2079, productName: '苦巧·咸酪', skuCode: 'HT-2079',
-    pictureUrl: '', category: '巧克力系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典巧克力',
     ingredients: ["巧克力"],
     allergens: [],
@@ -936,7 +936,7 @@ const PRODUCTS = [
   },
   {
     productId: 2080, productName: '提拉米苏·浓巧', skuCode: 'HT-2080',
-    pictureUrl: '', category: '巧克力系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典巧克力',
     ingredients: ["提拉米苏", "巧克力"],
     allergens: [],
@@ -945,7 +945,7 @@ const PRODUCTS = [
   },
   {
     productId: 2081, productName: '提拉米苏·英红', skuCode: 'HT-2081',
-    pictureUrl: '', category: '巧克力系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典巧克力',
     ingredients: ["提拉米苏", "英红"],
     allergens: [],
@@ -954,7 +954,7 @@ const PRODUCTS = [
   },
   {
     productId: 2082, productName: '空气马斯卡彭·英红', skuCode: 'HT-2082',
-    pictureUrl: '', category: '巧克力系列',
+    pictureUrl: '', category: '苦巧/抹茶/波波茶',
     description: '经典巧克力',
     ingredients: ["马斯卡彭"],
     allergens: [],
@@ -963,7 +963,7 @@ const PRODUCTS = [
   },
   {
     productId: 2083, productName: '烤布蕾油切乌龙冰', skuCode: 'HT-2083',
-    pictureUrl: '', category: '冰饮',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '经典冰饮',
     ingredients: ["布蕾", "乌龙"],
     allergens: [],
@@ -972,7 +972,7 @@ const PRODUCTS = [
   },
   {
     productId: 2084, productName: '咸酪泰奶冰', skuCode: 'HT-2084',
-    pictureUrl: '', category: '冰饮',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '泰奶搭配浓郁芝士奶盖',
     ingredients: ["泰奶"],
     allergens: ["乳制品"],
@@ -981,7 +981,7 @@ const PRODUCTS = [
   },
   {
     productId: 2085, productName: '流心奶黄波波冰', skuCode: 'HT-2085',
-    pictureUrl: '', category: '冰饮',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '经典冰饮',
     ingredients: ["奶黄", "波波"],
     allergens: ["乳制品"],
@@ -990,7 +990,7 @@ const PRODUCTS = [
   },
   {
     productId: 2086, productName: '牦牛乳酥油茶', skuCode: 'HT-2086',
-    pictureUrl: '', category: '特调',
+    pictureUrl: '', category: '茶特调/茗茶',
     description: '经典特调',
     ingredients: ["牦牛乳", "酥油"],
     allergens: ["乳制品"],
@@ -1144,7 +1144,7 @@ function mockHandler(toolName, args) {
         data: [
           { couponId: 'CP001', name: '新人专享 8 折券', discount: 0.8, minOrder: 20, maxDiscount: 10, validUntil: '2026-07-01', applicableStores: '全部门店' },
           { couponId: 'CP002', name: '满 30 减 5', discount: 5, type: 'fixed', minOrder: 30, validUntil: '2026-06-30', applicableStores: '深圳区域门店' },
-          { couponId: 'CP003', name: '多肉系列第二杯半价', discount: 0.5, type: 'bogo', minOrder: 2, validUntil: '2026-06-15', applicableStores: '全部门店', category: '多肉系列' },
+          { couponId: 'CP003', name: '多肉系列第二杯半价', discount: 0.5, type: 'bogo', minOrder: 2, validUntil: '2026-06-15', applicableStores: '全部门店', category: '植物茶/鲜果茶' },
         ],
         success: true,
       }
@@ -1248,12 +1248,12 @@ function handleSearchProduct({ storeId, query }) {
       if (p.category.includes(q)) return true
       if (p.description.includes(q)) return true
       if (p.tags.some(t => t.includes(q))) return true
-      // 泛化搜索词
-      if ((q.includes('果茶') || q.includes('水果')) && ['果茶系列', '多肉系列'].includes(p.category)) return true
-      if ((q.includes('奶盖') || q.includes('芝士')) && p.category === '芝芝系列') return true
-      if (q.includes('纯茶') && p.category === '纯茶系列') return true
+      // 泛化搜索词 → 新5大分类
+      if ((q.includes('果茶') || q.includes('水果') || q.includes('鲜果')) && p.category.includes('鲜果茶')) return true
+      if ((q.includes('奶盖') || q.includes('芝士') || q.includes('特调') || q.includes('纯茶') || q.includes('茗茶')) && p.category.includes('茶特调')) return true
+      if ((q.includes('波波') || q.includes('抹茶') || q.includes('巧克力') || q.includes('牛乳') || q.includes('苦巧')) && p.category.includes('苦巧')) return true
       if ((q.includes('新品') || q.includes('限定')) && p.tags.some(t => t === '新品' || t === '季节限定')) return true
-      if (q.includes('小食') || q.includes('蛋糕') || q.includes('点心')) return p.category === '小食'
+      if (q.includes('小食') || q.includes('蛋糕') || q.includes('点心') || q.includes('茶点')) return p.category.includes('灵感茶点')
       if (q.includes('推荐') || q.includes('热销') || q.includes('热门')) return p.tags.includes('热销')
       return false
     })

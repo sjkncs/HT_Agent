@@ -1038,32 +1038,49 @@ function SessionHeaderBar({ conversation }) {
 
 // Step definitions for the ordering flow
 const ORDER_STEPS = {
-  ice: {
-    title: '冰量',
-    type: '单选',
-    question: '请选择饮品的冰量偏好：',
-    options: [
-      { id: 'normal_ice', label: '正常冰', desc: '标准冰量，清爽冰凉' },
-      { id: 'less_ice', label: '少冰', desc: '冰量减半，口感更浓' },
-      { id: 'no_ice', label: '去冰', desc: '完全去冰，常温口感' },
-      { id: 'warm', label: '温热', desc: '加热制作，适合冬天' },
-    ],
-    recommended: 'less_ice',
-    sendText: (v) => v.replace('_', '') === 'normalice' ? '正常冰' : v === 'less_ice' ? '少冰' : v === 'no_ice' ? '去冰' : '温热',
-  },
   sugar: {
     title: '糖度',
     type: '单选',
-    question: '请选择甜度偏好：',
+    question: '请选择糖度：',
     options: [
-      { id: 'normal_sugar', label: '正常糖', desc: '标准甜度' },
+      { id: 'full_sugar', label: '全糖', desc: '标准甜度' },
       { id: 'seven_sugar', label: '七分糖', desc: '微甜，大多数人喜欢' },
       { id: 'five_sugar', label: '五分糖', desc: '适中甜度' },
       { id: 'three_sugar', label: '三分糖', desc: '清淡微甜' },
-      { id: 'no_sugar', label: '不另外加糖', desc: '原味，无额外糖' },
+      { id: 'no_sugar', label: '无糖', desc: '不另外加糖' },
     ],
     recommended: 'seven_sugar',
-    sendText: (v) => v === 'normal_sugar' ? '正常糖' : v === 'seven_sugar' ? '七分糖' : v === 'five_sugar' ? '五分糖' : v === 'three_sugar' ? '三分糖' : '不另外加糖',
+    sendText: (v) => v === 'full_sugar' ? '全糖' : v === 'seven_sugar' ? '七分糖' : v === 'five_sugar' ? '五分糖' : v === 'three_sugar' ? '三分糖' : '无糖',
+  },
+  topping: {
+    title: '加料',
+    type: '多选',
+    question: '选择加料（可多选）：',
+    options: [
+      { id: 'cheese', label: '芝士', desc: '+¥3' },
+      { id: 'coconut', label: '椰果', desc: '+¥2' },
+      { id: 'pearl', label: '珍珠', desc: '+¥2' },
+      { id: 'taro_ball', label: '芋圆', desc: '+¥3' },
+      { id: 'red_barley', label: '红薏', desc: '+¥2' },
+      { id: 'aloe', label: '芦荟', desc: '+¥2' },
+    ],
+    recommended: null,
+    sendText: (selectedIds) => {
+      const map = { cheese: '芝士', coconut: '椰果', pearl: '珍珠', taro_ball: '芋圆', red_barley: '红薏', aloe: '芦荟' }
+      const names = (Array.isArray(selectedIds) ? selectedIds : [selectedIds]).map(id => map[id] || id)
+      return names.length > 0 ? `加料：${names.join('、')}` : '不加料'
+    },
+  },
+  cup_size: {
+    title: '杯型',
+    type: '单选',
+    question: '请选择杯型：',
+    options: [
+      { id: 'medium', label: '中杯', desc: '标准杯' },
+      { id: 'large', label: '大杯', desc: '+¥3' },
+    ],
+    recommended: 'medium',
+    sendText: (v) => v === 'medium' ? '中杯' : '大杯',
   },
   confirm_order: {
     title: '确认订单',
@@ -1105,8 +1122,9 @@ const ORDER_STEPS = {
 }
 
 function detectStepType(text) {
-  if (/冰量|冰度|去冰|少冰|正常冰/.test(text)) return 'ice'
-  if (/糖度|甜度|几分糖/.test(text)) return 'sugar'
+  if (/糖度|甜度|几分糖|全糖|七分糖|五分糖|三分糖|无糖/.test(text) && /选择|请/.test(text)) return 'sugar'
+  if (/加料| topping|可选|芝士|椰果|珍珠|芋圆|红薏|芦荟/.test(text) && /多选|选择|加料/.test(text)) return 'topping'
+  if (/杯型|杯种|中杯|大杯/.test(text) && /选择|请/.test(text)) return 'cup_size'
   if (/确认.*订单|确认.*下单|是否.*确认|确认下单/.test(text)) return 'confirm_order'
   if (/支付完成|已支付|付款|扫码支付/.test(text) && !/告诉阿喜/.test(text.slice(-30))) return 'payment'
   if (/自提|配送|取餐方式|到店/.test(text) && /选择|请问|需要/.test(text)) return 'pickup'
@@ -1125,8 +1143,9 @@ function parseStoreOptions(text) {
   }).filter(Boolean)
 }
 
-function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, currentStep }) {
-  const [selected, setSelected] = useState(null)
+function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, currentStep, ...qoderProps }) {
+  const isMulti = stepConfig.type === '多选'
+  const [selected, setSelected] = useState(isMulti ? [] : null)
   const [collapsed, setCollapsed] = useState(false)
 
   const options = stepConfig.title === '门店选择' ? (dynamicOptions || []) : stepConfig.options
@@ -1134,34 +1153,47 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
     ? '请选择您想下单的门店：'
     : stepConfig.question
 
+  function toggleSelect(optId) {
+    if (isMulti) {
+      setSelected(prev => prev.includes(optId) ? prev.filter(id => id !== optId) : [...prev, optId])
+    } else {
+      setSelected(optId)
+    }
+  }
+
   function handleContinue() {
-    if (selected && onSend) {
-      const sendVal = stepConfig.sendText(selected)
-      onSend(sendVal)
+    if (onSend) {
+      if (isMulti) {
+        const sendVal = stepConfig.sendText(selected)
+        onSend(sendVal)
+      } else if (selected) {
+        const sendVal = stepConfig.sendText(selected)
+        onSend(sendVal)
+      }
     }
   }
 
   function handleRecommend() {
     if (stepConfig.recommended) {
-      setSelected(stepConfig.recommended)
+      setSelected(isMulti ? [stepConfig.recommended] : stepConfig.recommended)
     } else if (options.length > 0) {
-      setSelected(options[0].id)
+      setSelected(isMulti ? [options[0].id] : options[0].id)
     }
   }
 
   function handleSkip() {
-    if (onSend) onSend('跳过')
+    if (onSend) onSend(isMulti ? '不加料' : '跳过')
   }
+
+  const hasSelection = isMulti ? selected.length > 0 : !!selected
 
   return (
     <div style={{
-      marginTop: 10,
-      borderRadius: 12,
+      marginTop: 10, borderRadius: 12,
       border: '1px solid var(--cursor-border-10, #e5e5e5)',
       background: 'var(--cursor-surface-100, #fafaf9)',
-      overflow: 'hidden',
-      maxWidth: 420,
-    }}>
+      overflow: 'hidden', maxWidth: 420,
+    }} className={qoderProps?.className} data-qoder-id={qoderProps?.["data-qoder-id"]}>
       {/* Header */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -1175,7 +1207,7 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
           </span>
           <span style={{
             fontSize: 10, padding: '1px 7px', borderRadius: 4,
-            background: 'var(--cursor-orange, #f54e00)', color: '#fff', fontWeight: 600,
+            background: isMulti ? '#10b981' : 'var(--cursor-orange, #f54e00)', color: '#fff', fontWeight: 600,
           }}>
             {stepConfig.type}
           </span>
@@ -1186,13 +1218,10 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
               {currentStep} / {totalSteps}
             </span>
           )}
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer', padding: 2,
-              color: 'var(--cursor-border-55, #94a3b8)', fontSize: 11, fontWeight: 500,
-            }}
-          >
+          <button onClick={() => setCollapsed(!collapsed)} style={{
+            background: 'none', border: 'none', cursor: 'pointer', padding: 2,
+            color: 'var(--cursor-border-55, #94a3b8)', fontSize: 11, fontWeight: 500,
+          }}>
             {collapsed ? '展开' : '折叠'}
           </button>
         </div>
@@ -1205,47 +1234,37 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
             {question}
           </div>
 
-          {/* Options */}
-          <div style={{ padding: '4px 14px 10px' }}>
-            {options.map((opt, i) => {
-              const isSelected = selected === opt.id
+          {/* Options — pill grid for compact display */}
+          <div style={{ padding: '6px 14px 12px', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {options.map((opt) => {
+              const isSelected = isMulti ? selected.includes(opt.id) : selected === opt.id
               return (
                 <div
                   key={opt.id}
-                  onClick={() => setSelected(opt.id)}
+                  onClick={() => toggleSelect(opt.id)}
                   style={{
-                    display: 'flex', alignItems: 'flex-start', gap: 10,
-                    padding: '10px 12px',
-                    marginBottom: 6,
-                    borderRadius: 8,
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    padding: '8px 14px',
+                    borderRadius: 20,
                     border: isSelected ? '1.5px solid var(--cursor-orange, #f54e00)' : '1px solid var(--cursor-border-10, #e5e5e5)',
-                    background: isSelected ? 'rgba(245, 78, 0, 0.04)' : 'var(--cursor-surface-100, #fafaf9)',
+                    background: isSelected ? 'rgba(245, 78, 0, 0.06)' : '#fff',
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
+                    fontSize: 13, fontWeight: isSelected ? 600 : 400,
+                    color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-ink, #1a1a1a)',
                   }}
                 >
-                  {/* Radio indicator */}
-                  <div style={{
-                    width: 20, height: 20, borderRadius: '50%', flexShrink: 0, marginTop: 1,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    border: isSelected ? '2px solid var(--cursor-orange, #f54e00)' : '2px solid var(--cursor-border-10, #d4d4d4)',
-                    background: isSelected ? 'var(--cursor-orange, #f54e00)' : 'transparent',
-                    transition: 'all 0.15s ease',
-                  }}>
-                    {isSelected && <span style={{ color: '#fff', fontSize: 11, fontWeight: 700 }}>{i + 1}</span>}
-                    {!isSelected && <span style={{ color: 'var(--cursor-border-55, #94a3b8)', fontSize: 11, fontWeight: 600 }}>{i + 1}</span>}
-                  </div>
-                  {/* Content */}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-ink, #1a1a1a)' }}>
-                      {opt.label}
-                    </div>
-                    {opt.desc && (
-                      <div style={{ fontSize: 11, color: 'var(--cursor-border-55, #94a3b8)', marginTop: 2, lineHeight: 1.4 }}>
-                        {opt.desc}
-                      </div>
-                    )}
-                  </div>
+                  {isSelected && (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cursor-orange, #f54e00)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  )}
+                  <span>{opt.label}</span>
+                  {opt.desc && (
+                    <span style={{ fontSize: 11, color: isSelected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-border-55, #94a3b8)', fontWeight: 500 }}>
+                      {opt.desc}
+                    </span>
+                  )}
                 </div>
               )
             })}
@@ -1258,16 +1277,11 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
             borderTop: '1px solid var(--cursor-border-10, #e5e5e5)',
             background: 'var(--cursor-surface-300, #f5f5f4)',
           }}>
-            {/* Recommend button */}
-            <button
-              onClick={handleRecommend}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 4,
-                background: 'none', border: 'none', cursor: 'pointer',
-                color: 'var(--cursor-orange, #f54e00)', fontSize: 12, fontWeight: 500,
-                padding: '4px 0',
-              }}
-            >
+            <button onClick={handleRecommend} style={{
+              display: 'flex', alignItems: 'center', gap: 4,
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'var(--cursor-orange, #f54e00)', fontSize: 12, fontWeight: 500, padding: '4px 0',
+            }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
               </svg>
@@ -1275,28 +1289,22 @@ function SelectionCard({ stepConfig, dynamicOptions, onSend, totalSteps, current
             </button>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <button
-                onClick={handleSkip}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  color: 'var(--cursor-border-55, #94a3b8)', fontSize: 12, fontWeight: 500,
-                  padding: '6px 12px',
-                }}
-              >
+              <button onClick={handleSkip} style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: 'var(--cursor-border-55, #94a3b8)', fontSize: 12, fontWeight: 500, padding: '6px 12px',
+              }}>
                 跳过
               </button>
               <button
                 onClick={handleContinue}
-                disabled={!selected}
+                disabled={!hasSelection}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 4,
-                  padding: '6px 16px',
-                  borderRadius: 6,
-                  border: 'none',
-                  background: selected ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-border-10, #e5e5e5)',
-                  color: selected ? '#fff' : 'var(--cursor-border-55, #94a3b8)',
+                  padding: '6px 16px', borderRadius: 6, border: 'none',
+                  background: hasSelection ? 'var(--cursor-orange, #f54e00)' : 'var(--cursor-border-10, #e5e5e5)',
+                  color: hasSelection ? '#fff' : 'var(--cursor-border-55, #94a3b8)',
                   fontSize: 12, fontWeight: 600,
-                  cursor: selected ? 'pointer' : 'default',
+                  cursor: hasSelection ? 'pointer' : 'default',
                   transition: 'all 0.2s',
                 }}
               >
@@ -1341,7 +1349,7 @@ function OrderingQuickReplies({ text, onSend, isStreaming }) {
       onSend={onSend}
       totalSteps={totalSteps}
       currentStep={currentStep}
-    />
+     data-qoder-id="qel-selectioncard-0dce20fb" data-qoder-source="{&quot;qoderId&quot;:&quot;qel-selectioncard-0dce20fb&quot;,&quot;filePath&quot;:&quot;react-vite/src/components/chat/ChatInterface.jsx&quot;,&quot;componentName&quot;:&quot;OrderingQuickReplies&quot;,&quot;elementRole&quot;:&quot;selectioncard&quot;,&quot;loc&quot;:{&quot;line&quot;:1338,&quot;column&quot;:5}}"/>
   )
 }
 
