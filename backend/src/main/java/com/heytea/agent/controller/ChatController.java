@@ -83,12 +83,15 @@ public class ChatController {
             log.info("Auto-classified intent: {} for message: {}", intent, truncate(request.getMessage(), 50));
 
             // 4.1 Intent inheritance: generic messages inherit conversation's prior intent
-            //     Solves "人工"/"转人工"/"你好" etc. defaulting to general_knowledge
+            //     Solves "人工"/"转人工"/"你好"/"是人工客服吗" etc. defaulting to general_knowledge
             if ("general_knowledge".equals(intent)) {
                 String prevIntent = conversation.getIntent();
                 String msg = request.getMessage().trim();
-                boolean isGenericMsg = msg.length() <= 5 ||
-                        msg.matches("^(人工|转人工|人工客服|你好|在吗|嗯|好|对|是|继续)$");
+                String cleaned = msg.replaceAll("[^\\u4e00-\\u9fffa-zA-Z]", "");
+                boolean isGenericMsg = msg.length() <= 8 ||
+                        msg.matches("^(人工|转人工|人工客服|人工人工|人工服务|在线客服|你好|在吗|嗯|好|对|是|继续|谢谢|感谢).{0,3}$") ||
+                        cleaned.matches(".*(人工|转人工|客服).{0,3}") && cleaned.length() <= 8 ||
+                        msg.matches("^.{0,3}(人工客服|在线客服|人工服务).{0,3}$");
                 if (isGenericMsg && prevIntent != null && !prevIntent.isBlank()
                         && !"general_knowledge".equals(prevIntent)) {
                     intent = prevIntent;

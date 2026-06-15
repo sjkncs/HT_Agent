@@ -90,15 +90,23 @@ public class LLMServiceImpl implements LLMService {
                 "(食品问题|食品安全问题|怎么处理|怎么解决|给个说法|给个交代)",
                 // 包装/卫生
                 "(包装破|漏杯|封口不严|食安|食品安全|卫生问题|不干净|不卫生)",
-                "(杯盖.{0,3}(掉进|掉到|掉入)|吸管.{0,5}(脏|黑|变色|异物))",
+                "(杯盖.{0,3}(掉进|掉到|掉入)|吸管.{0,8}(脏|黑|黑圈|变色|异物))",
                 "(杯底.*有个|杯盖.*掉|杯子里.*有|杯底.*东西)",
                 // 模糊但有食安语境的表述
-                "(这是啥|这个是什么|这是什么呀|啥东西|什么情况|啥情况)",
+                "(这是啥|这个是啥|这个是什么|这是什么呀|啥东西|什么情况|啥情况)",
                 "(正常吗|正常的吗|这个正常|是不是正常|这样正常)",
                 "(吸出来|吸.*出来|喝到最后|喝到后面|喝出)",
                 "(给错|做错|弄错|出.*错).{0,6}(茶|饮|杯)",
                 "(反馈问题|反馈.{0,3}(食安|安全|卫生|质量))",
                 "(潮潮|黏黏|粘稠|结块|发粘)",
+                // 订单号（用户提供19位左右订单号通常在投诉语境；排除字母前缀的ID）
+                "(?<![a-zA-Z])\\d{16,20}(?!\\d)",
+                // 门店闭店/整改（食品安全相关）
+                "(闭店|整改|停业|关门.{0,3}(整改|检查|卫生)|歇业)",
+                // 用户粘贴客服回复（通常在食安投诉升级中）
+                "(非常抱歉给您|非常重视您的|请您提供订单编号|马上为您核实|门店负责人亲自联系|消消气)",
+                // 商家回复追问
+                "(商家的回复|商家.{0,2}(回复|答复|回应).{0,3}(什么|啥)意思)",
                 // 英文
                 "(foreign object|refund|sick|allergic|contaminated|hair|mold|expired|dirty)"
         );
@@ -632,6 +640,14 @@ public class LLMServiceImpl implements LLMService {
             return "general_knowledge";
         }
         String msg = userMessage.toLowerCase();
+
+        // ── Pre-check: Pure alphanumeric IDs → NOT food_safety ──
+        // Campaign codes, activity IDs (e.g., "H1248723697536200704000")
+        // Must contain BOTH letters and digits; pure digit order numbers are NOT excluded
+        if (msg.matches("^[a-zA-Z0-9_\\-]{10,}$") && msg.matches(".*[a-zA-Z].*") && msg.matches(".*\\d.*")) {
+            log.info("Alphanumeric ID detected, defaulting to general_knowledge");
+            return "general_knowledge";
+        }
 
         // ── Pre-check: Store-environment hygiene → NOT food_safety ──
         // Messages describing store hygiene (flies/pests/dirtiness IN the store)
