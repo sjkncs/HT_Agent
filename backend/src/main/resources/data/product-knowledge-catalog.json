@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "updatedAt": "2026-06-15",
-    "totalProducts": 118,
+    "totalProducts": 122,
     "categories": [
       "茶特调/茗茶",
       "植物茶/鲜果茶",
@@ -21,16 +21,36 @@
         "base": 29
       },
       "description": {
-        "short": "葡萄搭配清新茶底"
+        "short": "首创·四配方·葡萄汁+果肉+绿妍冰沙",
+        "long": "首创四配方饮品：100%葡萄汁+纯粹真冰糖+绿妍茶汤（冰沙）+现制葡萄果肉。经典葡萄系列，100%葡萄汁搭配现制果肉，酸甜浓郁。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "葡萄"
+          "100%葡萄汁",
+          "纯粹真冰糖",
+          "绿妍茶汤（冰沙）",
+          "现制葡萄果肉"
+        ],
+        "layers": [
+          {
+            "name": "现制葡萄果肉",
+            "position": "底层"
+          },
+          {
+            "name": "100%葡萄汁+绿妍冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [],
       "tags": {
-        "status": "首创"
+        "status": "首创",
+        "recipeCount": "四配方"
       },
       "nutrition": {
         "calories": "约200kcal",
@@ -38,7 +58,27 @@
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "100%葡萄汁",
+        "纯粹真冰糖",
+        "绿妍茶汤（冰沙）",
+        "现制葡萄果肉"
+      ],
+      "relatedProducts": [
+        "芝芝多肉葡萄",
+        "轻芝多肉葡萄"
+      ],
+      "faq": [
+        {
+          "q": "多肉葡萄有几个配方？",
+          "a": "首创四配方：100%葡萄汁+纯粹真冰糖+绿妍茶汤（冰沙）+现制葡萄果肉。"
+        },
+        {
+          "q": "多肉葡萄和芝芝多肉葡萄有什么区别？",
+          "a": "多肉葡萄是四配方，没有芝芝云顶奶盖；芝芝多肉葡萄是五配方，多了首创芝芝云顶，口感更丰富。"
+        }
+      ]
     },
     "清爽芭乐提(红芭乐)": {
       "productId": 2002,
@@ -493,16 +533,38 @@
         "base": 29
       },
       "description": {
-        "short": "红柚搭配清新茶底"
+        "short": "首创·五配方·西柚汁+西柚片+红柚果粒",
+        "long": "首创五配方饮品：绿妍茶汤（冰沙）+西柚片+纯粹真冰糖+100%西柚汁+红柚果粒。三重西柚风味（西柚片+西柚汁+红柚果粒），酸甜爆汁，果香浓郁。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "红柚"
+          "绿妍茶汤（冰沙）",
+          "西柚片",
+          "纯粹真冰糖",
+          "100%西柚汁",
+          "红柚果粒"
+        ],
+        "layers": [
+          {
+            "name": "红柚果粒+西柚片",
+            "position": "底层果肉"
+          },
+          {
+            "name": "100%西柚汁+绿妍冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [],
       "tags": {
-        "status": "首创"
+        "status": "首创",
+        "recipeCount": "五配方",
+        "feature": "三重西柚"
       },
       "nutrition": {
         "calories": "约200kcal",
@@ -510,7 +572,27 @@
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "绿妍茶汤（冰沙）",
+        "西柚片",
+        "纯粹真冰糖",
+        "100%西柚汁",
+        "红柚果粒"
+      ],
+      "relatedProducts": [
+        "轻芝杨梅"
+      ],
+      "faq": [
+        {
+          "q": "满杯红柚有几个配方？",
+          "a": "首创五配方：绿妍茶汤（冰沙）+西柚片+纯粹真冰糖+100%西柚汁+红柚果粒。三重西柚风味。"
+        },
+        {
+          "q": "满杯红柚的三重西柚是什么？",
+          "a": "西柚片（南非/以色列/埃及时令鲜果）+100%西柚汁（西班牙/南非/广西）+红柚果粒（南非红西柚），三种西柚原料带来层次丰富的酸甜爆汁体验。"
+        }
+      ]
     },
     "多肉青提": {
       "productId": 2014,
@@ -1142,18 +1224,43 @@
         "base": 31
       },
       "description": {
-        "short": "葡萄搭配浓郁芝士奶盖"
+        "short": "首创·五配方·芝芝云顶+葡萄汁+果肉",
+        "long": "首创五配方饮品：首创芝芝云顶+100%葡萄汁+纯粹真冰糖+绿妍茶汤（冰沙）+现制葡萄果肉。经典葡萄搭配芝芝云顶奶盖，丝滑浓郁。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "葡萄"
+          "首创芝芝云顶",
+          "100%葡萄汁",
+          "纯粹真冰糖",
+          "绿妍茶汤（冰沙）",
+          "现制葡萄果肉"
+        ],
+        "layers": [
+          {
+            "name": "首创芝芝云顶",
+            "position": "顶层奶盖"
+          },
+          {
+            "name": "现制葡萄果肉",
+            "position": "底层"
+          },
+          {
+            "name": "100%葡萄汁+绿妍冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [
         "乳制品"
       ],
       "tags": {
-        "status": "首创"
+        "status": "首创",
+        "recipeCount": "五配方"
       },
       "nutrition": {
         "calories": "约320kcal",
@@ -1161,7 +1268,28 @@
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "首创芝芝云顶",
+        "100%葡萄汁",
+        "纯粹真冰糖",
+        "绿妍茶汤（冰沙）",
+        "现制葡萄果肉"
+      ],
+      "relatedProducts": [
+        "多肉葡萄",
+        "芝芝多肉葡萄"
+      ],
+      "faq": [
+        {
+          "q": "轻芝多肉葡萄有几个配方？",
+          "a": "首创五配方：首创芝芝云顶+100%葡萄汁+纯粹真冰糖+绿妍茶汤（冰沙）+现制葡萄果肉。"
+        },
+        {
+          "q": "轻芝多肉葡萄含乳制品吗？",
+          "a": "是的，含有首创芝芝云顶奶盖，含乳制品过敏原。"
+        }
+      ]
     },
     "芝芝多肉葡萄": {
       "productId": 2031,
@@ -1171,18 +1299,43 @@
         "base": 31
       },
       "description": {
-        "short": "葡萄搭配浓郁芝士奶盖"
+        "short": "首创·五配方·芝芝云顶+葡萄汁+果肉",
+        "long": "首创五配方饮品：首创芝芝云顶+100%葡萄汁+纯粹真冰糖+绿妍茶汤（冰沙）+现制葡萄果肉。芝芝系列经典之作，奶盖搭配葡萄冰沙，层次丰富。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "葡萄"
+          "首创芝芝云顶",
+          "100%葡萄汁",
+          "纯粹真冰糖",
+          "绿妍茶汤（冰沙）",
+          "现制葡萄果肉"
+        ],
+        "layers": [
+          {
+            "name": "首创芝芝云顶",
+            "position": "顶层奶盖"
+          },
+          {
+            "name": "现制葡萄果肉",
+            "position": "底层"
+          },
+          {
+            "name": "100%葡萄汁+绿妍冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [
         "乳制品"
       ],
       "tags": {
-        "status": "首创"
+        "status": "首创",
+        "recipeCount": "五配方"
       },
       "nutrition": {
         "calories": "约320kcal",
@@ -1190,7 +1343,32 @@
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "首创芝芝云顶",
+        "100%葡萄汁",
+        "纯粹真冰糖",
+        "绿妍茶汤（冰沙）",
+        "现制葡萄果肉"
+      ],
+      "relatedProducts": [
+        "多肉葡萄",
+        "轻芝多肉葡萄"
+      ],
+      "faq": [
+        {
+          "q": "芝芝多肉葡萄有几个配方？",
+          "a": "首创五配方：首创芝芝云顶+100%葡萄汁+纯粹真冰糖+绿妍茶汤（冰沙）+现制葡萄果肉。"
+        },
+        {
+          "q": "芝芝多肉葡萄和轻芝多肉葡萄有什么区别？",
+          "a": "两者都是首创五配方，配方成分相同。轻芝版本奶盖用量更轻盈，口感更清爽；芝芝版本奶盖更浓郁。"
+        },
+        {
+          "q": "芝芝多肉葡萄含乳制品吗？",
+          "a": "是的，含有首创芝芝云顶奶盖，含乳制品过敏原。"
+        }
+      ]
     },
     "芝芝抹茶": {
       "productId": 2032,
@@ -4161,6 +4339,175 @@
         "芝芝抹茶",
         "咸酪碎银子",
         "碎银子牛乳茶"
+      ]
+    },
+    "100%葡萄汁": {
+      "productId": 3025,
+      "skuCode": "HT-ING-025",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "100%葡萄汁，巨峰/夏黑葡萄",
+        "long": "100%葡萄汁，产自陕西、辽宁、福建等核心产区，温差较大、阳光充足，更利于糖分沉淀。优选巨峰葡萄和夏黑葡萄，挂果约120天树上自然成熟。短时杀菌工艺，榨汁后瞬时冷却，持续冷冻运输保留葡萄风味。不添加人工色素与香精。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "100%葡萄汁"
+        ],
+        "fruitOrigin": "陕西、辽宁、福建"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果汁类原料",
+        "variety": "巨峰葡萄、夏黑葡萄",
+        "processing": "短时杀菌"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加人工色素",
+        "不添加香精",
+        "酸甜可口，香气独特",
+        "挂果约120天",
+        "短时杀菌工艺",
+        "品质可溯源"
+      ],
+      "processInfo": "产区温差较大、阳光充足，更利于糖分沉淀。优选巨峰葡萄和夏黑葡萄，挂果约120天树上自然成熟。鲜果冷藏运输到厂，品质可溯源。榨汁后短时杀菌、瞬时冷却，持续冷冻运输保留葡萄风味。",
+      "flavorProfile": "酸甜可口，香气独特",
+      "relatedProducts": [
+        "多肉葡萄",
+        "芝芝多肉葡萄",
+        "轻芝多肉葡萄"
+      ]
+    },
+    "现制葡萄果肉": {
+      "productId": 3026,
+      "skuCode": "HT-ING-026",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "辽宁云南现制葡萄果肉，新鲜制备",
+        "long": "现制葡萄果肉，产自辽宁、云南，光照充足（年日照超2300小时），昼夜温差大。夏黑葡萄与巨峰葡萄随产季切换，平均100天自然成熟不早采。全程冷链运输锁鲜，新鲜制备非罐头果肉。糖度>15，肉质爽脆肥嫩。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "现制葡萄果肉"
+        ],
+        "fruitOrigin": "辽宁、云南"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果肉类原料",
+        "variety": "夏黑葡萄、巨峰葡萄",
+        "feature": "非罐头"
+      },
+      "nutrition": {
+        "sugar": "糖度>15"
+      },
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "新鲜制备，非罐头果肉",
+        "糖度>15",
+        "肉质爽脆肥嫩",
+        "全程冷链运输",
+        "100天自然成熟不早采",
+        "真果自带香甜"
+      ],
+      "processInfo": "辽宁、云南产区光照充足，全年日照超2300小时，昼夜温差大。夏黑葡萄与巨峰葡萄随产季切换，平均100天自然成熟不早采。全程冷链运输进仓锁鲜。巨峰葡萄≥8g/颗，夏黑葡萄≥5g/颗。",
+      "flavorProfile": "肉质爽脆肥嫩，甜浓多汁，果香浓郁",
+      "relatedProducts": [
+        "多肉葡萄",
+        "芝芝多肉葡萄",
+        "轻芝多肉葡萄"
+      ]
+    },
+    "西柚片": {
+      "productId": 3027,
+      "skuCode": "HT-ING-027",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "南非/以色列/埃及时令西柚片",
+        "long": "西柚片产自南非、以色列、埃及等地，按时切换产地选用时令鲜果。平均挂果150-180天，果形扁球形，果皮橘黄色。糖度≥9，单果250-400g。果香浓郁，酸甜多汁，略带苦味。新鲜制备非罐头果肉。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "西柚片"
+        ],
+        "fruitOrigin": "南非、以色列、埃及"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果片类原料",
+        "feature": "时令切换"
+      },
+      "nutrition": {
+        "sugar": "糖度≥9"
+      },
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "新鲜制备，非罐头果肉",
+        "糖度≥9",
+        "单果250-400g",
+        "挂果150-180天",
+        "按时切换产地",
+        "真果自带香甜"
+      ],
+      "processInfo": "南非、以色列、埃及等产地按时切换，选用时令鲜果。平均挂果时长150-180天，果形扁球形，果皮橘黄色，无发霉、干瘪等现象。",
+      "flavorProfile": "果香浓郁，酸甜多汁，略带苦味",
+      "relatedProducts": [
+        "满杯红柚"
+      ]
+    },
+    "100%西柚汁": {
+      "productId": 3028,
+      "skuCode": "HT-ING-028",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "100%西柚汁，西班牙/南非/广西",
+        "long": "100%西柚汁，原料产自西班牙、南非、中国广西。日照充足，气候温和，广西产区年均温18°C以上，西班牙产区靠地中海沿岸。西柚树上自然成熟不早采，短时低温杀菌锁住风味。不添加人工色素与香精。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "100%西柚汁"
+        ],
+        "fruitOrigin": "西班牙、南非、中国广西"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果汁类原料",
+        "processing": "短时低温杀菌"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加人工色素",
+        "不添加香精",
+        "树上自然成熟不早采",
+        "短时低温杀菌",
+        "真果自带香甜"
+      ],
+      "processInfo": "西班牙、南非、广西三大产区，日照充足气候温和。广西产区年均温18°C以上，西班牙产区靠地中海沿岸。西柚树上自然成熟不早采，短时低温杀菌锁住更多西柚水果风味。",
+      "flavorProfile": "西柚果香浓郁，酸甜清爽",
+      "relatedProducts": [
+        "满杯红柚"
       ]
     }
   }
