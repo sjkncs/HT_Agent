@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "updatedAt": "2026-06-16",
-    "totalProducts": 100,
+    "updatedAt": "2026-06-15",
+    "totalProducts": 104,
     "categories": [
       "茶特调/茗茶",
       "植物茶/鲜果茶",
@@ -1257,22 +1257,51 @@
         "base": 22
       },
       "description": {
-        "short": "经典牛乳茶"
+        "short": "四配方·源牧3.8牛乳+嫣红茶汤+混合厚乳",
+        "long": "四配方饮品：源牧3.8牛乳+纯粹真冰糖+嫣红茶汤+混合厚乳。经典红茶搭配高品质牛乳与混合厚乳，醇厚顺滑，真材实料。",
+        "servingStyle": "冷热均可"
       },
       "ingredients": {
         "main": [
-          "红茶"
+          "源牧3.8牛乳",
+          "纯粹真冰糖",
+          "嫣红茶汤",
+          "混合厚乳"
         ]
       },
-      "allergens": [],
-      "tags": {},
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "recipeCount": "四配方"
+      },
       "nutrition": {
         "calories": "约100kcal",
         "sugar": "约22g",
         "caffeine": "约40mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "源牧3.8牛乳",
+        "纯粹真冰糖",
+        "嫣红茶汤",
+        "混合厚乳"
+      ],
+      "relatedProducts": [
+        "热烤黑糖波波牛乳茶",
+        "烤黑糖波波牛乳茶"
+      ],
+      "faq": [
+        {
+          "q": "嫣红牛乳茶有几个配方？",
+          "a": "四配方：源牧3.8牛乳+纯粹真冰糖+嫣红茶汤+混合厚乳。"
+        },
+        {
+          "q": "嫣红牛乳茶含咖啡因吗？",
+          "a": "嫣红牛乳茶含约40mg咖啡因，来自嫣红茶汤（红茶）。"
+        }
+      ]
     },
     "碎银子牛乳茶": {
       "productId": 2042,
@@ -2956,6 +2985,217 @@
         "奇兰乌龙康普茶液",
         "鸭喜香单丛茶汤",
         "低GI L-阿拉伯糖蔗糖调味糖浆"
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "混合厚乳": {
+      "productId": 3007,
+      "skuCode": "HT-ING-007",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "新西兰/宁夏/山东·荷斯坦奶牛·奶香浓郁",
+        "long": "混合厚乳，奶源来自新西兰、宁夏、山东等优质产区，选用荷斯坦奶牛，来自现代化牧场，精选饲料喂养。奶香浓郁，口感顺滑。不添加奶精、植脂末、氢化植物油、香精、色素。",
+        "servingStyle": "乳基"
+      },
+      "ingredients": {
+        "main": [
+          "牛乳"
+        ],
+        "milkOrigin": [
+          "新西兰",
+          "宁夏",
+          "山东"
+        ],
+        "cowBreed": "荷斯坦奶牛"
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "quality": "不添加奶精/植脂末/氢化植物油/香精/色素"
+      },
+      "nutrition": {
+        "caffeine": "0mg"
+      },
+      "customizationType": "none",
+      "qualityClaims": [
+        "奶精：不添加",
+        "植脂末：不添加",
+        "氢化植物油：不添加",
+        "香精：不添加",
+        "色素：不添加"
+      ],
+      "flavorProfile": "奶香浓郁，口感顺滑",
+      "processInfo": "现代化牧场，精选饲料喂养",
+      "faq": [
+        {
+          "q": "混合厚乳加了奶精吗？",
+          "a": "混合厚乳不添加奶精、植脂末、氢化植物油、香精和色素，使用真牛乳。"
+        },
+        {
+          "q": "混合厚乳的奶源来自哪里？",
+          "a": "奶源产地包括新西兰、宁夏、山东等地，选用荷斯坦奶牛，来自现代化牧场。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "嫣红茶汤": {
+      "productId": 3008,
+      "skuCode": "HT-ING-008",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "无香精·云南临沧+福建宁德·花香桂圆香",
+        "long": "嫣红茶汤，茶叶产地为云南临沧（海拔2000m+）和福建宁德（海拔800m+），属于红茶。产区年均日照1894-2261小时，年均气温17.3°C，年降水920-1750mm。花香、桂圆香、坚果香交织，滋味醇厚。5步制茶工艺：采摘→萎凋→揉捻→发酵→干燥。荣获凤庆县\"基地质量奖\"。不添加香精。",
+        "servingStyle": "茶汤"
+      },
+      "ingredients": {
+        "main": [
+          "红茶"
+        ],
+        "teaOrigin": [
+          "云南临沧",
+          "福建宁德"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "咖啡因黄灯",
+        "tea": "红茶",
+        "quality": "不添加香精"
+      },
+      "nutrition": {
+        "caffeine": "黄灯"
+      },
+      "customizationType": "none",
+      "teaType": "红茶",
+      "processInfo": "5步制茶工艺：采摘→萎凋→揉捻→发酵→干燥。产区年均日照1894-2261h，年均气温17.3°C，年降水920-1750mm",
+      "qualityClaims": [
+        "香精：不添加",
+        "凤庆县基地质量奖"
+      ],
+      "flavorProfile": "花香、桂圆香、坚果香交织，滋味醇厚",
+      "faq": [
+        {
+          "q": "嫣红茶汤是什么茶？",
+          "a": "嫣红茶汤属于红茶，茶叶来自云南临沧（海拔2000m+）和福建宁德（海拔800m+）。"
+        },
+        {
+          "q": "嫣红茶汤加了香精吗？",
+          "a": "嫣红茶汤不添加香精，花香、桂圆香、坚果香均来自茶叶本身。"
+        },
+        {
+          "q": "嫣红茶汤有什么奖？",
+          "a": "嫣红茶汤的茶叶荣获凤庆县\"基地质量奖\"。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "源牧3.8牛乳": {
+      "productId": 3009,
+      "skuCode": "HT-ING-009",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "新茶饮专用真牛乳·3.8g蛋白质",
+        "long": "源牧3.8牛乳，产地山东、河北，选用荷斯坦奶牛，蛋白质含量达3.8g/100mL。采用TMR系统科学喂养，冷链运输，闪蒸技术处理。新茶饮专用真牛乳，不添加植脂末和奶精。",
+        "servingStyle": "乳基"
+      },
+      "ingredients": {
+        "main": [
+          "牛乳"
+        ],
+        "milkOrigin": [
+          "山东",
+          "河北"
+        ],
+        "cowBreed": "荷斯坦奶牛"
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "quality": "不添加植脂末/奶精",
+        "highlight": "3.8g/100mL蛋白质"
+      },
+      "nutrition": {
+        "caffeine": "0mg",
+        "protein": "3.8g/100mL"
+      },
+      "customizationType": "none",
+      "qualityClaims": [
+        "植脂末：不添加",
+        "奶精：不添加",
+        "蛋白质含量：3.8g/100mL"
+      ],
+      "processInfo": "TMR系统科学喂养，冷链运输，闪蒸技术",
+      "flavorProfile": "新茶饮专用真牛乳",
+      "faq": [
+        {
+          "q": "源牧3.8牛乳蛋白质含量是多少？",
+          "a": "源牧3.8牛乳蛋白质含量为3.8g/100mL。"
+        },
+        {
+          "q": "源牧3.8牛乳加了植脂末吗？",
+          "a": "源牧3.8牛乳不添加植脂末和奶精，是真牛乳。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "纯粹真冰糖": {
+      "productId": 3010,
+      "skuCode": "HT-ING-010",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "广西甘蔗·植物提取天然糖",
+        "long": "纯粹真冰糖，产地广西，位于北回归线附近甘蔗黄金种植带。产区年均日照1500h，年均降雨2000mm，甘蔗生长超270天。经10余道工序精制，350目过滤，醇厚自然甜。植物提取天然糖，不含二氧化硫、防腐剂、果葡糖浆。",
+        "servingStyle": "甜味剂"
+      },
+      "ingredients": {
+        "main": [
+          "甘蔗冰糖"
+        ],
+        "sugarOrigin": "广西（北回归线附近甘蔗黄金种植带）"
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "quality": "不含二氧化硫/防腐剂/果葡糖浆",
+        "dietary": "植物提取天然糖"
+      },
+      "nutrition": {
+        "caffeine": "0mg"
+      },
+      "customizationType": "none",
+      "qualityClaims": [
+        "二氧化硫：不含",
+        "防腐剂：不含",
+        "果葡糖浆：不含"
+      ],
+      "processInfo": "10余道工序精制，350目过滤",
+      "climateInfo": "产区年均日照1500h，年均降雨2000mm，甘蔗生长超270天",
+      "flavorProfile": "醇厚自然甜",
+      "faq": [
+        {
+          "q": "纯粹真冰糖是天然的吗？",
+          "a": "纯粹真冰糖是植物提取的天然糖，不含二氧化硫、防腐剂和果葡糖浆。"
+        },
+        {
+          "q": "纯粹真冰糖的产地在哪？",
+          "a": "产地广西，位于北回归线附近甘蔗黄金种植带，甘蔗生长超270天。"
+        }
       ],
       "dataCompleteness": "detailed"
     }

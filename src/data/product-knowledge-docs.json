@@ -1,751 +1,1262 @@
 {
   "meta": {
-    "version": "1.1.0",
-    "generatedAt": "2026-06-15T13:40:23.554Z",
-    "totalDocuments": 42
+    "totalDocs": 83,
+    "generatedAt": "2026-06-15T13:48:55.016Z"
   },
   "documents": [
     {
-      "id": "story-HT-2021",
+      "id": "KDOC-001",
       "type": "product_story",
       "product": "奇兰粉芭乐",
       "category": "植物茶/鲜果茶",
-      "text": "首创六配方饮品：芭乐云顶奶盖+100%芭乐汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。奇兰芭乐莲雾的莲雾削减版本，保留芭乐清甜与奇兰花香。",
+      "text": "奇兰粉芭乐：首创六配方饮品：芭乐云顶奶盖+100%芭乐汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。奇兰芭乐莲雾的莲雾削减版本，保留芭乐清甜与奇兰花香。",
       "metadata": {
         "tags": [
-          "首创",
-          "咖啡因黄灯",
-          "六配方"
+          "奇兰粉芭乐",
+          "植物茶/鲜果茶",
+          "首创·六配方·芭乐+奇兰+牛乳"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "allergen-HT-2021",
+      "id": "KDOC-002",
       "type": "allergen_info",
       "product": "奇兰粉芭乐",
       "category": "植物茶/鲜果茶",
-      "text": "奇兰粉芭乐含有过敏原: 乳制品。",
+      "text": "奇兰粉芭乐含有以下过敏原：乳制品。",
       "metadata": {
         "tags": [
+          "奇兰粉芭乐",
           "过敏原",
           "乳制品"
         ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
+        "retrievalScope": "allergen"
       }
     },
     {
-      "id": "caffeine-HT-2021",
-      "type": "dietary_info",
-      "product": "奇兰粉芭乐",
-      "category": "植物茶/鲜果茶",
-      "text": "奇兰粉芭乐咖啡因等级: 咖啡因黄灯 (黄灯)",
-      "metadata": {
-        "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
-        ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
-      }
-    },
-    {
-      "id": "recipe-HT-2021",
+      "id": "KDOC-003",
       "type": "recipe_info",
       "product": "奇兰粉芭乐",
       "category": "植物茶/鲜果茶",
-      "text": "奇兰粉芭乐(六配方)配方：芭乐云顶 + 100%芭乐汁 + 纯粹真冰糖 + 花香奇兰茶汤 + 源牧3.8牛乳 + 定制轻乳。",
+      "text": "奇兰粉芭乐（六配方）配方组成：芭乐云顶 + 100%芭乐汁 + 纯粹真冰糖 + 花香奇兰茶汤 + 源牧3.8牛乳 + 定制轻乳。",
       "metadata": {
         "tags": [
+          "奇兰粉芭乐",
           "配方",
-          "原料",
-          "成分"
+          "芭乐云顶",
+          "100%芭乐汁",
+          "纯粹真冰糖",
+          "花香奇兰茶汤",
+          "源牧3.8牛乳",
+          "定制轻乳"
         ],
-        "retrievalScope": [
-          "ingredient_query",
-          "describe"
-        ]
+        "retrievalScope": "recipe"
       }
     },
     {
-      "id": "story-HT-2023",
+      "id": "KDOC-004",
+      "type": "faq",
+      "product": "奇兰粉芭乐",
+      "category": "植物茶/鲜果茶",
+      "text": "问：奇兰粉芭乐和奇兰芭乐莲雾有什么区别？\n答：奇兰粉芭乐是六配方，不含莲雾汁；奇兰芭乐莲雾是七配方，多了100%莲雾汁。",
+      "metadata": {
+        "tags": [
+          "奇兰粉芭乐",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-005",
       "type": "product_story",
       "product": "奇兰芭乐莲雾",
       "category": "植物茶/鲜果茶",
-      "text": "首创七配方饮品：芭乐云顶奶盖+100%芭乐汁+100%莲雾汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。融合热带芭乐清甜与莲雾爽脆，搭配花香奇兰茶底和丝滑牛乳。",
+      "text": "奇兰芭乐莲雾：首创七配方饮品：芭乐云顶奶盖+100%芭乐汁+100%莲雾汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。融合热带芭乐清甜与莲雾爽脆，搭配花香奇兰茶底和丝滑牛乳。",
       "metadata": {
         "tags": [
-          "首创",
-          "咖啡因黄灯",
-          "七配方"
+          "奇兰芭乐莲雾",
+          "植物茶/鲜果茶",
+          "首创·七配方·芭乐+莲雾+奇兰+牛乳"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "allergen-HT-2023",
+      "id": "KDOC-006",
       "type": "allergen_info",
       "product": "奇兰芭乐莲雾",
       "category": "植物茶/鲜果茶",
-      "text": "奇兰芭乐莲雾含有过敏原: 乳制品。",
+      "text": "奇兰芭乐莲雾含有以下过敏原：乳制品。",
       "metadata": {
         "tags": [
+          "奇兰芭乐莲雾",
           "过敏原",
           "乳制品"
         ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
+        "retrievalScope": "allergen"
       }
     },
     {
-      "id": "caffeine-HT-2023",
-      "type": "dietary_info",
-      "product": "奇兰芭乐莲雾",
-      "category": "植物茶/鲜果茶",
-      "text": "奇兰芭乐莲雾咖啡因等级: 咖啡因黄灯 (黄灯)",
-      "metadata": {
-        "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
-        ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
-      }
-    },
-    {
-      "id": "recipe-HT-2023",
+      "id": "KDOC-007",
       "type": "recipe_info",
       "product": "奇兰芭乐莲雾",
       "category": "植物茶/鲜果茶",
-      "text": "奇兰芭乐莲雾(七配方)配方：芭乐云顶 + 100%芭乐汁 + 100%莲雾汁 + 纯粹真冰糖 + 花香奇兰茶汤 + 源牧3.8牛乳 + 定制轻乳。",
+      "text": "奇兰芭乐莲雾（七配方）配方组成：芭乐云顶 + 100%芭乐汁 + 100%莲雾汁 + 纯粹真冰糖 + 花香奇兰茶汤 + 源牧3.8牛乳 + 定制轻乳。",
       "metadata": {
         "tags": [
+          "奇兰芭乐莲雾",
           "配方",
-          "原料",
-          "成分"
+          "芭乐云顶",
+          "100%芭乐汁",
+          "100%莲雾汁",
+          "纯粹真冰糖",
+          "花香奇兰茶汤",
+          "源牧3.8牛乳",
+          "定制轻乳"
         ],
-        "retrievalScope": [
-          "ingredient_query",
-          "describe"
-        ]
+        "retrievalScope": "recipe"
       }
     },
     {
-      "id": "story-HT-2028",
+      "id": "KDOC-008",
+      "type": "faq",
+      "product": "奇兰芭乐莲雾",
+      "category": "植物茶/鲜果茶",
+      "text": "问：奇兰芭乐莲雾有几个配方？\n答：首创七配方：芭乐云顶+100%芭乐汁+100%莲雾汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。",
+      "metadata": {
+        "tags": [
+          "奇兰芭乐莲雾",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-009",
       "type": "product_story",
       "product": "芒椰糯米饭",
       "category": "灵感茶点",
-      "text": "端午限定，超高人气「芒椰糯米饭」回归。每日现切当季云南鲜芒，现蒸椰香泰国籼糯米，搭配现打芒果冰沙，一杯可以喝的「糯米饭」，香糯爽口。0咖啡因。",
+      "text": "芒椰糯米饭：端午限定，超高人气「芒椰糯米饭」回归。每日现切当季云南鲜芒，现蒸椰香泰国籼糯米，搭配现打芒果冰沙，一杯可以喝的「糯米饭」，香糯爽口。0咖啡因。",
       "metadata": {
         "tags": [
-          "端午限定",
-          "回归",
-          "0咖啡因",
-          "不含茶"
+          "芒椰糯米饭",
+          "灵感茶点",
+          "端午限定回归·0咖啡因"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "allergen-HT-2028",
+      "id": "KDOC-010",
       "type": "allergen_info",
       "product": "芒椰糯米饭",
       "category": "灵感茶点",
-      "text": "芒椰糯米饭含有过敏原: 椰子、乳制品。",
+      "text": "芒椰糯米饭含有以下过敏原：椰子、乳制品。",
       "metadata": {
         "tags": [
+          "芒椰糯米饭",
           "过敏原",
           "椰子",
           "乳制品"
         ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
+        "retrievalScope": "allergen"
       }
     },
     {
-      "id": "caffeine-HT-2028",
+      "id": "KDOC-011",
       "type": "dietary_info",
       "product": "芒椰糯米饭",
       "category": "灵感茶点",
-      "text": "芒椰糯米饭咖啡因等级: 0咖啡因 (0mg)",
+      "text": "芒椰糯米饭饮食信息：0咖啡因，不含茶。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "0咖啡因"
+          "芒椰糯米饭",
+          "饮食",
+          "0咖啡因",
+          "不含茶"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "story-HT-2033",
+      "id": "KDOC-012",
+      "type": "faq",
+      "product": "芒椰糯米饭",
+      "category": "灵感茶点",
+      "text": "问：芒椰糯米饭有茶吗？\n答：芒椰糯米饭不含茶，0咖啡因，适合对咖啡因敏感的朋友。",
+      "metadata": {
+        "tags": [
+          "芒椰糯米饭",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-013",
+      "type": "faq",
+      "product": "芒椰糯米饭",
+      "category": "灵感茶点",
+      "text": "问：芒椰糯米饭里的粽叶能吃吗？\n答：粽叶仅作装饰用途，不可直接食用哦。",
+      "metadata": {
+        "tags": [
+          "芒椰糯米饭",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-014",
+      "type": "faq",
+      "product": "芒椰糯米饭",
+      "category": "灵感茶点",
+      "text": "问：芒椰糯米饭多少卡路里？\n答：约260kcal，糖分约28g。",
+      "metadata": {
+        "tags": [
+          "芒椰糯米饭",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-015",
       "type": "product_story",
       "product": "芝芝绿妍茶后",
       "category": "茶特调/茗茶",
-      "text": "首创三配方饮品：首创芝芝云顶奶盖+绿妍茶汤+纯粹真冰糖。经典绿妍茉莉花茶搭配浓郁芝芝奶盖，好茶自然香。",
+      "text": "芝芝绿妍茶后：首创三配方饮品：首创芝芝云顶奶盖+绿妍茶汤+纯粹真冰糖。经典绿妍茉莉花茶搭配浓郁芝芝奶盖，好茶自然香。",
       "metadata": {
         "tags": [
-          "首创",
-          "咖啡因黄灯",
-          "三配方"
+          "芝芝绿妍茶后",
+          "茶特调/茗茶",
+          "首创·三配方·芝芝云顶+绿妍茶汤"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "allergen-HT-2033",
+      "id": "KDOC-016",
       "type": "allergen_info",
       "product": "芝芝绿妍茶后",
       "category": "茶特调/茗茶",
-      "text": "芝芝绿妍茶后含有过敏原: 乳制品。",
+      "text": "芝芝绿妍茶后含有以下过敏原：乳制品。",
       "metadata": {
         "tags": [
+          "芝芝绿妍茶后",
           "过敏原",
           "乳制品"
         ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
+        "retrievalScope": "allergen"
       }
     },
     {
-      "id": "caffeine-HT-2033",
-      "type": "dietary_info",
-      "product": "芝芝绿妍茶后",
-      "category": "茶特调/茗茶",
-      "text": "芝芝绿妍茶后咖啡因等级: 咖啡因黄灯 (黄灯)",
-      "metadata": {
-        "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
-        ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
-      }
-    },
-    {
-      "id": "recipe-HT-2033",
+      "id": "KDOC-017",
       "type": "recipe_info",
       "product": "芝芝绿妍茶后",
       "category": "茶特调/茗茶",
-      "text": "芝芝绿妍茶后(三配方)配方：首创芝芝云顶 + 绿妍茶汤 + 纯粹真冰糖。",
+      "text": "芝芝绿妍茶后（三配方）配方组成：首创芝芝云顶 + 绿妍茶汤 + 纯粹真冰糖。",
       "metadata": {
         "tags": [
+          "芝芝绿妍茶后",
           "配方",
-          "原料",
-          "成分"
+          "首创芝芝云顶",
+          "绿妍茶汤",
+          "纯粹真冰糖"
         ],
-        "retrievalScope": [
-          "ingredient_query",
-          "describe"
-        ]
+        "retrievalScope": "recipe"
       }
     },
     {
-      "id": "story-HT-2068",
-      "type": "product_story",
-      "product": "纯绿妍茶后",
+      "id": "KDOC-018",
+      "type": "faq",
+      "product": "芝芝绿妍茶后",
       "category": "茶特调/茗茶",
-      "text": "一配方纯茶饮品：绿妍茶汤。采用烘青茉莉花茶，1斤绿妍使用超4500朵广西横州茉莉鲜花，经7次窖制工序。好茶自然香，不含茶粉与香精。",
+      "text": "问：芝芝绿妍茶后有几个配方？\n答：首创三配方：芝芝云顶奶盖+绿妍茶汤+纯粹真冰糖。",
       "metadata": {
         "tags": [
-          "咖啡因黄灯",
-          "一配方"
+          "芝芝绿妍茶后",
+          "常见问题"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "faq"
       }
     },
     {
-      "id": "caffeine-HT-2068",
-      "type": "dietary_info",
-      "product": "纯绿妍茶后",
-      "category": "茶特调/茗茶",
-      "text": "纯绿妍茶后咖啡因等级: 咖啡因黄灯 (黄灯)",
-      "metadata": {
-        "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
-        ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
-      }
-    },
-    {
-      "id": "story-HT-ING-001",
+      "id": "KDOC-019",
       "type": "product_story",
-      "product": "芭乐云顶",
-      "category": "原料/配料",
-      "text": "芭乐云顶奶盖，使用动物性奶油和真牛乳打制，咸甜风味，细膩丝滑，奶香饱满。真奶自带清甜，不添加奶盖粉。奶源产地：新西兰、澳大利亚、中国山东等。奶牛品种：荷斯坦奶牛。",
+      "product": "嫣红牛乳茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "嫣红牛乳茶：四配方饮品：源牧3.8牛乳+纯粹真冰糖+嫣红茶汤+混合厚乳。经典红茶搭配高品质牛乳与混合厚乳，醇厚顺滑，真材实料。",
       "metadata": {
         "tags": [
-          "0咖啡因"
+          "嫣红牛乳茶",
+          "苦巧/抹茶/波波茶",
+          "四配方·源牧3.8牛乳+嫣红茶汤+混合厚乳"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "allergen-HT-ING-001",
+      "id": "KDOC-020",
       "type": "allergen_info",
-      "product": "芭乐云顶",
-      "category": "原料/配料",
-      "text": "芭乐云顶含有过敏原: 乳制品。",
+      "product": "嫣红牛乳茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "嫣红牛乳茶含有以下过敏原：乳制品。",
       "metadata": {
         "tags": [
+          "嫣红牛乳茶",
           "过敏原",
           "乳制品"
         ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
+        "retrievalScope": "allergen"
       }
     },
     {
-      "id": "caffeine-HT-ING-001",
+      "id": "KDOC-021",
+      "type": "recipe_info",
+      "product": "嫣红牛乳茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "嫣红牛乳茶（四配方）配方组成：源牧3.8牛乳 + 纯粹真冰糖 + 嫣红茶汤 + 混合厚乳。",
+      "metadata": {
+        "tags": [
+          "嫣红牛乳茶",
+          "配方",
+          "源牧3.8牛乳",
+          "纯粹真冰糖",
+          "嫣红茶汤",
+          "混合厚乳"
+        ],
+        "retrievalScope": "recipe"
+      }
+    },
+    {
+      "id": "KDOC-022",
+      "type": "faq",
+      "product": "嫣红牛乳茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "问：嫣红牛乳茶有几个配方？\n答：四配方：源牧3.8牛乳+纯粹真冰糖+嫣红茶汤+混合厚乳。",
+      "metadata": {
+        "tags": [
+          "嫣红牛乳茶",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-023",
+      "type": "faq",
+      "product": "嫣红牛乳茶",
+      "category": "苦巧/抹茶/波波茶",
+      "text": "问：嫣红牛乳茶含咖啡因吗？\n答：嫣红牛乳茶含约40mg咖啡因，来自嫣红茶汤（红茶）。",
+      "metadata": {
+        "tags": [
+          "嫣红牛乳茶",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-024",
+      "type": "product_story",
+      "product": "纯绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "纯绿妍茶后：一配方纯茶饮品：绿妍茶汤。采用烘青茉莉花茶，1斤绿妍使用超4500朵广西横州茉莉鲜花，经7次窖制工序。好茶自然香，不含茶粉与香精。",
+      "metadata": {
+        "tags": [
+          "纯绿妍茶后",
+          "茶特调/茗茶",
+          "一配方·纯绿妍茶汤"
+        ],
+        "retrievalScope": "product_detail"
+      }
+    },
+    {
+      "id": "KDOC-025",
+      "type": "recipe_info",
+      "product": "纯绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "纯绿妍茶后（一配方）配方组成：绿妍茶汤。",
+      "metadata": {
+        "tags": [
+          "纯绿妍茶后",
+          "配方",
+          "绿妍茶汤"
+        ],
+        "retrievalScope": "recipe"
+      }
+    },
+    {
+      "id": "KDOC-026",
+      "type": "product_story",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "芭乐云顶：芭乐云顶奶盖，使用动物性奶油和真牛乳打制，咸甜风味，细膩丝滑，奶香饱满。真奶自带清甜，不添加奶盖粉。奶源产地：新西兰、澳大利亚、中国山东等。奶牛品种：荷斯坦奶牛。",
+      "metadata": {
+        "tags": [
+          "芭乐云顶",
+          "原料/配料",
+          "搭配无香精芭乐汁·动物性奶油+真牛乳"
+        ],
+        "retrievalScope": "product_detail"
+      }
+    },
+    {
+      "id": "KDOC-027",
+      "type": "allergen_info",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "芭乐云顶含有以下过敏原：乳制品。",
+      "metadata": {
+        "tags": [
+          "芭乐云顶",
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "KDOC-028",
       "type": "dietary_info",
       "product": "芭乐云顶",
       "category": "原料/配料",
-      "text": "芭乐云顶咖啡因等级: 0咖啡因 (0mg)",
+      "text": "芭乐云顶饮食信息：0咖啡因，不添加奶精/奶盖粉/植脂末。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "0咖啡因"
+          "芭乐云顶",
+          "饮食",
+          "0咖啡因",
+          "不添加奶精/奶盖粉/植脂末"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "quality-HT-ING-001",
+      "id": "KDOC-029",
       "type": "quality_info",
       "product": "芭乐云顶",
       "category": "原料/配料",
-      "text": "芭乐云顶品质保障：奶精：不添加；奶盖粉：不添加；植脂末：不添加。",
+      "text": "芭乐云顶品质承诺：奶精：不添加；奶盖粉：不添加；植脂末：不添加。",
       "metadata": {
         "tags": [
+          "芭乐云顶",
           "品质",
-          "不添加",
-          "安全"
+          "质量"
         ],
-        "retrievalScope": [
-          "safety",
-          "ingredient_query"
-        ]
+        "retrievalScope": "quality"
       }
     },
     {
-      "id": "story-HT-ING-002",
+      "id": "KDOC-030",
+      "type": "faq",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "问：芭乐云顶加了奶盖粉吗？\n答：芭乐云顶不添加奶精、奶盖粉和植脂末，使用动物性奶油和真牛乳打制。",
+      "metadata": {
+        "tags": [
+          "芭乐云顶",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-031",
+      "type": "faq",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "问：芭乐云顶的奶源来自哪里？\n答：奶源产地包括新西兰、澳大利亚、中国山东等地，奶牛品种为荷斯坦奶牛。",
+      "metadata": {
+        "tags": [
+          "芭乐云顶",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-032",
       "type": "product_story",
       "product": "100%芭乐汁",
       "category": "原料/配料",
-      "text": "100%芭乐汁，红心芭乐鲜果搭配芭乐汁，无香精。产地气候光照充足、降雨量充足、气候温暖，水果味道甘甜、果味浓郁、口感甜糯。不添加人工色素与香精。",
+      "text": "100%芭乐汁：100%芭乐汁，红心芭乐鲜果搭配芭乐汁，无香精。产地气候光照充足、降雨量充足、气候温暖，水果味道甘甜、果味浓郁、口感甜糯。不添加人工色素与香精。",
       "metadata": {
         "tags": [
-          "无香精",
-          "0咖啡因"
+          "100%芭乐汁",
+          "原料/配料",
+          "无香精·红心芭乐鲜果+芭乐汁"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "caffeine-HT-ING-002",
+      "id": "KDOC-033",
       "type": "dietary_info",
       "product": "100%芭乐汁",
       "category": "原料/配料",
-      "text": "100%芭乐汁咖啡因等级: 0咖啡因 (0mg)",
+      "text": "100%芭乐汁饮食信息：0咖啡因，不添加人工色素与香精。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "0咖啡因"
+          "100%芭乐汁",
+          "饮食",
+          "0咖啡因",
+          "不添加人工色素与香精"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "quality-HT-ING-002",
+      "id": "KDOC-034",
       "type": "quality_info",
       "product": "100%芭乐汁",
       "category": "原料/配料",
-      "text": "100%芭乐汁品质保障：人工色素：不添加；香精：不添加。",
+      "text": "100%芭乐汁品质承诺：人工色素：不添加；香精：不添加。",
       "metadata": {
         "tags": [
+          "100%芭乐汁",
           "品质",
-          "不添加",
-          "安全"
+          "质量"
         ],
-        "retrievalScope": [
-          "safety",
-          "ingredient_query"
-        ]
+        "retrievalScope": "quality"
       }
     },
     {
-      "id": "story-HT-ING-003",
+      "id": "KDOC-035",
+      "type": "faq",
+      "product": "100%芭乐汁",
+      "category": "原料/配料",
+      "text": "问：芭乐汁有人工色素吗？\n答：100%芭乐汁不添加人工色素与香精，使用红心芭乐鲜果。",
+      "metadata": {
+        "tags": [
+          "100%芭乐汁",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-036",
       "type": "product_story",
       "product": "100%莲雾汁",
       "category": "原料/配料",
-      "text": "100%莲雾汁，选用黑金刚莲雾品种，果实大，果肉青白色，水分丰富，清甜无渣。肉质爽脆多汁、口感清甜可口。不添加人工色素与香精。",
+      "text": "100%莲雾汁：100%莲雾汁，选用黑金刚莲雾品种，果实大，果肉青白色，水分丰富，清甜无渣。肉质爽脆多汁、口感清甜可口。不添加人工色素与香精。",
       "metadata": {
         "tags": [
-          "0咖啡因"
+          "100%莲雾汁",
+          "原料/配料",
+          "黑金刚莲雾·无香精无色素"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "caffeine-HT-ING-003",
+      "id": "KDOC-037",
       "type": "dietary_info",
       "product": "100%莲雾汁",
       "category": "原料/配料",
-      "text": "100%莲雾汁咖啡因等级: 0咖啡因 (0mg)",
+      "text": "100%莲雾汁饮食信息：0咖啡因，不添加人工色素与香精。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "0咖啡因"
+          "100%莲雾汁",
+          "饮食",
+          "0咖啡因",
+          "不添加人工色素与香精"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "quality-HT-ING-003",
+      "id": "KDOC-038",
       "type": "quality_info",
       "product": "100%莲雾汁",
       "category": "原料/配料",
-      "text": "100%莲雾汁品质保障：人工色素：不添加；香精：不添加。",
+      "text": "100%莲雾汁品质承诺：人工色素：不添加；香精：不添加。",
       "metadata": {
         "tags": [
+          "100%莲雾汁",
           "品质",
-          "不添加",
-          "安全"
+          "质量"
         ],
-        "retrievalScope": [
-          "safety",
-          "ingredient_query"
-        ]
+        "retrievalScope": "quality"
       }
     },
     {
-      "id": "story-HT-ING-004",
+      "id": "KDOC-039",
+      "type": "faq",
+      "product": "100%莲雾汁",
+      "category": "原料/配料",
+      "text": "问：莲雾汁是什么品种的莲雾？\n答：选用黑金刚莲雾品种，果实大，果肉青白色，水分丰富，清甜无渣。",
+      "metadata": {
+        "tags": [
+          "100%莲雾汁",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-040",
       "type": "product_story",
       "product": "绿妍茶汤",
       "category": "原料/配料",
-      "text": "绿妍茶汤，采用烘青茉莉花茶，茶叶来自全国各地核心产区（云南普洱、四川自贡、陕西汉中）。气候温润，降水丰富，雨热充足。1斤绿妍使用超4500朵茉莉鲜花（广西横州，世界茉莉花都），经7次窖制工序而成。好茶自然香，不含茶粉与香精。",
+      "text": "绿妍茶汤：绿妍茶汤，采用烘青茉莉花茶，茶叶来自全国各地核心产区（云南普洱、四川自贡、陕西汉中）。气候温润，降水丰富，雨热充足。1斤绿妍使用超4500朵茉莉鲜花（广西横州，世界茉莉花都），经7次窖制工序而成。好茶自然香，不含茶粉与香精。",
       "metadata": {
         "tags": [
-          "咖啡因黄灯",
-          "茉莉花茶"
+          "绿妍茶汤",
+          "原料/配料",
+          "无香精·烘青茉莉花茶"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "caffeine-HT-ING-004",
+      "id": "KDOC-041",
       "type": "dietary_info",
       "product": "绿妍茶汤",
       "category": "原料/配料",
-      "text": "绿妍茶汤咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "text": "绿妍茶汤饮食信息：不含茶粉与香精。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
+          "绿妍茶汤",
+          "饮食",
+          "不含茶粉与香精"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "quality-HT-ING-004",
+      "id": "KDOC-042",
       "type": "quality_info",
       "product": "绿妍茶汤",
       "category": "原料/配料",
-      "text": "绿妍茶汤品质保障：茶粉：不添加；香精：不添加。",
+      "text": "绿妍茶汤品质承诺：茶粉：不添加；香精：不添加。",
       "metadata": {
         "tags": [
+          "绿妍茶汤",
           "品质",
-          "不添加",
-          "安全"
+          "质量"
         ],
-        "retrievalScope": [
-          "safety",
-          "ingredient_query"
-        ]
+        "retrievalScope": "quality"
       }
     },
     {
-      "id": "process-HT-ING-004",
+      "id": "KDOC-043",
       "type": "process_info",
       "product": "绿妍茶汤",
       "category": "原料/配料",
-      "text": "绿妍茶汤制茶工艺：三地绿茶自研拼配，1斤绿妍使用超4500朵茉莉鲜花，经7次窖制工序（采鲜摘花→养花→拌茶和花→窨花置→续收窨堆→起花→干燥复火）。",
+      "text": "绿妍茶汤工艺信息：三地绿茶自研拼配，1斤绿妍使用超4500朵茉莉鲜花，经7次窖制工序（采鲜摘花→养花→拌茶和花→窨花置→续收窨堆→起花→干燥复火）",
       "metadata": {
         "tags": [
+          "绿妍茶汤",
           "工艺",
-          "制茶",
-          "窖制"
+          "制作"
         ],
-        "retrievalScope": [
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "process"
       }
     },
     {
-      "id": "story-HT-3005",
+      "id": "KDOC-044",
+      "type": "faq",
+      "product": "绿妍茶汤",
+      "category": "原料/配料",
+      "text": "问：绿妍茶汤加了香精吗？\n答：好茶自然香，不含茶粉与香精。绿妍使用广西横州茉莉鲜花，经7次窖制工序天然提香。",
+      "metadata": {
+        "tags": [
+          "绿妍茶汤",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-045",
+      "type": "faq",
+      "product": "绿妍茶汤",
+      "category": "原料/配料",
+      "text": "问：绿妍茶底是什么茶？\n答：绿妍采用烘青茉莉花茶，茶叶来自云南普洱、四川自贡、陕西汉中等核心产区。",
+      "metadata": {
+        "tags": [
+          "绿妍茶汤",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-046",
       "type": "product_story",
       "product": "杨桃三重奏",
       "category": "植物茶/鲜果茶",
-      "text": "四配方饮品：杨桃汁+现制油柑汁+九窨雪毫茉王茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。三重果味搭配茉莉花茶王，清新爽口。",
+      "text": "杨桃三重奏：四配方饮品：杨桃汁+现制油柑汁+九窨雪毫茉王茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。三重果味搭配茉莉花茶王，清新爽口。",
       "metadata": {
         "tags": [
-          "咖啡因黄灯",
-          "四配方"
+          "杨桃三重奏",
+          "植物茶/鲜果茶",
+          "四配方·杨桃汁+油柑汁+雪毫茉王茶"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "caffeine-HT-3005",
+      "id": "KDOC-047",
       "type": "dietary_info",
       "product": "杨桃三重奏",
       "category": "植物茶/鲜果茶",
-      "text": "杨桃三重奏咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "text": "杨桃三重奏饮食信息：低GI。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
+          "杨桃三重奏",
+          "饮食",
+          "低GI"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "recipe-HT-3005",
+      "id": "KDOC-048",
       "type": "recipe_info",
       "product": "杨桃三重奏",
       "category": "植物茶/鲜果茶",
-      "text": "杨桃三重奏(四配方)配方：杨桃汁 + 现制油柑汁 + 九窨雪毫茉王茶汤 + 低GI L-阿拉伯糖蔗糖调味糖浆。",
+      "text": "杨桃三重奏（四配方）配方组成：杨桃汁 + 现制油柑汁 + 九窨雪毫茉王茶汤 + 低GI L-阿拉伯糖蔗糖调味糖浆。",
       "metadata": {
         "tags": [
+          "杨桃三重奏",
           "配方",
-          "原料",
-          "成分"
+          "杨桃汁",
+          "现制油柑汁",
+          "九窨雪毫茉王茶汤",
+          "低GI L-阿拉伯糖蔗糖调味糖浆"
         ],
-        "retrievalScope": [
-          "ingredient_query",
-          "describe"
-        ]
+        "retrievalScope": "recipe"
       }
     },
     {
-      "id": "story-HT-3006",
+      "id": "KDOC-049",
       "type": "product_story",
       "product": "轻酵黄皮康普茶",
       "category": "植物茶/鲜果茶",
-      "text": "五配方饮品：黄皮汁+现制苹果汁+奇兰乌龙康普茶液+鸭喜香单丛茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。轻酵康普茶搭配岭南黄皮，清爽回甘。",
+      "text": "轻酵黄皮康普茶：五配方饮品：黄皮汁+现制苹果汁+奇兰乌龙康普茶液+鸭喜香单丛茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。轻酵康普茶搭配岭南黄皮，清爽回甘。",
       "metadata": {
         "tags": [
-          "咖啡因黄灯",
-          "康普茶",
-          "五配方"
+          "轻酵黄皮康普茶",
+          "植物茶/鲜果茶",
+          "五配方·黄皮汁+苹果汁+奇兰乌龙康普茶"
         ],
-        "retrievalScope": [
-          "recommend",
-          "describe",
-          "ingredient_query"
-        ]
+        "retrievalScope": "product_detail"
       }
     },
     {
-      "id": "caffeine-HT-3006",
+      "id": "KDOC-050",
       "type": "dietary_info",
       "product": "轻酵黄皮康普茶",
       "category": "植物茶/鲜果茶",
-      "text": "轻酵黄皮康普茶咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "text": "轻酵黄皮康普茶饮食信息：低GI。",
       "metadata": {
         "tags": [
-          "咖啡因",
-          "咖啡因黄灯"
+          "轻酵黄皮康普茶",
+          "饮食",
+          "低GI"
         ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
+        "retrievalScope": "dietary"
       }
     },
     {
-      "id": "recipe-HT-3006",
+      "id": "KDOC-051",
       "type": "recipe_info",
       "product": "轻酵黄皮康普茶",
       "category": "植物茶/鲜果茶",
-      "text": "轻酵黄皮康普茶(五配方)配方：黄皮汁 + 现制苹果汁 + 奇兰乌龙康普茶液 + 鸭喜香单丛茶汤 + 低GI L-阿拉伯糖蔗糖调味糖浆。",
+      "text": "轻酵黄皮康普茶（五配方）配方组成：黄皮汁 + 现制苹果汁 + 奇兰乌龙康普茶液 + 鸭喜香单丛茶汤 + 低GI L-阿拉伯糖蔗糖调味糖浆。",
       "metadata": {
         "tags": [
+          "轻酵黄皮康普茶",
           "配方",
-          "原料",
-          "成分"
+          "黄皮汁",
+          "现制苹果汁",
+          "奇兰乌龙康普茶液",
+          "鸭喜香单丛茶汤",
+          "低GI L-阿拉伯糖蔗糖调味糖浆"
         ],
-        "retrievalScope": [
-          "ingredient_query",
-          "describe"
-        ]
+        "retrievalScope": "recipe"
       }
     },
     {
-      "id": "recommend-caffeine-free",
+      "id": "KDOC-052",
+      "type": "product_story",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "混合厚乳：混合厚乳，奶源来自新西兰、宁夏、山东等优质产区，选用荷斯坦奶牛，来自现代化牧场，精选饲料喂养。奶香浓郁，口感顺滑。不添加奶精、植脂末、氢化植物油、香精、色素。",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "原料/配料",
+          "新西兰/宁夏/山东·荷斯坦奶牛·奶香浓郁"
+        ],
+        "retrievalScope": "product_detail"
+      }
+    },
+    {
+      "id": "KDOC-053",
+      "type": "allergen_info",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "混合厚乳含有以下过敏原：乳制品。",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "KDOC-054",
+      "type": "dietary_info",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "混合厚乳饮食信息：0咖啡因，不添加奶精/植脂末/氢化植物油/香精/色素。",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "饮食",
+          "0咖啡因",
+          "不添加奶精/植脂末/氢化植物油/香精/色素"
+        ],
+        "retrievalScope": "dietary"
+      }
+    },
+    {
+      "id": "KDOC-055",
+      "type": "quality_info",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "混合厚乳品质承诺：奶精：不添加；植脂末：不添加；氢化植物油：不添加；香精：不添加；色素：不添加。",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "品质",
+          "质量"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "KDOC-056",
+      "type": "process_info",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "混合厚乳工艺信息：现代化牧场，精选饲料喂养",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "工艺",
+          "制作"
+        ],
+        "retrievalScope": "process"
+      }
+    },
+    {
+      "id": "KDOC-057",
+      "type": "faq",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "问：混合厚乳加了奶精吗？\n答：混合厚乳不添加奶精、植脂末、氢化植物油、香精和色素，使用真牛乳。",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-058",
+      "type": "faq",
+      "product": "混合厚乳",
+      "category": "原料/配料",
+      "text": "问：混合厚乳的奶源来自哪里？\n答：奶源产地包括新西兰、宁夏、山东等地，选用荷斯坦奶牛，来自现代化牧场。",
+      "metadata": {
+        "tags": [
+          "混合厚乳",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-059",
+      "type": "product_story",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "嫣红茶汤：嫣红茶汤，茶叶产地为云南临沧（海拔2000m+）和福建宁德（海拔800m+），属于红茶。产区年均日照1894-2261小时，年均气温17.3°C，年降水920-1750mm。花香、桂圆香、坚果香交织，滋味醇厚。5步制茶工艺：采摘→萎凋→揉捻→发酵→干燥。荣获凤庆县\"基地质量奖\"。不添加香精。",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "原料/配料",
+          "无香精·云南临沧+福建宁德·花香桂圆香"
+        ],
+        "retrievalScope": "product_detail"
+      }
+    },
+    {
+      "id": "KDOC-060",
+      "type": "dietary_info",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "嫣红茶汤饮食信息：不添加香精。",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "饮食",
+          "不添加香精"
+        ],
+        "retrievalScope": "dietary"
+      }
+    },
+    {
+      "id": "KDOC-061",
+      "type": "quality_info",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "嫣红茶汤品质承诺：香精：不添加；凤庆县基地质量奖。",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "品质",
+          "质量"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "KDOC-062",
+      "type": "process_info",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "嫣红茶汤工艺信息：5步制茶工艺：采摘→萎凋→揉捻→发酵→干燥。产区年均日照1894-2261h，年均气温17.3°C，年降水920-1750mm",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "工艺",
+          "制作"
+        ],
+        "retrievalScope": "process"
+      }
+    },
+    {
+      "id": "KDOC-063",
+      "type": "faq",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "问：嫣红茶汤是什么茶？\n答：嫣红茶汤属于红茶，茶叶来自云南临沧（海拔2000m+）和福建宁德（海拔800m+）。",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-064",
+      "type": "faq",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "问：嫣红茶汤加了香精吗？\n答：嫣红茶汤不添加香精，花香、桂圆香、坚果香均来自茶叶本身。",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-065",
+      "type": "faq",
+      "product": "嫣红茶汤",
+      "category": "原料/配料",
+      "text": "问：嫣红茶汤有什么奖？\n答：嫣红茶汤的茶叶荣获凤庆县\"基地质量奖\"。",
+      "metadata": {
+        "tags": [
+          "嫣红茶汤",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-066",
+      "type": "product_story",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "源牧3.8牛乳：源牧3.8牛乳，产地山东、河北，选用荷斯坦奶牛，蛋白质含量达3.8g/100mL。采用TMR系统科学喂养，冷链运输，闪蒸技术处理。新茶饮专用真牛乳，不添加植脂末和奶精。",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "原料/配料",
+          "新茶饮专用真牛乳·3.8g蛋白质"
+        ],
+        "retrievalScope": "product_detail"
+      }
+    },
+    {
+      "id": "KDOC-067",
+      "type": "allergen_info",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "源牧3.8牛乳含有以下过敏原：乳制品。",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "KDOC-068",
+      "type": "dietary_info",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "源牧3.8牛乳饮食信息：0咖啡因，不添加植脂末/奶精。",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "饮食",
+          "0咖啡因",
+          "不添加植脂末/奶精"
+        ],
+        "retrievalScope": "dietary"
+      }
+    },
+    {
+      "id": "KDOC-069",
+      "type": "quality_info",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "源牧3.8牛乳品质承诺：植脂末：不添加；奶精：不添加；蛋白质含量：3.8g/100mL。",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "品质",
+          "质量"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "KDOC-070",
+      "type": "process_info",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "源牧3.8牛乳工艺信息：TMR系统科学喂养，冷链运输，闪蒸技术",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "工艺",
+          "制作"
+        ],
+        "retrievalScope": "process"
+      }
+    },
+    {
+      "id": "KDOC-071",
+      "type": "faq",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "问：源牧3.8牛乳蛋白质含量是多少？\n答：源牧3.8牛乳蛋白质含量为3.8g/100mL。",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-072",
+      "type": "faq",
+      "product": "源牧3.8牛乳",
+      "category": "原料/配料",
+      "text": "问：源牧3.8牛乳加了植脂末吗？\n答：源牧3.8牛乳不添加植脂末和奶精，是真牛乳。",
+      "metadata": {
+        "tags": [
+          "源牧3.8牛乳",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-073",
+      "type": "product_story",
+      "product": "纯粹真冰糖",
+      "category": "原料/配料",
+      "text": "纯粹真冰糖：纯粹真冰糖，产地广西，位于北回归线附近甘蔗黄金种植带。产区年均日照1500h，年均降雨2000mm，甘蔗生长超270天。经10余道工序精制，350目过滤，醇厚自然甜。植物提取天然糖，不含二氧化硫、防腐剂、果葡糖浆。",
+      "metadata": {
+        "tags": [
+          "纯粹真冰糖",
+          "原料/配料",
+          "广西甘蔗·植物提取天然糖"
+        ],
+        "retrievalScope": "product_detail"
+      }
+    },
+    {
+      "id": "KDOC-074",
+      "type": "dietary_info",
+      "product": "纯粹真冰糖",
+      "category": "原料/配料",
+      "text": "纯粹真冰糖饮食信息：0咖啡因，植物提取天然糖，不含二氧化硫/防腐剂/果葡糖浆。",
+      "metadata": {
+        "tags": [
+          "纯粹真冰糖",
+          "饮食",
+          "0咖啡因",
+          "植物提取天然糖",
+          "不含二氧化硫/防腐剂/果葡糖浆"
+        ],
+        "retrievalScope": "dietary"
+      }
+    },
+    {
+      "id": "KDOC-075",
+      "type": "quality_info",
+      "product": "纯粹真冰糖",
+      "category": "原料/配料",
+      "text": "纯粹真冰糖品质承诺：二氧化硫：不含；防腐剂：不含；果葡糖浆：不含。",
+      "metadata": {
+        "tags": [
+          "纯粹真冰糖",
+          "品质",
+          "质量"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "KDOC-076",
+      "type": "process_info",
+      "product": "纯粹真冰糖",
+      "category": "原料/配料",
+      "text": "纯粹真冰糖工艺信息：10余道工序精制，350目过滤",
+      "metadata": {
+        "tags": [
+          "纯粹真冰糖",
+          "工艺",
+          "制作"
+        ],
+        "retrievalScope": "process"
+      }
+    },
+    {
+      "id": "KDOC-077",
+      "type": "faq",
+      "product": "纯粹真冰糖",
+      "category": "原料/配料",
+      "text": "问：纯粹真冰糖是天然的吗？\n答：纯粹真冰糖是植物提取的天然糖，不含二氧化硫、防腐剂和果葡糖浆。",
+      "metadata": {
+        "tags": [
+          "纯粹真冰糖",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-078",
+      "type": "faq",
+      "product": "纯粹真冰糖",
+      "category": "原料/配料",
+      "text": "问：纯粹真冰糖的产地在哪？\n答：产地广西，位于北回归线附近甘蔗黄金种植带，甘蔗生长超270天。",
+      "metadata": {
+        "tags": [
+          "纯粹真冰糖",
+          "常见问题"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "KDOC-079",
       "type": "recommendation",
-      "category": "跨分类",
-      "text": "不含咖啡因的饮品推荐：芒椰糯米饭（0咖啡因）、热烤黑糖波波牛乳（0咖啡因）、芭乐云顶（0咖啡因）、100%芭乐汁（0咖啡因）、100%莲雾汁（0咖啡因）。适合对咖啡因敏感或晚间饮用的顾客。",
+      "product": null,
+      "category": "推荐",
+      "text": "0咖啡因饮品推荐：芒椰糯米饭、芭乐云顶、100%芭乐汁、100%莲雾汁、混合厚乳、源牧3.8牛乳、纯粹真冰糖。适合对咖啡因敏感的朋友。",
       "metadata": {
         "tags": [
-          "咖啡因",
           "推荐",
-          "0咖啡因"
+          "0咖啡因",
+          "低咖啡因"
         ],
-        "retrievalScope": [
-          "recommend",
-          "dietary_query"
-        ]
+        "retrievalScope": "recommendation"
       }
     },
     {
-      "id": "recommend-hot-drinks",
-      "type": "seasonal_recommend",
-      "category": "热饮推荐",
-      "text": "热饮推荐系列：热三倍厚抹¥19浓郁三重奏、热小奶茉¥13馥郁茉莉、热芝芝抹茶¥25经典复刻、热烤黑糖波波牛乳¥19首创0咖啡因、热苦巧·咸酪碎银子¥25、热咸醋碎银子¥22。",
-      "metadata": {
-        "tags": [
-          "热饮",
-          "推荐",
-          "温暖"
-        ],
-        "retrievalScope": [
-          "recommend",
-          "seasonal"
-        ]
-      }
-    },
-    {
-      "id": "recommend-fruit-tea",
-      "type": "seasonal_recommend",
-      "category": "鲜果茶推荐",
-      "text": "夏日鲜果茶推荐：多肉葡萄¥29经典必点、满杯红柚¥29清爽解渴、奇兰芭乐莲雾（首创七配方）、奇兰粉芭乐（首创六配方）、杨桃三重奏（四配方）、轻酵黄皮康普茶（五配方）。",
-      "metadata": {
-        "tags": [
-          "鲜果茶",
-          "夏天",
-          "推荐",
-          "清爽",
-          "首创"
-        ],
-        "retrievalScope": [
-          "recommend",
-          "seasonal"
-        ]
-      }
-    },
-    {
-      "id": "recommend-new-creations",
+      "id": "KDOC-080",
       "type": "recommendation",
-      "category": "首创推荐",
-      "text": "首创系列推荐：奇兰芭乐莲雾（首创七配方，芭乐+莲雾+奇兰+牛乳）、奇兰粉芭乐（首创六配方，芭乐+奇兰+牛乳）、芝芝绿妍茶后（首创三配方，芝芝云顶+绿妍茶汤）。",
+      "product": null,
+      "category": "推荐",
+      "text": "多配方饮品推荐：奇兰粉芭乐（六配方）、奇兰芭乐莲雾（七配方）、芝芝绿妍茶后（三配方）、嫣红牛乳茶（四配方）、纯绿妍茶后（一配方）、杨桃三重奏（四配方）、轻酵黄皮康普茶（五配方）。每款均由多种高品质原料精心搭配。",
       "metadata": {
         "tags": [
-          "首创",
           "推荐",
-          "新品"
+          "配方",
+          "多配方"
         ],
-        "retrievalScope": [
-          "recommend",
-          "seasonal"
-        ]
+        "retrievalScope": "recommendation"
       }
     },
     {
-      "id": "guide-low-gi",
+      "id": "KDOC-081",
+      "type": "seasonal_recommend",
+      "product": null,
+      "category": "时令",
+      "text": "当前时令推荐：芒椰糯米饭（端午限定）。",
+      "metadata": {
+        "tags": [
+          "时令",
+          "季节",
+          "限定"
+        ],
+        "retrievalScope": "seasonal"
+      }
+    },
+    {
+      "id": "KDOC-082",
       "type": "dietary_guide",
+      "product": null,
       "category": "饮食指南",
-      "text": "低GI饮品推荐：杨桃三重奏（四配方，低GI L-阿拉伯糖蔗糖调味）、轻酵黄皮康普茶（五配方，低GI L-阿拉伯糖蔗糖调味）、芒椰糯米饭可选低GI甜度。",
+      "text": "含乳制品的饮品：奇兰粉芭乐、奇兰芭乐莲雾、芒椰糯米饭、芝芝绿妍茶后、嫣红牛乳茶、芭乐云顶、混合厚乳、源牧3.8牛乳。乳糖不耐受的朋友请注意选择。",
       "metadata": {
         "tags": [
-          "低GI",
-          "健康",
-          "推荐",
-          "阿拉伯糖"
+          "饮食指南",
+          "乳制品",
+          "乳糖"
         ],
-        "retrievalScope": [
-          "recommend",
-          "dietary_query"
-        ]
+        "retrievalScope": "dietary_guide"
+      }
+    },
+    {
+      "id": "KDOC-083",
+      "type": "quality_info",
+      "product": null,
+      "category": "品质体系",
+      "text": "喜茶品质承诺：所有茶饮坚持使用真材实料，不添加奶精、植脂末、氢化植物油、香精、色素等人工添加剂。茶叶不含茶粉与香精，水果原料无农药残留。",
+      "metadata": {
+        "tags": [
+          "品质",
+          "质量",
+          "承诺",
+          "食品安全"
+        ],
+        "retrievalScope": "quality_overview"
       }
     }
   ]
