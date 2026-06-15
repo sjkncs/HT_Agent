@@ -1,85 +1,35 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "generatedAt": "2026-06-15T12:39:11.953Z",
-    "totalDocuments": 35
+    "version": "1.1.0",
+    "generatedAt": "2026-06-15T13:40:23.554Z",
+    "totalDocuments": 42
   },
   "documents": [
     {
-      "id": "allergen-HT-2006",
-      "type": "allergen_info",
-      "product": "芒芒甘露",
+      "id": "story-HT-2021",
+      "type": "product_story",
+      "product": "奇兰粉芭乐",
       "category": "植物茶/鲜果茶",
-      "text": "芒芒甘露含有过敏原: 芒果。",
+      "text": "首创六配方饮品：芭乐云顶奶盖+100%芭乐汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。奇兰芭乐莲雾的莲雾削减版本，保留芭乐清甜与奇兰花香。",
       "metadata": {
         "tags": [
-          "过敏原",
-          "芒果"
+          "首创",
+          "咖啡因黄灯",
+          "六配方"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "recommend",
+          "describe",
+          "ingredient_query"
         ]
       }
     },
     {
-      "id": "allergen-HT-2007",
+      "id": "allergen-HT-2021",
       "type": "allergen_info",
-      "product": "超多肉芒芒甘露",
+      "product": "奇兰粉芭乐",
       "category": "植物茶/鲜果茶",
-      "text": "超多肉芒芒甘露含有过敏原: 芒果。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "芒果"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2008",
-      "type": "allergen_info",
-      "product": "多肉芒芒",
-      "category": "植物茶/鲜果茶",
-      "text": "多肉芒芒含有过敏原: 芒果。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "芒果"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2009",
-      "type": "allergen_info",
-      "product": "椰椰芒芒",
-      "category": "植物茶/鲜果茶",
-      "text": "椰椰芒芒含有过敏原: 芒果、椰子。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "芒果",
-          "椰子"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2012",
-      "type": "allergen_info",
-      "product": "轻芝杨梅",
-      "category": "植物茶/鲜果茶",
-      "text": "轻芝杨梅含有过敏原: 乳制品。",
+      "text": "奇兰粉芭乐含有过敏原: 乳制品。",
       "metadata": {
         "tags": [
           "过敏原",
@@ -88,6 +38,112 @@
         "retrievalScope": [
           "allergen_query",
           "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2021",
+      "type": "dietary_info",
+      "product": "奇兰粉芭乐",
+      "category": "植物茶/鲜果茶",
+      "text": "奇兰粉芭乐咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "recipe-HT-2021",
+      "type": "recipe_info",
+      "product": "奇兰粉芭乐",
+      "category": "植物茶/鲜果茶",
+      "text": "奇兰粉芭乐(六配方)配方：芭乐云顶 + 100%芭乐汁 + 纯粹真冰糖 + 花香奇兰茶汤 + 源牧3.8牛乳 + 定制轻乳。",
+      "metadata": {
+        "tags": [
+          "配方",
+          "原料",
+          "成分"
+        ],
+        "retrievalScope": [
+          "ingredient_query",
+          "describe"
+        ]
+      }
+    },
+    {
+      "id": "story-HT-2023",
+      "type": "product_story",
+      "product": "奇兰芭乐莲雾",
+      "category": "植物茶/鲜果茶",
+      "text": "首创七配方饮品：芭乐云顶奶盖+100%芭乐汁+100%莲雾汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。融合热带芭乐清甜与莲雾爽脆，搭配花香奇兰茶底和丝滑牛乳。",
+      "metadata": {
+        "tags": [
+          "首创",
+          "咖啡因黄灯",
+          "七配方"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-2023",
+      "type": "allergen_info",
+      "product": "奇兰芭乐莲雾",
+      "category": "植物茶/鲜果茶",
+      "text": "奇兰芭乐莲雾含有过敏原: 乳制品。",
+      "metadata": {
+        "tags": [
+          "过敏原",
+          "乳制品"
+        ],
+        "retrievalScope": [
+          "allergen_query",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2023",
+      "type": "dietary_info",
+      "product": "奇兰芭乐莲雾",
+      "category": "植物茶/鲜果茶",
+      "text": "奇兰芭乐莲雾咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "recipe-HT-2023",
+      "type": "recipe_info",
+      "product": "奇兰芭乐莲雾",
+      "category": "植物茶/鲜果茶",
+      "text": "奇兰芭乐莲雾(七配方)配方：芭乐云顶 + 100%芭乐汁 + 100%莲雾汁 + 纯粹真冰糖 + 花香奇兰茶汤 + 源牧3.8牛乳 + 定制轻乳。",
+      "metadata": {
+        "tags": [
+          "配方",
+          "原料",
+          "成分"
+        ],
+        "retrievalScope": [
+          "ingredient_query",
+          "describe"
         ]
       }
     },
@@ -147,53 +203,21 @@
       }
     },
     {
-      "id": "allergen-HT-2030",
-      "type": "allergen_info",
-      "product": "轻芝多肉葡萄",
-      "category": "植物茶/鲜果茶",
-      "text": "轻芝多肉葡萄含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2031",
-      "type": "allergen_info",
-      "product": "芝芝多肉葡萄",
-      "category": "植物茶/鲜果茶",
-      "text": "芝芝多肉葡萄含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2032",
-      "type": "allergen_info",
-      "product": "芝芝抹茶",
+      "id": "story-HT-2033",
+      "type": "product_story",
+      "product": "芝芝绿妍茶后",
       "category": "茶特调/茗茶",
-      "text": "芝芝抹茶含有过敏原: 乳制品。",
+      "text": "首创三配方饮品：首创芝芝云顶奶盖+绿妍茶汤+纯粹真冰糖。经典绿妍茉莉花茶搭配浓郁芝芝奶盖，好茶自然香。",
       "metadata": {
         "tags": [
-          "过敏原",
-          "乳制品"
+          "首创",
+          "咖啡因黄灯",
+          "三配方"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "recommend",
+          "describe",
+          "ingredient_query"
         ]
       }
     },
@@ -215,198 +239,11 @@
       }
     },
     {
-      "id": "allergen-HT-2034",
-      "type": "allergen_info",
-      "product": "芝士咸酪藏茶",
-      "category": "茶特调/茗茶",
-      "text": "芝士咸酪藏茶含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2044",
-      "type": "allergen_info",
-      "product": "雪域·牦牛乳恰安莫",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "雪域·牦牛乳恰安莫含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2058",
-      "type": "allergen_info",
-      "product": "咸酪厚抹",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "咸酪厚抹含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2074",
-      "type": "allergen_info",
-      "product": "英红·芝士糯糯",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "英红·芝士糯糯含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2075",
-      "type": "allergen_info",
-      "product": "龙井·芝士糯糯",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "龙井·芝士糯糯含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2084",
-      "type": "allergen_info",
-      "product": "咸酪泰奶冰",
-      "category": "茶特调/茗茶",
-      "text": "咸酪泰奶冰含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2085",
-      "type": "allergen_info",
-      "product": "流心奶黄波波冰",
-      "category": "茶特调/茗茶",
-      "text": "流心奶黄波波冰含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2086",
-      "type": "allergen_info",
-      "product": "牦牛乳酥油茶",
-      "category": "茶特调/茗茶",
-      "text": "牦牛乳酥油茶含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2087",
-      "type": "allergen_info",
-      "product": "热三倍厚抹",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热三倍厚抹含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "caffeine-HT-2087",
+      "id": "caffeine-HT-2033",
       "type": "dietary_info",
-      "product": "热三倍厚抹",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热三倍厚抹咖啡因等级: 咖啡因红灯 (红灯)",
-      "metadata": {
-        "tags": [
-          "咖啡因",
-          "咖啡因红灯"
-        ],
-        "retrievalScope": [
-          "dietary_query",
-          "recommend"
-        ]
-      }
-    },
-    {
-      "id": "allergen-HT-2088",
-      "type": "allergen_info",
-      "product": "热小奶茉",
-      "category": "咖啡/经典/小料",
-      "text": "热小奶茉含有过敏原: 乳制品。",
-      "metadata": {
-        "tags": [
-          "过敏原",
-          "乳制品"
-        ],
-        "retrievalScope": [
-          "allergen_query",
-          "safety"
-        ]
-      }
-    },
-    {
-      "id": "caffeine-HT-2088",
-      "type": "dietary_info",
-      "product": "热小奶茉",
-      "category": "咖啡/经典/小料",
-      "text": "热小奶茉咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "product": "芝芝绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "芝芝绿妍茶后咖啡因等级: 咖啡因黄灯 (黄灯)",
       "metadata": {
         "tags": [
           "咖啡因",
@@ -419,28 +256,47 @@
       }
     },
     {
-      "id": "allergen-HT-2089",
-      "type": "allergen_info",
-      "product": "热芝芝抹茶",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热芝芝抹茶含有过敏原: 乳制品。",
+      "id": "recipe-HT-2033",
+      "type": "recipe_info",
+      "product": "芝芝绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "芝芝绿妍茶后(三配方)配方：首创芝芝云顶 + 绿妍茶汤 + 纯粹真冰糖。",
       "metadata": {
         "tags": [
-          "过敏原",
-          "乳制品"
+          "配方",
+          "原料",
+          "成分"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "ingredient_query",
+          "describe"
         ]
       }
     },
     {
-      "id": "caffeine-HT-2089",
+      "id": "story-HT-2068",
+      "type": "product_story",
+      "product": "纯绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "一配方纯茶饮品：绿妍茶汤。采用烘青茉莉花茶，1斤绿妍使用超4500朵广西横州茉莉鲜花，经7次窖制工序。好茶自然香，不含茶粉与香精。",
+      "metadata": {
+        "tags": [
+          "咖啡因黄灯",
+          "一配方"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-2068",
       "type": "dietary_info",
-      "product": "热芝芝抹茶",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热芝芝抹茶咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "product": "纯绿妍茶后",
+      "category": "茶特调/茗茶",
+      "text": "纯绿妍茶后咖啡因等级: 咖啡因黄灯 (黄灯)",
       "metadata": {
         "tags": [
           "咖啡因",
@@ -453,11 +309,28 @@
       }
     },
     {
-      "id": "allergen-HT-2090",
+      "id": "story-HT-ING-001",
+      "type": "product_story",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "芭乐云顶奶盖，使用动物性奶油和真牛乳打制，咸甜风味，细膩丝滑，奶香饱满。真奶自带清甜，不添加奶盖粉。奶源产地：新西兰、澳大利亚、中国山东等。奶牛品种：荷斯坦奶牛。",
+      "metadata": {
+        "tags": [
+          "0咖啡因"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "allergen-HT-ING-001",
       "type": "allergen_info",
-      "product": "热烤黑糖波波牛乳",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热烤黑糖波波牛乳含有过敏原: 乳制品。",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "芭乐云顶含有过敏原: 乳制品。",
       "metadata": {
         "tags": [
           "过敏原",
@@ -470,11 +343,11 @@
       }
     },
     {
-      "id": "caffeine-HT-2090",
+      "id": "caffeine-HT-ING-001",
       "type": "dietary_info",
-      "product": "热烤黑糖波波牛乳",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热烤黑糖波波牛乳咖啡因等级: 0咖啡因 (0mg)",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "芭乐云顶咖啡因等级: 0咖啡因 (0mg)",
       "metadata": {
         "tags": [
           "咖啡因",
@@ -487,70 +360,303 @@
       }
     },
     {
-      "id": "allergen-HT-2091",
-      "type": "allergen_info",
-      "product": "热苦巧·咸酪碎银子",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热苦巧·咸酪碎银子含有过敏原: 乳制品。",
+      "id": "quality-HT-ING-001",
+      "type": "quality_info",
+      "product": "芭乐云顶",
+      "category": "原料/配料",
+      "text": "芭乐云顶品质保障：奶精：不添加；奶盖粉：不添加；植脂末：不添加。",
       "metadata": {
         "tags": [
-          "过敏原",
-          "乳制品"
+          "品质",
+          "不添加",
+          "安全"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "safety",
+          "ingredient_query"
         ]
       }
     },
     {
-      "id": "allergen-HT-2092",
-      "type": "allergen_info",
-      "product": "热苦巧·咸酪(不含茶)",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热苦巧·咸酪(不含茶)含有过敏原: 乳制品。",
+      "id": "story-HT-ING-002",
+      "type": "product_story",
+      "product": "100%芭乐汁",
+      "category": "原料/配料",
+      "text": "100%芭乐汁，红心芭乐鲜果搭配芭乐汁，无香精。产地气候光照充足、降雨量充足、气候温暖，水果味道甘甜、果味浓郁、口感甜糯。不添加人工色素与香精。",
       "metadata": {
         "tags": [
-          "过敏原",
-          "乳制品"
+          "无香精",
+          "0咖啡因"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "recommend",
+          "describe",
+          "ingredient_query"
         ]
       }
     },
     {
-      "id": "allergen-HT-2093",
-      "type": "allergen_info",
-      "product": "热咸醋碎银子",
-      "category": "茶特调/茗茶",
-      "text": "热咸醋碎银子含有过敏原: 乳制品。",
+      "id": "caffeine-HT-ING-002",
+      "type": "dietary_info",
+      "product": "100%芭乐汁",
+      "category": "原料/配料",
+      "text": "100%芭乐汁咖啡因等级: 0咖啡因 (0mg)",
       "metadata": {
         "tags": [
-          "过敏原",
-          "乳制品"
+          "咖啡因",
+          "0咖啡因"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "dietary_query",
+          "recommend"
         ]
       }
     },
     {
-      "id": "allergen-HT-2094",
-      "type": "allergen_info",
-      "product": "热烤黑糖波波牛乳茶",
-      "category": "苦巧/抹茶/波波茶",
-      "text": "热烤黑糖波波牛乳茶含有过敏原: 乳制品。",
+      "id": "quality-HT-ING-002",
+      "type": "quality_info",
+      "product": "100%芭乐汁",
+      "category": "原料/配料",
+      "text": "100%芭乐汁品质保障：人工色素：不添加；香精：不添加。",
       "metadata": {
         "tags": [
-          "过敏原",
-          "乳制品"
+          "品质",
+          "不添加",
+          "安全"
         ],
         "retrievalScope": [
-          "allergen_query",
-          "safety"
+          "safety",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "story-HT-ING-003",
+      "type": "product_story",
+      "product": "100%莲雾汁",
+      "category": "原料/配料",
+      "text": "100%莲雾汁，选用黑金刚莲雾品种，果实大，果肉青白色，水分丰富，清甜无渣。肉质爽脆多汁、口感清甜可口。不添加人工色素与香精。",
+      "metadata": {
+        "tags": [
+          "0咖啡因"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-ING-003",
+      "type": "dietary_info",
+      "product": "100%莲雾汁",
+      "category": "原料/配料",
+      "text": "100%莲雾汁咖啡因等级: 0咖啡因 (0mg)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "0咖啡因"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "quality-HT-ING-003",
+      "type": "quality_info",
+      "product": "100%莲雾汁",
+      "category": "原料/配料",
+      "text": "100%莲雾汁品质保障：人工色素：不添加；香精：不添加。",
+      "metadata": {
+        "tags": [
+          "品质",
+          "不添加",
+          "安全"
+        ],
+        "retrievalScope": [
+          "safety",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "story-HT-ING-004",
+      "type": "product_story",
+      "product": "绿妍茶汤",
+      "category": "原料/配料",
+      "text": "绿妍茶汤，采用烘青茉莉花茶，茶叶来自全国各地核心产区（云南普洱、四川自贡、陕西汉中）。气候温润，降水丰富，雨热充足。1斤绿妍使用超4500朵茉莉鲜花（广西横州，世界茉莉花都），经7次窖制工序而成。好茶自然香，不含茶粉与香精。",
+      "metadata": {
+        "tags": [
+          "咖啡因黄灯",
+          "茉莉花茶"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-ING-004",
+      "type": "dietary_info",
+      "product": "绿妍茶汤",
+      "category": "原料/配料",
+      "text": "绿妍茶汤咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "quality-HT-ING-004",
+      "type": "quality_info",
+      "product": "绿妍茶汤",
+      "category": "原料/配料",
+      "text": "绿妍茶汤品质保障：茶粉：不添加；香精：不添加。",
+      "metadata": {
+        "tags": [
+          "品质",
+          "不添加",
+          "安全"
+        ],
+        "retrievalScope": [
+          "safety",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "process-HT-ING-004",
+      "type": "process_info",
+      "product": "绿妍茶汤",
+      "category": "原料/配料",
+      "text": "绿妍茶汤制茶工艺：三地绿茶自研拼配，1斤绿妍使用超4500朵茉莉鲜花，经7次窖制工序（采鲜摘花→养花→拌茶和花→窨花置→续收窨堆→起花→干燥复火）。",
+      "metadata": {
+        "tags": [
+          "工艺",
+          "制茶",
+          "窖制"
+        ],
+        "retrievalScope": [
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "story-HT-3005",
+      "type": "product_story",
+      "product": "杨桃三重奏",
+      "category": "植物茶/鲜果茶",
+      "text": "四配方饮品：杨桃汁+现制油柑汁+九窨雪毫茉王茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。三重果味搭配茉莉花茶王，清新爽口。",
+      "metadata": {
+        "tags": [
+          "咖啡因黄灯",
+          "四配方"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-3005",
+      "type": "dietary_info",
+      "product": "杨桃三重奏",
+      "category": "植物茶/鲜果茶",
+      "text": "杨桃三重奏咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "recipe-HT-3005",
+      "type": "recipe_info",
+      "product": "杨桃三重奏",
+      "category": "植物茶/鲜果茶",
+      "text": "杨桃三重奏(四配方)配方：杨桃汁 + 现制油柑汁 + 九窨雪毫茉王茶汤 + 低GI L-阿拉伯糖蔗糖调味糖浆。",
+      "metadata": {
+        "tags": [
+          "配方",
+          "原料",
+          "成分"
+        ],
+        "retrievalScope": [
+          "ingredient_query",
+          "describe"
+        ]
+      }
+    },
+    {
+      "id": "story-HT-3006",
+      "type": "product_story",
+      "product": "轻酵黄皮康普茶",
+      "category": "植物茶/鲜果茶",
+      "text": "五配方饮品：黄皮汁+现制苹果汁+奇兰乌龙康普茶液+鸭喜香单丛茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。轻酵康普茶搭配岭南黄皮，清爽回甘。",
+      "metadata": {
+        "tags": [
+          "咖啡因黄灯",
+          "康普茶",
+          "五配方"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "describe",
+          "ingredient_query"
+        ]
+      }
+    },
+    {
+      "id": "caffeine-HT-3006",
+      "type": "dietary_info",
+      "product": "轻酵黄皮康普茶",
+      "category": "植物茶/鲜果茶",
+      "text": "轻酵黄皮康普茶咖啡因等级: 咖啡因黄灯 (黄灯)",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "咖啡因黄灯"
+        ],
+        "retrievalScope": [
+          "dietary_query",
+          "recommend"
+        ]
+      }
+    },
+    {
+      "id": "recipe-HT-3006",
+      "type": "recipe_info",
+      "product": "轻酵黄皮康普茶",
+      "category": "植物茶/鲜果茶",
+      "text": "轻酵黄皮康普茶(五配方)配方：黄皮汁 + 现制苹果汁 + 奇兰乌龙康普茶液 + 鸭喜香单丛茶汤 + 低GI L-阿拉伯糖蔗糖调味糖浆。",
+      "metadata": {
+        "tags": [
+          "配方",
+          "原料",
+          "成分"
+        ],
+        "retrievalScope": [
+          "ingredient_query",
+          "describe"
         ]
       }
     },
@@ -558,7 +664,7 @@
       "id": "recommend-caffeine-free",
       "type": "recommendation",
       "category": "跨分类",
-      "text": "不含咖啡因的饮品推荐：芒椰糯米饭（0咖啡因）、热烤黑糖波波牛乳（0咖啡因）。适合对咖啡因敏感或晚间饮用的顾客。",
+      "text": "不含咖啡因的饮品推荐：芒椰糯米饭（0咖啡因）、热烤黑糖波波牛乳（0咖啡因）、芭乐云顶（0咖啡因）、100%芭乐汁（0咖啡因）、100%莲雾汁（0咖啡因）。适合对咖啡因敏感或晚间饮用的顾客。",
       "metadata": {
         "tags": [
           "咖啡因",
@@ -592,17 +698,53 @@
       "id": "recommend-fruit-tea",
       "type": "seasonal_recommend",
       "category": "鲜果茶推荐",
-      "text": "夏日鲜果茶推荐：多肉葡萄¥29经典必点、满杯红柚¥29清爽解渴、超级杯绿妍¥29超大杯畅享、满杯百香果¥28酸甜可口。",
+      "text": "夏日鲜果茶推荐：多肉葡萄¥29经典必点、满杯红柚¥29清爽解渴、奇兰芭乐莲雾（首创七配方）、奇兰粉芭乐（首创六配方）、杨桃三重奏（四配方）、轻酵黄皮康普茶（五配方）。",
       "metadata": {
         "tags": [
           "鲜果茶",
           "夏天",
           "推荐",
-          "清爽"
+          "清爽",
+          "首创"
         ],
         "retrievalScope": [
           "recommend",
           "seasonal"
+        ]
+      }
+    },
+    {
+      "id": "recommend-new-creations",
+      "type": "recommendation",
+      "category": "首创推荐",
+      "text": "首创系列推荐：奇兰芭乐莲雾（首创七配方，芭乐+莲雾+奇兰+牛乳）、奇兰粉芭乐（首创六配方，芭乐+奇兰+牛乳）、芝芝绿妍茶后（首创三配方，芝芝云顶+绿妍茶汤）。",
+      "metadata": {
+        "tags": [
+          "首创",
+          "推荐",
+          "新品"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "seasonal"
+        ]
+      }
+    },
+    {
+      "id": "guide-low-gi",
+      "type": "dietary_guide",
+      "category": "饮食指南",
+      "text": "低GI饮品推荐：杨桃三重奏（四配方，低GI L-阿拉伯糖蔗糖调味）、轻酵黄皮康普茶（五配方，低GI L-阿拉伯糖蔗糖调味）、芒椰糯米饭可选低GI甜度。",
+      "metadata": {
+        "tags": [
+          "低GI",
+          "健康",
+          "推荐",
+          "阿拉伯糖"
+        ],
+        "retrievalScope": [
+          "recommend",
+          "dietary_query"
         ]
       }
     }

@@ -1,14 +1,15 @@
 {
   "meta": {
     "version": "1.0.0",
-    "updatedAt": "2026-06-15",
-    "totalProducts": 94,
+    "updatedAt": "2026-06-16",
+    "totalProducts": 100,
     "categories": [
       "茶特调/茗茶",
       "植物茶/鲜果茶",
       "苦巧/抹茶/波波茶",
       "灵感茶点",
-      "咖啡/经典/小料"
+      "咖啡/经典/小料",
+      "原料/配料"
     ]
   },
   "products": {
@@ -540,22 +541,50 @@
         "base": 27
       },
       "description": {
-        "short": "芭乐搭配清新茶底"
+        "short": "首创·六配方·芭乐+奇兰+牛乳",
+        "long": "首创六配方饮品：芭乐云顶奶盖+100%芭乐汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。奇兰芭乐莲雾的莲雾削减版本，保留芭乐清甜与奇兰花香。",
+        "servingStyle": "冷饮"
       },
       "ingredients": {
         "main": [
-          "芭乐"
+          "芭乐云顶",
+          "100%芭乐汁",
+          "纯粹真冰糖",
+          "花香奇兰茶汤",
+          "源牧3.8牛乳",
+          "定制轻乳"
         ]
       },
-      "allergens": [],
-      "tags": {},
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "status": "首创",
+        "caffeine": "咖啡因黄灯",
+        "recipeCount": "六配方"
+      },
       "nutrition": {
-        "calories": "约200kcal",
-        "sugar": "约27g",
-        "caffeine": "约25mg"
+        "caffeine": "黄灯"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "芭乐云顶",
+        "100%芭乐汁",
+        "纯粹真冰糖",
+        "花香奇兰茶汤",
+        "源牧3.8牛乳",
+        "定制轻乳"
+      ],
+      "relatedProducts": [
+        "奇兰芭乐莲雾"
+      ],
+      "faq": [
+        {
+          "q": "奇兰粉芭乐和奇兰芭乐莲雾有什么区别？",
+          "a": "奇兰粉芭乐是六配方，不含莲雾汁；奇兰芭乐莲雾是七配方，多了100%莲雾汁。"
+        }
+      ]
     },
     "奇兰红颜莓莓": {
       "productId": 2022,
@@ -590,23 +619,67 @@
         "base": 27
       },
       "description": {
-        "short": "芭乐+莲雾搭配清新茶底"
+        "short": "首创·七配方·芭乐+莲雾+奇兰+牛乳",
+        "long": "首创七配方饮品：芭乐云顶奶盖+100%芭乐汁+100%莲雾汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。融合热带芭乐清甜与莲雾爽脆，搭配花香奇兰茶底和丝滑牛乳。",
+        "servingStyle": "冷饮"
       },
       "ingredients": {
         "main": [
-          "芭乐",
-          "莲雾"
+          "芭乐云顶",
+          "100%芭乐汁",
+          "100%莲雾汁",
+          "纯粹真冰糖",
+          "花香奇兰茶汤",
+          "源牧3.8牛乳",
+          "定制轻乳"
+        ],
+        "layers": [
+          {
+            "name": "芭乐云顶奶盖",
+            "position": "顶层"
+          },
+          {
+            "name": "芭乐+莲雾果汁",
+            "position": "中层"
+          },
+          {
+            "name": "奇兰茶汤+牛乳",
+            "position": "底层"
+          }
         ]
       },
-      "allergens": [],
-      "tags": {},
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "status": "首创",
+        "caffeine": "咖啡因黄灯",
+        "recipeCount": "七配方"
+      },
       "nutrition": {
-        "calories": "约200kcal",
-        "sugar": "约27g",
-        "caffeine": "约25mg"
+        "caffeine": "黄灯"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "芭乐云顶",
+        "100%芭乐汁",
+        "100%莲雾汁",
+        "纯粹真冰糖",
+        "花香奇兰茶汤",
+        "源牧3.8牛乳",
+        "定制轻乳"
+      ],
+      "relatedProducts": [
+        "奇兰粉芭乐",
+        "芝芝绿妍茶后"
+      ],
+      "faq": [
+        {
+          "q": "奇兰芭乐莲雾有几个配方？",
+          "a": "首创七配方：芭乐云顶+100%芭乐汁+100%莲雾汁+纯粹真冰糖+花香奇兰茶汤+源牧3.8牛乳+定制轻乳。"
+        }
+      ]
     },
     "雪毫茉王芭乐": {
       "productId": 2024,
@@ -958,26 +1031,44 @@
         "base": 33
       },
       "description": {
-        "short": "绿茶搭配浓郁芝士奶盖"
+        "short": "首创·三配方·芝芝云顶+绿妍茶汤",
+        "long": "首创三配方饮品：首创芝芝云顶奶盖+绿妍茶汤+纯粹真冰糖。经典绿妍茉莉花茶搭配浓郁芝芝奶盖，好茶自然香。",
+        "servingStyle": "冷饮"
       },
       "ingredients": {
         "main": [
-          "绿茶"
+          "首创芝芝云顶",
+          "绿妍茶汤",
+          "纯粹真冰糖"
         ]
       },
       "allergens": [
         "乳制品"
       ],
       "tags": {
-        "status": "首创"
+        "status": "首创",
+        "caffeine": "咖啡因黄灯",
+        "recipeCount": "三配方"
       },
       "nutrition": {
-        "calories": "约220kcal",
-        "sugar": "约33g",
-        "caffeine": "约0mg"
+        "caffeine": "黄灯"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "首创芝芝云顶",
+        "绿妍茶汤",
+        "纯粹真冰糖"
+      ],
+      "relatedProducts": [
+        "纯绿妍茶后"
+      ],
+      "faq": [
+        {
+          "q": "芝芝绿妍茶后有几个配方？",
+          "a": "首创三配方：芝芝云顶奶盖+绿妍茶汤+纯粹真冰糖。"
+        }
+      ]
     },
     "芝士咸酪藏茶": {
       "productId": 2034,
@@ -1858,22 +1949,31 @@
         "base": 12
       },
       "description": {
-        "short": "经典纯茶"
+        "short": "一配方·纯绿妍茶汤",
+        "long": "一配方纯茶饮品：绿妍茶汤。采用烘青茉莉花茶，1斤绿妍使用超4500朵广西横州茉莉鲜花，经7次窖制工序。好茶自然香，不含茶粉与香精。",
+        "servingStyle": "冷饮"
       },
       "ingredients": {
         "main": [
-          "绿茶"
+          "绿妍茶汤"
         ]
       },
       "allergens": [],
-      "tags": {},
+      "tags": {
+        "caffeine": "咖啡因黄灯",
+        "recipeCount": "一配方"
+      },
       "nutrition": {
-        "calories": "约100kcal",
-        "sugar": "约12g",
-        "caffeine": "约50mg"
+        "caffeine": "黄灯"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "绿妍茶汤"
+      ],
+      "relatedProducts": [
+        "芝芝绿妍茶后"
+      ]
     },
     "绿妍轻柠茶(超大杯)": {
       "productId": 2069,
@@ -2580,6 +2680,284 @@
       },
       "customizationType": "hot_drink",
       "dataCompleteness": "basic"
+    },
+    "芭乐云顶": {
+      "productId": 3001,
+      "skuCode": "HT-ING-001",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "搭配无香精芭乐汁·动物性奶油+真牛乳",
+        "long": "芭乐云顶奶盖，使用动物性奶油和真牛乳打制，咸甜风味，细膩丝滑，奶香饱满。真奶自带清甜，不添加奶盖粉。奶源产地：新西兰、澳大利亚、中国山东等。奶牛品种：荷斯坦奶牛。",
+        "servingStyle": "奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "动物性奶油",
+          "真牛乳",
+          "芭乐汁"
+        ],
+        "milkOrigin": [
+          "新西兰",
+          "澳大利亚",
+          "中国山东"
+        ],
+        "cowBreed": "荷斯坦奶牛"
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "quality": "不添加奶精/奶盖粉/植脂末"
+      },
+      "nutrition": {
+        "caffeine": "0mg"
+      },
+      "customizationType": "none",
+      "qualityClaims": [
+        "奶精：不添加",
+        "奶盖粉：不添加",
+        "植脂末：不添加"
+      ],
+      "flavorProfile": "咸甜风味，细膩丝滑，奶香饱满",
+      "faq": [
+        {
+          "q": "芭乐云顶加了奶盖粉吗？",
+          "a": "芭乐云顶不添加奶精、奶盖粉和植脂末，使用动物性奶油和真牛乳打制。"
+        },
+        {
+          "q": "芭乐云顶的奶源来自哪里？",
+          "a": "奶源产地包括新西兰、澳大利亚、中国山东等地，奶牛品种为荷斯坦奶牛。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "100%芭乐汁": {
+      "productId": 3002,
+      "skuCode": "HT-ING-002",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "无香精·红心芭乐鲜果+芭乐汁",
+        "long": "100%芭乐汁，红心芭乐鲜果搭配芭乐汁，无香精。产地气候光照充足、降雨量充足、气候温暖，水果味道甘甜、果味浓郁、口感甜糯。不添加人工色素与香精。",
+        "servingStyle": "果汁"
+      },
+      "ingredients": {
+        "main": [
+          "红心芭乐鲜果",
+          "芭乐汁"
+        ],
+        "fruitOrigin": [
+          "广东",
+          "广西",
+          "福建"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "quality": "不添加人工色素与香精",
+        "status": "无香精"
+      },
+      "nutrition": {
+        "caffeine": "0mg"
+      },
+      "customizationType": "none",
+      "climateInfo": "产地气候：光照充足、降雨量充足、气候温暖",
+      "flavorProfile": "味道甘甜、果味浓郁、口感甜糯",
+      "qualityClaims": [
+        "人工色素：不添加",
+        "香精：不添加"
+      ],
+      "faq": [
+        {
+          "q": "芭乐汁有人工色素吗？",
+          "a": "100%芭乐汁不添加人工色素与香精，使用红心芭乐鲜果。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "100%莲雾汁": {
+      "productId": 3003,
+      "skuCode": "HT-ING-003",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "黑金刚莲雾·无香精无色素",
+        "long": "100%莲雾汁，选用黑金刚莲雾品种，果实大，果肉青白色，水分丰富，清甜无渣。肉质爽脆多汁、口感清甜可口。不添加人工色素与香精。",
+        "servingStyle": "果汁"
+      },
+      "ingredients": {
+        "main": [
+          "黑金刚莲雾鲜果",
+          "莲雾汁"
+        ],
+        "fruitOrigin": [
+          "越南",
+          "中国海南"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "0咖啡因",
+        "quality": "不添加人工色素与香精"
+      },
+      "nutrition": {
+        "caffeine": "0mg"
+      },
+      "customizationType": "none",
+      "varietyInfo": "黑金刚莲雾：果实大，果肉青白色，水分丰富，清甜无渣",
+      "flavorProfile": "肉质爽脆多汁、口感清甜可口",
+      "qualityClaims": [
+        "人工色素：不添加",
+        "香精：不添加"
+      ],
+      "faq": [
+        {
+          "q": "莲雾汁是什么品种的莲雾？",
+          "a": "选用黑金刚莲雾品种，果实大，果肉青白色，水分丰富，清甜无渣。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "绿妍茶汤": {
+      "productId": 3004,
+      "skuCode": "HT-ING-004",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "无香精·烘青茉莉花茶",
+        "long": "绿妍茶汤，采用烘青茉莉花茶，茶叶来自全国各地核心产区（云南普洱、四川自贡、陕西汉中）。气候温润，降水丰富，雨热充足。1斤绿妍使用超4500朵茉莉鲜花（广西横州，世界茉莉花都），经7次窖制工序而成。好茶自然香，不含茶粉与香精。",
+        "servingStyle": "茶汤"
+      },
+      "ingredients": {
+        "main": [
+          "烘青茉莉花茶",
+          "茉莉鲜花"
+        ],
+        "teaOrigin": [
+          "云南普洱",
+          "四川自贡",
+          "陕西汉中"
+        ],
+        "flowerOrigin": "广西横州（世界茉莉花都）"
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "咖啡因黄灯",
+        "tea": "茉莉花茶",
+        "quality": "不含茶粉与香精"
+      },
+      "nutrition": {
+        "caffeine": "黄灯"
+      },
+      "customizationType": "none",
+      "teaType": "烘青茉莉花茶",
+      "processInfo": "三地绿茶自研拼配，1斤绿妍使用超4500朵茉莉鲜花，经7次窖制工序（采鲜摘花→养花→拌茶和花→窨花置→续收窨堆→起花→干燥复火）",
+      "qualityTests": "100多项权威检测",
+      "qualityClaims": [
+        "茶粉：不添加",
+        "香精：不添加"
+      ],
+      "faq": [
+        {
+          "q": "绿妍茶汤加了香精吗？",
+          "a": "好茶自然香，不含茶粉与香精。绿妍使用广西横州茉莉鲜花，经7次窖制工序天然提香。"
+        },
+        {
+          "q": "绿妍茶底是什么茶？",
+          "a": "绿妍采用烘青茉莉花茶，茶叶来自云南普洱、四川自贡、陕西汉中等核心产区。"
+        }
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "杨桃三重奏": {
+      "productId": 3005,
+      "skuCode": "HT-3005",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "四配方·杨桃汁+油柑汁+雪毫茉王茶",
+        "long": "四配方饮品：杨桃汁+现制油柑汁+九窨雪毫茉王茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。三重果味搭配茉莉花茶王，清新爽口。",
+        "servingStyle": "冷饮"
+      },
+      "ingredients": {
+        "main": [
+          "杨桃汁",
+          "现制油柑汁",
+          "九窨雪毫茉王茶汤",
+          "低GI L-阿拉伯糖蔗糖调味糖浆"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "咖啡因黄灯",
+        "recipeCount": "四配方",
+        "dietary": "低GI"
+      },
+      "nutrition": {
+        "caffeine": "黄灯"
+      },
+      "customizationType": "standard",
+      "recipeComponents": [
+        "杨桃汁",
+        "现制油柑汁",
+        "九窨雪毫茉王茶汤",
+        "低GI L-阿拉伯糖蔗糖调味糖浆"
+      ],
+      "dataCompleteness": "detailed"
+    },
+    "轻酵黄皮康普茶": {
+      "productId": 3006,
+      "skuCode": "HT-3006",
+      "category": "植物茶/鲜果茶",
+      "pricing": {
+        "base": 28
+      },
+      "description": {
+        "short": "五配方·黄皮汁+苹果汁+奇兰乌龙康普茶",
+        "long": "五配方饮品：黄皮汁+现制苹果汁+奇兰乌龙康普茶液+鸭喜香单丛茶汤+低GI L-阿拉伯糖蔗糖调味糖浆。轻酵康普茶搭配岭南黄皮，清爽回甘。",
+        "servingStyle": "冷饮"
+      },
+      "ingredients": {
+        "main": [
+          "黄皮汁",
+          "现制苹果汁",
+          "奇兰乌龙康普茶液",
+          "鸭喜香单丛茶汤",
+          "低GI L-阿拉伯糖蔗糖调味糖浆"
+        ]
+      },
+      "allergens": [],
+      "tags": {
+        "caffeine": "咖啡因黄灯",
+        "recipeCount": "五配方",
+        "dietary": "低GI",
+        "tea": "康普茶"
+      },
+      "nutrition": {
+        "caffeine": "黄灯"
+      },
+      "customizationType": "standard",
+      "recipeComponents": [
+        "黄皮汁",
+        "现制苹果汁",
+        "奇兰乌龙康普茶液",
+        "鸭喜香单丛茶汤",
+        "低GI L-阿拉伯糖蔗糖调味糖浆"
+      ],
+      "dataCompleteness": "detailed"
     }
   }
 }
