@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "updatedAt": "2026-06-15",
-    "totalProducts": 104,
+    "totalProducts": 118,
     "categories": [
       "茶特调/茗茶",
       "植物茶/鲜果茶",
@@ -148,18 +148,48 @@
         "base": 31
       },
       "description": {
-        "short": "芒果搭配茶底与特色小料"
+        "short": "八配方·芒果+红柚+椰乳+脆波波",
+        "long": "八配方饮品：红柚果粒+100%芒果原浆+椰乳+0脂脆波波+绿妍茶汤（冰沙）+现制芒果果肉+西米+纯粹真冰糖。芒果椰乳搭配红柚果粒与0脂脆波波，层次丰富，首创。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "芒果"
+          "红柚果粒",
+          "100%芒果原浆",
+          "椰乳",
+          "0脂脆波波",
+          "绿妍茶汤（冰沙）",
+          "现制芒果果肉",
+          "西米",
+          "纯粹真冰糖"
+        ],
+        "layers": [
+          {
+            "name": "红柚果粒+0脂脆波波+西米",
+            "position": "底层小料"
+          },
+          {
+            "name": "现制芒果果肉",
+            "position": "下层果肉"
+          },
+          {
+            "name": "芒果椰乳冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [
-        "芒果"
+        "芒果",
+        "椰子",
+        "乳制品"
       ],
       "tags": {
-        "status": "首创"
+        "status": "首创",
+        "recipeCount": "八配方"
       },
       "nutrition": {
         "calories": "约260kcal",
@@ -167,7 +197,37 @@
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "红柚果粒",
+        "100%芒果原浆",
+        "椰乳",
+        "0脂脆波波",
+        "绿妍茶汤（冰沙）",
+        "现制芒果果肉",
+        "西米",
+        "纯粹真冰糖"
+      ],
+      "relatedProducts": [
+        "椰椰芒芒",
+        "多肉芒芒",
+        "超多肉芒芒甘露",
+        "芒椰糯米饭"
+      ],
+      "faq": [
+        {
+          "q": "芒芒甘露有几个配方？",
+          "a": "首创八配方：红柚果粒+100%芒果原浆+椰乳+0脂脆波波+绿妍茶汤（冰沙）+现制芒果果肉+西米+纯粹真冰糖。"
+        },
+        {
+          "q": "芒芒甘露和椰椰芒芒有什么区别？",
+          "a": "芒芒甘露是八配方，多了红柚果粒和0脂脆波波；椰椰芒芒是七配方，多了定制弹弹冻但没有红柚果粒和0脂脆波波。"
+        },
+        {
+          "q": "芒芒甘露含过敏原吗？",
+          "a": "含芒果、椰子和乳制品过敏原。"
+        }
+      ]
     },
     "超多肉芒芒甘露": {
       "productId": 2007,
@@ -204,24 +264,66 @@
         "base": 27
       },
       "description": {
-        "short": "芒果搭配清新茶底"
+        "short": "四配方·芒果原浆+果肉+绿妍冰沙",
+        "long": "四配方饮品：100%芒果原浆+现制芒果果肉+绿妍茶汤（冰沙）+纯粹真冰糖。纯粹芒果风味，原浆搭配现制果肉，浓郁鲜甜。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "芒果"
+          "100%芒果原浆",
+          "现制芒果果肉",
+          "绿妍茶汤（冰沙）",
+          "纯粹真冰糖"
+        ],
+        "layers": [
+          {
+            "name": "现制芒果果肉",
+            "position": "底层"
+          },
+          {
+            "name": "芒果原浆绿妍冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [
         "芒果"
       ],
-      "tags": {},
+      "tags": {
+        "recipeCount": "四配方"
+      },
       "nutrition": {
         "calories": "约200kcal",
         "sugar": "约27g",
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "100%芒果原浆",
+        "现制芒果果肉",
+        "绿妍茶汤（冰沙）",
+        "纯粹真冰糖"
+      ],
+      "relatedProducts": [
+        "芒芒甘露",
+        "椰椰芒芒",
+        "芒椰糯米饭"
+      ],
+      "faq": [
+        {
+          "q": "多肉芒芒有几个配方？",
+          "a": "四配方：100%芒果原浆+现制芒果果肉+绿妍茶汤（冰沙）+纯粹真冰糖。"
+        },
+        {
+          "q": "多肉芒芒和芒芒甘露有什么区别？",
+          "a": "多肉芒芒是四配方，纯芒果风味；芒芒甘露是八配方，多了红柚果粒、椰乳、0脂脆波波、西米等配料，口感层次更丰富。"
+        }
+      ]
     },
     "椰椰芒芒": {
       "productId": 2009,
@@ -231,26 +333,78 @@
         "base": 27
       },
       "description": {
-        "short": "芒果+椰子搭配清新茶底"
+        "short": "七配方·芒果+椰乳+弹弹冻+西米",
+        "long": "七配方饮品：100%芒果原浆+椰乳+定制弹弹冻+绿妍茶汤（冰沙）+现制芒果果肉+西米+纯粹真冰糖。芒果与椰乳热带风味融合，搭配弹弹冻与西米的Q弹口感。",
+        "servingStyle": "冰沙"
       },
       "ingredients": {
         "main": [
-          "芒果",
-          "椰子"
+          "100%芒果原浆",
+          "椰乳",
+          "定制弹弹冻",
+          "绿妍茶汤（冰沙）",
+          "现制芒果果肉",
+          "西米",
+          "纯粹真冰糖"
+        ],
+        "layers": [
+          {
+            "name": "现制芒果果肉",
+            "position": "底层"
+          },
+          {
+            "name": "西米+定制弹弹冻",
+            "position": "下层小料"
+          },
+          {
+            "name": "芒果椰乳冰沙",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [
         "芒果",
-        "椰子"
+        "椰子",
+        "乳制品"
       ],
-      "tags": {},
+      "tags": {
+        "recipeCount": "七配方"
+      },
       "nutrition": {
         "calories": "约200kcal",
         "sugar": "约27g",
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "100%芒果原浆",
+        "椰乳",
+        "定制弹弹冻",
+        "绿妍茶汤（冰沙）",
+        "现制芒果果肉",
+        "西米",
+        "纯粹真冰糖"
+      ],
+      "relatedProducts": [
+        "芒芒甘露",
+        "多肉芒芒",
+        "芒椰糯米饭"
+      ],
+      "faq": [
+        {
+          "q": "椰椰芒芒有几个配方？",
+          "a": "七配方：100%芒果原浆+椰乳+定制弹弹冻+绿妍茶汤（冰沙）+现制芒果果肉+西米+纯粹真冰糖。"
+        },
+        {
+          "q": "椰椰芒芒含过敏原吗？",
+          "a": "含芒果、椰子和乳制品过敏原。"
+        }
+      ]
     },
     "多肉桃李": {
       "productId": 2010,
@@ -491,22 +645,64 @@
         "base": 27
       },
       "description": {
-        "short": "苹果杏搭配清新茶底"
+        "short": "四配方·苹果汁+奇兰茶汤+杏浆",
+        "long": "四配方饮品：现制苹果汁+纯粹真冰糖+花香奇兰茶汤+金太阳杏浆。苹果清甜与杏浆酸甜交融，搭配花香奇兰茶底，果香馥郁。",
+        "servingStyle": "冷饮"
       },
       "ingredients": {
         "main": [
-          "苹果杏"
+          "现制苹果汁",
+          "纯粹真冰糖",
+          "花香奇兰茶汤",
+          "金太阳杏浆"
+        ],
+        "layers": [
+          {
+            "name": "金太阳杏浆",
+            "position": "底层"
+          },
+          {
+            "name": "现制苹果汁+奇兰茶汤",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
       "allergens": [],
-      "tags": {},
+      "tags": {
+        "recipeCount": "四配方"
+      },
       "nutrition": {
         "calories": "约200kcal",
         "sugar": "约27g",
         "caffeine": "约25mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "现制苹果汁",
+        "纯粹真冰糖",
+        "花香奇兰茶汤",
+        "金太阳杏浆"
+      ],
+      "relatedProducts": [
+        "奇兰粉芭乐",
+        "奇兰芭乐莲雾",
+        "奇兰红颜莓莓"
+      ],
+      "faq": [
+        {
+          "q": "奇兰苹果杏有几个配方？",
+          "a": "四配方：现制苹果汁+纯粹真冰糖+花香奇兰茶汤+金太阳杏浆。"
+        },
+        {
+          "q": "奇兰苹果杏含咖啡因吗？",
+          "a": "含有咖啡因，来自花香奇兰茶汤。"
+        }
+      ]
     },
     "奇兰苹果杏特调": {
       "productId": 2020,
@@ -1311,22 +1507,71 @@
         "base": 25
       },
       "description": {
-        "short": "经典牛乳茶"
+        "short": "四配方·碎银子普洱+牛乳+芝芝云顶",
+        "long": "四配方饮品：首创芝芝云顶+源牧3.8牛乳+纯粹真冰糖+碎银子普洱茶汤。碎银子普洱的糯香搭配丝滑牛乳与芝芝云顶，醇厚温润。",
+        "servingStyle": "冷饮/热饮"
       },
       "ingredients": {
         "main": [
-          "碎银子"
+          "首创芝芝云顶",
+          "源牧3.8牛乳",
+          "纯粹真冰糖",
+          "碎银子普洱茶汤"
+        ],
+        "layers": [
+          {
+            "name": "首创芝芝云顶",
+            "position": "顶层奶盖"
+          },
+          {
+            "name": "碎银子普洱茶汤+牛乳",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
-      "allergens": [],
-      "tags": {},
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "recipeCount": "四配方"
+      },
       "nutrition": {
         "calories": "约160kcal",
         "sugar": "约25g",
         "caffeine": "约40mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "首创芝芝云顶",
+        "源牧3.8牛乳",
+        "纯粹真冰糖",
+        "碎银子普洱茶汤"
+      ],
+      "relatedProducts": [
+        "咸酪碎银子",
+        "碎银子糯糯",
+        "碎银子黑糖波波",
+        "嫣红牛乳茶"
+      ],
+      "faq": [
+        {
+          "q": "碎银子牛乳茶有几个配方？",
+          "a": "四配方：首创芝芝云顶+源牧3.8牛乳+纯粹真冰糖+碎银子普洱茶汤。"
+        },
+        {
+          "q": "碎银子牛乳茶含咖啡因吗？",
+          "a": "含有咖啡因，来自碎银子普洱茶汤。"
+        },
+        {
+          "q": "碎银子牛乳茶和咸酪碎银子有什么区别？",
+          "a": "碎银子牛乳茶是四配方，口感更清爽；咸酪碎银子是五配方，多了混合咸酪厚乳，口感更丰富。"
+        }
+      ]
     },
     "芋圆牛乳茶": {
       "productId": 2043,
@@ -1928,22 +2173,70 @@
         "base": 16
       },
       "description": {
-        "short": "经典茶饮"
+        "short": "四配方·源牧牛乳+绿妍茶汤+轻乳",
+        "long": "四配方饮品：源牧3.8牛乳+纯粹真冰糖+绿妍茶汤+定制轻乳。茉莉花香搭配丝滑牛乳与轻乳，清甜馥郁。",
+        "servingStyle": "冷饮/热饮"
       },
       "ingredients": {
         "main": [
-          "茉莉"
+          "源牧3.8牛乳",
+          "纯粹真冰糖",
+          "绿妍茶汤",
+          "定制轻乳"
+        ],
+        "layers": [
+          {
+            "name": "定制轻乳",
+            "position": "顶层"
+          },
+          {
+            "name": "绿妍茶汤+牛乳",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
-      "allergens": [],
-      "tags": {},
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "recipeCount": "四配方"
+      },
       "nutrition": {
         "calories": "约100kcal",
         "sugar": "约16g",
         "caffeine": "约50mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "源牧3.8牛乳",
+        "纯粹真冰糖",
+        "绿妍茶汤",
+        "定制轻乳"
+      ],
+      "relatedProducts": [
+        "纯绿妍茶后",
+        "芝芝绿妍茶后",
+        "嫣红牛乳茶"
+      ],
+      "faq": [
+        {
+          "q": "小奶茉有几个配方？",
+          "a": "四配方：源牧3.8牛乳+纯粹真冰糖+绿妍茶汤+定制轻乳。"
+        },
+        {
+          "q": "小奶茉含咖啡因吗？",
+          "a": "含有咖啡因，来自绿妍茶汤。"
+        },
+        {
+          "q": "小奶茉有乳制品吗？",
+          "a": "是的，含有源牧3.8牛乳和定制轻乳，均含乳制品。"
+        }
+      ]
     },
     "开心小奶茉": {
       "productId": 2067,
@@ -2090,22 +2383,74 @@
         "base": 27
       },
       "description": {
-        "short": "经典糯糯"
+        "short": "五配方·碎银子普洱+咸酪厚乳+芝芝云顶",
+        "long": "五配方饮品：首创芝芝云顶+源牧3.8牛乳+纯粹真冰糖+碎银子普洱茶汤+混合咸酪厚乳。碎银子普洱的糯香搭配咸酪厚乳与芝芝云顶，层次丰富，首创。",
+        "servingStyle": "冷饮/热饮"
       },
       "ingredients": {
         "main": [
-          "碎银子"
+          "首创芝芝云顶",
+          "源牧3.8牛乳",
+          "纯粹真冰糖",
+          "碎银子普洱茶汤",
+          "混合咸酪厚乳"
+        ],
+        "layers": [
+          {
+            "name": "首创芝芝云顶",
+            "position": "顶层奶盖"
+          },
+          {
+            "name": "碎银子普洱茶汤+牛乳+咸酪厚乳",
+            "position": "主体"
+          },
+          {
+            "name": "纯粹真冰糖",
+            "position": "调味"
+          }
         ]
       },
-      "allergens": [],
-      "tags": {},
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "status": "首创",
+        "recipeCount": "五配方"
+      },
       "nutrition": {
         "calories": "约160kcal",
         "sugar": "约27g",
         "caffeine": "约40mg"
       },
       "customizationType": "standard",
-      "dataCompleteness": "basic"
+      "dataCompleteness": "detailed",
+      "recipeComponents": [
+        "首创芝芝云顶",
+        "源牧3.8牛乳",
+        "纯粹真冰糖",
+        "碎银子普洱茶汤",
+        "混合咸酪厚乳"
+      ],
+      "relatedProducts": [
+        "碎银子牛乳茶",
+        "苦巧·咸酪碎银子",
+        "碎银子糯糯",
+        "碎银子黑糖波波"
+      ],
+      "faq": [
+        {
+          "q": "咸酪碎银子有几个配方？",
+          "a": "首创五配方：首创芝芝云顶+源牧3.8牛乳+纯粹真冰糖+碎银子普洱茶汤+混合咸酪厚乳。"
+        },
+        {
+          "q": "咸酪碎银子含咖啡因吗？",
+          "a": "含有咖啡因，来自碎银子普洱茶汤。"
+        },
+        {
+          "q": "咸酪碎银子和碎银子牛乳茶有什么区别？",
+          "a": "咸酪碎银子是五配方，多了混合咸酪厚乳；碎银子牛乳茶是四配方，没有混合咸酪厚乳，口感更清爽。"
+        }
+      ]
     },
     "碎银子黑糖波波": {
       "productId": 2073,
@@ -2865,7 +3210,7 @@
       },
       "description": {
         "short": "无香精·烘青茉莉花茶",
-        "long": "绿妍茶汤，采用烘青茉莉花茶，茶叶来自全国各地核心产区（云南普洱、四川自贡、陕西汉中）。气候温润，降水丰富，雨热充足。1斤绿妍使用超4500朵茉莉鲜花（广西横州，世界茉莉花都），经7次窖制工序而成。好茶自然香，不含茶粉与香精。",
+        "long": "绿妍茶汤，采用烘青茉莉花茶，茶叶来自全国各地核心产区（云南普洱、四川自贡、陕西汉中）。气候温润，降水丰富，雨热充足。1斤绿妍使用超4500朵茉莉鲜花（广西横州，世界茉莉花都），经7次窖制工序而成。好茶自然香，不含茶粉与香精。 茶叶产自云南普洱、四川自贡、陕西汉中核心产区，气候温润、降水丰富、雨热充足。烘青茉莉花茶品种，茉莉花来自广西横州（世界茉莉花都），500g绿茶配4500+朵茉莉花，7次窨制工艺。茶香高扬持久，茉莉花香甜醇馥郁。好茶自然香，不含茶粉与香精。",
         "servingStyle": "茶汤"
       },
       "ingredients": {
@@ -2873,29 +3218,32 @@
           "烘青茉莉花茶",
           "茉莉鲜花"
         ],
-        "teaOrigin": [
-          "云南普洱",
-          "四川自贡",
-          "陕西汉中"
-        ],
+        "teaOrigin": "云南普洱、四川自贡、陕西汉中",
         "flowerOrigin": "广西横州（世界茉莉花都）"
       },
       "allergens": [],
       "tags": {
-        "caffeine": "咖啡因黄灯",
+        "caffeine": "含咖啡因",
         "tea": "茉莉花茶",
-        "quality": "不含茶粉与香精"
+        "quality": "不含茶粉与香精",
+        "teaType": "烘青茉莉花茶",
+        "jasmineOrigin": "广西横州"
       },
       "nutrition": {
         "caffeine": "黄灯"
       },
       "customizationType": "none",
       "teaType": "烘青茉莉花茶",
-      "processInfo": "三地绿茶自研拼配，1斤绿妍使用超4500朵茉莉鲜花，经7次窖制工序（采鲜摘花→养花→拌茶和花→窨花置→续收窨堆→起花→干燥复火）",
+      "processInfo": "7步窨制工艺：采鲜摘花→养花→拌茶和花→窨静花置→续收窨堆→起花→干复燥火。广西横州晴天采摘茉莉花苞，三区绿茶自主拼配。",
       "qualityTests": "100多项权威检测",
       "qualityClaims": [
         "茶粉：不添加",
-        "香精：不添加"
+        "香精：不添加",
+        "不含茶粉",
+        "不含香精",
+        "好茶自然香",
+        "7次窨制",
+        "500g绿茶配4500+朵茉莉花"
       ],
       "faq": [
         {
@@ -2905,9 +3253,18 @@
         {
           "q": "绿妍茶底是什么茶？",
           "a": "绿妍采用烘青茉莉花茶，茶叶来自云南普洱、四川自贡、陕西汉中等核心产区。"
+        },
+        {
+          "q": "绿妍茶汤是什么茶？",
+          "a": "烘青茉莉花茶，产自云南普洱、四川自贡、陕西汉中核心产区。500g绿茶配4500+朵茉莉花，7次窨制。"
+        },
+        {
+          "q": "绿妍茶汤含香精吗？",
+          "a": "不含。好茶自然香，不含茶粉与香精，经过100多项权威检测。"
         }
       ],
-      "dataCompleteness": "detailed"
+      "dataCompleteness": "detailed",
+      "flavorProfile": "茶香高扬持久，茉莉花香甜醇馥郁"
     },
     "杨桃三重奏": {
       "productId": 3005,
@@ -3106,7 +3463,7 @@
       },
       "description": {
         "short": "新茶饮专用真牛乳·3.8g蛋白质",
-        "long": "源牧3.8牛乳，产地山东、河北，选用荷斯坦奶牛，蛋白质含量达3.8g/100mL。采用TMR系统科学喂养，冷链运输，闪蒸技术处理。新茶饮专用真牛乳，不添加植脂末和奶精。",
+        "long": "源牧3.8牛乳，产地山东、河北，选用荷斯坦奶牛，蛋白质含量达3.8g/100mL。采用TMR系统科学喂养，冷链运输，闪蒸技术处理。新茶饮专用真牛乳，不添加植脂末和奶精。 奶源产自山东、河北牧场，优选荷斯坦奶牛。智能化管理，牛舍定期消毒，TMR系统科学喂养精选优质饲料。生牛乳冷链运输锁鲜，先进杀菌工艺保留原奶口感，闪蒸技术带来更高乳蛋白含量。奶香浓郁，自带清甜，避免奶腥味和蒸煮味。新茶饮专用真牛乳，无奶精零添加。",
         "servingStyle": "乳基"
       },
       "ingredients": {
@@ -3125,7 +3482,9 @@
       "tags": {
         "caffeine": "0咖啡因",
         "quality": "不添加植脂末/奶精",
-        "highlight": "3.8g/100mL蛋白质"
+        "highlight": "3.8g/100mL蛋白质",
+        "cowBreed": "荷斯坦奶牛",
+        "farmMgmt": "智能化管理"
       },
       "nutrition": {
         "caffeine": "0mg",
@@ -3135,10 +3494,16 @@
       "qualityClaims": [
         "植脂末：不添加",
         "奶精：不添加",
-        "蛋白质含量：3.8g/100mL"
+        "蛋白质含量：3.8g/100mL",
+        "不添加奶精",
+        "不添加植脂末",
+        "新茶饮专用真牛乳",
+        "TMR科学喂养",
+        "闪蒸技术",
+        "冷链运输"
       ],
-      "processInfo": "TMR系统科学喂养，冷链运输，闪蒸技术",
-      "flavorProfile": "新茶饮专用真牛乳",
+      "processInfo": "山东、河北牧场优选荷斯坦奶牛。智能化牧场管理，牛舍定期消毒。TMR（全混合日粮）系统科学喂养，精选优质饲料保障生牛乳品质。生牛乳冷链运输锁住新鲜，先进杀菌工艺保留更多原奶口感，闪蒸技术带来更高乳蛋白含量（3.8g/100mL）。",
+      "flavorProfile": "奶香浓郁，自带清甜，避免奶腥味和蒸煮味",
       "faq": [
         {
           "q": "源牧3.8牛乳蛋白质含量是多少？",
@@ -3147,6 +3512,14 @@
         {
           "q": "源牧3.8牛乳加了植脂末吗？",
           "a": "源牧3.8牛乳不添加植脂末和奶精，是真牛乳。"
+        },
+        {
+          "q": "源牧3.8牛乳的3.8是什么意思？",
+          "a": "指蛋白质含量3.8g/100mL，属于高品质牛乳标准。"
+        },
+        {
+          "q": "源牧3.8牛乳产自哪里？",
+          "a": "奶源产自山东、河北牧场，优选荷斯坦奶牛，智能化牧场管理。"
         }
       ],
       "dataCompleteness": "detailed"
@@ -3160,7 +3533,7 @@
       },
       "description": {
         "short": "广西甘蔗·植物提取天然糖",
-        "long": "纯粹真冰糖，产地广西，位于北回归线附近甘蔗黄金种植带。产区年均日照1500h，年均降雨2000mm，甘蔗生长超270天。经10余道工序精制，350目过滤，醇厚自然甜。植物提取天然糖，不含二氧化硫、防腐剂、果葡糖浆。",
+        "long": "纯粹真冰糖，产地广西，位于北回归线附近甘蔗黄金种植带。产区年均日照1500h，年均降雨2000mm，甘蔗生长超270天。经10余道工序精制，350目过滤，醇厚自然甜。植物提取天然糖，不含二氧化硫、防腐剂、果葡糖浆。 原料产自中国广西北回归线附近甘蔗黄金种植带，年日照约1500小时，年降水约2000mm。甘蔗生长超270天自然熟成，10+道工序精制，350目过滤保证糖浆纯净。醇厚自然甜，如清泉裹蜜。真糖更纯粹，植物提取天然糖。",
         "servingStyle": "甜味剂"
       },
       "ingredients": {
@@ -3182,11 +3555,14 @@
       "qualityClaims": [
         "二氧化硫：不含",
         "防腐剂：不含",
-        "果葡糖浆：不含"
+        "果葡糖浆：不含",
+        "未检出二氧化硫",
+        "不添加防腐剂",
+        "不添加果葡萄浆"
       ],
-      "processInfo": "10余道工序精制，350目过滤",
+      "processInfo": "广西北回归线甘蔗黄金种植带，年日照约1500小时，年降水约2000mm。甘蔗生长超270天自然熟成。甘蔗汁提取后经10+道工序（复溶、过滤、蒸发浓缩等），350目过滤保证糖浆纯净，糖分子结构完整保留天然甜味。",
       "climateInfo": "产区年均日照1500h，年均降雨2000mm，甘蔗生长超270天",
-      "flavorProfile": "醇厚自然甜",
+      "flavorProfile": "醇厚自然甜，如清泉裹蜜",
       "faq": [
         {
           "q": "纯粹真冰糖是天然的吗？",
@@ -3195,9 +3571,597 @@
         {
           "q": "纯粹真冰糖的产地在哪？",
           "a": "产地广西，位于北回归线附近甘蔗黄金种植带，甘蔗生长超270天。"
+        },
+        {
+          "q": "纯粹真冰糖和普通糖有什么区别？",
+          "a": "纯粹真冰糖源自广西北回归线甘蔗黄金种植带，植物提取天然糖，超270天自然熟成甘蔗，350目过滤保证纯净。不添加防腐剂、果葡萄浆，二氧化硫未检出。"
         }
       ],
       "dataCompleteness": "detailed"
+    },
+    "100%芒果原浆": {
+      "productId": 3011,
+      "skuCode": "HT-ING-011",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "100%芒果原浆，广西小白芒农果",
+        "long": "甄选广西亚热带季风气候产区小白芒农果，挂果约120天自然成熟，榨汁后急速冷冻至-18°C锁鲜，果香浓郁，味道甘甜。不添加人工色素与香精。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "100%芒果原浆"
+        ],
+        "fruitOrigin": "广西"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "芒果类原料",
+        "processing": "急速冷冻"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加人工色素",
+        "不添加香精",
+        "果香浓郁，味道甘甜",
+        "挂果约120天",
+        "-18°C急速冷冻锁鲜"
+      ],
+      "processInfo": "亚热带季风气候产区，年均温约21°C，降水充沛，昼夜温差大。榨汁后急速冷冻，-18°C储存保鲜。",
+      "flavorProfile": "果香浓郁，味道甘甜"
+    },
+    "现制芒果果肉": {
+      "productId": 3012,
+      "skuCode": "HT-ING-012",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "新鲜现制芒果果肉",
+        "long": "当季新鲜芒果现制果肉，保留真实果肉颗粒感与芒果天然风味，用于多款鲜果饮品中。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "现制芒果果肉"
+        ]
+      },
+      "allergens": [
+        "芒果"
+      ],
+      "tags": {
+        "category": "芒果类原料",
+        "processing": "现制"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "新鲜现制",
+        "真实果肉颗粒",
+        "保留天然风味"
+      ],
+      "processInfo": "当季鲜芒每日现切，保留果肉完整颗粒感。",
+      "flavorProfile": "芒果天然甜香，果肉饱满"
+    },
+    "西米": {
+      "productId": 3013,
+      "skuCode": "HT-ING-013",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "泰国木薯西米，Q弹口感",
+        "long": "甄选泰国原产地木薯，产区年均温约28°C，年日照约2500小时，低湿匀速烘干工艺造就颗颗匀称的Q弹口感，软糯爽滑不粘牙。不添加香精。",
+        "servingStyle": "小料"
+      },
+      "ingredients": {
+        "main": [
+          "西米"
+        ],
+        "fruitOrigin": "泰国"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "小料",
+        "processing": "低湿烘干"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加香精",
+        "Q弹口感",
+        "颗颗匀称",
+        "泰国木薯原料"
+      ],
+      "processInfo": "泰国产区年均温约28°C，年日照约2500小时。低湿匀速烘干，颗颗匀称。",
+      "flavorProfile": "软糯爽滑不粘牙，Q弹口感"
+    },
+    "椰乳": {
+      "productId": 3014,
+      "skuCode": "HT-ING-014",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "印尼+海南高种椰椰乳",
+        "long": "甄选印度尼西亚与中国海南产区高种椰，印尼赤道零度纬度肥沃泥炭土椰园，椰香纯正，清甜回甘。不添加人工色素与香精。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "椰乳"
+        ],
+        "fruitOrigin": "印度尼西亚、中国海南"
+      },
+      "allergens": [
+        "椰子"
+      ],
+      "tags": {
+        "category": "椰子类原料",
+        "variety": "高种椰"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加人工色素",
+        "不添加香精",
+        "椰香纯正，清甜回甘",
+        "高种椰",
+        "赤道泥炭土椰园"
+      ],
+      "processInfo": "海南产区高温多雨，印尼产区年均湿度70-90%，赤道零度纬度肥沃泥炭土，适合椰子生长。",
+      "flavorProfile": "椰香纯正，清甜回甘"
+    },
+    "红柚果粒": {
+      "productId": 3015,
+      "skuCode": "HT-ING-015",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "南非红西柚果粒，酸甜爆汁",
+        "long": "甄选南非红西柚，热带草原气候全年高温，年平均气温约25°C，阳光充足。果肉柔嫩，香气独特，果香浓郁，酸甜爆汁。不添加人工色素与香精。",
+        "servingStyle": "小料"
+      },
+      "ingredients": {
+        "main": [
+          "红柚果粒"
+        ],
+        "fruitOrigin": "南非"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果粒类原料",
+        "variety": "南非红西柚"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加人工色素",
+        "不添加香精",
+        "酸甜爆汁",
+        "果肉柔嫩，香气独特",
+        "南非红西柚"
+      ],
+      "processInfo": "南非热带草原气候，全年高温，年平均气温约25°C，阳光充足。",
+      "flavorProfile": "果香浓郁，酸甜爆汁"
+    },
+    "0脂脆波波": {
+      "productId": 3016,
+      "skuCode": "HT-ING-016",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "云南贵州魔芋脆波波，0脂",
+        "long": "源自云南、贵州甄选魔芋，低纬高原日照充足、降水丰富（年均降水916-1100mm）。巴氏杀菌工艺保留更多原生风味，脆爽Q弹不甜腻。不添加香精。",
+        "servingStyle": "小料"
+      },
+      "ingredients": {
+        "main": [
+          "0脂脆波波"
+        ],
+        "fruitOrigin": "云南、贵州"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "小料",
+        "processing": "巴氏杀菌",
+        "feature": "0脂"
+      },
+      "nutrition": {
+        "fat": "0g"
+      },
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加香精",
+        "脆爽Q弹",
+        "不甜腻",
+        "0脂",
+        "巴氏杀菌工艺"
+      ],
+      "processInfo": "云南低纬高原产区，日照充足，降水丰富，年均降水916-1100mm。巴氏杀菌工艺保留原生风味。",
+      "flavorProfile": "脆爽Q弹，不甜腻"
+    },
+    "定制弹弹冻": {
+      "productId": 3017,
+      "skuCode": "HT-ING-017",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "云南贵州魔芋弹弹冻",
+        "long": "源自云南、贵州甄选魔芋，低纬高原日照充足、降水丰富（年均降水916-1100mm）。巴氏杀菌工艺保留更多原生风味，脆爽Q弹不甜腻。不添加香精。",
+        "servingStyle": "小料"
+      },
+      "ingredients": {
+        "main": [
+          "定制弹弹冻"
+        ],
+        "fruitOrigin": "云南、贵州"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "小料",
+        "processing": "巴氏杀菌"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加香精",
+        "脆爽Q弹",
+        "不甜腻",
+        "巴氏杀菌工艺"
+      ],
+      "processInfo": "云南低纬高原产区，日照充足，降水丰富，年均降水916-1100mm。巴氏杀菌工艺保留原生风味。",
+      "flavorProfile": "脆爽Q弹，不甜腻"
+    },
+    "现制苹果汁": {
+      "productId": 3018,
+      "skuCode": "HT-ING-018",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "山东山西红富士苹果现制果汁",
+        "long": "甄选山东/山西红富士苹果，挂果90+天树上自然成熟，日照600+小时。平均糖度≥8，单果70g+（约100g/颗），55mm+。新鲜制备非罐头果肉，无香精添加。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "现制苹果汁"
+        ],
+        "fruitOrigin": "山东、山西"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果汁类原料",
+        "variety": "红富士苹果",
+        "feature": "无香精"
+      },
+      "nutrition": {
+        "sugar": "糖度≥8"
+      },
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "无香精添加",
+        "新鲜制备，非罐头果肉",
+        "糖度≥8",
+        "单果70g+（约100g/颗）",
+        "55mm+果径",
+        "挂果90+天",
+        "日照600+小时"
+      ],
+      "processInfo": "山东/山西产区四季分明，光照充足，昼夜温差大，土壤肥沃富含有机质和矿物质。海拔适中，挂果90+天树上自然成熟。山西产：香脆爽甜、酸甜馥郁、无涩感；山东产：肉质细密、清香蜜味、汁水多。",
+      "flavorProfile": "果实色泽鲜艳，风味浓郁，果肉松脆多汁，独特果香与清甜"
+    },
+    "金太阳杏浆": {
+      "productId": 3019,
+      "skuCode": "HT-ING-019",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "金太阳杏浆，山东山西河北产区",
+        "long": "甄选金太阳杏品种，产自山东、山西、河北等温带季风气候区。树上自然成熟，平均挂果60-70天，单果≥65g。果香馥郁，酸甜爽口。不添加人工色素与香精。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "金太阳杏浆"
+        ],
+        "fruitOrigin": "山东、山西、河北"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "果浆类原料",
+        "variety": "金太阳杏"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加人工色素",
+        "不添加香精",
+        "果香馥郁，酸甜爽口",
+        "挂果60-70天",
+        "单果≥65g"
+      ],
+      "processInfo": "温带季风气候，四季分明，气候温润，降水充沛。树上自然成熟，平均挂果时长达60-70天，保障杏子更好风味。",
+      "flavorProfile": "果香馥郁，酸甜爽口，肉质鲜嫩，果肉橙黄色"
+    },
+    "花香奇兰茶汤": {
+      "productId": 3020,
+      "skuCode": "HT-ING-020",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "福建武夷山奇兰乌龙茶汤",
+        "long": "茶叶产自福建武夷山，奇兰乌龙茶品种。亚热带气候降水丰富、雨热充足，造就茶香高扬。品种自带兰香高扬，花香浓郁持久。6步精制工艺，不含茶粉与香精。",
+        "servingStyle": "茶汤"
+      },
+      "ingredients": {
+        "main": [
+          "花香奇兰茶汤"
+        ],
+        "teaOrigin": "福建省南平市武夷山市",
+        "milkOrigin": null
+      },
+      "allergens": [],
+      "tags": {
+        "category": "茶汤类原料",
+        "teaType": "奇兰乌龙茶",
+        "caffeine": "含咖啡因"
+      },
+      "nutrition": {
+        "caffeine": "含咖啡因"
+      },
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不含茶粉",
+        "不含香精",
+        "兰香高扬",
+        "花香浓郁持久",
+        "好茶自然香"
+      ],
+      "processInfo": "6步工艺：采摘→萎凋→做青→杀青→揉捻→精制。亚热带产区降水丰富、雨热充足。干茶条索紧结，冲泡后茶汤金黄明亮，滋味醇厚。",
+      "flavorProfile": "兰香高扬，花香浓郁持久，滋味醇厚，茶汤金黄明亮",
+      "recipeComponents": [
+        "奇兰乌龙茶叶"
+      ],
+      "relatedProducts": [
+        "奇兰粉芭乐",
+        "奇兰芭乐莲雾",
+        "奇兰苹果杏",
+        "奇兰红颜莓莓"
+      ]
+    },
+    "定制轻乳": {
+      "productId": 3021,
+      "skuCode": "HT-ING-021",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "澳大利亚定制轻乳，五项不添加",
+        "long": "奶源产自澳大利亚，优选荷斯坦奶牛。牛乳原料使用过滤膜技术，冷冻过程保留牛乳香醇风味。口感清爽，丝滑醇香。不添加奶精、植脂末、氢化植物油、香精、色素五项。",
+        "servingStyle": "原料"
+      },
+      "ingredients": {
+        "main": [
+          "定制轻乳"
+        ],
+        "milkOrigin": "澳大利亚"
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "category": "乳品原料",
+        "cowBreed": "荷斯坦奶牛",
+        "feature": "五项不添加"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加奶精",
+        "不添加植脂末",
+        "不添加氢化植物油",
+        "不添加香精",
+        "不添加色素",
+        "口感清爽，丝滑醇香",
+        "过滤膜技术",
+        "澳大利亚奶源"
+      ],
+      "processInfo": "澳大利亚优选荷斯坦奶牛，使用过滤膜技术处理牛乳原料，冷冻过程保留牛乳香醇风味。",
+      "flavorProfile": "口感清爽，丝滑醇香"
+    },
+    "碎银子普洱茶汤": {
+      "productId": 3022,
+      "skuCode": "HT-ING-022",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "云南普洱/西双版纳碎银子普洱茶汤",
+        "long": "熟普洱散茶产自云南省普洱市、西双版纳，云雾高山、澜沧江润泽，千年原始森林环抱。海拔1000-1500米，温润气候，赤红壤富含矿物质。云南大叶种茶树，搭配云南红河州糯米香叶。9步工艺精制，好茶自然香，不含茶粉与香精。",
+        "servingStyle": "茶汤"
+      },
+      "ingredients": {
+        "main": [
+          "碎银子普洱茶汤"
+        ],
+        "teaOrigin": "云南省普洱市、西双版纳",
+        "leafType": "云南大叶种茶树",
+        "extraLeaf": "糯米香叶（产地：云南红河州）"
+      },
+      "allergens": [],
+      "tags": {
+        "category": "茶汤类原料",
+        "teaType": "熟普洱散茶",
+        "caffeine": "含咖啡因",
+        "altitude": "1000-1500米"
+      },
+      "nutrition": {
+        "caffeine": "含咖啡因"
+      },
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不含茶粉",
+        "不含香精",
+        "好茶自然香",
+        "云南大叶种茶树",
+        "海拔1000-1500米",
+        "赤红壤富含矿物质"
+      ],
+      "processInfo": "9步工艺：1.采摘→2.杀青→3.揉捻→4.晒青→5.渥堆发酵→6.起堆→7.压制→8.切割→9.干燥。普洱与西双版纳共拥云雾高山、澜沧江润泽，千年原始森林环抱。茶叶海拔1000-1500米，夏无酷暑、冬无严寒的温润气候，赤红壤富含矿物质，星夜温凝凝练茶韵。糯米香叶产自云南红河州，在昼夜温差与溪流晨露中自然生长，叶片肥厚幽香，饱满糯香、陈厚余韵。",
+      "flavorProfile": "饱满糯香，陈厚余韵，茶汤醇厚温润",
+      "recipeComponents": [
+        "云南大叶种普洱茶叶",
+        "糯米香叶（云南红河州）"
+      ],
+      "relatedProducts": [
+        "咸酪碎银子",
+        "碎银子牛乳茶",
+        "碎银子糯糯",
+        "碎银子黑糖波波",
+        "酱香白脱碎银子",
+        "牛肝菌碎银子特调"
+      ],
+      "faq": [
+        {
+          "q": "碎银子普洱茶汤产自哪里？",
+          "a": "产自云南省普洱市和西双版纳，海拔1000-1500米，云雾高山、澜沧江润泽。"
+        },
+        {
+          "q": "碎银子普洱茶汤是什么茶？",
+          "a": "熟普洱散茶，云南大叶种茶树，搭配云南红河州糯米香叶，经9步工艺精制。"
+        },
+        {
+          "q": "碎银子普洱茶汤含香精吗？",
+          "a": "不含。好茶自然香，不含茶粉与香精。"
+        }
+      ]
+    },
+    "混合咸酪厚乳": {
+      "productId": 3024,
+      "skuCode": "HT-ING-024",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "新西兰/宁夏/山东·荷斯坦奶牛·奶香浓郁·咸酪风味",
+        "long": "混合咸酪厚乳，奶源来自新西兰、宁夏、山东等优质产区，选用荷斯坦奶牛，现代化牧场专业管理。奶香浓郁，口感顺滑纯正，咸酪风味增添层次。不添加奶精、植脂末、氢化植物油、香精、色素。",
+        "servingStyle": "乳基"
+      },
+      "ingredients": {
+        "main": [
+          "混合咸酪厚乳"
+        ],
+        "milkOrigin": [
+          "新西兰",
+          "宁夏",
+          "山东"
+        ],
+        "cowBreed": "荷斯坦奶牛"
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "category": "乳品原料",
+        "cowBreed": "荷斯坦奶牛",
+        "flavor": "咸酪风味",
+        "feature": "五项不添加"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "不添加奶精",
+        "不添加植脂末",
+        "不添加氢化植物油",
+        "不添加香精",
+        "不添加色素",
+        "奶香浓郁",
+        "口感顺滑纯正",
+        "现代化牧场管理"
+      ],
+      "processInfo": "新西兰、宁夏、山东三大产区荷斯坦奶牛。现代化设施专业管理保障奶牛健康，精选饲料提升生牛乳品质。",
+      "flavorProfile": "奶香浓郁，口感顺滑纯正，咸酪风味",
+      "relatedProducts": [
+        "混合厚乳",
+        "咸酪碎银子",
+        "苦巧·咸酪碎银子"
+      ]
+    },
+    "首创芝芝云顶": {
+      "productId": 3023,
+      "skuCode": "HT-ING-023",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "首创芝芝云顶奶盖",
+        "long": "首创芝芝云顶奶盖，丝滑浓郁的芝士奶盖，为多款芝芝系列饮品提供顶层口感。搭配各种茶底，增添芝士风味与丝滑质感。",
+        "servingStyle": "顶层奶盖"
+      },
+      "ingredients": {
+        "main": [
+          "首创芝芝云顶"
+        ]
+      },
+      "allergens": [
+        "乳制品"
+      ],
+      "tags": {
+        "category": "奶盖类原料",
+        "status": "首创"
+      },
+      "nutrition": {},
+      "customizationType": "ingredient",
+      "dataCompleteness": "detailed",
+      "qualityClaims": [
+        "首创",
+        "丝滑浓郁",
+        "芝士风味"
+      ],
+      "relatedProducts": [
+        "芝芝绿妍茶后",
+        "芝芝多肉葡萄",
+        "芝芝抹茶",
+        "咸酪碎银子",
+        "碎银子牛乳茶"
+      ]
     }
   }
 }
