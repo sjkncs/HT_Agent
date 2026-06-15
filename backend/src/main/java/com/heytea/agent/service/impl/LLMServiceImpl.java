@@ -131,17 +131,20 @@ public class LLMServiceImpl implements LLMService {
                 "(果肉.{0,2}少|小料.{0,2}少|料.{0,2}少|份量.{0,2}少|不满杯|半杯)",
                 "(做错了|出品错误|做错|不是.*点|加错|漏做|没做)",
                 "(不新鲜|水果.{0,2}(坏|烂|不新鲜)|变质|发黄|发黑)",
-                "(波波|珍珠|啵啵).{0,5}(硬|变|不对|没有|少)",
+                "(波波|珍珠|啵啵|珠珠).{0,5}(硬|变|不对|没有|少)",
                 "(融化|化了|分层|沉底|混在一起|芝士.{0,2}化|冰淇淋.{0,2}化|奶油.{0,2}化)",
                 "(温度|太烫|太热|不够热|凉了|冷的|常温.*冷|温.*烫)"
         );
 
-        // ── Efficiency: from 关键词.xlsx 制作效率 ──
+        // ── Efficiency: from 关键词.xlsx 制作效率 + 评测失败案例增强 ──
         EFFICIENCY_PATTERNS = compilePatterns(
                 "(等了.{0,5}(久|长|半天|小时|分钟)|排队.{0,5}(久|长))",
-                "(叫号.{0,3}(没|不|还|才)|没叫号|叫了.*没做好|做好了.*没叫)",
+                "(等了.{0,3}(分钟|小时|半天).{0,6}(还没|没做|没好|还没做好|没出))",
+                "(叫号.{0,3}(没|不|还|才)|没叫号|叫了.*没做好|做好了.*没叫|叫号.*没人|叫.*半天.*没人)",
                 "(超.{0,3}(预估|时间|时)|制作.{0,3}(慢|久|效率))",
-                "(等了很久|等半天|等了好久|效率低|出杯慢)"
+                "(等了很久|等半天|等了好久|效率低|出杯慢|出杯速度|出杯太慢|速度太慢|速度.*慢)",
+                "(前面.{0,3}(人|位).{0,5}(等|排).{0,5}(久|长|半|小时|分钟))",
+                "(做.{0,3}(太慢|好慢|很慢)|出品.{0,3}慢|上杯.{0,3}慢)"
         );
 
         // ── Packaging: from 关键词.xlsx 包装问题 ──
@@ -188,8 +191,9 @@ public class LLMServiceImpl implements LLMService {
         return null;
     }
 
-    // ── Ordering keywords (unchanged, no product names to avoid food safety false positives) ──
+    // ── Ordering keywords (includes store info queries) ──
     private static final Pattern[] ORDERING_PATTERNS;
+    private static final Pattern[] STORE_INFO_PATTERNS;
     static {
         ORDERING_PATTERNS = compilePatterns(
                 "(点单|下单|点一杯|来一杯|买一杯|要一杯|我想点|想喝)",
@@ -197,6 +201,14 @@ public class LLMServiceImpl implements LLMService {
                 "(甜度|冰量|少冰|去冰|几分糖|加料|规格)",
                 "(确认订单|订单确认|配送地址|送到|自提|外卖地址)",
                 "(多少钱|价格|size|menu|order)"
+        );
+        STORE_INFO_PATTERNS = compilePatterns(
+                "(门店.{0,5}(在|哪|地址|位置|怎么|电话|联系))",
+                "(哪家店|最近的店|哪个门店|哪里.{0,3}(有|能|可以).{0,3}(喜茶|店|门店))",
+                "(几点.{0,5}(开|关|营业|打烊|上班|下班))",
+                "(营业.{0,3}(时间|几点|到))",
+                "(门店.{0,5}(停车|车位|停车费|座位|wifi|WiFi|洗手间|卫生间))",
+                "(哪些.{0,3}门店|哪些.{0,3}店|有没有.{0,3}店)"
         );
     }
 
@@ -241,8 +253,9 @@ public class LLMServiceImpl implements LLMService {
     private String detectGeneralSubScenario(String msg) {
         if (matchAny(msg, SERVICE_COMPLAINT_PATTERNS)) return "service_complaint";
         if (matchAny(msg, DELIVERY_ISSUE_PATTERNS)) return "delivery_issue";
-        if (matchAny(msg, PRODUCT_QUALITY_PATTERNS)) return "product_quality";
+        // Efficiency checked BEFORE product_quality to avoid "还没做好" matching "没做"
         if (matchAny(msg, EFFICIENCY_PATTERNS)) return "efficiency";
+        if (matchAny(msg, PRODUCT_QUALITY_PATTERNS)) return "product_quality";
         if (matchAny(msg, PACKAGING_PATTERNS)) return "packaging";
         if (matchAny(msg, HYGIENE_PATTERNS)) return "hygiene";
         return null;
@@ -251,7 +264,7 @@ public class LLMServiceImpl implements LLMService {
     private String detectOrderingSubScenario(String msg) {
         if (matchAny(msg, compilePatterns("(推荐|有什么|什么好喝|热门|新品)"))) return "recommendation";
         if (matchAny(msg, compilePatterns("(确认|下单|购买|来一|要一)"))) return "place_order";
-        if (matchAny(msg, compilePatterns("(地址|门店|在哪|几点|营业)"))) return "store_info";
+        if (matchAny(msg, STORE_INFO_PATTERNS) || matchAny(msg, compilePatterns("(地址|门店|在哪|几点|营业|开门|关门|打烊|停车|车位|座位|哪些店|哪家店|最近的店|洗手间|卫生间|wifi|WiFi)"))) return "store_info";
         return "browse_menu";
     }
 
@@ -627,6 +640,12 @@ public class LLMServiceImpl implements LLMService {
             log.info("Keyword fast-path: ordering (matched: {})", matched);
             return "ordering";
         }
+        // 门店查询 → ordering (store_info sub-scenario)
+        if (matchAny(msg, STORE_INFO_PATTERNS)) {
+            String matched = findMatch(msg, STORE_INFO_PATTERNS);
+            log.info("Keyword fast-path: ordering/store_info (matched: {})", matched);
+            return "ordering";
+        }
 
         // ── Phase 2: LLM 增强分类（11大类精细分类）──
         try {
@@ -648,8 +667,9 @@ public class LLMServiceImpl implements LLMService {
                        - 态度差/不理人 → general_knowledge(服务投诉)
                     
                     2. ordering（点单）
-                       点饮品/查看菜单/推荐/修改查询订单/价格规格
+                       点饮品/查看菜单/推荐/修改查询订单/价格规格/门店查询
                        信号：点单/下单/来一杯/菜单/推荐/甜度/冰量/多少钱
+                       门店信号：门店在哪/最近门店/几点开门/几点关门/营业时间/门店停车/门店座位/哪些门店
                     
                     3. general_knowledge（通用咨询/其他投诉）
                        以下全部归入此类，由系统内部细分：
@@ -661,7 +681,8 @@ public class LLMServiceImpl implements LLMService {
                        - 卫生问题（门店脏/员工没戴口罩/操作台脏/门店有飞虫苍蝇）
                        - 门店管理（排队/线上关闭/售罄/座位）
                        - 一般咨询（门店/会员/优惠/活动/品牌）
-                       信号：门店/在哪/几点/会员/积分/优惠/活动/新品/等了/态度/外卖
+                       信号：会员/积分/优惠/活动/新品/等了/态度/外卖
+                       ⚠ 注意：门店查询（在哪/几点/营业/停车/座位）→ ordering，不是 general_knowledge
                     
                     只返回类别名称（food_safety / ordering / general_knowledge），不要返回其他任何文字。
                     
