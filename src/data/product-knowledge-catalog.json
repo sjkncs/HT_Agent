@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "updatedAt": "2026-06-16",
-    "totalProducts": 154,
+    "updatedAt": "2026-06-18",
+    "totalProducts": 160,
     "categories": [
       "茶特调/茗茶",
       "植物茶/鲜果茶",
@@ -4703,7 +4703,7 @@
       "skuCode": "HT-ING-013",
       "category": "原料/配料",
       "pricing": {
-        "base": 0
+        "base": 1
       },
       "description": {
         "short": "泰国木薯西米，Q弹口感",
@@ -6424,7 +6424,7 @@
       "skuCode": "HT-2105",
       "category": "植物茶/鲜果茶",
       "pricing": {
-        "base": 32
+        "base": 28
       },
       "description": {
         "short": "首创·五配方·芝芝云顶+芒果原浆+冰糖+绿妍冰沙+芒果果肉",
@@ -6615,7 +6615,7 @@
       "skuCode": "HT-ING-044",
       "category": "原料/配料",
       "pricing": {
-        "base": 2
+        "base": 1
       },
       "description": {
         "short": "喜茶定制弹弹冻·QQ弹弹·仅限冷饮",
@@ -6665,7 +6665,7 @@
       "skuCode": "HT-ING-045",
       "category": "原料/配料",
       "pricing": {
-        "base": 2
+        "base": 1
       },
       "description": {
         "short": "每日65分钟慢熬·黑糖液融入波波·香甜软糯Q弹",
@@ -6726,7 +6726,7 @@
       "skuCode": "HT-ING-046",
       "category": "原料/配料",
       "pricing": {
-        "base": 4
+        "base": 3
       },
       "description": {
         "short": "泰国进口籼糯米+椰乳·每日现蒸·糯香浓厚",
@@ -6786,7 +6786,7 @@
       "skuCode": "HT-2110",
       "category": "苦巧/抹茶/波波茶",
       "pricing": {
-        "base": 22
+        "base": 15
       },
       "description": {
         "short": "四配方·源牧3.8牛乳+嫣红茶汤+混合厚乳（热饮版）",
@@ -6990,6 +6990,96 @@
           "a": "是的，喝前请务必搅匀，让抹茶分层充分融合。"
         }
       ]
+    },
+    "奇亚籽冻": {
+      "productId": 3047,
+      "skuCode": "HT-ING-047",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "奇亚籽制成冻状，口感爽滑",
+        "long": "奇亚籽冻，选用优质奇亚籽，经浸泡膨胀后制成冻状，口感爽滑Q弹，富含膳食纤维。加料价¥2。"
+      },
+      "allergens": [],
+      "tags": ["小料", "高纤维"],
+      "dataCompleteness": "detailed"
+    },
+    "0脂肪波波": {
+      "productId": 3048,
+      "skuCode": "HT-ING-048",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "0脂肪波波·Q弹口感·低卡选择",
+        "long": "0脂肪波波，口感Q弹，不含脂肪，是追求低卡消费者的理想加料选择。加料价¥2。"
+      },
+      "allergens": [],
+      "tags": ["小料", "0脂肪", "低卡"],
+      "dataCompleteness": "detailed"
+    },
+    "白柚果粒": {
+      "productId": 3049,
+      "skuCode": "HT-ING-049",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "新鲜白柚果肉粒·清甜微苦",
+        "long": "白柚果粒，选用新鲜白柚果肉切粒，清甜中带有微微苦味，适合添加到果茶类饮品中。加料价¥2。"
+      },
+      "allergens": ["柚子"],
+      "tags": ["小料", "鲜果"],
+      "dataCompleteness": "detailed"
+    },
+    "苦味云顶": {
+      "productId": 3050,
+      "skuCode": "HT-ING-050",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "苦味奶盖云顶·浓郁微苦·层次丰富",
+        "long": "苦味云顶，喜茶特色苦味奶盖，口感浓郁微苦，与抹茶或可可类饮品搭配，层次更丰富。加料价¥6。"
+      },
+      "allergens": ["乳制品"],
+      "tags": ["小料", "云顶", "含乳制品"],
+      "dataCompleteness": "detailed"
+    },
+    "苦巧云顶": {
+      "productId": 3051,
+      "skuCode": "HT-ING-051",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "苦巧风味奶盖云顶·巧克力与奶盖融合",
+        "long": "苦巧云顶，苦巧风味奶盖，将浓郁巧克力风味与奶盖融合，口感丝滑，适合搭配可可类饮品。加料价¥6。"
+      },
+      "allergens": ["乳制品"],
+      "tags": ["小料", "云顶", "含乳制品", "巧克力"],
+      "dataCompleteness": "detailed"
+    },
+    "轻芝云顶": {
+      "productId": 3052,
+      "skuCode": "HT-ING-052",
+      "category": "原料/配料",
+      "pricing": {
+        "base": 0
+      },
+      "description": {
+        "short": "轻盈芝士奶盖·口感清爽不腻",
+        "long": "轻芝云顶，轻盈版芝士奶盖，相比首创芝芝云顶更清爽不腻，适合搭配清淡茶底。加料价¥3。"
+      },
+      "allergens": ["乳制品"],
+      "tags": ["小料", "云顶", "含乳制品", "轻芝士"],
+      "dataCompleteness": "detailed"
     }
   }
 }

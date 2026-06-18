@@ -189,6 +189,18 @@ const TOPPING_ATTR = {
     { attributeId: 304, attributeName: '芋圆', selected: null, price: 3, canSelected: 1 },
     { attributeId: 305, attributeName: '红薏', selected: null, price: 2, canSelected: 1 },
     { attributeId: 306, attributeName: '芦荟', selected: null, price: 2, canSelected: 1 },
+    { attributeId: 307, attributeName: '奇亚籽冻', selected: null, price: 2, canSelected: 1 },
+    { attributeId: 308, attributeName: '红柚果粒', selected: null, price: 2, canSelected: 1 },
+    { attributeId: 309, attributeName: '0脂肪波波', selected: null, price: 2, canSelected: 1 },
+    { attributeId: 310, attributeName: '白柚果粒', selected: null, price: 2, canSelected: 1 },
+    { attributeId: 311, attributeName: '苦味云顶', selected: null, price: 6, canSelected: 1 },
+    { attributeId: 312, attributeName: '苦巧云顶', selected: null, price: 6, canSelected: 1 },
+    { attributeId: 313, attributeName: '首创芝芝云顶', selected: null, price: 5, canSelected: 1 },
+    { attributeId: 314, attributeName: '轻芝云顶', selected: null, price: 3, canSelected: 1 },
+    { attributeId: 315, attributeName: '慢熬黑糖波波', selected: null, price: 1, canSelected: 1 },
+    { attributeId: 316, attributeName: '椰香糯米饭', selected: null, price: 3, canSelected: 1 },
+    { attributeId: 317, attributeName: '西米', selected: null, price: 1, canSelected: 1 },
+    { attributeId: 318, attributeName: '弹弹冻', selected: null, price: 1, canSelected: 1 },
   ],
 }
 
@@ -1260,7 +1272,7 @@ const PRODUCTS = [
     ingredients: ["首创芝芝云顶", "100%芒果原浆", "纯粹真冰糖", "绿妍茶汤", "现制芒果果肉"],
     allergens: ["乳制品", "芒果"],
     nutritionInfo: { calories: '约300kcal', sugar: '约34g', caffeine: '约15mg' },
-    productAttrs: buildAttrs(), tags: ["首创", "含乳制品", "含芒果"], initialPrice: 32, estimatePrice: 32,
+    productAttrs: buildAttrs(), tags: ["首创", "含乳制品", "含芒果"], initialPrice: 28, estimatePrice: 28,
   },
   // ─── 小料（可单独购买）───
   {
@@ -1270,7 +1282,7 @@ const PRODUCTS = [
     ingredients: ["黑糖波波"],
     allergens: [],
     nutritionInfo: { calories: '约100kcal', sugar: '约18g', caffeine: '0mg' },
-    productAttrs: buildAttrs(), tags: ["小料", "可分装"], initialPrice: 2, estimatePrice: 2,
+    productAttrs: buildAttrs(), tags: ["小料", "可分装"], initialPrice: 1, estimatePrice: 1,
   },
   {
     productId: 2107, productName: '椰香糯米饭', skuCode: 'HT-2107',
@@ -1279,7 +1291,7 @@ const PRODUCTS = [
     ingredients: ["泰国进口籼糯米", "椰乳"],
     allergens: ["椰子"],
     nutritionInfo: { calories: '约120kcal', sugar: '约6g', caffeine: '0mg' },
-    productAttrs: buildAttrs(), tags: ["小料", "可分装", "含椰子"], initialPrice: 4, estimatePrice: 4,
+    productAttrs: buildAttrs(), tags: ["小料", "可分装", "含椰子"], initialPrice: 3, estimatePrice: 3,
   },
   {
     productId: 2108, productName: '西米', skuCode: 'HT-2108',
@@ -1288,7 +1300,7 @@ const PRODUCTS = [
     ingredients: ["西米"],
     allergens: [],
     nutritionInfo: { calories: '约80kcal', sugar: '约5g', caffeine: '0mg' },
-    productAttrs: buildAttrs(), tags: ["小料", "可分装"], initialPrice: 2, estimatePrice: 2,
+    productAttrs: buildAttrs(), tags: ["小料", "可分装"], initialPrice: 1, estimatePrice: 1,
   },
   {
     productId: 2109, productName: '弹弹冻', skuCode: 'HT-2109',
@@ -1297,7 +1309,7 @@ const PRODUCTS = [
     ingredients: ["弹弹冻"],
     allergens: [],
     nutritionInfo: { calories: '约60kcal', sugar: '约8g', caffeine: '0mg' },
-    productAttrs: buildAttrs(), tags: ["小料", "可分装", "仅限冷饮"], initialPrice: 2, estimatePrice: 2,
+    productAttrs: buildAttrs(), tags: ["小料", "可分装", "仅限冷饮"], initialPrice: 1, estimatePrice: 1,
   },
   // ─── 热饮系列 ───
   {
@@ -1307,7 +1319,7 @@ const PRODUCTS = [
     ingredients: ["源牧3.8牛乳", "纯粹真冰糖", "嫣红茶汤", "混合厚乳"],
     allergens: ["乳制品"],
     nutritionInfo: { calories: '约255kcal', sugar: '约22g', caffeine: '约40mg', protein: '9.5g', transFat: '0g', carbs: '22g', fat: '14.5g', teaPolyphenols: '250mg' },
-    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶", "四配方"], initialPrice: 22, estimatePrice: 22,
+    productAttrs: buildHotDrinkAttrs(), tags: ["热销", "含乳制品", "含茶", "四配方"], initialPrice: 15, estimatePrice: 15,
   },
   {
     productId: 2111, productName: '热碎银子牛乳茶', skuCode: 'HT-2111',

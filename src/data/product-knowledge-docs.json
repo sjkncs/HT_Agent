@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "2.1.0",
-    "generatedAt": "2026-06-15T15:11:52.303Z",
-    "totalDocs": 391,
+    "generatedAt": "2026-06-18T10:00:00.000Z",
+    "totalDocs": 411,
     "detailedProducts": 73,
     "docTypes": [
       "product_story",
@@ -5799,6 +5799,285 @@
           "芒果"
         ],
         "retrievalScope": "dietary"
+      }
+    },
+    {
+      "id": "doc-0392",
+      "type": "quality_info",
+      "product": "喜茶品牌",
+      "category": "品牌政策",
+      "text": "喜茶下单须知：1. 饮品制作需要一定时间，高峰期可能需要等待，请耐心等待；2. 请在下单时确认好口味、甜度、冰量等定制选项，制作完成后无法更改；3. 部分饮品含有小料（如波波、芋圆、弹弹冻等），请根据口感偏好选择；4. 热饮饮品请注意饮用温度，避免烫伤；5. 含咖啡因饮品（茶底、咖啡类）请根据自身情况选择，孕妇及儿童建议咨询后再点；6. 如有过敏原需求，请在下单前查看过敏原信息或咨询店员。",
+      "metadata": {
+        "tags": [
+          "下单须知",
+          "点单提醒",
+          "注意事项"
+        ],
+        "retrievalScope": "policy"
+      }
+    },
+    {
+      "id": "doc-0393",
+      "type": "quality_info",
+      "product": "喜茶品牌",
+      "category": "品质标准",
+      "text": "喜茶「四真七零」品质承诺：四真——真奶、真茶、真果、真糖。真奶：使用源牧3.8牛乳等优质乳源，拒绝植脂末；真茶：使用原叶茶汤，拒绝茶粉茶精；真果：使用新鲜水果和100%原浆，拒绝果酱罐头；真糖：使用纯粹真冰糖，拒绝果葡糖浆。七零——0奶精、0香精、0色素、0防腐剂、0反式脂肪酸、0植脂末、0茶粉。喜茶坚持真材实料，让消费者喝到真正的好茶。",
+      "metadata": {
+        "tags": [
+          "四真七零",
+          "品质承诺",
+          "真材实料",
+          "0添加"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "doc-0394",
+      "type": "quality_info",
+      "product": "喜茶品牌",
+      "category": "品牌理念",
+      "text": "绿色喜茶：喜茶积极践行绿色环保理念，从原料采购到门店运营全链路推行可持续发展。在包材方面，喜茶推行可降解杯盖、纸吸管等环保包装；在原料方面，坚持选用天然、优质的原材料，减少人工添加；在供应链方面，优化物流减少碳排放。喜茶致力于成为茶饮行业的绿色发展标杆，让每一杯茶都是对地球友好的选择。",
+      "metadata": {
+        "tags": [
+          "绿色喜茶",
+          "环保",
+          "可持续发展",
+          "绿色理念"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "doc-0395",
+      "type": "quality_info",
+      "product": "喜茶品牌",
+      "category": "服务保障",
+      "text": "喜茶「不满意就重做」服务承诺：如果您对饮品口味不满意，喜茶承诺可以免费重做。无论是因为甜度、冰量、口感等问题，只要您觉得不好喝，都可以联系门店或客服申请重做。喜茶重视每一位消费者的体验，希望每位顾客都能喝到满意的饮品。如需重做，请提供订单信息，门店会尽快为您重新制作。此承诺适用于所有喜茶门店的现制饮品。",
+      "metadata": {
+        "tags": [
+          "不满意就重做",
+          "服务承诺",
+          "重做",
+          "顾客满意"
+        ],
+        "retrievalScope": "policy"
+      }
+    },
+    {
+      "id": "doc-0396",
+      "type": "quality_info",
+      "product": "喜茶品牌",
+      "category": "品质标准",
+      "text": "喜茶咖啡因指示灯系统：为帮助消费者了解饮品咖啡因含量，喜茶推出咖啡因指示灯。绿灯：低咖啡因，适合对咖啡因敏感的人群、孕妇和儿童；黄灯：中等咖啡因，正常饮用无需担心；红灯：高咖啡因，建议对咖啡因敏感者谨慎选择。消费者可根据自身情况，参考指示灯选择适合自己的饮品。",
+      "metadata": {
+        "tags": [
+          "咖啡因",
+          "指示灯",
+          "红绿灯",
+          "低咖啡因",
+          "高咖啡因"
+        ],
+        "retrievalScope": "quality"
+      }
+    },
+    {
+      "id": "doc-0397",
+      "type": "process_info",
+      "product": "奇亚籽冻",
+      "category": "咖啡/经典/小料",
+      "text": "奇亚籽冻制作工艺：选用优质奇亚籽，经浸泡膨胀后制成冻状。奇亚籽富含膳食纤维和Omega-3脂肪酸，口感爽滑Q弹。加料价¥2。",
+      "metadata": {
+        "tags": [
+          "奇亚籽冻"
+        ],
+        "retrievalScope": "ingredient"
+      }
+    },
+    {
+      "id": "doc-0398",
+      "type": "allergen_info",
+      "product": "奇亚籽冻",
+      "category": "咖啡/经典/小料",
+      "text": "奇亚籽冻过敏原信息：不含常见过敏原。适合素食者食用。",
+      "metadata": {
+        "tags": [
+          "奇亚籽冻"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "doc-0399",
+      "type": "faq",
+      "product": "奇亚籽冻",
+      "category": "咖啡/经典/小料",
+      "text": "奇亚籽冻有什么营养？ 奇亚籽冻富含膳食纤维，口感爽滑Q弹，是健康的加料选择。",
+      "metadata": {
+        "tags": [
+          "奇亚籽冻",
+          "faq"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "doc-0400",
+      "type": "process_info",
+      "product": "0脂肪波波",
+      "category": "咖啡/经典/小料",
+      "text": "0脂肪波波：口感Q弹，不含脂肪，是追求低卡消费者的理想加料选择。相比传统波波（珍珠），0脂肪波波在保持Q弹口感的同时，去除了脂肪成分。加料价¥2。",
+      "metadata": {
+        "tags": [
+          "0脂肪波波"
+        ],
+        "retrievalScope": "ingredient"
+      }
+    },
+    {
+      "id": "doc-0401",
+      "type": "faq",
+      "product": "0脂肪波波",
+      "category": "咖啡/经典/小料",
+      "text": "0脂肪波波和普通波波有什么区别？ 0脂肪波波不含脂肪，口感同样Q弹，是低卡消费者的理想选择。普通波波（珍珠）含有少量脂肪。",
+      "metadata": {
+        "tags": [
+          "0脂肪波波",
+          "faq"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "doc-0402",
+      "type": "process_info",
+      "product": "白柚果粒",
+      "category": "咖啡/经典/小料",
+      "text": "白柚果粒：选用新鲜白柚果肉切粒，清甜中带有微微苦味，适合添加到果茶类饮品中，增添果香和口感层次。加料价¥2。含柚子过敏原。",
+      "metadata": {
+        "tags": [
+          "白柚果粒"
+        ],
+        "retrievalScope": "ingredient"
+      }
+    },
+    {
+      "id": "doc-0403",
+      "type": "allergen_info",
+      "product": "白柚果粒",
+      "category": "咖啡/经典/小料",
+      "text": "白柚果粒过敏原信息：含柚子。对柑橘类水果过敏者请注意。",
+      "metadata": {
+        "tags": [
+          "白柚果粒"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "doc-0404",
+      "type": "recipe_info",
+      "product": "苦味云顶",
+      "category": "咖啡/经典/小料",
+      "text": "苦味云顶：喜茶特色苦味奶盖云顶，口感浓郁微苦，与抹茶或可可类饮品搭配，层次更丰富。含乳制品。加料价¥6。",
+      "metadata": {
+        "tags": [
+          "苦味云顶"
+        ],
+        "retrievalScope": "ingredient"
+      }
+    },
+    {
+      "id": "doc-0405",
+      "type": "allergen_info",
+      "product": "苦味云顶",
+      "category": "咖啡/经典/小料",
+      "text": "苦味云顶过敏原信息：含乳制品。对牛奶过敏者请勿选择。",
+      "metadata": {
+        "tags": [
+          "苦味云顶"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "doc-0406",
+      "type": "faq",
+      "product": "苦味云顶",
+      "category": "咖啡/经典/小料",
+      "text": "苦味云顶适合搭配什么饮品？ 苦味云顶适合搭配抹茶类（如三倍厚抹、芝芝抹茶）或可可类饮品，苦味与茶香/可可香融合，层次更丰富。",
+      "metadata": {
+        "tags": [
+          "苦味云顶",
+          "faq"
+        ],
+        "retrievalScope": "faq"
+      }
+    },
+    {
+      "id": "doc-0407",
+      "type": "recipe_info",
+      "product": "苦巧云顶",
+      "category": "咖啡/经典/小料",
+      "text": "苦巧云顶：苦巧风味奶盖云顶，将浓郁巧克力风味与奶盖融合，口感丝滑，适合搭配可可类饮品。含乳制品。加料价¥6。",
+      "metadata": {
+        "tags": [
+          "苦巧云顶"
+        ],
+        "retrievalScope": "ingredient"
+      }
+    },
+    {
+      "id": "doc-0408",
+      "type": "allergen_info",
+      "product": "苦巧云顶",
+      "category": "咖啡/经典/小料",
+      "text": "苦巧云顶过敏原信息：含乳制品。对牛奶或巧克力过敏者请勿选择。",
+      "metadata": {
+        "tags": [
+          "苦巧云顶"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "doc-0409",
+      "type": "recipe_info",
+      "product": "轻芝云顶",
+      "category": "咖啡/经典/小料",
+      "text": "轻芝云顶：轻盈版芝士奶盖云顶，相比首创芝芝云顶（¥5）更清爽不腻，适合搭配清淡茶底如纯绿妍茶后。含乳制品。加料价¥3。",
+      "metadata": {
+        "tags": [
+          "轻芝云顶"
+        ],
+        "retrievalScope": "ingredient"
+      }
+    },
+    {
+      "id": "doc-0410",
+      "type": "allergen_info",
+      "product": "轻芝云顶",
+      "category": "咖啡/经典/小料",
+      "text": "轻芝云顶过敏原信息：含乳制品。对牛奶过敏者请勿选择。",
+      "metadata": {
+        "tags": [
+          "轻芝云顶"
+        ],
+        "retrievalScope": "allergen"
+      }
+    },
+    {
+      "id": "doc-0411",
+      "type": "faq",
+      "product": "轻芝云顶",
+      "category": "咖啡/经典/小料",
+      "text": "轻芝云顶和首创芝芝云顶有什么区别？ 轻芝云顶（¥3）是轻盈版芝士奶盖，口感更清爽；首创芝芝云顶（¥5）是经典浓郁版芝士奶盖。可根据个人口味偏好选择。",
+      "metadata": {
+        "tags": [
+          "轻芝云顶",
+          "faq"
+        ],
+        "retrievalScope": "faq"
       }
     }
   ]
