@@ -21,9 +21,9 @@
 /** 默认 API 配置 (可在运行时覆盖) — LongCat 主力 + NVIDIA 备用 */
 const DEFAULT_CONFIG = Object.freeze({
   // API 端点 (LongCat — LongCat-2.0-Preview 主力模型)
-  baseUrl: 'https://api.longcat.chat/openai/v1',
-  apiKey: 'ak_2yB7yX46I2wR32C4tZ30i3sf5zM3j',
-  model: 'LongCat-2.0-Preview',
+  baseUrl: import.meta.env.VITE_LLM_BASE_URL || 'https://api.longcat.chat/openai/v1',
+  apiKey: import.meta.env.VITE_LLM_API_KEY || '',
+  model: import.meta.env.VITE_LLM_MODEL || 'LongCat-2.0-Preview',
 
   // 请求参数
   temperature: 0.3,
@@ -43,7 +43,7 @@ const DEFAULT_CONFIG = Object.freeze({
   // 备用配置 (主 API 失败时降级 → NVIDIA kimi-k2.6，需 temperature=0)
   fallback: {
     baseUrl: 'https://integrate.api.nvidia.com/v1',
-    apiKey: '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',
+    apiKey: import.meta.env.VITE_NVIDIA_API_KEY || '',
     model: 'moonshotai/kimi-k2.6',
   },
 
@@ -53,7 +53,7 @@ const DEFAULT_CONFIG = Object.freeze({
   extraBody: null,
 
   // 内容安全护栏
-  contentSafetyKey: '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',
+  contentSafetyKey: import.meta.env.VITE_CONTENT_SAFETY_KEY || '',
   contentSafetyEnabled: true,
 })
 

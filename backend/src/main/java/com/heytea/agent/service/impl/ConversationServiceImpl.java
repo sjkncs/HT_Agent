@@ -48,11 +48,7 @@ public class ConversationServiceImpl implements ConversationService {
 
     @Override
     public Conversation getConversation(String conversationId) {
-        Conversation conversation = conversationMapper.selectById(conversationId);
-        if (conversation == null) {
-            throw new RuntimeException("Conversation not found: " + conversationId);
-        }
-        return conversation;
+        return conversationMapper.selectById(conversationId);
     }
 
     @Override

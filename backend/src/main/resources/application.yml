@@ -70,33 +70,33 @@ mybatis-plus:
 
 # ── JWT ──
 jwt:
-  secret: ${JWT_SECRET:heytea-agent-secret-key-change-in-production-2024}
+  secret: ${JWT_SECRET:dev-secret-change-me-in-production}
   expiration: 86400000  # 24 hours
 
 # ── LLM — xixixixi Gateway (Qwen3.7-MAX) ──
 llm:
   provider: dashscope
-  api-key: sk-o7BuqZPyiYSm7CD2L5arfVdFvdM4JR5foObVnWWmOIoFgsVv
-  model: Qwen3.7-MAX
+  api-key: ${LLM_API_KEY:sk-dev-placeholder}
+  model: ${LLM_MODEL:Qwen3.7-MAX}
   max-tokens: 2048
   temperature: 0.7
-  base-url: https://api.xixixixi.cloud/v1
+  base-url: ${LLM_BASE_URL:https://api.xixixixi.cloud/v1}
 
 # ── MemOS Cloud ──
 memos:
   enabled: true
   base-url: https://memos.memtensor.cn/api/openmem/v1
-  api-key: ${MEMOS_API_KEY:mpg-B8vt02G3gwlMsZ6sJ4u8yTJalxdHD6os9+Ep5dLP}
+  api-key: ${MEMOS_API_KEY:}
   user-id: heytea-user
 
 # ── Tavily Web Search ──
 tavily:
-  api-key: ${TAVILY_API_KEY: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}
+  api-key: ${TAVILY_API_KEY:}
   base-url: https://api.tavily.com
 
 # ── File Upload ──
 upload:
-  dir: C:/Users/Administrator/.qoderwork/workspace/mq0pr2crlh3pe0ap/react-vite/backend/uploads
+  dir: ${UPLOAD_DIR:./uploads}
 
 # ── Logging ──
 logging:

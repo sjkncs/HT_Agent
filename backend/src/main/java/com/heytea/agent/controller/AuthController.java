@@ -6,8 +6,8 @@ import com.heytea.agent.dto.LoginResponse;
 import com.heytea.agent.dto.RegisterRequest;
 import com.heytea.agent.entity.User;
 import com.heytea.agent.mapper.UserMapper;
+import com.heytea.agent.util.JwtUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.Resource;
@@ -119,7 +119,7 @@ public class AuthController {
 
     @GetMapping("/me")
     public Result<Map<String, Object>> me(@RequestHeader("Authorization") String authHeader) {
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -162,31 +162,5 @@ public class AuthController {
                 .expiration(expiryDate)
                 .signWith(key)
                 .compact();
-    }
-
-    /**
-     * Extract the user ID from the JWT token in the Authorization header.
-     * Expects the header value to be in the format "Bearer <token>".
-     */
-    private Long extractUserIdFromToken(String authHeader) {
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
-        }
-        try {
-            String token = authHeader.substring(7);
-            SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-
-            Claims claims = Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
-
-            String subject = claims.getSubject();
-            return subject != null ? Long.parseLong(subject) : null;
-        } catch (Exception e) {
-            log.warn("Failed to parse JWT token: {}", e.getMessage());
-            return null;
-        }
     }
 }

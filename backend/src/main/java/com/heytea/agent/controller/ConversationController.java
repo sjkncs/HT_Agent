@@ -8,17 +8,13 @@ import com.heytea.agent.entity.Conversation;
 import com.heytea.agent.entity.Message;
 import com.heytea.agent.mapper.ConversationMapper;
 import com.heytea.agent.mapper.MessageMapper;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import com.heytea.agent.util.JwtUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +49,7 @@ public class ConversationController {
             @RequestParam(required = false) String riskLevel,
             @RequestParam(required = false) String status) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -88,7 +84,7 @@ public class ConversationController {
             @RequestHeader("Authorization") String authHeader,
             @PathVariable String id) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -123,7 +119,7 @@ public class ConversationController {
             @RequestHeader("Authorization") String authHeader,
             @PathVariable String id) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -155,7 +151,7 @@ public class ConversationController {
     public Result<Map<String, Object>> stats(
             @RequestHeader("Authorization") String authHeader) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -197,31 +193,5 @@ public class ConversationController {
         statsMap.put("highRisk", highRiskCount);
 
         return Result.success(statsMap);
-    }
-
-    // ──────────────────────────────────────────
-    // Helper — JWT parsing
-    // ──────────────────────────────────────────
-
-    private Long extractUserIdFromToken(String authHeader) {
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
-        }
-        try {
-            String token = authHeader.substring(7);
-            SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-
-            Claims claims = Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
-
-            String subject = claims.getSubject();
-            return subject != null ? Long.parseLong(subject) : null;
-        } catch (Exception e) {
-            log.warn("Failed to parse JWT token: {}", e.getMessage());
-            return null;
-        }
     }
 }

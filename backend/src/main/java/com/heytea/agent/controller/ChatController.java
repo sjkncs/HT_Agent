@@ -7,17 +7,19 @@ import com.heytea.agent.entity.Conversation;
 import com.heytea.agent.entity.Message;
 import com.heytea.agent.service.ConversationService;
 import com.heytea.agent.service.LLMService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import com.heytea.agent.service.impl.LLMServiceImpl;
+import com.heytea.agent.util.JwtUtil;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Chat controller — send messages, reload history, and streaming placeholder.
@@ -43,9 +45,9 @@ public class ChatController {
     @PostMapping("/send")
     public Result<ChatResponse> send(
             @RequestHeader("Authorization") String authHeader,
-            @RequestBody ChatRequest request) {
+            @Valid @RequestBody ChatRequest request) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -139,7 +141,7 @@ public class ChatController {
             @RequestHeader("Authorization") String authHeader,
             @PathVariable String conversationId) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
         if (userId == null) {
             return Result.error(401, "Invalid or expired token");
         }
@@ -156,24 +158,77 @@ public class ChatController {
         return Result.success(messages);
     }
 
+    private final ExecutorService sseExecutor = Executors.newCachedThreadPool();
+
+    @Resource
+    private LLMServiceImpl llmServiceImpl;
+
     // ──────────────────────────────────────────
-    // GET /chat/{conversationId}/stream
+    // GET /chat/{conversationId}/stream — SSE
     // ──────────────────────────────────────────
 
-    @GetMapping("/{conversationId}/stream")
-    public Result<String> stream(
+    @GetMapping(value = "/{conversationId}/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter stream(
             @RequestHeader("Authorization") String authHeader,
-            @PathVariable String conversationId) {
+            @PathVariable String conversationId,
+            @RequestParam String message) {
 
-        Long userId = extractUserIdFromToken(authHeader);
+        Long userId = JwtUtil.extractUserId(authHeader, jwtSecret);
+        SseEmitter emitter = new SseEmitter(120_000L);
+
         if (userId == null) {
-            return Result.error(401, "Invalid or expired token");
+            try { emitter.send(SseEmitter.event().name("error").data("Unauthorized")); } catch (Exception ignored) {}
+            emitter.complete();
+            return emitter;
         }
 
-        // Placeholder — SSE streaming will be implemented in a future iteration
-        return Result.success(
-                "SSE streaming endpoint for conversation " + conversationId +
-                ". Streaming support will be implemented in a future iteration.");
+        Conversation conversation = conversationService.getConversation(conversationId);
+        if (conversation == null || !conversation.getUserId().equals(userId)) {
+            try { emitter.send(SseEmitter.event().name("error").data("Access denied")); } catch (Exception ignored) {}
+            emitter.complete();
+            return emitter;
+        }
+
+        sseExecutor.submit(() -> {
+            try {
+                // Save user message
+                conversationService.addMessage(conversationId, "user", message);
+                List<Message> history = conversationService.getConversationMessages(conversationId);
+
+                // Classify intent
+                String intent = llmService.classifyIntent(message);
+
+                // Stream LLM response
+                StringBuilder fullContent = new StringBuilder();
+                llmServiceImpl.chatStream(conversationId, message, intent, history)
+                        .doOnNext(chunk -> {
+                            try {
+                                fullContent.append(chunk);
+                                emitter.send(SseEmitter.event().data(chunk));
+                            } catch (Exception e) {
+                                emitter.completeWithError(e);
+                            }
+                        })
+                        .doOnComplete(() -> {
+                            try {
+                                // Save assistant message
+                                conversationService.addMessage(conversationId, "assistant", fullContent.toString());
+                                emitter.send(SseEmitter.event().name("done").data(""));
+                                emitter.complete();
+                            } catch (Exception e) {
+                                emitter.completeWithError(e);
+                            }
+                        })
+                        .doOnError(emitter::completeWithError)
+                        .subscribe();
+
+            } catch (Exception e) {
+                log.error("SSE stream error for {}: {}", conversationId, e.getMessage());
+                emitter.completeWithError(e);
+            }
+        });
+
+        return emitter;
     }
 
     // ──────────────────────────────────────────
@@ -183,27 +238,5 @@ public class ChatController {
     private String truncate(String text, int maxLen) {
         if (text == null) return "";
         return text.length() > maxLen ? text.substring(0, maxLen) + "..." : text;
-    }
-
-    private Long extractUserIdFromToken(String authHeader) {
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
-        }
-        try {
-            String token = authHeader.substring(7);
-            SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-
-            Claims claims = Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
-
-            String subject = claims.getSubject();
-            return subject != null ? Long.parseLong(subject) : null;
-        } catch (Exception e) {
-            log.warn("Failed to parse JWT token: {}", e.getMessage());
-            return null;
-        }
     }
 }
