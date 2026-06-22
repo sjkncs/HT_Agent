@@ -35,6 +35,7 @@ public class IntentClassifier {
 
     // ── Precompiled regex patterns ──
     private static final Pattern[] FOOD_SAFETY_PATTERNS;
+    private static final Pattern[] FOOD_SAFETY_EDGE_PATTERNS;
     private static final Pattern[] SERVICE_COMPLAINT_PATTERNS;
     private static final Pattern[] DELIVERY_ISSUE_PATTERNS;
     private static final Pattern[] PRODUCT_QUALITY_PATTERNS;
@@ -160,6 +161,41 @@ public class IntentClassifier {
         ENVIRONMENT_CONTEXT_PATTERNS = compilePatterns(
                 "(门店|店里|店内|操作台|大堂|大厅|吧台|柜台|店里头)"
         );
+
+        // ── Edge-case patterns: colloquial/novel food safety expressions ──
+        // These catch novel phrasings that standard patterns miss
+        FOOD_SAFETY_EDGE_PATTERNS = compilePatterns(
+                // 颜色/外观异常 (novel descriptions of spoilage)
+                "(颜色.{0,3}(发|变|成了).{0,4}(绿|黑|灰|暗|浑浊))",
+                "(看起来.{0,5}(不对劲|有问题|怪怪的|不太对))",
+                "(变色了|浑浊|有沉淀|有悬浮|飘着.{0,3}(黑|绿|白).{0,3}(点|丝|块|东西))",
+                // 化学/添加剂质疑 (food safety questioning, not complaint)
+                "(防腐剂|添加剂|色素|香精|化学.{0,3}(成分|物质|添加)|人工.{0,3}(合成|添加))",
+                "(是不是.{0,5}(有毒|有害|不安全|不健康|有问题))",
+                "(含.{0,3}(防腐剂|添加剂|色素|香精|化学成分))",
+                // 口语化身体不适 (internet slang / colloquial)
+                "(跑厕所|进医院|上医院|去急诊|挂急诊|看急诊)",
+                "(拉.{0,2}(到|得|了).{0,4}(脱水|虚脱|不行|站不住))",
+                "(吐.{0,2}(到|得|了).{0,4}(不行|脱水|胆汁|血丝))",
+                "(胃.{0,2}(在烧|灼热|绞痛|翻腾|痉挛)|肚子.{0,2}(绞痛|痉挛|翻江倒海))",
+                "(浑身.{0,3}(无力|发软|发抖|冒冷汗)|全身.{0,3}(发麻|起鸡皮))",
+                // 隐喻/夸张表达 (metaphorical but genuine food safety)
+                "(喝完.{0,8}(直接|当场|立马).{0,5}(进|去|跑|送).{0,5}(医院|厕所|急诊))",
+                "(避雷.{0,5}(医院|拉肚子|中毒|不舒服|恶心))",
+                "(喝完.{0,5}(人|身体|状态).{0,5}(不对|出问题|出状况))",
+                // 模糊但有食安语境的活体/动态描述
+                "(在动|在爬|在游|在飞|蠕动|活的|会动的)",
+                "(黑点|黑斑|白点|白斑|绿点|绿斑).{0,5}(在动|在爬|活的|蠕动)",
+                // 模糊异物描述 (vague foreign object descriptions)
+                "(硬硬的|软软的|黏糊糊的|毛毛的|刺刺的).{0,5}(东西|物体|东西|啥)",
+                "(跟|像|好像|像是|类似).{0,8}(棉花|毛线|头发|虫子|蜘蛛|丝|絮|渣).{0,5}(似|一样|的|般|那种)",
+                "(咬到|硌到|嚼到|吃到).{0,8}(硬|软|怪|不对|不该有).{0,5}(东西|的)",
+                "(有个|有个像|有个跟).{0,8}(东西|物体|啥|什么).{0,5}(咬|硌|嚼)",
+                // 网络用语呕吐/恶心 (internet slang disgust/vomiting)
+                "(yue了|yue|吐了|干呕|呕|反胃|想吐|恶心死了|恶心得要死)",
+                "(泔水味|馊水味|下水道味|臭水沟味|阴沟味)",
+                "(闻起来|喝着|喝起来).{0,5}(yue|想吐|反胃|恶心|作呕)"
+        );
     }
 
     public IntentClassifier(ObjectMapper objectMapper) {
@@ -180,6 +216,10 @@ public class IntentClassifier {
 
     /**
      * Classify user message intent: food_safety / ordering / general_knowledge.
+     * Architecture: regex confidence scoring + LLM few-shot fallback.
+     * - High-confidence regex match → fast-path (no LLM call)
+     * - Edge pattern match → food_safety (catches colloquial/novel expressions)
+     * - Low/zero confidence → LLM few-shot classification
      */
     public String classify(String userMessage) {
         if (userMessage == null || userMessage.isBlank()) {
@@ -198,25 +238,57 @@ public class IntentClassifier {
                 && matchAny(msg, HYGIENE_PATTERNS)
                 && !matchAny(msg, compilePatterns("(喝出|吃出|吸出|喝了|吃了|我的.*茶|我的.*饮|杯子里|饮品里)"));
 
-        // Phase 1: regex fast-path
-        if (!isEnvironmentOnly && matchAny(msg, FOOD_SAFETY_PATTERNS)) {
-            String matched = findMatch(msg, FOOD_SAFETY_PATTERNS);
-            log.info("Keyword fast-path: food_safety (matched: {})", matched);
+        // ── Phase 1: Edge-case patterns (high priority, catches novel expressions) ──
+        if (!isEnvironmentOnly && matchAny(msg, FOOD_SAFETY_EDGE_PATTERNS)) {
+            String matched = findMatch(msg, FOOD_SAFETY_EDGE_PATTERNS);
+            log.info("Edge-case fast-path: food_safety (matched: {})", matched);
             return "food_safety";
         }
-        if (matchAny(msg, ORDERING_PATTERNS)) {
+
+        // ── Phase 2: Standard regex with confidence scoring ──
+        // Count food safety pattern matches for confidence
+        int fsMatches = countMatches(msg, FOOD_SAFETY_PATTERNS);
+        boolean orderingMatch = matchAny(msg, ORDERING_PATTERNS);
+        boolean storeMatch = matchAny(msg, STORE_INFO_PATTERNS);
+
+        // High-confidence food safety: strong regex signal
+        if (!isEnvironmentOnly && fsMatches >= 2) {
+            String matched = findMatch(msg, FOOD_SAFETY_PATTERNS);
+            log.info("High-confidence regex: food_safety ({} matches, matched: {})", fsMatches, matched);
+            return "food_safety";
+        }
+
+        // Single food safety match: could be genuine or false positive → verify with LLM
+        // This is the key insight: single regex match is NOT enough for borderline cases
+        if (!isEnvironmentOnly && fsMatches == 1) {
+            String matched = findMatch(msg, FOOD_SAFETY_PATTERNS);
+            log.info("Low-confidence food_safety regex (1 match: {}), verifying with LLM", matched);
+            // Fall through to LLM verification
+        }
+
+        // High-confidence ordering (no food safety signal at all)
+        if (fsMatches == 0 && orderingMatch) {
             String matched = findMatch(msg, ORDERING_PATTERNS);
             log.info("Keyword fast-path: ordering (matched: {})", matched);
             return "ordering";
         }
-        if (matchAny(msg, STORE_INFO_PATTERNS)) {
+        if (fsMatches == 0 && storeMatch) {
             String matched = findMatch(msg, STORE_INFO_PATTERNS);
             log.info("Keyword fast-path: ordering/store_info (matched: {})", matched);
             return "ordering";
         }
 
-        // Phase 2: LLM enhanced classification
+        // ── Phase 3: LLM few-shot classification (all ambiguous/uncertain cases) ──
         return llmClassify(userMessage);
+    }
+
+    /** Count how many patterns in the array match the text. */
+    private static int countMatches(String text, Pattern[] patterns) {
+        int count = 0;
+        for (Pattern p : patterns) {
+            if (p.matcher(text).find()) count++;
+        }
+        return count;
     }
 
     // ── LLM fallback classification ──
@@ -224,14 +296,41 @@ public class IntentClassifier {
     private String llmClassify(String userMessage) {
         try {
             String classificationPrompt = """
-                    你是喜茶客服意图分类器。请根据用户消息判断其意图类别。
+                    你是喜茶客服意图分类器。判断用户消息的意图类别。
                     
-                    【分类体系 — 3大类】
-                    1. food_safety（食品安全）— 仅当消息包含健康/安全信号
+                    【分类体系】
+                    1. food_safety（食品安全）— 用户描述了与饮品安全/健康相关的问题
                     2. ordering（点单）— 点饮品/查看菜单/推荐/门店查询
-                    3. general_knowledge（通用咨询/其他投诉）
+                    3. general_knowledge（通用咨询/其他）— 服务投诉/外卖问题/产品口感偏好/效率/包装/卫生
                     
-                    只返回类别名称，不要返回其他任何文字。
+                    【⚠ 关键：food_safety 的判断边界 — 宁宽勿漏】
+                    以下看似模糊但实际涉及食安的表述，必须归为 food_safety：
+                    - 颜色/外观异常："颜色发绿了""变色了""浑浊""有沉淀"
+                    - 化学/添加剂质疑："含防腐剂吗""有没有添加剂""是不是色素"
+                    - 口语化身体不适："跑厕所三趟""进医院了""胃在烧""浑身发软"
+                    - 隐喻/夸张表达："避雷！！喝完直接进医院""绝了喝完跑厕所跑三趟"
+                    - 活体/动态异物："杯壁上有个黑点在动""发现虫子在爬"
+                    - 模糊但有食安语境："是不是没加弹弹冻啊""这个正常吗"+"饮品内容物描述"
+                    
+                    以下 NOT food_safety（归入 general_knowledge）：
+                    - 主观口味偏好："太甜了""不够甜""太淡"
+                    - 配送问题："外卖撒了""送错了""超时了"
+                    - 服务态度："态度差""不理人"
+                    - 产品口感（非安全）："不好喝""口感一般"
+                    
+                    【示例】
+                    用户：昨晚买的杨枝甘露，今天打开发现颜色发绿了 → food_safety
+                    用户：你们用的椰奶是不是含防腐剂啊 → food_safety
+                    用户：刚喝了两口发现杯壁上有个黑点在动 → food_safety
+                    用户：绝了 喝完直接跑厕所跑了三趟 → food_safety
+                    用户：避雷！！喝完直接进医院了 → food_safety
+                    用户：感觉喝完胃在烧，之前从来没有过 → food_safety
+                    用户：外卖撒了一半 怎么搞 → general_knowledge
+                    用户：等了四十分钟还没做好 → general_knowledge
+                    用户：服务态度太差了 → general_knowledge
+                    用户：请问最近的门店在哪里 → ordering
+                    
+                    只返回类别名称（food_safety / ordering / general_knowledge），不要返回其他任何文字。
                     
                     用户消息：%s
                     """.formatted(userMessage);
